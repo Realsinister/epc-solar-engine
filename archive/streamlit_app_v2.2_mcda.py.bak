@@ -1,0 +1,247 @@
+import pandas as pd
+import plotly.express as px
+import plotly.graph_objects as go
+import streamlit as st
+import numpy as np
+from io import BytesIO
+
+# ---------- 1. Page Configuration ----------
+st.set_page_config(
+    page_title="PV LCA Science Lab",
+    page_icon="🔬",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
+
+# --- CSS STYLING ---
+st.markdown("""
+<style>
+    .block-container { padding-top: 2rem; }
+    div[data-testid="stMetric"] {
+        background-color: var(--secondary-background-color);
+        border: 1px solid rgba(128, 128, 128, 0.2);
+        border-radius: 8px;
+        padding: 10px;
+    }
+    .recommendation-box {
+        border-left: 5px solid #27ae60;
+        background-color: rgba(39, 174, 96, 0.1);
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+    }
+</style>
+""", unsafe_allow_html=True)
+
+# ---------- 2. Data Loading ----------
+WB = "data/EPD_Hub_V3_PV_master_curated_v1.xlsx"
+TARGET_SHEET = "INDICATORS_NORMALIZED"
+
+@st.cache_data
+def load_and_process_data():
+    try:
+        xl = pd.ExcelFile(WB)
+        sheet_names = xl.sheet_names
+        load_sheet = TARGET_SHEET if TARGET_SHEET in sheet_names else sheet_names[0]
+        df = pd.read_excel(WB, sheet_name=load_sheet)
+        
+        numeric_cols = ['module_power_Wp', 'module_area_m2', 'GWP_total_A1A3_per_kWp_kgCO2e']
+        for col in numeric_cols:
+            if col in df.columns:
+                df[col] = pd.to_numeric(df[col], errors='coerce')
+
+        if 'manufacturer' in df.columns and 'name' in df.columns:
+            df['Display_Name'] = df.apply(lambda x: f"{x['manufacturer']} - {str(x['name'])[:25]}", axis=1)
+        else:
+            df['Display_Name'] = df.index.astype(str)
+
+        # Efficiency Calculation
+        if 'module_power_Wp' in df.columns and 'module_area_m2' in df.columns:
+            df['Efficiency_Pct'] = (df['module_power_Wp'] / (df['module_area_m2'] * 1000)) * 100
+        else:
+            df['Efficiency_Pct'] = 0
+
+        # Pedigree Uncertainty
+        def calculate_uncertainty(row):
+            score_rel = 1 if (pd.notna(row.get('source')) and '.pdf' in str(row['source']).lower()) else 3
+            score_comp = 1 if (pd.notna(row.get('module_power_Wp')) and row['module_power_Wp'] > 0) else 4
+            score_temp = 1 if (pd.notna(row.get('version'))) else 3
+            uncertainty_factor = 0.05 + (0.02 * (score_rel - 1)) + (0.02 * (score_comp - 1)) + (0.02 * (score_temp - 1))
+            return uncertainty_factor 
+
+        df['Uncertainty_SD'] = df.apply(calculate_uncertainty, axis=1)
+        return df
+    
+    except Exception as e:
+        st.error(f"Critical Data Error: {e}")
+        return pd.DataFrame()
+
+df_master = load_and_process_data()
+if df_master.empty: st.stop()
+
+# ---------- 3. Sidebar: Project Scenarios ----------
+st.sidebar.title("🏗️ Project Optimization")
+
+# A. Scenario Selector (The Supervisor Fix)
+scenario = st.sidebar.selectbox(
+    "Optimization Goal (Project Type)",
+    ["Eco-Flagship (Minimize Carbon)", "Utility Scale (Lowest LCOE)", "Space Constrained (Rooftop)"],
+    index=0,
+    help="Changing this re-weights the scoring algorithm."
+)
+
+# B. Technical Inputs
+with st.sidebar.expander("⚙️ System Parameters", expanded=False):
+    base_irradiance = st.number_input("Irradiance (kWh/kWp/yr)", 500, 2500, 1200)
+    lifetime = st.slider("Lifetime (Years)", 15, 40, 30)
+    temp_loss = st.slider("Temp Loss (%)", 0.0, 20.0, 10.0)
+
+# C. Economic Inputs (For MCDA)
+with st.sidebar.expander("💰 Market Inputs", expanded=True):
+    avg_price_wp = st.number_input("Avg. Module Price (€/Wp)", 0.10, 1.00, 0.25, 0.01)
+    bos_cost_wp = st.number_input("BOS Cost (€/Wp)", 0.10, 2.00, 0.40)
+    opex_annual = st.number_input("O&M (€/kWp/yr)", 5.0, 50.0, 15.0)
+
+# D. Filters
+if 'manufacturer' in df_master.columns:
+    manufacturers = sorted(df_master['manufacturer'].dropna().astype(str).unique())
+    selected_mfg = st.sidebar.multiselect("Filter Brand", manufacturers)
+else:
+    selected_mfg = []
+
+# ---------- 4. Calculation Engine ----------
+df_calc = df_master.copy()
+if selected_mfg:
+    df_calc = df_calc[df_calc['manufacturer'].astype(str).isin(selected_mfg)]
+
+df_calc = df_calc.dropna(subset=['GWP_total_A1A3_per_kWp_kgCO2e'])
+
+# 1. Physics Calculations
+effective_yield = base_irradiance * (1 - (temp_loss/100))
+df_calc['Carbon_Intensity_Mean'] = (df_calc['GWP_total_A1A3_per_kWp_kgCO2e'] * 1000) / (effective_yield * lifetime)
+
+# 2. Economic Calculations (LCOE Estimation)
+# We assume specific module price varies slightly by efficiency (heuristic) if real price unknown
+# But for this model, we use the user input price + a penalty for high efficiency modules (Logic: High eff usually costs more)
+# This creates a trade-off.
+df_calc['Estimated_Price_Wp'] = avg_price_wp * (1 + (df_calc['Efficiency_Pct'] - 20)/100) # Simple heuristic: +1% price for +1% eff
+capex = (df_calc['Estimated_Price_Wp'] + bos_cost_wp) * 1000
+opex = opex_annual * lifetime
+production = effective_yield * lifetime
+df_calc['LCOE_EUR_MWh'] = ((capex + opex) / production) * 1000
+
+# 3. MCDA Normalization (0 to 1 Scale)
+# We need to normalize metrics so we can sum them.
+# For Carbon & LCOE: Lower is better (Invert). For Efficiency: Higher is better.
+def normalize(series, invert=False):
+    min_val = series.min()
+    max_val = series.max()
+    if max_val == min_val: return 1.0
+    norm = (series - min_val) / (max_val - min_val)
+    return 1 - norm if invert else norm
+
+df_calc['Score_Eco'] = normalize(df_calc['Carbon_Intensity_Mean'], invert=True)
+df_calc['Score_Cost'] = normalize(df_calc['LCOE_EUR_MWh'], invert=True)
+df_calc['Score_Tech'] = normalize(df_calc['Efficiency_Pct'], invert=False)
+
+# 4. Dynamic Weighting (The Fix)
+if scenario == "Eco-Flagship (Minimize Carbon)":
+    w_eco, w_cost, w_tech = 0.70, 0.15, 0.15
+elif scenario == "Utility Scale (Lowest LCOE)":
+    w_eco, w_cost, w_tech = 0.20, 0.60, 0.20
+else: # Space Constrained
+    w_eco, w_cost, w_tech = 0.20, 0.20, 0.60
+
+df_calc['Suitability_Index'] = (
+    (df_calc['Score_Eco'] * w_eco) + 
+    (df_calc['Score_Cost'] * w_cost) + 
+    (df_calc['Score_Tech'] * w_tech)
+) * 100
+
+df_calc = df_calc.sort_values('Suitability_Index', ascending=False)
+winner = df_calc.iloc[0]
+
+# ---------- 5. Dashboard ----------
+st.title(f"PV LCA & Optimization: {scenario}")
+
+# --- RECOMMENDATION ENGINE ---
+st.markdown(f"""
+<div class="recommendation-box">
+    <h3>🏆 Optimal Module: {winner['manufacturer']} {str(winner['name'])[:15]}...</h3>
+    <p>This module achieved the highest <b>Suitability Index ({winner['Suitability_Index']:.1f}/100)</b> for the <b>{scenario}</b> scenario.</p>
+    <ul>
+        <li><b>Carbon Score:</b> {winner['Score_Eco']*100:.0f}/100 ({winner['Carbon_Intensity_Mean']:.1f} g/kWh)</li>
+        <li><b>Economic Score:</b> {winner['Score_Cost']*100:.0f}/100 (~{winner['LCOE_EUR_MWh']:.2f} €/MWh)</li>
+        <li><b>Technical Score:</b> {winner['Score_Tech']*100:.0f}/100 ({winner['Efficiency_Pct']:.1f}% Eff)</li>
+    </ul>
+</div>
+""", unsafe_allow_html=True)
+
+tab1, tab2, tab3 = st.tabs(["🕸️ Multi-Criteria Analysis", "📊 Stochastic Analysis", "💾 Raw Data"])
+
+# === TAB 1: RADAR CHART (MCDA Visual) ===
+with tab1:
+    c1, c2 = st.columns([2, 1])
+    with c1:
+        st.subheader("Why this module won (Trade-off Analysis)")
+        # Radar Chart Logic
+        categories = ['Low Carbon', 'Low Cost (LCOE)', 'High Efficiency']
+        
+        # Winner Data
+        fig_radar = go.Figure()
+        fig_radar.add_trace(go.Scatterpolar(
+            r=[winner['Score_Eco'], winner['Score_Cost'], winner['Score_Tech']],
+            theta=categories,
+            fill='toself',
+            name=f"Winner: {winner['manufacturer']}"
+        ))
+        
+        # Average Data (Benchmark)
+        avg_eco = df_calc['Score_Eco'].mean()
+        avg_cost = df_calc['Score_Cost'].mean()
+        avg_tech = df_calc['Score_Tech'].mean()
+        
+        fig_radar.add_trace(go.Scatterpolar(
+            r=[avg_eco, avg_cost, avg_tech],
+            theta=categories,
+            name='Market Average',
+            line=dict(color='gray', dash='dot')
+        ))
+        
+        fig_radar.update_layout(
+            polar=dict(radialaxis=dict(visible=True, range=[0, 1])),
+            showlegend=True
+        )
+        st.plotly_chart(fig_radar, use_container_width=True)
+    
+    with c2:
+        st.markdown("**Weights Applied:**")
+        st.progress(w_eco, text=f"Environmental Importance: {int(w_eco*100)}%")
+        st.progress(w_cost, text=f"Economic Importance: {int(w_cost*100)}%")
+        st.progress(w_tech, text=f"Technical Importance: {int(w_tech*100)}%")
+
+# === TAB 2: STOCHASTIC ANALYSIS ===
+with tab2:
+    st.subheader("Risk & Uncertainty Profile (Top 3 Candidates)")
+    top_3 = df_calc.head(3)
+    
+    n_sims = 1000
+    sim_data = []
+    for i, row in top_3.iterrows():
+        mean_gwp = row['GWP_total_A1A3_per_kWp_kgCO2e']
+        sigma = row['Uncertainty_SD']
+        mu = np.log(mean_gwp) - 0.5 * sigma**2
+        samples_gwp = np.random.lognormal(mu, sigma, n_sims)
+        samples_intensity = (samples_gwp * 1000) / (effective_yield * lifetime)
+        
+        for x in samples_intensity:
+            sim_data.append({'Module': row['manufacturer'], 'Intensity (g/kWh)': x})
+    
+    df_sim = pd.DataFrame(sim_data)
+    fig_mc = px.histogram(df_sim, x="Intensity (g/kWh)", color="Module", barmode="overlay", nbins=50, opacity=0.7)
+    st.plotly_chart(fig_mc, use_container_width=True)
+
+# === TAB 3: DATA ===
+with tab3:
+    cols = ['manufacturer', 'name', 'Suitability_Index', 'Carbon_Intensity_Mean', 'LCOE_EUR_MWh', 'Efficiency_Pct']
+    st.dataframe(df_calc[cols].style.background_gradient(subset=['Suitability_Index'], cmap='Greens'), use_container_width=True)

@@ -1,0 +1,43 @@
+Manufacturer,Model_Series,Description / Note,GWP A1-A3 (kgCO2e/Wp),GWP A1-A3 (kgCO2e/kWp),GWP A1-A3 (kgCO2e/m2),GWP_A1A3_kgCO2e_per_Module,Source File
+Tongwei Solar,TWMNH-48HExxx,Monocrystalline 470W,0.493,493,115.97,231.71,Tongwei Solar.pdf
+Tongwei Solar,TWMNH-48HWxxx,Monocrystalline 475W,0.493,493,117.2,234.18,Tongwei Solar.pdf
+Tongwei Solar,TWMNH-48HDxxx,Monocrystalline 475W (Previous Gen),0.493,493,117.2,234.18,Tongwei Solar.pdf
+Tongwei Solar,TWMNF-66HD,TNC-G12-66 (725W),0.409,409,95.5,296.53,Kiwa 6.pdf
+Tongwei Solar,TWMNH-48HD,TNC-G12R-48 (455W),0.426,426,96.9,193.83,Kiwa 4.pdf
+Tongwei Solar,TWMNH-66HD,TNC-G12R-66 (630W),0.437,437,102,275.31,Kiwa 3.pdf
+Tongwei Solar,TWMNH-66HS,TNC-G12R-66 (635W),0.447,447,105,283.85,Kiwa 2.pdf
+Tongwei Solar,TWMNH-48HC,TNC-G12R-48 Fullblack (455W),0.426,426,96.9,193.83,Kiwa 5.pdf
+Phono Solar,Single Glass P-Type,General Series (Max Inventory),0.836,836,180,Variable,NEPD-5712-4981.pdf
+Phono Solar,Double Glass P-Type,General Series (Max Inventory),0.815,815,175,Variable,NEPD-5713-4981.pdf
+Midsummer,BOLD,CIGS Flexible (190W),0.113,113,12.77,21.47,midsummer bold.pdf
+Midsummer,SLIM,CIGS Flexible (65W),0.101,101,10.1,6.57,midsummer.pdf
+Win Win Precision,WST-XXXNGXB-D3,Reference Product (430W),0.421,421,92.7,181.03,Win Precision.pdf
+Win Win Precision,WST-XXXNGX-D3,Variant (435W),0.416,416.16,92.7,181.03,Win Precision.pdf
+SolarLab,BIPV Façade,Customized Façade Cladding,1,1000,141,Variable,Solarlab.pdf
+SunPower,Maxeon 3,Monocrystalline (400W),0.342,342,77.2,136.8,NEPD-3087-1726.pdf
+ML System,BIPV No Coating,Glass-Glass (Variable Size),0.742,742,167,Variable,ITB-EPD_444.pdf
+ML System,BIPV Color Coating,Glass-Glass (Variable Size),0.747,747,168,Variable,ITB-EPD_444.pdf
+Renesola,RS4-460~500 NBG-E1,182mm Mono 500W,0.535,535,124,267.5,Kiwa.pdf
+Renesola,RS5-515~545 NBG-E2,182mm Mono 545W,0.535,535,122.79,291.58,Kiwa.pdf
+Renesola,RS5J-610~635 NBG-E1,182mm Mono 635W,0.535,535,122.8,339.73,Kiwa.pdf
+Renesola,RS6-560~595 NBG-E3,182mm Mono 595W,0.535,535,123.23,318.33,Kiwa.pdf
+Renesola,RS7-610~645 NBG-E2,182mm Mono 645W,0.535,535,123.47,345.08,Kiwa.pdf
+Renesola,RS8-610~655 NBG-E1,210mm Mono 655W,0.535,535,123.82,350.43,Kiwa.pdf
+Renesola,RS9-675~720 NBG-E1,210mm Mono 720W,0.535,535,124,385.2,Kiwa.pdf
+Renesola,RS41-420~450 NBG-E3,182mm Mono 450W,0.535,535,123.29,240.75,Kiwa.pdf
+Renesola,RS42J-440~460 NBG-E1,182mm Mono 460W,0.535,535,123.31,246.1,Kiwa.pdf
+Jolywood,JW-HD156N-182,N-type Bifacial 630W,0.443,443,99.85,279.09,Data.pdf
+Jolywood,JW-HD144N-182,N-type Bifacial 585W,0.417,417.31,94.5,244.12,Data.pdf
+LONGi,LR5-54HIH,Hi-MO 5 (420W),0.55,550,118.46,231,Longi.pdf
+LONGi,LR5-54HPB,Hi-MO 5 (420W),0.55,550,118.46,231,Longi.pdf
+LONGi,LR5-54HPH,Hi-MO 5 (425W),0.55,550,119.87,233.75,Longi.pdf
+LONGi,LR5-54HTB,Hi-MO 5 (440W),0.55,550,124.1,242,Longi.pdf
+LONGi,LR5-54HTH,Hi-MO 5 (450W),0.55,550,126.92,247.5,Longi.pdf
+LONGi,LR5-66HIH,Hi-MO 5 (510W),0.55,550,118.35,280.5,Longi.pdf
+LONGi,LR5-66HPH,Hi-MO 5 (515W),0.55,550,119.51,283.25,Longi.pdf
+LONGi,LR7-72HVD,Hi-MO 7 (665W),0.321,321,79.06,213.47,Longi 2.pdf
+LONGi,LR7-72HVH,Hi-MO 7 (670W),0.332,332.24,82.39,222.6,Longi 2.pdf
+LONGi,LR7-54HVH,Hi-MO 7 (500W),0.322,321.9,78.9,160.95,Longi 2.pdf
+LONGi,LR7-54HVD,Hi-MO 7 (495W),0.333,332.75,80.74,164.71,Longi 2.pdf
+LONGi,LR7-54HVB,Hi-MO 7 (500W),0.343,343.41,84.17,171.7,Longi 2.pdf
+Ennogie,ERS-0191,BIPV 130W,0.946,946,166,122.98,Ennogie.pdf

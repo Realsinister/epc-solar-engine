@@ -1,0 +1,17 @@
+credentials:
+  usernames:
+    admin:
+      email: admin@pvlca.com
+      name: Administrator
+      password: $2b$12$4Zj4ZmswLAxXkEJ2CrMRA.Ck/Ax3Cq4nvBMUoH/SF3PT6Q1bD.T6W
+    analyst:
+      email: analyst@pvlca.com
+      name: Senior Analyst
+      password: $2b$12$4Zj4ZmswLAxXkEJ2CrMRA.Ck/Ax3Cq4nvBMUoH/SF3PT6Q1bD.T6W
+cookie:
+  expiry_days: 30
+  key: pv_lca_auth_key
+  name: pv_lca_cookie
+pre-authorized:
+  emails:
+    - admin@pvlca.com

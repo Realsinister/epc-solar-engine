@@ -1,0 +1,1004 @@
+<?xml version="1.0" encoding="utf-8"?>
+<processDataSet xmlns:common="http://lca.jrc.it/ILCD/Common" xmlns:epd="http://www.iai.kit.edu/EPD/2013" xmlns:epd2="http://www.indata.network/EPD/2019" epd2:epd-version="1.2" version="1.1" xmlns="http://lca.jrc.it/ILCD/Process">
+  <processInformation>
+    <dataSetInformation>
+      <common:UUID>8402b76f-b61a-41ab-8a30-08ddea978f5a</common:UUID>
+      <name>
+        <baseName xml:lang="en">Tongwei N type half-piece double-glass photovoltaic module</baseName>
+      </name>
+      <classificationInformation>
+        <common:classification name="The International EPD System">
+          <common:class level="0" classId="0">Construction products, Infrastructure &amp; buildings</common:class>
+        </common:classification>
+      </classificationInformation>
+      <common:generalComment xml:lang="en" />
+      <common:other>
+        <epd:scenarios />
+      </common:other>
+    </dataSetInformation>
+    <quantitativeReference>
+      <referenceToReferenceFlow>0</referenceToReferenceFlow>
+      <functionalUnitOrOther xml:lang="en">1 Wp of manufactured photovoltaic module, from cradle-to-grave, with activities needed for a study period for a RSL of 25 years.</functionalUnitOrOther>
+    </quantitativeReference>
+    <time>
+      <common:referenceYear>2025</common:referenceYear>
+      <common:dataSetValidUntil>2030</common:dataSetValidUntil>
+      <common:timeRepresentativenessDescription xml:lang="en" />
+      <common:other>
+        <epd2:publicationDateOfEPD>2025-11-13</epd2:publicationDateOfEPD>
+      </common:other>
+    </time>
+    <geography>
+      <locationOfOperationSupplyOrProduction location="CN">
+        <descriptionOfRestrictions xml:lang="en">China</descriptionOfRestrictions>
+      </locationOfOperationSupplyOrProduction>
+    </geography>
+    <technology>
+      <technologyDescriptionAndIncludedProcesses xml:lang="en">Components/materials: tempered solar glass, aluminum-alloy frame, N-type monocrystalline Si cells, EVA &amp; POE encapsulants, copper interconnects/busbars, PPE/PPO junction box, silicone sealants; packaging uses corrugated board and a plywood pallet. 
+Manufacturing keywords: cutting &amp; string welding → EL/appearance testing → stacking → lamination → framing &amp; junction-box bonding/terminal welding → curing → IV/insulation testing → automatic packaging. 
+Use &amp; EoL: Suitable for commercial/industrial rooftops and ground-mounted PV plants; operating temperature −40 to +85 °C; manufacturing, use, and end-of-life all take place in China.</technologyDescriptionAndIncludedProcesses>
+      <technologicalApplicability xml:lang="en">Tongwei N type half-piece double-glass photovoltaic module is suitable for industrial and commercial roof and ground power stations. The PV module has high power generation and low cost per hour. The maximum power can reach 630W and the module efficiency can reach 23.3%. In addition, the component has passed a number of quality certifications, and the product quality is reliable and guaranteed. </technologicalApplicability>
+      <referenceToTechnologyPictogramme type="source data set" refObjectId="4f0b0a7e-a51a-44d2-8a1f-40efd549b05e" version="24.01.000" uri="../sources/4f0b0a7e-a51a-44d2-8a1f-40efd549b05e.xml">
+        <common:shortDescription xml:lang="en">1.png</common:shortDescription>
+      </referenceToTechnologyPictogramme>
+    </technology>
+  </processInformation>
+  <modellingAndValidation>
+    <LCIMethodAndAllocation>
+      <typeOfDataSet>EPD</typeOfDataSet>
+      <referenceToLCAMethodDetails type="source data set" refObjectId="b78ad5a2-ee63-436b-ae42-f30e6a8a9822" version="00.00.001" uri="../sources/b78ad5a2-ee63-436b-ae42-f30e6a8a9822.xml">
+        <common:shortDescription xml:lang="en">Construction products (EN 15804+A2) (version 2.0.1)</common:shortDescription>
+      </referenceToLCAMethodDetails>
+      <common:other>
+        <epd:subType>specific dataset</epd:subType>
+      </common:other>
+    </LCIMethodAndAllocation>
+    <dataSourcesTreatmentAndRepresentativeness>
+      <referenceToDataSource type="source data set" refObjectId="b497a91f-e14b-4b69-8f28-f50eb1576766">
+        <common:shortDescription xml:lang="en">ecoinvent database (general)</common:shortDescription>
+      </referenceToDataSource>
+      <referenceToDataSource type="source data set" refObjectId="6edab576-5247-472f-a2f4-0cb84561ca8b">
+        <common:shortDescription xml:lang="en">ecoinvent 3.10 database</common:shortDescription>
+      </referenceToDataSource>
+      <useAdviceForDataSet xml:lang="en">This data set includes modules A1-A5, B2, C1-C4, and D.</useAdviceForDataSet>
+      <common:other>
+        <epd2:referenceToOriginalEPD type="source data set" refObjectId="4b3b5c71-aff2-47b3-1aa6-08de22a6472a" version="07.02.003" xmlns:epd2="http://www.indata.network/EPD/2019">
+          <common:shortDescription xml:lang="en">epd_document</common:shortDescription>
+        </epd2:referenceToOriginalEPD>
+      </common:other>
+    </dataSourcesTreatmentAndRepresentativeness>
+    <validation>
+      <review type="Independent external review">
+        <common:referenceToNameOfReviewerAndInstitution type="contact data set" refObjectId="fb6bb1ad-00dc-4fc5-532e-08de2298ddca" uri="../contacts/fb6bb1ad-00dc-4fc5-532e-08de2298ddca.xml">
+          <common:shortDescription xml:lang="en">Ying SU</common:shortDescription>
+        </common:referenceToNameOfReviewerAndInstitution>
+      </review>
+    </validation>
+    <complianceDeclarations>
+      <compliance>
+        <common:referenceToComplianceSystem type="source data set" refObjectId="d4aa3ec7-b1d7-4a4a-a6cb-37af88dcc902" version="00.01.000">
+          <common:shortDescription xml:lang="en">EN 15804+A2 (EF 3.1)</common:shortDescription>
+        </common:referenceToComplianceSystem>
+      </compliance>
+      <compliance>
+        <common:referenceToComplianceSystem type="source data set" refObjectId="4f2eb655-6e44-4874-a95a-e28f5442cd4d" version="00.00.001">
+          <common:shortDescription xml:lang="en">ISO 14025</common:shortDescription>
+        </common:referenceToComplianceSystem>
+      </compliance>
+    </complianceDeclarations>
+  </modellingAndValidation>
+  <administrativeInformation>
+    <dataGenerator>
+      <common:referenceToPersonOrEntityGeneratingTheDataSet type="contact data set" refObjectId="7a056982-b4cb-421f-8155-08ddea99558b" version="00.00.001" uri="../contacts/7a056982-b4cb-421f-8155-08ddea99558b.xml">
+        <common:shortDescription xml:lang="en">Sijing Xiang, xiangsijing@cdt-dtlc.com</common:shortDescription>
+      </common:referenceToPersonOrEntityGeneratingTheDataSet>
+    </dataGenerator>
+    <dataEntryBy>
+      <common:timeStamp>2025-11-18T02:15:34.2058207+00:00</common:timeStamp>
+      <common:referenceToDataSetFormat type="source data set" refObjectId="a97a0155-0234-4b87-b4ce-a45da52f2a40" version="01.00.000" uri="http://lca.jrc.ec.europa.eu/lcainfohub/sample_data/ilcd/sources/ILCD_Format_a97a0155-0234-4b87-b4ce-a45da52f2a40_01.00.000.xml">
+        <common:shortDescription xml:lang="en">ILCD Format 1.1</common:shortDescription>
+      </common:referenceToDataSetFormat>
+      <common:referenceToDataSetFormat type="source data set" refObjectId="a29449fd-aa2f-4de8-b5d7-4b06b43c6fde" version="00.01.000" uri="http://lca.jrc.ec.europa.eu/lcainfohub/sample_data/resource/sources/a29449fd-aa2f-4de8-b5d7-4b06b43c6fde?format=html&amp;amp;version=00.01.000">
+        <common:shortDescription xml:lang="en">EPD Data Format Extensions v1.2</common:shortDescription>
+      </common:referenceToDataSetFormat>
+    </dataEntryBy>
+    <publicationAndOwnership>
+      <common:dataSetVersion>07.02.003</common:dataSetVersion>
+      <common:referenceToPrecedingDataSetVersion type="process data set" refObjectId="8402b76f-b61a-41ab-8a30-08ddea978f5a" version="07.01.003" />
+      <common:dateOfLastRevision>2025-11-13T18:55:46.833+08:00</common:dateOfLastRevision>
+      <common:referenceToRegistrationAuthority type="contact data set" refObjectId="5e09bd06-11a1-4292-a56b-47898ad6a691" version="00.00.002">
+        <common:shortDescription xml:lang="en">The International EPD System</common:shortDescription>
+      </common:referenceToRegistrationAuthority>
+      <common:registrationNumber>EPD-IES-0025632:003</common:registrationNumber>
+      <common:referenceToOwnershipOfDataSet type="contact data set" refObjectId="38004c05-4ee1-4c69-990c-08ddcb22f974" version="00.00.101">
+        <common:shortDescription xml:lang="en">Tongwei Solar (Yancheng) Co.,Ltd.</common:shortDescription>
+      </common:referenceToOwnershipOfDataSet>
+      <common:copyright>true</common:copyright>
+      <common:licenseType>Free of charge for all users and uses</common:licenseType>
+      <common:accessRestrictions xml:lang="en">Your use of this material is subject to the General Terms of Use published on by EPD International AB:s homepage at https://www.environdec.com/contact/General-terms-of-use/. If you have not accepted EPD International AB:s the General Terms of Use, you are not authorized to exploit this work in any manner.</common:accessRestrictions>
+      <common:other>
+        <epd2:referenceToPublisher type="contact data set" refObjectId="5e09bd06-11a1-4292-a56b-47898ad6a691" version="00.00.002" xmlns:epd2="http://www.indata.network/EPD/2019">
+          <common:shortDescription xml:lang="en">The International EPD System</common:shortDescription>
+        </epd2:referenceToPublisher>
+      </common:other>
+    </publicationAndOwnership>
+  </administrativeInformation>
+  <exchanges>
+    <exchange dataSetInternalID="0">
+      <referenceToFlowDataSet type="flow data set" refObjectId="3b806238-69be-4aee-67e9-08de2298ddca" version="00.01.000">
+        <common:shortDescription xml:lang="en">Photovoltaic module. Unit: Area (m2). Value: 2.7</common:shortDescription>
+      </referenceToFlowDataSet>
+      <meanAmount>1</meanAmount>
+    </exchange>
+    <exchange dataSetInternalID="1">
+      <referenceToFlowDataSet type="flow data set" refObjectId="20f32be5-0398-4288-9b6d-accddd195317">
+        <common:shortDescription xml:lang="en">Use of renewable primary energy as energy carrier (PERE)</common:shortDescription>
+      </referenceToFlowDataSet>
+      <functionType>General reminder flow</functionType>
+      <exchangeDirection>Input</exchangeDirection>
+      <meanAmount>0.0</meanAmount>
+      <common:other>
+        <epd:amount epd:module="A1-A3">0.854</epd:amount>
+        <epd:amount epd:module="A4">0.00194</epd:amount>
+        <epd:amount epd:module="A5">0.0156</epd:amount>
+        <epd:amount epd:module="B1">0</epd:amount>
+        <epd:amount epd:module="B2">0.0000226</epd:amount>
+        <epd:amount epd:module="B3">0</epd:amount>
+        <epd:amount epd:module="B4">0</epd:amount>
+        <epd:amount epd:module="B5">0</epd:amount>
+        <epd:amount epd:module="B6">0</epd:amount>
+        <epd:amount epd:module="B7">0</epd:amount>
+        <epd:amount epd:module="C1">0.0156</epd:amount>
+        <epd:amount epd:module="C2">0.0000691</epd:amount>
+        <epd:amount epd:module="C3">0.0156</epd:amount>
+        <epd:amount epd:module="C4">0.00000567</epd:amount>
+        <epd:amount epd:module="D">-0.108</epd:amount>
+        <epd:referenceToUnitGroupDataSet refObjectId="93a60a57-a3c8-11da-a746-0800200c9a66" type="unit group data set" uri="../unitgroups/93a60a57-a3c8-11da-a746-0800200c9a66">
+          <common:shortDescription>MJ</common:shortDescription>
+        </epd:referenceToUnitGroupDataSet>
+      </common:other>
+    </exchange>
+    <exchange dataSetInternalID="2">
+      <referenceToFlowDataSet type="flow data set" refObjectId="fb3ec0de-548d-4508-aea5-00b73bf6f702">
+        <common:shortDescription xml:lang="en">Use of renewable primary energy resources used as raw materials (PERM)</common:shortDescription>
+      </referenceToFlowDataSet>
+      <functionType>General reminder flow</functionType>
+      <exchangeDirection>Input</exchangeDirection>
+      <meanAmount>0.0</meanAmount>
+      <common:other>
+        <epd:amount epd:module="A1-A3">0.0442</epd:amount>
+        <epd:amount epd:module="A4">0</epd:amount>
+        <epd:amount epd:module="A5">-0.0442</epd:amount>
+        <epd:amount epd:module="B1">0</epd:amount>
+        <epd:amount epd:module="B2">0</epd:amount>
+        <epd:amount epd:module="B3">0</epd:amount>
+        <epd:amount epd:module="B4">0</epd:amount>
+        <epd:amount epd:module="B5">0</epd:amount>
+        <epd:amount epd:module="B6">0</epd:amount>
+        <epd:amount epd:module="B7">0</epd:amount>
+        <epd:amount epd:module="C1">0</epd:amount>
+        <epd:amount epd:module="C2">0</epd:amount>
+        <epd:amount epd:module="C3">0</epd:amount>
+        <epd:amount epd:module="C4">0</epd:amount>
+        <epd:amount epd:module="D">0</epd:amount>
+        <epd:referenceToUnitGroupDataSet refObjectId="93a60a57-a3c8-11da-a746-0800200c9a66" type="unit group data set" uri="../unitgroups/93a60a57-a3c8-11da-a746-0800200c9a66">
+          <common:shortDescription>MJ</common:shortDescription>
+        </epd:referenceToUnitGroupDataSet>
+      </common:other>
+    </exchange>
+    <exchange dataSetInternalID="3">
+      <referenceToFlowDataSet type="flow data set" refObjectId="53f97275-fa8a-4cdd-9024-65936002acd0">
+        <common:shortDescription xml:lang="en">Total use of renewable primary energy (PERT)</common:shortDescription>
+      </referenceToFlowDataSet>
+      <functionType>General reminder flow</functionType>
+      <exchangeDirection>Input</exchangeDirection>
+      <meanAmount>0.0</meanAmount>
+      <common:other>
+        <epd:amount epd:module="A1-A3">0.898</epd:amount>
+        <epd:amount epd:module="A4">0.00194</epd:amount>
+        <epd:amount epd:module="A5">-0.0286</epd:amount>
+        <epd:amount epd:module="B1">0</epd:amount>
+        <epd:amount epd:module="B2">0.0000226</epd:amount>
+        <epd:amount epd:module="B3">0</epd:amount>
+        <epd:amount epd:module="B4">0</epd:amount>
+        <epd:amount epd:module="B5">0</epd:amount>
+        <epd:amount epd:module="B6">0</epd:amount>
+        <epd:amount epd:module="B7">0</epd:amount>
+        <epd:amount epd:module="C1">0.0156</epd:amount>
+        <epd:amount epd:module="C2">0.0000691</epd:amount>
+        <epd:amount epd:module="C3">0.0156</epd:amount>
+        <epd:amount epd:module="C4">0.00000567</epd:amount>
+        <epd:amount epd:module="D">-0.108</epd:amount>
+        <epd:referenceToUnitGroupDataSet refObjectId="93a60a57-a3c8-11da-a746-0800200c9a66" type="unit group data set" uri="../unitgroups/93a60a57-a3c8-11da-a746-0800200c9a66">
+          <common:shortDescription>MJ</common:shortDescription>
+        </epd:referenceToUnitGroupDataSet>
+      </common:other>
+    </exchange>
+    <exchange dataSetInternalID="4">
+      <referenceToFlowDataSet type="flow data set" refObjectId="ac857178-2b45-46ec-892a-a9a4332f0372">
+        <common:shortDescription xml:lang="en">Use of non renewable primary energy as energy carrier (PENRE)</common:shortDescription>
+      </referenceToFlowDataSet>
+      <functionType>General reminder flow</functionType>
+      <exchangeDirection>Input</exchangeDirection>
+      <meanAmount>0.0</meanAmount>
+      <common:other>
+        <epd:amount epd:module="A1-A3">4.28</epd:amount>
+        <epd:amount epd:module="A4">0.146</epd:amount>
+        <epd:amount epd:module="A5">0.128</epd:amount>
+        <epd:amount epd:module="B1">0</epd:amount>
+        <epd:amount epd:module="B2">0.000204</epd:amount>
+        <epd:amount epd:module="B3">0</epd:amount>
+        <epd:amount epd:module="B4">0</epd:amount>
+        <epd:amount epd:module="B5">0</epd:amount>
+        <epd:amount epd:module="B6">0</epd:amount>
+        <epd:amount epd:module="B7">0</epd:amount>
+        <epd:amount epd:module="C1">0.128</epd:amount>
+        <epd:amount epd:module="C2">0.00475</epd:amount>
+        <epd:amount epd:module="C3">0.128</epd:amount>
+        <epd:amount epd:module="C4">0.000655</epd:amount>
+        <epd:amount epd:module="D">-0.840</epd:amount>
+        <epd:referenceToUnitGroupDataSet refObjectId="93a60a57-a3c8-11da-a746-0800200c9a66" type="unit group data set" uri="../unitgroups/93a60a57-a3c8-11da-a746-0800200c9a66">
+          <common:shortDescription>MJ</common:shortDescription>
+        </epd:referenceToUnitGroupDataSet>
+      </common:other>
+    </exchange>
+    <exchange dataSetInternalID="5">
+      <referenceToFlowDataSet type="flow data set" refObjectId="1421caa0-679d-4bf4-b282-0eb850ccae27">
+        <common:shortDescription xml:lang="en">Use of non renewable primary energy resources used as raw materials (PENRM)</common:shortDescription>
+      </referenceToFlowDataSet>
+      <functionType>General reminder flow</functionType>
+      <exchangeDirection>Input</exchangeDirection>
+      <meanAmount>0.0</meanAmount>
+      <common:other>
+        <epd:amount epd:module="A1-A3">0.157</epd:amount>
+        <epd:amount epd:module="A4">0</epd:amount>
+        <epd:amount epd:module="A5">0</epd:amount>
+        <epd:amount epd:module="B1">0</epd:amount>
+        <epd:amount epd:module="B2">0</epd:amount>
+        <epd:amount epd:module="B3">0</epd:amount>
+        <epd:amount epd:module="B4">0</epd:amount>
+        <epd:amount epd:module="B5">0</epd:amount>
+        <epd:amount epd:module="B6">0</epd:amount>
+        <epd:amount epd:module="B7">0</epd:amount>
+        <epd:amount epd:module="C1">0</epd:amount>
+        <epd:amount epd:module="C2">0</epd:amount>
+        <epd:amount epd:module="C3">0</epd:amount>
+        <epd:amount epd:module="C4">-0.157</epd:amount>
+        <epd:amount epd:module="D">0</epd:amount>
+        <epd:referenceToUnitGroupDataSet refObjectId="93a60a57-a3c8-11da-a746-0800200c9a66" type="unit group data set" uri="../unitgroups/93a60a57-a3c8-11da-a746-0800200c9a66">
+          <common:shortDescription>MJ</common:shortDescription>
+        </epd:referenceToUnitGroupDataSet>
+      </common:other>
+    </exchange>
+    <exchange dataSetInternalID="6">
+      <referenceToFlowDataSet type="flow data set" refObjectId="06159210-646b-4c8d-8583-da9b3b95a6c1">
+        <common:shortDescription xml:lang="en">Total use of non renewable primary energy resource (PENRT)</common:shortDescription>
+      </referenceToFlowDataSet>
+      <functionType>General reminder flow</functionType>
+      <exchangeDirection>Input</exchangeDirection>
+      <meanAmount>0.0</meanAmount>
+      <common:other>
+        <epd:amount epd:module="A1-A3">4.43</epd:amount>
+        <epd:amount epd:module="A4">0.146</epd:amount>
+        <epd:amount epd:module="A5">0.128</epd:amount>
+        <epd:amount epd:module="B1">0</epd:amount>
+        <epd:amount epd:module="B2">0.000204</epd:amount>
+        <epd:amount epd:module="B3">0</epd:amount>
+        <epd:amount epd:module="B4">0</epd:amount>
+        <epd:amount epd:module="B5">0</epd:amount>
+        <epd:amount epd:module="B6">0</epd:amount>
+        <epd:amount epd:module="B7">0</epd:amount>
+        <epd:amount epd:module="C1">0.128</epd:amount>
+        <epd:amount epd:module="C2">0.00475</epd:amount>
+        <epd:amount epd:module="C3">0.128</epd:amount>
+        <epd:amount epd:module="C4">-0.156</epd:amount>
+        <epd:amount epd:module="D">-0.840</epd:amount>
+        <epd:referenceToUnitGroupDataSet refObjectId="93a60a57-a3c8-11da-a746-0800200c9a66" type="unit group data set" uri="../unitgroups/93a60a57-a3c8-11da-a746-0800200c9a66">
+          <common:shortDescription>MJ</common:shortDescription>
+        </epd:referenceToUnitGroupDataSet>
+      </common:other>
+    </exchange>
+    <exchange dataSetInternalID="7">
+      <referenceToFlowDataSet type="flow data set" refObjectId="c6a1f35f-2d09-4f54-8dfb-97e502e1ce92">
+        <common:shortDescription xml:lang="en">Use of secondary material (SM)</common:shortDescription>
+      </referenceToFlowDataSet>
+      <functionType>General reminder flow</functionType>
+      <exchangeDirection>Input</exchangeDirection>
+      <meanAmount>0.0</meanAmount>
+      <common:other>
+        <epd:amount epd:module="A1-A3">0</epd:amount>
+        <epd:amount epd:module="A4">0</epd:amount>
+        <epd:amount epd:module="A5">0</epd:amount>
+        <epd:amount epd:module="B1">0</epd:amount>
+        <epd:amount epd:module="B2">0</epd:amount>
+        <epd:amount epd:module="B3">0</epd:amount>
+        <epd:amount epd:module="B4">0</epd:amount>
+        <epd:amount epd:module="B5">0</epd:amount>
+        <epd:amount epd:module="B6">0</epd:amount>
+        <epd:amount epd:module="B7">0</epd:amount>
+        <epd:amount epd:module="C1">0</epd:amount>
+        <epd:amount epd:module="C2">0</epd:amount>
+        <epd:amount epd:module="C3">0</epd:amount>
+        <epd:amount epd:module="C4">0</epd:amount>
+        <epd:amount epd:module="D">0</epd:amount>
+        <epd:referenceToUnitGroupDataSet refObjectId="ad38d542-3fe9-439d-9b95-2f5f7752acaf" type="unit group data set" uri="../unitgroups/ad38d542-3fe9-439d-9b95-2f5f7752acaf">
+          <common:shortDescription>kg</common:shortDescription>
+        </epd:referenceToUnitGroupDataSet>
+      </common:other>
+    </exchange>
+    <exchange dataSetInternalID="8">
+      <referenceToFlowDataSet type="flow data set" refObjectId="64333088-a55f-4aa2-9a31-c10b07816787">
+        <common:shortDescription xml:lang="en">Use of renewable secondary fuels (RSF)</common:shortDescription>
+      </referenceToFlowDataSet>
+      <functionType>General reminder flow</functionType>
+      <exchangeDirection>Input</exchangeDirection>
+      <meanAmount>0.0</meanAmount>
+      <common:other>
+        <epd:amount epd:module="A1-A3">0</epd:amount>
+        <epd:amount epd:module="A4">0</epd:amount>
+        <epd:amount epd:module="A5">0</epd:amount>
+        <epd:amount epd:module="B1">0</epd:amount>
+        <epd:amount epd:module="B2">0</epd:amount>
+        <epd:amount epd:module="B3">0</epd:amount>
+        <epd:amount epd:module="B4">0</epd:amount>
+        <epd:amount epd:module="B5">0</epd:amount>
+        <epd:amount epd:module="B6">0</epd:amount>
+        <epd:amount epd:module="B7">0</epd:amount>
+        <epd:amount epd:module="C1">0</epd:amount>
+        <epd:amount epd:module="C2">0</epd:amount>
+        <epd:amount epd:module="C3">0</epd:amount>
+        <epd:amount epd:module="C4">0</epd:amount>
+        <epd:amount epd:module="D">0</epd:amount>
+        <epd:referenceToUnitGroupDataSet refObjectId="93a60a57-a3c8-11da-a746-0800200c9a66" type="unit group data set" uri="../unitgroups/93a60a57-a3c8-11da-a746-0800200c9a66">
+          <common:shortDescription>MJ</common:shortDescription>
+        </epd:referenceToUnitGroupDataSet>
+      </common:other>
+    </exchange>
+    <exchange dataSetInternalID="9">
+      <referenceToFlowDataSet type="flow data set" refObjectId="89def144-d39a-4287-b86f-efde453ddcb2">
+        <common:shortDescription xml:lang="en">Use of non renewable secondary fuels (NRSF)</common:shortDescription>
+      </referenceToFlowDataSet>
+      <functionType>General reminder flow</functionType>
+      <exchangeDirection>Input</exchangeDirection>
+      <meanAmount>0.0</meanAmount>
+      <common:other>
+        <epd:amount epd:module="A1-A3">0</epd:amount>
+        <epd:amount epd:module="A4">0</epd:amount>
+        <epd:amount epd:module="A5">0</epd:amount>
+        <epd:amount epd:module="B1">0</epd:amount>
+        <epd:amount epd:module="B2">0</epd:amount>
+        <epd:amount epd:module="B3">0</epd:amount>
+        <epd:amount epd:module="B4">0</epd:amount>
+        <epd:amount epd:module="B5">0</epd:amount>
+        <epd:amount epd:module="B6">0</epd:amount>
+        <epd:amount epd:module="B7">0</epd:amount>
+        <epd:amount epd:module="C1">0</epd:amount>
+        <epd:amount epd:module="C2">0</epd:amount>
+        <epd:amount epd:module="C3">0</epd:amount>
+        <epd:amount epd:module="C4">0</epd:amount>
+        <epd:amount epd:module="D">0</epd:amount>
+        <epd:referenceToUnitGroupDataSet refObjectId="93a60a57-a3c8-11da-a746-0800200c9a66" type="unit group data set" uri="../unitgroups/93a60a57-a3c8-11da-a746-0800200c9a66">
+          <common:shortDescription>MJ</common:shortDescription>
+        </epd:referenceToUnitGroupDataSet>
+      </common:other>
+    </exchange>
+    <exchange dataSetInternalID="10">
+      <referenceToFlowDataSet type="flow data set" refObjectId="3cf952c8-f3a4-461d-8c96-96456ca62246">
+        <common:shortDescription xml:lang="en">Net use of fresh water (FW)</common:shortDescription>
+      </referenceToFlowDataSet>
+      <functionType>General reminder flow</functionType>
+      <exchangeDirection>Input</exchangeDirection>
+      <meanAmount>0.0</meanAmount>
+      <common:other>
+        <epd:amount epd:module="A1-A3">0.0107</epd:amount>
+        <epd:amount epd:module="A4">0.0000201</epd:amount>
+        <epd:amount epd:module="A5">0.0000382</epd:amount>
+        <epd:amount epd:module="B1">0</epd:amount>
+        <epd:amount epd:module="B2">0.0000182</epd:amount>
+        <epd:amount epd:module="B3">0</epd:amount>
+        <epd:amount epd:module="B4">0</epd:amount>
+        <epd:amount epd:module="B5">0</epd:amount>
+        <epd:amount epd:module="B6">0</epd:amount>
+        <epd:amount epd:module="B7">0</epd:amount>
+        <epd:amount epd:module="C1">0.0000382</epd:amount>
+        <epd:amount epd:module="C2">0.000000725</epd:amount>
+        <epd:amount epd:module="C3">0.0000382</epd:amount>
+        <epd:amount epd:module="C4">0.0000000482</epd:amount>
+        <epd:amount epd:module="D">-0.000584</epd:amount>
+        <epd:referenceToUnitGroupDataSet refObjectId="cd950537-0a98-4044-9ba7-9f9a68d0a504" type="unit group data set" uri="../unitgroups/cd950537-0a98-4044-9ba7-9f9a68d0a504">
+          <common:shortDescription>m3</common:shortDescription>
+        </epd:referenceToUnitGroupDataSet>
+      </common:other>
+    </exchange>
+    <exchange dataSetInternalID="11">
+      <referenceToFlowDataSet type="flow data set" refObjectId="430f9e0f-59b2-46a0-8e0d-55e0e84948fc">
+        <common:shortDescription xml:lang="en">Hazardous waste disposed (HWD)</common:shortDescription>
+      </referenceToFlowDataSet>
+      <functionType>General reminder flow</functionType>
+      <exchangeDirection>Output</exchangeDirection>
+      <meanAmount>0.0</meanAmount>
+      <common:other>
+        <epd:amount epd:module="A1-A3">0.0481</epd:amount>
+        <epd:amount epd:module="A4">0.000257</epd:amount>
+        <epd:amount epd:module="A5">0.00160</epd:amount>
+        <epd:amount epd:module="B1">0</epd:amount>
+        <epd:amount epd:module="B2">0.00000176</epd:amount>
+        <epd:amount epd:module="B3">0</epd:amount>
+        <epd:amount epd:module="B4">0</epd:amount>
+        <epd:amount epd:module="B5">0</epd:amount>
+        <epd:amount epd:module="B6">0</epd:amount>
+        <epd:amount epd:module="B7">0</epd:amount>
+        <epd:amount epd:module="C1">0.00160</epd:amount>
+        <epd:amount epd:module="C2">0.00000852</epd:amount>
+        <epd:amount epd:module="C3">0.00160</epd:amount>
+        <epd:amount epd:module="C4">0.000000942</epd:amount>
+        <epd:amount epd:module="D">-0.0162</epd:amount>
+        <epd:referenceToUnitGroupDataSet refObjectId="ad38d542-3fe9-439d-9b95-2f5f7752acaf" type="unit group data set" uri="../unitgroups/ad38d542-3fe9-439d-9b95-2f5f7752acaf">
+          <common:shortDescription>kg</common:shortDescription>
+        </epd:referenceToUnitGroupDataSet>
+      </common:other>
+    </exchange>
+    <exchange dataSetInternalID="12">
+      <referenceToFlowDataSet type="flow data set" refObjectId="b29ef66b-e286-4afa-949f-62f1a7b4d7fa">
+        <common:shortDescription xml:lang="en">Non harzardous waste disposed (NHWD)</common:shortDescription>
+      </referenceToFlowDataSet>
+      <functionType>General reminder flow</functionType>
+      <exchangeDirection>Output</exchangeDirection>
+      <meanAmount>0.0</meanAmount>
+      <common:other>
+        <epd:amount epd:module="A1-A3">0.584</epd:amount>
+        <epd:amount epd:module="A4">0.00483</epd:amount>
+        <epd:amount epd:module="A5">0.0124</epd:amount>
+        <epd:amount epd:module="B1">0</epd:amount>
+        <epd:amount epd:module="B2">0.000320</epd:amount>
+        <epd:amount epd:module="B3">0</epd:amount>
+        <epd:amount epd:module="B4">0</epd:amount>
+        <epd:amount epd:module="B5">0</epd:amount>
+        <epd:amount epd:module="B6">0</epd:amount>
+        <epd:amount epd:module="B7">0</epd:amount>
+        <epd:amount epd:module="C1">0.0124</epd:amount>
+        <epd:amount epd:module="C2">0.000159</epd:amount>
+        <epd:amount epd:module="C3">0.0124</epd:amount>
+        <epd:amount epd:module="C4">0.0000149</epd:amount>
+        <epd:amount epd:module="D">-0.107</epd:amount>
+        <epd:referenceToUnitGroupDataSet refObjectId="ad38d542-3fe9-439d-9b95-2f5f7752acaf" type="unit group data set" uri="../unitgroups/ad38d542-3fe9-439d-9b95-2f5f7752acaf">
+          <common:shortDescription>kg</common:shortDescription>
+        </epd:referenceToUnitGroupDataSet>
+      </common:other>
+    </exchange>
+    <exchange dataSetInternalID="13">
+      <referenceToFlowDataSet type="flow data set" refObjectId="3449546e-52ad-4b39-b809-9fb77cea8ff6">
+        <common:shortDescription xml:lang="en">Radioactive waste disposed (RWD)</common:shortDescription>
+      </referenceToFlowDataSet>
+      <functionType>General reminder flow</functionType>
+      <exchangeDirection>Output</exchangeDirection>
+      <meanAmount>0.0</meanAmount>
+      <common:other>
+        <epd:amount epd:module="A1-A3">0.00000645</epd:amount>
+        <epd:amount epd:module="A4">0.0000000297</epd:amount>
+        <epd:amount epd:module="A5">0.000000140</epd:amount>
+        <epd:amount epd:module="B1">0</epd:amount>
+        <epd:amount epd:module="B2">0.000000000473</epd:amount>
+        <epd:amount epd:module="B3">0</epd:amount>
+        <epd:amount epd:module="B4">0</epd:amount>
+        <epd:amount epd:module="B5">0</epd:amount>
+        <epd:amount epd:module="B6">0</epd:amount>
+        <epd:amount epd:module="B7">0</epd:amount>
+        <epd:amount epd:module="C1">0.000000140</epd:amount>
+        <epd:amount epd:module="C2">0.00000000107</epd:amount>
+        <epd:amount epd:module="C3">0.000000140</epd:amount>
+        <epd:amount epd:module="C4">0.0000000000770</epd:amount>
+        <epd:amount epd:module="D">-0.000000677</epd:amount>
+        <epd:referenceToUnitGroupDataSet refObjectId="ad38d542-3fe9-439d-9b95-2f5f7752acaf" type="unit group data set" uri="../unitgroups/ad38d542-3fe9-439d-9b95-2f5f7752acaf">
+          <common:shortDescription>kg</common:shortDescription>
+        </epd:referenceToUnitGroupDataSet>
+      </common:other>
+    </exchange>
+    <exchange dataSetInternalID="14">
+      <referenceToFlowDataSet type="flow data set" refObjectId="a2b32f97-3fc7-4af2-b209-525bc6426f33">
+        <common:shortDescription xml:lang="en">Components for re-use (CRU)</common:shortDescription>
+      </referenceToFlowDataSet>
+      <functionType>General reminder flow</functionType>
+      <exchangeDirection>Output</exchangeDirection>
+      <meanAmount>0.0</meanAmount>
+      <common:other>
+        <epd:amount epd:module="A1-A3">0</epd:amount>
+        <epd:amount epd:module="A4">0</epd:amount>
+        <epd:amount epd:module="A5">0</epd:amount>
+        <epd:amount epd:module="B1">0</epd:amount>
+        <epd:amount epd:module="B2">0</epd:amount>
+        <epd:amount epd:module="B3">0</epd:amount>
+        <epd:amount epd:module="B4">0</epd:amount>
+        <epd:amount epd:module="B5">0</epd:amount>
+        <epd:amount epd:module="B6">0</epd:amount>
+        <epd:amount epd:module="B7">0</epd:amount>
+        <epd:amount epd:module="C1">0</epd:amount>
+        <epd:amount epd:module="C2">0</epd:amount>
+        <epd:amount epd:module="C3">0</epd:amount>
+        <epd:amount epd:module="C4">0</epd:amount>
+        <epd:amount epd:module="D">0</epd:amount>
+        <epd:referenceToUnitGroupDataSet refObjectId="ad38d542-3fe9-439d-9b95-2f5f7752acaf" type="unit group data set" uri="../unitgroups/ad38d542-3fe9-439d-9b95-2f5f7752acaf">
+          <common:shortDescription>kg</common:shortDescription>
+        </epd:referenceToUnitGroupDataSet>
+      </common:other>
+    </exchange>
+    <exchange dataSetInternalID="15">
+      <referenceToFlowDataSet type="flow data set" refObjectId="d7fe48a5-4103-49c8-9aae-b0b5dfdbd6ae">
+        <common:shortDescription xml:lang="en">Materials for recycling (MFR)</common:shortDescription>
+      </referenceToFlowDataSet>
+      <functionType>General reminder flow</functionType>
+      <exchangeDirection>Output</exchangeDirection>
+      <meanAmount>0.0</meanAmount>
+      <common:other>
+        <epd:amount epd:module="A1-A3">0</epd:amount>
+        <epd:amount epd:module="A4">0</epd:amount>
+        <epd:amount epd:module="A5">0.00238</epd:amount>
+        <epd:amount epd:module="B1">0</epd:amount>
+        <epd:amount epd:module="B2">0</epd:amount>
+        <epd:amount epd:module="B3">0</epd:amount>
+        <epd:amount epd:module="B4">0</epd:amount>
+        <epd:amount epd:module="B5">0</epd:amount>
+        <epd:amount epd:module="B6">0</epd:amount>
+        <epd:amount epd:module="B7">0</epd:amount>
+        <epd:amount epd:module="C1">0</epd:amount>
+        <epd:amount epd:module="C2">0</epd:amount>
+        <epd:amount epd:module="C3">0.0338</epd:amount>
+        <epd:amount epd:module="C4">0</epd:amount>
+        <epd:amount epd:module="D">0</epd:amount>
+        <epd:referenceToUnitGroupDataSet refObjectId="ad38d542-3fe9-439d-9b95-2f5f7752acaf" type="unit group data set" uri="../unitgroups/ad38d542-3fe9-439d-9b95-2f5f7752acaf">
+          <common:shortDescription>kg</common:shortDescription>
+        </epd:referenceToUnitGroupDataSet>
+      </common:other>
+    </exchange>
+    <exchange dataSetInternalID="16">
+      <referenceToFlowDataSet type="flow data set" refObjectId="59a9181c-3aaf-46ee-8b13-2b3723b6e447">
+        <common:shortDescription xml:lang="en">Materials for energy recovery (MER)</common:shortDescription>
+      </referenceToFlowDataSet>
+      <functionType>General reminder flow</functionType>
+      <exchangeDirection>Output</exchangeDirection>
+      <meanAmount>0.0</meanAmount>
+      <common:other>
+        <epd:amount epd:module="A1-A3">0</epd:amount>
+        <epd:amount epd:module="A4">0</epd:amount>
+        <epd:amount epd:module="A5">0</epd:amount>
+        <epd:amount epd:module="B1">0</epd:amount>
+        <epd:amount epd:module="B2">0</epd:amount>
+        <epd:amount epd:module="B3">0</epd:amount>
+        <epd:amount epd:module="B4">0</epd:amount>
+        <epd:amount epd:module="B5">0</epd:amount>
+        <epd:amount epd:module="B6">0</epd:amount>
+        <epd:amount epd:module="B7">0</epd:amount>
+        <epd:amount epd:module="C1">0</epd:amount>
+        <epd:amount epd:module="C2">0</epd:amount>
+        <epd:amount epd:module="C3">0</epd:amount>
+        <epd:amount epd:module="C4">0.00360</epd:amount>
+        <epd:amount epd:module="D">0</epd:amount>
+        <epd:referenceToUnitGroupDataSet refObjectId="ad38d542-3fe9-439d-9b95-2f5f7752acaf" type="unit group data set" uri="../unitgroups/ad38d542-3fe9-439d-9b95-2f5f7752acaf">
+          <common:shortDescription>kg</common:shortDescription>
+        </epd:referenceToUnitGroupDataSet>
+      </common:other>
+    </exchange>
+    <exchange dataSetInternalID="17">
+      <referenceToFlowDataSet type="flow data set" refObjectId="4da0c987-2b76-40d6-9e9e-82a017aaaf29">
+        <common:shortDescription xml:lang="en">Exported electrical energy (EEE)</common:shortDescription>
+      </referenceToFlowDataSet>
+      <functionType>General reminder flow</functionType>
+      <exchangeDirection>Output</exchangeDirection>
+      <meanAmount>0.0</meanAmount>
+      <common:other>
+        <epd:amount epd:module="A1-A3">0</epd:amount>
+        <epd:amount epd:module="A4">0</epd:amount>
+        <epd:amount epd:module="A5">0</epd:amount>
+        <epd:amount epd:module="B1">0</epd:amount>
+        <epd:amount epd:module="B2">0</epd:amount>
+        <epd:amount epd:module="B3">0</epd:amount>
+        <epd:amount epd:module="B4">0</epd:amount>
+        <epd:amount epd:module="B5">0</epd:amount>
+        <epd:amount epd:module="B6">0</epd:amount>
+        <epd:amount epd:module="B7">0</epd:amount>
+        <epd:amount epd:module="C1">0</epd:amount>
+        <epd:amount epd:module="C2">0</epd:amount>
+        <epd:amount epd:module="C3">0</epd:amount>
+        <epd:amount epd:module="C4">0</epd:amount>
+        <epd:amount epd:module="D">-0.133</epd:amount>
+        <epd:referenceToUnitGroupDataSet refObjectId="93a60a57-a3c8-11da-a746-0800200c9a66" type="unit group data set" uri="../unitgroups/93a60a57-a3c8-11da-a746-0800200c9a66">
+          <common:shortDescription>MJ</common:shortDescription>
+        </epd:referenceToUnitGroupDataSet>
+      </common:other>
+    </exchange>
+    <exchange dataSetInternalID="18">
+      <referenceToFlowDataSet type="flow data set" refObjectId="98daf38a-7a79-46d3-9a37-2b7bd0955810">
+        <common:shortDescription xml:lang="en">Exported thermal energy (EET)</common:shortDescription>
+      </referenceToFlowDataSet>
+      <functionType>General reminder flow</functionType>
+      <exchangeDirection>Output</exchangeDirection>
+      <meanAmount>0.0</meanAmount>
+      <common:other>
+        <epd:amount epd:module="A1-A3">0.00130</epd:amount>
+        <epd:amount epd:module="A4">0.0000217</epd:amount>
+        <epd:amount epd:module="A5">0.00000804</epd:amount>
+        <epd:amount epd:module="B1">0</epd:amount>
+        <epd:amount epd:module="B2">0.0000000284</epd:amount>
+        <epd:amount epd:module="B3">0</epd:amount>
+        <epd:amount epd:module="B4">0</epd:amount>
+        <epd:amount epd:module="B5">0</epd:amount>
+        <epd:amount epd:module="B6">0</epd:amount>
+        <epd:amount epd:module="B7">0</epd:amount>
+        <epd:amount epd:module="C1">0.00000800</epd:amount>
+        <epd:amount epd:module="C2">0.000000698</epd:amount>
+        <epd:amount epd:module="C3">0.00000800</epd:amount>
+        <epd:amount epd:module="C4">0.0000000169</epd:amount>
+        <epd:amount epd:module="D">-0.0000642</epd:amount>
+        <epd:referenceToUnitGroupDataSet refObjectId="93a60a57-a3c8-11da-a746-0800200c9a66" type="unit group data set" uri="../unitgroups/93a60a57-a3c8-11da-a746-0800200c9a66">
+          <common:shortDescription>MJ</common:shortDescription>
+        </epd:referenceToUnitGroupDataSet>
+      </common:other>
+    </exchange>
+  </exchanges>
+  <LCIAResults>
+    <LCIAResult>
+      <referenceToLCIAMethodDataSet type="LCIA method data set" refObjectId="a7ea19c0-9749-11ed-a8fc-0242ac120002" uri="../lciamethods/a7ea19c0-9749-11ed-a8fc-0242ac120002">
+        <common:shortDescription xml:lang="en">Global Warming Potential - fossil fuels (GWP-fossil)</common:shortDescription>
+      </referenceToLCIAMethodDataSet>
+      <meanAmount>0.0</meanAmount>
+      <common:other>
+        <epd:amount epd:module="A1-A3">0.363</epd:amount>
+        <epd:amount epd:module="A4">0.0104</epd:amount>
+        <epd:amount epd:module="A5">0.0131</epd:amount>
+        <epd:amount epd:module="B1">0</epd:amount>
+        <epd:amount epd:module="B2">0.0000160</epd:amount>
+        <epd:amount epd:module="B3">0</epd:amount>
+        <epd:amount epd:module="B4">0</epd:amount>
+        <epd:amount epd:module="B5">0</epd:amount>
+        <epd:amount epd:module="B6">0</epd:amount>
+        <epd:amount epd:module="B7">0</epd:amount>
+        <epd:amount epd:module="C1">0.0131</epd:amount>
+        <epd:amount epd:module="C2">0.000332</epd:amount>
+        <epd:amount epd:module="C3">0.0131</epd:amount>
+        <epd:amount epd:module="C4">0.0000512</epd:amount>
+        <epd:amount epd:module="D">-0.0909</epd:amount>
+        <epd:referenceToUnitGroupDataSet refObjectId="1ebf3012-d0db-4de2-aefd-ef30cedb0be1" type="unit group data set" uri="../unitgroups/1ebf3012-d0db-4de2-aefd-ef30cedb0be1">
+          <common:shortDescription>kg CO2 eq.</common:shortDescription>
+        </epd:referenceToUnitGroupDataSet>
+      </common:other>
+    </LCIAResult>
+    <LCIAResult>
+      <referenceToLCIAMethodDataSet type="LCIA method data set" refObjectId="a7ea186c-9749-11ed-a8fc-0242ac120002" uri="../lciamethods/a7ea186c-9749-11ed-a8fc-0242ac120002">
+        <common:shortDescription xml:lang="en">Global Warming Potential - biogenic (GWP-biogenic)</common:shortDescription>
+      </referenceToLCIAMethodDataSet>
+      <meanAmount>0.0</meanAmount>
+      <common:other>
+        <epd:amount epd:module="A1-A3">-0.00229</epd:amount>
+        <epd:amount epd:module="A4">0.000000200</epd:amount>
+        <epd:amount epd:module="A5">0.00280</epd:amount>
+        <epd:amount epd:module="B1">0</epd:amount>
+        <epd:amount epd:module="B2">0.0000000483</epd:amount>
+        <epd:amount epd:module="B3">0</epd:amount>
+        <epd:amount epd:module="B4">0</epd:amount>
+        <epd:amount epd:module="B5">0</epd:amount>
+        <epd:amount epd:module="B6">0</epd:amount>
+        <epd:amount epd:module="B7">0</epd:amount>
+        <epd:amount epd:module="C1">-0.0000747</epd:amount>
+        <epd:amount epd:module="C2">0.000000399</epd:amount>
+        <epd:amount epd:module="C3">-0.0000747</epd:amount>
+        <epd:amount epd:module="C4">0.00000000423</epd:amount>
+        <epd:amount epd:module="D">0.000430</epd:amount>
+        <epd:referenceToUnitGroupDataSet refObjectId="1ebf3012-d0db-4de2-aefd-ef30cedb0be1" type="unit group data set" uri="../unitgroups/1ebf3012-d0db-4de2-aefd-ef30cedb0be1">
+          <common:shortDescription>kg CO2 eq.</common:shortDescription>
+        </epd:referenceToUnitGroupDataSet>
+      </common:other>
+    </LCIAResult>
+    <LCIAResult>
+      <referenceToLCIAMethodDataSet type="LCIA method data set" refObjectId="a7ea1ae2-9749-11ed-a8fc-0242ac120002" uri="../lciamethods/a7ea1ae2-9749-11ed-a8fc-0242ac120002">
+        <common:shortDescription xml:lang="en">Global Warming Potential - land use and land use change (GWP-luluc)</common:shortDescription>
+      </referenceToLCIAMethodDataSet>
+      <meanAmount>0.0</meanAmount>
+      <common:other>
+        <epd:amount epd:module="A1-A3">0.000272</epd:amount>
+        <epd:amount epd:module="A4">0.00000422</epd:amount>
+        <epd:amount epd:module="A5">0.00000475</epd:amount>
+        <epd:amount epd:module="B1">0</epd:amount>
+        <epd:amount epd:module="B2">0.0000000196</epd:amount>
+        <epd:amount epd:module="B3">0</epd:amount>
+        <epd:amount epd:module="B4">0</epd:amount>
+        <epd:amount epd:module="B5">0</epd:amount>
+        <epd:amount epd:module="B6">0</epd:amount>
+        <epd:amount epd:module="B7">0</epd:amount>
+        <epd:amount epd:module="C1">0.00000469</epd:amount>
+        <epd:amount epd:module="C2">0.00000111</epd:amount>
+        <epd:amount epd:module="C3">0.00000469</epd:amount>
+        <epd:amount epd:module="C4">0.00000000507</epd:amount>
+        <epd:amount epd:module="D">-0.0000270</epd:amount>
+        <epd:referenceToUnitGroupDataSet refObjectId="1ebf3012-d0db-4de2-aefd-ef30cedb0be1" type="unit group data set" uri="../unitgroups/1ebf3012-d0db-4de2-aefd-ef30cedb0be1">
+          <common:shortDescription>kg CO2 eq.</common:shortDescription>
+        </epd:referenceToUnitGroupDataSet>
+      </common:other>
+    </LCIAResult>
+    <LCIAResult>
+      <referenceToLCIAMethodDataSet type="LCIA method data set" refObjectId="a7ea142a-9749-11ed-a8fc-0242ac120002" uri="../lciamethods/a7ea142a-9749-11ed-a8fc-0242ac120002">
+        <common:shortDescription xml:lang="en">Global Warming Potential - total (GWP-total)</common:shortDescription>
+      </referenceToLCIAMethodDataSet>
+      <meanAmount>0.0</meanAmount>
+      <common:other>
+        <epd:amount epd:module="A1-A3">0.361</epd:amount>
+        <epd:amount epd:module="A4">0.0104</epd:amount>
+        <epd:amount epd:module="A5">0.0160</epd:amount>
+        <epd:amount epd:module="B1">0</epd:amount>
+        <epd:amount epd:module="B2">0.0000161</epd:amount>
+        <epd:amount epd:module="B3">0</epd:amount>
+        <epd:amount epd:module="B4">0</epd:amount>
+        <epd:amount epd:module="B5">0</epd:amount>
+        <epd:amount epd:module="B6">0</epd:amount>
+        <epd:amount epd:module="B7">0</epd:amount>
+        <epd:amount epd:module="C1">0.0131</epd:amount>
+        <epd:amount epd:module="C2">0.000334</epd:amount>
+        <epd:amount epd:module="C3">0.0131</epd:amount>
+        <epd:amount epd:module="C4">0.0000512</epd:amount>
+        <epd:amount epd:module="D">-0.0905</epd:amount>
+        <epd:referenceToUnitGroupDataSet refObjectId="1ebf3012-d0db-4de2-aefd-ef30cedb0be1" type="unit group data set" uri="../unitgroups/1ebf3012-d0db-4de2-aefd-ef30cedb0be1">
+          <common:shortDescription>kg CO2 eq.</common:shortDescription>
+        </epd:referenceToUnitGroupDataSet>
+      </common:other>
+    </LCIAResult>
+    <LCIAResult>
+      <referenceToLCIAMethodDataSet type="LCIA method data set" refObjectId="b5c629d6-def3-11e6-bf01-fe55135034f3" uri="../lciamethods/b5c629d6-def3-11e6-bf01-fe55135034f3">
+        <common:shortDescription xml:lang="en">Depletion potential of the stratospheric ozone layer (ODP)</common:shortDescription>
+      </referenceToLCIAMethodDataSet>
+      <meanAmount>0.0</meanAmount>
+      <common:other>
+        <epd:amount epd:module="A1-A3">0.00000000444</epd:amount>
+        <epd:amount epd:module="A4">0.000000000154</epd:amount>
+        <epd:amount epd:module="A5">0.0000000000312</epd:amount>
+        <epd:amount epd:module="B1">0</epd:amount>
+        <epd:amount epd:module="B2">0.00000000000230</epd:amount>
+        <epd:amount epd:module="B3">0</epd:amount>
+        <epd:amount epd:module="B4">0</epd:amount>
+        <epd:amount epd:module="B5">0</epd:amount>
+        <epd:amount epd:module="B6">0</epd:amount>
+        <epd:amount epd:module="B7">0</epd:amount>
+        <epd:amount epd:module="C1">0.0000000000309</epd:amount>
+        <epd:amount epd:module="C2">0.00000000000559</epd:amount>
+        <epd:amount epd:module="C3">0.0000000000309</epd:amount>
+        <epd:amount epd:module="C4">0.000000000000741</epd:amount>
+        <epd:amount epd:module="D">-0.000000000275</epd:amount>
+        <epd:referenceToUnitGroupDataSet refObjectId="d9e957c9-7309-4474-bf3a-7777df6c4e5b" type="unit group data set" uri="../unitgroups/d9e957c9-7309-4474-bf3a-7777df6c4e5b">
+          <common:shortDescription>kg CFC-11 eq.</common:shortDescription>
+        </epd:referenceToUnitGroupDataSet>
+      </common:other>
+    </LCIAResult>
+    <LCIAResult>
+      <referenceToLCIAMethodDataSet type="LCIA method data set" refObjectId="b5c611c6-def3-11e6-bf01-fe55135034f3" uri="../lciamethods/b5c611c6-def3-11e6-bf01-fe55135034f3">
+        <common:shortDescription xml:lang="en">Acidifcation potential, Accumulated Exceedance (AP)</common:shortDescription>
+      </referenceToLCIAMethodDataSet>
+      <meanAmount>0.0</meanAmount>
+      <common:other>
+        <epd:amount epd:module="A1-A3">0.00207</epd:amount>
+        <epd:amount epd:module="A4">0.0000238</epd:amount>
+        <epd:amount epd:module="A5">0.0000725</epd:amount>
+        <epd:amount epd:module="B1">0</epd:amount>
+        <epd:amount epd:module="B2">0.0000000839</epd:amount>
+        <epd:amount epd:module="B3">0</epd:amount>
+        <epd:amount epd:module="B4">0</epd:amount>
+        <epd:amount epd:module="B5">0</epd:amount>
+        <epd:amount epd:module="B6">0</epd:amount>
+        <epd:amount epd:module="B7">0</epd:amount>
+        <epd:amount epd:module="C1">0.0000724</epd:amount>
+        <epd:amount epd:module="C2">0.00000152</epd:amount>
+        <epd:amount epd:module="C3">0.0000724</epd:amount>
+        <epd:amount epd:module="C4">0.000000450</epd:amount>
+        <epd:amount epd:module="D">-0.000554</epd:amount>
+        <epd:referenceToUnitGroupDataSet refObjectId="42e089ac-92bf-4bf2-8ca1-5fc40d18f2ed" type="unit group data set" uri="../unitgroups/42e089ac-92bf-4bf2-8ca1-5fc40d18f2ed">
+          <common:shortDescription>mol H+ eq.</common:shortDescription>
+        </epd:referenceToUnitGroupDataSet>
+      </common:other>
+    </LCIAResult>
+    <LCIAResult>
+      <referenceToLCIAMethodDataSet type="LCIA method data set" refObjectId="b53ec18f-7377-4ad3-86eb-cc3f4f276b2b" uri="../lciamethods/b53ec18f-7377-4ad3-86eb-cc3f4f276b2b">
+        <common:shortDescription xml:lang="en">Europhication potential - freshwater (EP-freshwater)</common:shortDescription>
+      </referenceToLCIAMethodDataSet>
+      <meanAmount>0.0</meanAmount>
+      <common:other>
+        <epd:amount epd:module="A1-A3">0.000111</epd:amount>
+        <epd:amount epd:module="A4">0.000000820</epd:amount>
+        <epd:amount epd:module="A5">0.00000262</epd:amount>
+        <epd:amount epd:module="B1">0</epd:amount>
+        <epd:amount epd:module="B2">0.00000000653</epd:amount>
+        <epd:amount epd:module="B3">0</epd:amount>
+        <epd:amount epd:module="B4">0</epd:amount>
+        <epd:amount epd:module="B5">0</epd:amount>
+        <epd:amount epd:module="B6">0</epd:amount>
+        <epd:amount epd:module="B7">0</epd:amount>
+        <epd:amount epd:module="C1">0.00000262</epd:amount>
+        <epd:amount epd:module="C2">0.0000000271</epd:amount>
+        <epd:amount epd:module="C3">0.00000262</epd:amount>
+        <epd:amount epd:module="C4">0.00000000251</epd:amount>
+        <epd:amount epd:module="D">-0.0000177</epd:amount>
+        <epd:referenceToUnitGroupDataSet refObjectId="0429039d-a61d-4590-ba67-aa4a20a810a1" type="unit group data set" uri="../unitgroups/0429039d-a61d-4590-ba67-aa4a20a810a1">
+          <common:shortDescription>kg P eq.</common:shortDescription>
+        </epd:referenceToUnitGroupDataSet>
+      </common:other>
+    </LCIAResult>
+    <LCIAResult>
+      <referenceToLCIAMethodDataSet type="LCIA method data set" refObjectId="b5c619fa-def3-11e6-bf01-fe55135034f3" uri="../lciamethods/b5c619fa-def3-11e6-bf01-fe55135034f3">
+        <common:shortDescription xml:lang="en">Europhication potential - marine (EP-marine)</common:shortDescription>
+      </referenceToLCIAMethodDataSet>
+      <meanAmount>0.0</meanAmount>
+      <common:other>
+        <epd:amount epd:module="A1-A3">0.000388</epd:amount>
+        <epd:amount epd:module="A4">0.00000552</epd:amount>
+        <epd:amount epd:module="A5">0.0000149</epd:amount>
+        <epd:amount epd:module="B1">0</epd:amount>
+        <epd:amount epd:module="B2">0.0000000169</epd:amount>
+        <epd:amount epd:module="B3">0</epd:amount>
+        <epd:amount epd:module="B4">0</epd:amount>
+        <epd:amount epd:module="B5">0</epd:amount>
+        <epd:amount epd:module="B6">0</epd:amount>
+        <epd:amount epd:module="B7">0</epd:amount>
+        <epd:amount epd:module="C1">0.0000148</epd:amount>
+        <epd:amount epd:module="C2">0.000000579</epd:amount>
+        <epd:amount epd:module="C3">0.0000148</epd:amount>
+        <epd:amount epd:module="C4">0.000000202</epd:amount>
+        <epd:amount epd:module="D">-0.000102</epd:amount>
+        <epd:referenceToUnitGroupDataSet refObjectId="d05bb823-ecdf-4686-8c40-bf1d9257859f" type="unit group data set" uri="../unitgroups/d05bb823-ecdf-4686-8c40-bf1d9257859f">
+          <common:shortDescription>kg N eq.</common:shortDescription>
+        </epd:referenceToUnitGroupDataSet>
+      </common:other>
+    </LCIAResult>
+    <LCIAResult>
+      <referenceToLCIAMethodDataSet type="LCIA method data set" refObjectId="b5c614d2-def3-11e6-bf01-fe55135034f3" uri="../lciamethods/b5c614d2-def3-11e6-bf01-fe55135034f3">
+        <common:shortDescription xml:lang="en">Europhication potential - terrestrial (EP-terrestrial)</common:shortDescription>
+      </referenceToLCIAMethodDataSet>
+      <meanAmount>0.0</meanAmount>
+      <common:other>
+        <epd:amount epd:module="A1-A3">0.00413</epd:amount>
+        <epd:amount epd:module="A4">0.0000596</epd:amount>
+        <epd:amount epd:module="A5">0.000159</epd:amount>
+        <epd:amount epd:module="B1">0</epd:amount>
+        <epd:amount epd:module="B2">0.000000172</epd:amount>
+        <epd:amount epd:module="B3">0</epd:amount>
+        <epd:amount epd:module="B4">0</epd:amount>
+        <epd:amount epd:module="B5">0</epd:amount>
+        <epd:amount epd:module="B6">0</epd:amount>
+        <epd:amount epd:module="B7">0</epd:amount>
+        <epd:amount epd:module="C1">0.000158</epd:amount>
+        <epd:amount epd:module="C2">0.00000623</epd:amount>
+        <epd:amount epd:module="C3">0.000158</epd:amount>
+        <epd:amount epd:module="C4">0.00000221</epd:amount>
+        <epd:amount epd:module="D">-0.00108</epd:amount>
+        <epd:referenceToUnitGroupDataSet refObjectId="71b4d617-0ec9-4d3f-b65e-e438940c2401" type="unit group data set" uri="../unitgroups/71b4d617-0ec9-4d3f-b65e-e438940c2401">
+          <common:shortDescription>mol N eq.</common:shortDescription>
+        </epd:referenceToUnitGroupDataSet>
+      </common:other>
+    </LCIAResult>
+    <LCIAResult>
+      <referenceToLCIAMethodDataSet type="LCIA method data set" refObjectId="b5c610fe-def3-11e6-bf01-fe55135034f3" uri="../lciamethods/b5c610fe-def3-11e6-bf01-fe55135034f3">
+        <common:shortDescription xml:lang="en">Photochemical Ozone Creation Potential (POCP)</common:shortDescription>
+      </referenceToLCIAMethodDataSet>
+      <meanAmount>0.0</meanAmount>
+      <common:other>
+        <epd:amount epd:module="A1-A3">0.00125</epd:amount>
+        <epd:amount epd:module="A4">0.0000333</epd:amount>
+        <epd:amount epd:module="A5">0.0000424</epd:amount>
+        <epd:amount epd:module="B1">0</epd:amount>
+        <epd:amount epd:module="B2">0.0000000526</epd:amount>
+        <epd:amount epd:module="B3">0</epd:amount>
+        <epd:amount epd:module="B4">0</epd:amount>
+        <epd:amount epd:module="B5">0</epd:amount>
+        <epd:amount epd:module="B6">0</epd:amount>
+        <epd:amount epd:module="B7">0</epd:amount>
+        <epd:amount epd:module="C1">0.0000423</epd:amount>
+        <epd:amount epd:module="C2">0.00000215</epd:amount>
+        <epd:amount epd:module="C3">0.0000423</epd:amount>
+        <epd:amount epd:module="C4">0.000000671</epd:amount>
+        <epd:amount epd:module="D">-0.000308</epd:amount>
+        <epd:referenceToUnitGroupDataSet refObjectId="d27c25f8-fbc1-44c6-b47b-4adbae4199c6" type="unit group data set" uri="../unitgroups/d27c25f8-fbc1-44c6-b47b-4adbae4199c6">
+          <common:shortDescription>kg NMVOC eq.</common:shortDescription>
+        </epd:referenceToUnitGroupDataSet>
+      </common:other>
+    </LCIAResult>
+    <LCIAResult>
+      <referenceToLCIAMethodDataSet type="LCIA method data set" refObjectId="b2ad6494-c78d-11e6-9d9d-cec0c932ce01" uri="../lciamethods/b2ad6494-c78d-11e6-9d9d-cec0c932ce01">
+        <common:shortDescription xml:lang="en">Abiotic depletion potential - non-fossil resources (ADPE)</common:shortDescription>
+      </referenceToLCIAMethodDataSet>
+      <meanAmount>0.0</meanAmount>
+      <common:other>
+        <epd:amount epd:module="A1-A3">0.00000128</epd:amount>
+        <epd:amount epd:module="A4">0.0000000338</epd:amount>
+        <epd:amount epd:module="A5">0.0000000550</epd:amount>
+        <epd:amount epd:module="B1">0</epd:amount>
+        <epd:amount epd:module="B2">0.0000000000728</epd:amount>
+        <epd:amount epd:module="B3">0</epd:amount>
+        <epd:amount epd:module="B4">0</epd:amount>
+        <epd:amount epd:module="B5">0</epd:amount>
+        <epd:amount epd:module="B6">0</epd:amount>
+        <epd:amount epd:module="B7">0</epd:amount>
+        <epd:amount epd:module="C1">0.0000000549</epd:amount>
+        <epd:amount epd:module="C2">0.00000000104</epd:amount>
+        <epd:amount epd:module="C3">0.0000000549</epd:amount>
+        <epd:amount epd:module="C4">0.0000000000183</epd:amount>
+        <epd:amount epd:module="D">-0.000000396</epd:amount>
+        <epd:referenceToUnitGroupDataSet refObjectId="54ccd2d9-a32a-4fc2-923d-f2c8c93e89d4" type="unit group data set" uri="../unitgroups/54ccd2d9-a32a-4fc2-923d-f2c8c93e89d4">
+          <common:shortDescription>kg Sb eq.</common:shortDescription>
+        </epd:referenceToUnitGroupDataSet>
+      </common:other>
+    </LCIAResult>
+    <LCIAResult>
+      <referenceToLCIAMethodDataSet type="LCIA method data set" refObjectId="b2ad6110-c78d-11e6-9d9d-cec0c932ce01" uri="../lciamethods/b2ad6110-c78d-11e6-9d9d-cec0c932ce01">
+        <common:shortDescription xml:lang="en">Abiotic depletion potential - fossil resources (ADPF)</common:shortDescription>
+      </referenceToLCIAMethodDataSet>
+      <meanAmount>0.0</meanAmount>
+      <common:other>
+        <epd:amount epd:module="A1-A3">4.27</epd:amount>
+        <epd:amount epd:module="A4">0.146</epd:amount>
+        <epd:amount epd:module="A5">0.128</epd:amount>
+        <epd:amount epd:module="B1">0</epd:amount>
+        <epd:amount epd:module="B2">0.000204</epd:amount>
+        <epd:amount epd:module="B3">0</epd:amount>
+        <epd:amount epd:module="B4">0</epd:amount>
+        <epd:amount epd:module="B5">0</epd:amount>
+        <epd:amount epd:module="B6">0</epd:amount>
+        <epd:amount epd:module="B7">0</epd:amount>
+        <epd:amount epd:module="C1">0.128</epd:amount>
+        <epd:amount epd:module="C2">0.00474</epd:amount>
+        <epd:amount epd:module="C3">0.128</epd:amount>
+        <epd:amount epd:module="C4">0.000655</epd:amount>
+        <epd:amount epd:module="D">-0.839</epd:amount>
+        <epd:referenceToUnitGroupDataSet refObjectId="93a60a57-a3c8-11da-a746-0800200c9a66" type="unit group data set" uri="../unitgroups/93a60a57-a3c8-11da-a746-0800200c9a66">
+          <common:shortDescription>MJ</common:shortDescription>
+        </epd:referenceToUnitGroupDataSet>
+      </common:other>
+    </LCIAResult>
+    <LCIAResult>
+      <referenceToLCIAMethodDataSet type="LCIA method data set" refObjectId="b2ad66ce-c78d-11e6-9d9d-cec0c932ce01" uri="../lciamethods/b2ad66ce-c78d-11e6-9d9d-cec0c932ce01">
+        <common:shortDescription xml:lang="en">Water (user) deprivation potential (WDP)</common:shortDescription>
+      </referenceToLCIAMethodDataSet>
+      <meanAmount>0.0</meanAmount>
+      <common:other>
+        <epd:amount epd:module="A1-A3">0.434</epd:amount>
+        <epd:amount epd:module="A4">0.000823</epd:amount>
+        <epd:amount epd:module="A5">0.00117</epd:amount>
+        <epd:amount epd:module="B1">0</epd:amount>
+        <epd:amount epd:module="B2">0.000783</epd:amount>
+        <epd:amount epd:module="B3">0</epd:amount>
+        <epd:amount epd:module="B4">0</epd:amount>
+        <epd:amount epd:module="B5">0</epd:amount>
+        <epd:amount epd:module="B6">0</epd:amount>
+        <epd:amount epd:module="B7">0</epd:amount>
+        <epd:amount epd:module="C1">0.00116</epd:amount>
+        <epd:amount epd:module="C2">0.0000297</epd:amount>
+        <epd:amount epd:module="C3">0.00116</epd:amount>
+        <epd:amount epd:module="C4">0.00000197</epd:amount>
+        <epd:amount epd:module="D">-0.0229</epd:amount>
+        <epd:referenceToUnitGroupDataSet refObjectId="6ae2df01-888e-46c8-b17d-49fa3869b476" type="unit group data set" uri="../unitgroups/6ae2df01-888e-46c8-b17d-49fa3869b476">
+          <common:shortDescription>m3 world eq. deprived</common:shortDescription>
+        </epd:referenceToUnitGroupDataSet>
+      </common:other>
+    </LCIAResult>
+    <LCIAResult>
+      <referenceToLCIAMethodDataSet type="LCIA method data set" refObjectId="e03c018f-8526-44bc-b5e4-bc03c3ab32f3" uri="../lciamethods/e03c018f-8526-44bc-b5e4-bc03c3ab32f3">
+        <common:shortDescription xml:lang="en">Global Warming Potential (GWP-GHG)</common:shortDescription>
+      </referenceToLCIAMethodDataSet>
+      <meanAmount>0.0</meanAmount>
+      <common:other>
+        <epd:amount epd:module="A1-A3">0.361</epd:amount>
+        <epd:amount epd:module="A4">0.0104</epd:amount>
+        <epd:amount epd:module="A5">0.0131</epd:amount>
+        <epd:amount epd:module="B1">0</epd:amount>
+        <epd:amount epd:module="B2">0.0000161</epd:amount>
+        <epd:amount epd:module="B3">0</epd:amount>
+        <epd:amount epd:module="B4">0</epd:amount>
+        <epd:amount epd:module="B5">0</epd:amount>
+        <epd:amount epd:module="B6">0</epd:amount>
+        <epd:amount epd:module="B7">0</epd:amount>
+        <epd:amount epd:module="C1">0.0131</epd:amount>
+        <epd:amount epd:module="C2">0.000334</epd:amount>
+        <epd:amount epd:module="C3">0.0131</epd:amount>
+        <epd:amount epd:module="C4">0.0000512</epd:amount>
+        <epd:amount epd:module="D">-0.0905</epd:amount>
+        <epd:referenceToUnitGroupDataSet refObjectId="1ebf3012-d0db-4de2-aefd-ef30cedb0be1" type="unit group data set" uri="../unitgroups/1ebf3012-d0db-4de2-aefd-ef30cedb0be1">
+          <common:shortDescription>kg CO2 eq.</common:shortDescription>
+        </epd:referenceToUnitGroupDataSet>
+      </common:other>
+    </LCIAResult>
+  </LCIAResults>
+</processDataSet>

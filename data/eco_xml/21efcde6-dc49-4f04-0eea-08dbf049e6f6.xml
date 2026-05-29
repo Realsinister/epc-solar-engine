@@ -1,0 +1,991 @@
+<?xml version="1.0" encoding="utf-8"?>
+<processDataSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="1.1" d1p1:epd-version="1.2" xmlns:d1p1="http://www.indata.network/EPD/2019" xmlns="http://lca.jrc.it/ILCD/Process">
+  <processInformation>
+    <dataSetInformation>
+      <UUID xmlns="http://lca.jrc.it/ILCD/Common">21efcde6-dc49-4f04-0eea-08dbf049e6f6</UUID>
+      <name>
+        <baseName xml:lang="en">Astronergy Photovoltaic Modules CHSM54M-HC and CHSM54M(BL)-HC</baseName>
+      </name>
+      <classificationInformation>
+        <classification name="The International EPD System" xmlns="http://lca.jrc.it/ILCD/Common">
+          <class level="0" classId="0">Construction products</class>
+        </classification>
+      </classificationInformation>
+    </dataSetInformation>
+    <quantitativeReference type="Reference flow(s)">
+      <referenceToReferenceFlow>0</referenceToReferenceFlow>
+    </quantitativeReference>
+    <time>
+      <referenceYear xmlns="http://lca.jrc.it/ILCD/Common">2024</referenceYear>
+      <dataSetValidUntil xmlns="http://lca.jrc.it/ILCD/Common">2029</dataSetValidUntil>
+      <timeRepresentativenessDescription xml:lang="en" xmlns="http://lca.jrc.it/ILCD/Common" />
+      <other xmlns="http://lca.jrc.it/ILCD/Common">
+        <epd2:publicationDateOfEPD xmlns:epd2="http://www.indata.network/EPD/2019">2024-01-31</epd2:publicationDateOfEPD>
+      </other>
+    </time>
+    <geography>
+      <locationOfOperationSupplyOrProduction location="GLO">
+        <descriptionOfRestrictions xml:lang="en" />
+      </locationOfOperationSupplyOrProduction>
+    </geography>
+    <technology>
+      <technologyDescriptionAndIncludedProcesses xml:lang="en">This dataset describes 1 Wp (Watt-peak) of manufactured PV module with mono-Si cells, with activities needed for a reference service of life (RSL) of 25 years (≥80% of the labelled power output).</technologyDescriptionAndIncludedProcesses>
+      <technologicalApplicability xml:lang="en">The PV module can be installed both as rooftop and ground-mounted type.</technologicalApplicability>
+      <referenceToTechnologyFlowDiagrammOrPicture type="source data set" refObjectId="785a09be-82f3-461a-ba60-c49b80204481">
+        <shortDescription xml:lang="en" xmlns="http://lca.jrc.it/ILCD/Common">Process flow</shortDescription>
+      </referenceToTechnologyFlowDiagrammOrPicture>
+    </technology>
+  </processInformation>
+  <modellingAndValidation>
+    <LCIMethodAndAllocation>
+      <typeOfDataSet>EPD</typeOfDataSet>
+      <referenceToLCAMethodDetails type="source data set" refObjectId="4aec26e0-edf5-47ef-9bf9-e9544ad7b86f" version="00.00.001">
+        <shortDescription xml:lang="en" xmlns="http://lca.jrc.it/ILCD/Common">2019:14-c-PCR-016 Photovoltaic modules and parts thereof</shortDescription>
+      </referenceToLCAMethodDetails>
+      <other xmlns="http://lca.jrc.it/ILCD/Common">
+        <epd:subType xmlns:epd="http://www.iai.kit.edu/EPD/2013">specific dataset</epd:subType>
+      </other>
+    </LCIMethodAndAllocation>
+    <dataSourcesTreatmentAndRepresentativeness>
+      <referenceToDataSource type="source data set" refObjectId="b497a91f-e14b-4b69-8f28-f50eb1576766">
+        <shortDescription xml:lang="en" xmlns="http://lca.jrc.it/ILCD/Common">ecoinvent database (general)</shortDescription>
+      </referenceToDataSource>
+      <referenceToDataSource type="source data set" refObjectId="c6825ce7-2951-4e1e-8634-426c7af4679b">
+        <shortDescription xml:lang="en" xmlns="http://lca.jrc.it/ILCD/Common">ecoinvent 3.9 database</shortDescription>
+      </referenceToDataSource>
+      <useAdviceForDataSet xml:lang="en">System boundary, assumptions, applied PCR should be taken into consideration.</useAdviceForDataSet>
+      <other xmlns="http://lca.jrc.it/ILCD/Common">
+        <d1p1:referenceToOriginalEPD refObjectId="1a828fcd-c3f3-42bf-73a9-08dbf049e6f6" type="source data set" version="00.00.001">
+          <shortDescription xml:lang="en">EPD-IES-0011631:001 (S-P-11631) Astronergy Photovoltaic Modules CHSM54M-HC and CHSM54M(BL)-HC</shortDescription>
+        </d1p1:referenceToOriginalEPD>
+      </other>
+    </dataSourcesTreatmentAndRepresentativeness>
+    <validation>
+      <review type="Independent external review">
+        <referenceToNameOfReviewerAndInstitution type="source data set" xmlns="http://lca.jrc.it/ILCD/Common">
+          <shortDescription xml:lang="en">Marcel Gómez Ferrer, Marcel Gómez Consultoria Ambiental</shortDescription>
+        </referenceToNameOfReviewerAndInstitution>
+      </review>
+    </validation>
+    <complianceDeclarations>
+      <compliance>
+        <referenceToComplianceSystem type="source data set" refObjectId="c0016b33-8cf7-415c-ac6e-deba0d21440d" version="00.02.000" xmlns="http://lca.jrc.it/ILCD/Common">
+          <shortDescription xml:lang="en">EN 15804+A2 (EF 3.0)</shortDescription>
+        </referenceToComplianceSystem>
+      </compliance>
+      <compliance>
+        <referenceToComplianceSystem type="source data set" refObjectId="4f2eb655-6e44-4874-a95a-e28f5442cd4d" version="00.00.004" xmlns="http://lca.jrc.it/ILCD/Common">
+          <shortDescription xml:lang="en">ISO 14025</shortDescription>
+        </referenceToComplianceSystem>
+      </compliance>
+    </complianceDeclarations>
+    <other xmlns="http://lca.jrc.it/ILCD/Common">
+      <d1p1:referenceToOriginalEPD refObjectId="1a828fcd-c3f3-42bf-73a9-08dbf049e6f6" type="source data set" version="00.00.001">
+        <shortDescription xml:lang="en">EPD-IES-0011631:001 (S-P-11631) Astronergy Photovoltaic Modules CHSM54M-HC and CHSM54M(BL)-HC</shortDescription>
+      </d1p1:referenceToOriginalEPD>
+    </other>
+  </modellingAndValidation>
+  <administrativeInformation>
+    <dataGenerator>
+      <referenceToPersonOrEntityGeneratingTheDataSet type="contact data set" version="00.00.001" xmlns="http://lca.jrc.it/ILCD/Common">
+        <shortDescription xml:lang="en">Dandan Li, dandan.li@startalers.cn</shortDescription>
+      </referenceToPersonOrEntityGeneratingTheDataSet>
+    </dataGenerator>
+    <dataEntryBy>
+      <timeStamp xmlns="http://lca.jrc.it/ILCD/Common">2024-08-19T06:37:32.393</timeStamp>
+      <referenceToDataSetFormat type="source data set" refObjectId="cba73800-7874-11e3-981f-0800200c9a66" version="00.01.000" xmlns="http://lca.jrc.it/ILCD/Common">
+        <shortDescription xml:lang="en">EPD Data Format Extension</shortDescription>
+      </referenceToDataSetFormat>
+      <referenceToDataSetFormat type="source data set" refObjectId="a97a0155-0234-4b87-b4ce-a45da52f2a40" version="01.00.000" uri="http://lca.jrc.ec.europa.eu/lcainfohub/sample_data/ilcd/sources/ILCD_Format_a97a0155-0234-4b87-b4ce-a45da52f2a40_01.00.000.xml" xmlns="http://lca.jrc.it/ILCD/Common">
+        <shortDescription xml:lang="en">ILCD format</shortDescription>
+      </referenceToDataSetFormat>
+    </dataEntryBy>
+    <publicationAndOwnership>
+      <dataSetVersion xmlns="http://lca.jrc.it/ILCD/Common">07.01.003</dataSetVersion>
+      <registrationNumber xmlns="http://lca.jrc.it/ILCD/Common">EPD-IES-0011631:001 (S-P-11631)</registrationNumber>
+      <referenceToOwnershipOfDataSet type="contact data set" refObjectId="ef9eb7ff-82a1-4119-ea78-08dbe00a377f" version="00.00.001" xmlns="http://lca.jrc.it/ILCD/Common">
+        <shortDescription xml:lang="en">Chint New Energy Technology Co., Ltd.</shortDescription>
+      </referenceToOwnershipOfDataSet>
+      <accessRestrictions xml:lang="en" xmlns="http://lca.jrc.it/ILCD/Common">Your use of this material is subject to the General Terms of Use published on by EPD International AB:s homepage at https://www.environdec.com/contact/General-terms-of-use/. If you have not accepted EPD International AB:s the General Terms of Use, you are not authorized to exploit this work in any manner.</accessRestrictions>
+      <copyright xmlns="http://lca.jrc.it/ILCD/Common">true</copyright>
+    </publicationAndOwnership>
+  </administrativeInformation>
+  <exchanges>
+    <exchange dataSetInternalID="0">
+      <referenceToFlowDataSet type="flow data set" refObjectId="9ee21dfe-c44b-4156-ad5a-c4e54c676252" version="00.01.000">
+        <shortDescription xml:lang="en" xmlns="http://lca.jrc.it/ILCD/Common">1 Wp of manufactured photovoltaic module</shortDescription>
+      </referenceToFlowDataSet>
+      <meanAmount>1</meanAmount>
+    </exchange>
+    <exchange dataSetInternalID="1">
+      <referenceToFlowDataSet type="flow data set" refObjectId="20f32be5-0398-4288-9b6d-accddd195317">
+        <shortDescription xml:lang="en" xmlns="http://lca.jrc.it/ILCD/Common">Use of renewable primary energy as energy carrier (PERE)</shortDescription>
+      </referenceToFlowDataSet>
+      <functionType>General reminder flow</functionType>
+      <exchangeDirection>Input</exchangeDirection>
+      <meanAmount>0.0</meanAmount>
+      <other xmlns="http://lca.jrc.it/ILCD/Common">
+        <amount d5p1:module="A1-A3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">1.08</amount>
+        <amount d5p1:module="A4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.00209</amount>
+        <amount d5p1:module="A5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0291</amount>
+        <amount d5p1:module="B1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0000321</amount>
+        <amount d5p1:module="B3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B6" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="B7" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="C1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.00017</amount>
+        <amount d5p1:module="C2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.000104</amount>
+        <amount d5p1:module="C3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0215</amount>
+        <amount d5p1:module="C4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.00012</amount>
+        <amount d5p1:module="D" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">-0.123</amount>
+        <referenceToUnitGroupDataSet refObjectId="93a60a57-a3c8-11da-a746-0800200c9a66" type="unit group data set" uri="../unitgroups/93a60a57-a3c8-11da-a746-0800200c9a66" xmlns="http://www.iai.kit.edu/EPD/2013">
+          <shortDescription xmlns="http://lca.jrc.it/ILCD/Common">MJ</shortDescription>
+        </referenceToUnitGroupDataSet>
+      </other>
+    </exchange>
+    <exchange dataSetInternalID="2">
+      <referenceToFlowDataSet type="flow data set" refObjectId="fb3ec0de-548d-4508-aea5-00b73bf6f702">
+        <shortDescription xml:lang="en" xmlns="http://lca.jrc.it/ILCD/Common">Use of renewable primary energy resources used as raw materials (PERM)</shortDescription>
+      </referenceToFlowDataSet>
+      <functionType>General reminder flow</functionType>
+      <exchangeDirection>Input</exchangeDirection>
+      <meanAmount>0.0</meanAmount>
+      <other xmlns="http://lca.jrc.it/ILCD/Common">
+        <amount d5p1:module="A1-A3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0289</amount>
+        <amount d5p1:module="A4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="A5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">-0.0289</amount>
+        <amount d5p1:module="B1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="B3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B6" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="B7" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="C1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="C2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="C3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="C4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="D" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <referenceToUnitGroupDataSet refObjectId="93a60a57-a3c8-11da-a746-0800200c9a66" type="unit group data set" uri="../unitgroups/93a60a57-a3c8-11da-a746-0800200c9a66" xmlns="http://www.iai.kit.edu/EPD/2013">
+          <shortDescription xmlns="http://lca.jrc.it/ILCD/Common">MJ</shortDescription>
+        </referenceToUnitGroupDataSet>
+      </other>
+    </exchange>
+    <exchange dataSetInternalID="3">
+      <referenceToFlowDataSet type="flow data set" refObjectId="53f97275-fa8a-4cdd-9024-65936002acd0">
+        <shortDescription xml:lang="en" xmlns="http://lca.jrc.it/ILCD/Common">Total use of renewable primary energy (PERT)</shortDescription>
+      </referenceToFlowDataSet>
+      <functionType>General reminder flow</functionType>
+      <exchangeDirection>Input</exchangeDirection>
+      <meanAmount>0.0</meanAmount>
+      <other xmlns="http://lca.jrc.it/ILCD/Common">
+        <amount d5p1:module="A1-A3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">1.11</amount>
+        <amount d5p1:module="A4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.00209</amount>
+        <amount d5p1:module="A5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.000196</amount>
+        <amount d5p1:module="B1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0000321</amount>
+        <amount d5p1:module="B3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B6" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="B7" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="C1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.00017</amount>
+        <amount d5p1:module="C2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.000104</amount>
+        <amount d5p1:module="C3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0215</amount>
+        <amount d5p1:module="C4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.00012</amount>
+        <amount d5p1:module="D" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">-0.123</amount>
+        <referenceToUnitGroupDataSet refObjectId="93a60a57-a3c8-11da-a746-0800200c9a66" type="unit group data set" uri="../unitgroups/93a60a57-a3c8-11da-a746-0800200c9a66" xmlns="http://www.iai.kit.edu/EPD/2013">
+          <shortDescription xmlns="http://lca.jrc.it/ILCD/Common">MJ</shortDescription>
+        </referenceToUnitGroupDataSet>
+      </other>
+    </exchange>
+    <exchange dataSetInternalID="4">
+      <referenceToFlowDataSet type="flow data set" refObjectId="ac857178-2b45-46ec-892a-a9a4332f0372">
+        <shortDescription xml:lang="en" xmlns="http://lca.jrc.it/ILCD/Common">Use of non renewable primary energy as energy carrier (PENRE)</shortDescription>
+      </referenceToFlowDataSet>
+      <functionType>General reminder flow</functionType>
+      <exchangeDirection>Input</exchangeDirection>
+      <meanAmount>0.0</meanAmount>
+      <other xmlns="http://lca.jrc.it/ILCD/Common">
+        <amount d5p1:module="A1-A3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">6.07</amount>
+        <amount d5p1:module="A4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.164</amount>
+        <amount d5p1:module="A5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0191</amount>
+        <amount d5p1:module="B1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.00032</amount>
+        <amount d5p1:module="B3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B6" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="B7" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="C1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0175</amount>
+        <amount d5p1:module="C2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.00641</amount>
+        <amount d5p1:module="C3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0521</amount>
+        <amount d5p1:module="C4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.213</amount>
+        <amount d5p1:module="D" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">-0.957</amount>
+        <referenceToUnitGroupDataSet refObjectId="93a60a57-a3c8-11da-a746-0800200c9a66" type="unit group data set" uri="../unitgroups/93a60a57-a3c8-11da-a746-0800200c9a66" xmlns="http://www.iai.kit.edu/EPD/2013">
+          <shortDescription xmlns="http://lca.jrc.it/ILCD/Common">MJ</shortDescription>
+        </referenceToUnitGroupDataSet>
+      </other>
+    </exchange>
+    <exchange dataSetInternalID="5">
+      <referenceToFlowDataSet type="flow data set" refObjectId="1421caa0-679d-4bf4-b282-0eb850ccae27">
+        <shortDescription xml:lang="en" xmlns="http://lca.jrc.it/ILCD/Common">Use of non renewable primary energy resources used as raw materials (PENRM)</shortDescription>
+      </referenceToFlowDataSet>
+      <functionType>General reminder flow</functionType>
+      <exchangeDirection>Input</exchangeDirection>
+      <meanAmount>0.0</meanAmount>
+      <other xmlns="http://lca.jrc.it/ILCD/Common">
+        <amount d5p1:module="A1-A3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.211</amount>
+        <amount d5p1:module="A4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="A5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="B1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="B3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B6" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="B7" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="C1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="C2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="C3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="C4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">-0.211</amount>
+        <amount d5p1:module="D" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <referenceToUnitGroupDataSet refObjectId="93a60a57-a3c8-11da-a746-0800200c9a66" type="unit group data set" uri="../unitgroups/93a60a57-a3c8-11da-a746-0800200c9a66" xmlns="http://www.iai.kit.edu/EPD/2013">
+          <shortDescription xmlns="http://lca.jrc.it/ILCD/Common">MJ</shortDescription>
+        </referenceToUnitGroupDataSet>
+      </other>
+    </exchange>
+    <exchange dataSetInternalID="6">
+      <referenceToFlowDataSet type="flow data set" refObjectId="06159210-646b-4c8d-8583-da9b3b95a6c1">
+        <shortDescription xml:lang="en" xmlns="http://lca.jrc.it/ILCD/Common">Total use of non renewable primary energy resource (PENRT)</shortDescription>
+      </referenceToFlowDataSet>
+      <functionType>General reminder flow</functionType>
+      <exchangeDirection>Input</exchangeDirection>
+      <meanAmount>0.0</meanAmount>
+      <other xmlns="http://lca.jrc.it/ILCD/Common">
+        <amount d5p1:module="A1-A3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">6.28</amount>
+        <amount d5p1:module="A4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.164</amount>
+        <amount d5p1:module="A5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0191</amount>
+        <amount d5p1:module="B1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.00032</amount>
+        <amount d5p1:module="B3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B6" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="B7" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="C1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0175</amount>
+        <amount d5p1:module="C2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.00641</amount>
+        <amount d5p1:module="C3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0521</amount>
+        <amount d5p1:module="C4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.00185</amount>
+        <amount d5p1:module="D" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">-0.957</amount>
+        <referenceToUnitGroupDataSet refObjectId="93a60a57-a3c8-11da-a746-0800200c9a66" type="unit group data set" uri="../unitgroups/93a60a57-a3c8-11da-a746-0800200c9a66" xmlns="http://www.iai.kit.edu/EPD/2013">
+          <shortDescription xmlns="http://lca.jrc.it/ILCD/Common">MJ</shortDescription>
+        </referenceToUnitGroupDataSet>
+      </other>
+    </exchange>
+    <exchange dataSetInternalID="7">
+      <referenceToFlowDataSet type="flow data set" refObjectId="c6a1f35f-2d09-4f54-8dfb-97e502e1ce92">
+        <shortDescription xml:lang="en" xmlns="http://lca.jrc.it/ILCD/Common">Use of secondary material (SM)</shortDescription>
+      </referenceToFlowDataSet>
+      <functionType>General reminder flow</functionType>
+      <exchangeDirection>Input</exchangeDirection>
+      <meanAmount>0.0</meanAmount>
+      <other xmlns="http://lca.jrc.it/ILCD/Common">
+        <amount d5p1:module="A1-A3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.00345</amount>
+        <amount d5p1:module="A4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="A5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="B1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="B3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B6" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="B7" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="C1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="C2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="C3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="C4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="D" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <referenceToUnitGroupDataSet refObjectId="ad38d542-3fe9-439d-9b95-2f5f7752acaf" type="unit group data set" uri="../unitgroups/ad38d542-3fe9-439d-9b95-2f5f7752acaf" xmlns="http://www.iai.kit.edu/EPD/2013">
+          <shortDescription xmlns="http://lca.jrc.it/ILCD/Common">kg</shortDescription>
+        </referenceToUnitGroupDataSet>
+      </other>
+    </exchange>
+    <exchange dataSetInternalID="8">
+      <referenceToFlowDataSet type="flow data set" refObjectId="64333088-a55f-4aa2-9a31-c10b07816787">
+        <shortDescription xml:lang="en" xmlns="http://lca.jrc.it/ILCD/Common">Use of renewable secondary fuels (RSF)</shortDescription>
+      </referenceToFlowDataSet>
+      <functionType>General reminder flow</functionType>
+      <exchangeDirection>Input</exchangeDirection>
+      <meanAmount>0.0</meanAmount>
+      <other xmlns="http://lca.jrc.it/ILCD/Common">
+        <amount d5p1:module="A1-A3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="A4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="A5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="B1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="B3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B6" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="B7" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="C1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="C2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="C3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="C4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="D" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <referenceToUnitGroupDataSet refObjectId="93a60a57-a3c8-11da-a746-0800200c9a66" type="unit group data set" uri="../unitgroups/93a60a57-a3c8-11da-a746-0800200c9a66" xmlns="http://www.iai.kit.edu/EPD/2013">
+          <shortDescription xmlns="http://lca.jrc.it/ILCD/Common">MJ</shortDescription>
+        </referenceToUnitGroupDataSet>
+      </other>
+    </exchange>
+    <exchange dataSetInternalID="9">
+      <referenceToFlowDataSet type="flow data set" refObjectId="89def144-d39a-4287-b86f-efde453ddcb2">
+        <shortDescription xml:lang="en" xmlns="http://lca.jrc.it/ILCD/Common">Use of non renewable secondary fuels (NRSF)</shortDescription>
+      </referenceToFlowDataSet>
+      <functionType>General reminder flow</functionType>
+      <exchangeDirection>Input</exchangeDirection>
+      <meanAmount>0.0</meanAmount>
+      <other xmlns="http://lca.jrc.it/ILCD/Common">
+        <amount d5p1:module="A1-A3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="A4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="A5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="B1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="B3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B6" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="B7" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="C1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="C2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="C3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="C4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="D" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <referenceToUnitGroupDataSet refObjectId="93a60a57-a3c8-11da-a746-0800200c9a66" type="unit group data set" uri="../unitgroups/93a60a57-a3c8-11da-a746-0800200c9a66" xmlns="http://www.iai.kit.edu/EPD/2013">
+          <shortDescription xmlns="http://lca.jrc.it/ILCD/Common">MJ</shortDescription>
+        </referenceToUnitGroupDataSet>
+      </other>
+    </exchange>
+    <exchange dataSetInternalID="10">
+      <referenceToFlowDataSet type="flow data set" refObjectId="3cf952c8-f3a4-461d-8c96-96456ca62246">
+        <shortDescription xml:lang="en" xmlns="http://lca.jrc.it/ILCD/Common">Net use of fresh water (FW)</shortDescription>
+      </referenceToFlowDataSet>
+      <functionType>General reminder flow</functionType>
+      <exchangeDirection>Input</exchangeDirection>
+      <meanAmount>0.0</meanAmount>
+      <other xmlns="http://lca.jrc.it/ILCD/Common">
+        <amount d5p1:module="A1-A3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0146</amount>
+        <amount d5p1:module="A4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0000213</amount>
+        <amount d5p1:module="A5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.00000225</amount>
+        <amount d5p1:module="B1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0000264</amount>
+        <amount d5p1:module="B3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B6" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="B7" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="C1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.00000168</amount>
+        <amount d5p1:module="C2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.000000955</amount>
+        <amount d5p1:module="C3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0000877</amount>
+        <amount d5p1:module="C4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0000182</amount>
+        <amount d5p1:module="D" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">-0.000399</amount>
+        <referenceToUnitGroupDataSet refObjectId="cd950537-0a98-4044-9ba7-9f9a68d0a504" type="unit group data set" uri="../unitgroups/cd950537-0a98-4044-9ba7-9f9a68d0a504" xmlns="http://www.iai.kit.edu/EPD/2013">
+          <shortDescription xmlns="http://lca.jrc.it/ILCD/Common">m3</shortDescription>
+        </referenceToUnitGroupDataSet>
+      </other>
+    </exchange>
+    <exchange dataSetInternalID="11">
+      <referenceToFlowDataSet type="flow data set" refObjectId="430f9e0f-59b2-46a0-8e0d-55e0e84948fc">
+        <shortDescription xml:lang="en" xmlns="http://lca.jrc.it/ILCD/Common">Hazardous waste disposed (HWD)</shortDescription>
+      </referenceToFlowDataSet>
+      <functionType>General reminder flow</functionType>
+      <exchangeDirection>Output</exchangeDirection>
+      <meanAmount>0.0</meanAmount>
+      <other xmlns="http://lca.jrc.it/ILCD/Common">
+        <amount d5p1:module="A1-A3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.000848</amount>
+        <amount d5p1:module="A4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.00000101</amount>
+        <amount d5p1:module="A5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.00000013</amount>
+        <amount d5p1:module="B1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.000000000843</amount>
+        <amount d5p1:module="B3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B6" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="B7" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="C1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.000000119</amount>
+        <amount d5p1:module="C2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0000000422</amount>
+        <amount d5p1:module="C3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.000000142</amount>
+        <amount d5p1:module="C4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.00000001</amount>
+        <amount d5p1:module="D" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.00000711</amount>
+        <referenceToUnitGroupDataSet refObjectId="ad38d542-3fe9-439d-9b95-2f5f7752acaf" type="unit group data set" uri="../unitgroups/ad38d542-3fe9-439d-9b95-2f5f7752acaf" xmlns="http://www.iai.kit.edu/EPD/2013">
+          <shortDescription xmlns="http://lca.jrc.it/ILCD/Common">kg</shortDescription>
+        </referenceToUnitGroupDataSet>
+      </other>
+    </exchange>
+    <exchange dataSetInternalID="12">
+      <referenceToFlowDataSet type="flow data set" refObjectId="b29ef66b-e286-4afa-949f-62f1a7b4d7fa">
+        <shortDescription xml:lang="en" xmlns="http://lca.jrc.it/ILCD/Common">Non harzardous waste disposed (NHWD)</shortDescription>
+      </referenceToFlowDataSet>
+      <functionType>General reminder flow</functionType>
+      <exchangeDirection>Output</exchangeDirection>
+      <meanAmount>0.0</meanAmount>
+      <other xmlns="http://lca.jrc.it/ILCD/Common">
+        <amount d5p1:module="A1-A3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0407</amount>
+        <amount d5p1:module="A4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.00619</amount>
+        <amount d5p1:module="A5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.000107</amount>
+        <amount d5p1:module="B1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.00000348</amount>
+        <amount d5p1:module="B3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B6" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="B7" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="C1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0000277</amount>
+        <amount d5p1:module="C2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.00033</amount>
+        <amount d5p1:module="C3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0366</amount>
+        <amount d5p1:module="C4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0144</amount>
+        <amount d5p1:module="D" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">-0.00903</amount>
+        <referenceToUnitGroupDataSet refObjectId="ad38d542-3fe9-439d-9b95-2f5f7752acaf" type="unit group data set" uri="../unitgroups/ad38d542-3fe9-439d-9b95-2f5f7752acaf" xmlns="http://www.iai.kit.edu/EPD/2013">
+          <shortDescription xmlns="http://lca.jrc.it/ILCD/Common">kg</shortDescription>
+        </referenceToUnitGroupDataSet>
+      </other>
+    </exchange>
+    <exchange dataSetInternalID="13">
+      <referenceToFlowDataSet type="flow data set" refObjectId="3449546e-52ad-4b39-b809-9fb77cea8ff6">
+        <shortDescription xml:lang="en" xmlns="http://lca.jrc.it/ILCD/Common">Radioactive waste disposed (RWD)</shortDescription>
+      </referenceToFlowDataSet>
+      <functionType>General reminder flow</functionType>
+      <exchangeDirection>Output</exchangeDirection>
+      <meanAmount>0.0</meanAmount>
+      <other xmlns="http://lca.jrc.it/ILCD/Common">
+        <amount d5p1:module="A1-A3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.00000637</amount>
+        <amount d5p1:module="A4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0000000383</amount>
+        <amount d5p1:module="A5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.00000000391</amount>
+        <amount d5p1:module="B1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.000000000734</amount>
+        <amount d5p1:module="B3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B6" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="B7" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="C1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.00000000347</amount>
+        <amount d5p1:module="C2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.00000000218</amount>
+        <amount d5p1:module="C3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.000000817</amount>
+        <amount d5p1:module="C4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.00000000159</amount>
+        <amount d5p1:module="D" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">-0.00000161</amount>
+        <referenceToUnitGroupDataSet refObjectId="ad38d542-3fe9-439d-9b95-2f5f7752acaf" type="unit group data set" uri="../unitgroups/ad38d542-3fe9-439d-9b95-2f5f7752acaf" xmlns="http://www.iai.kit.edu/EPD/2013">
+          <shortDescription xmlns="http://lca.jrc.it/ILCD/Common">kg</shortDescription>
+        </referenceToUnitGroupDataSet>
+      </other>
+    </exchange>
+    <exchange dataSetInternalID="14">
+      <referenceToFlowDataSet type="flow data set" refObjectId="a2b32f97-3fc7-4af2-b209-525bc6426f33">
+        <shortDescription xml:lang="en" xmlns="http://lca.jrc.it/ILCD/Common">Components for re-use (CRU)</shortDescription>
+      </referenceToFlowDataSet>
+      <functionType>General reminder flow</functionType>
+      <exchangeDirection>Output</exchangeDirection>
+      <meanAmount>0.0</meanAmount>
+      <other xmlns="http://lca.jrc.it/ILCD/Common">
+        <amount d5p1:module="A1-A3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="A4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="A5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="B1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="B3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B6" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="B7" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="C1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="C2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="C3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="C4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="D" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <referenceToUnitGroupDataSet refObjectId="ad38d542-3fe9-439d-9b95-2f5f7752acaf" type="unit group data set" uri="../unitgroups/ad38d542-3fe9-439d-9b95-2f5f7752acaf" xmlns="http://www.iai.kit.edu/EPD/2013">
+          <shortDescription xmlns="http://lca.jrc.it/ILCD/Common">kg</shortDescription>
+        </referenceToUnitGroupDataSet>
+      </other>
+    </exchange>
+    <exchange dataSetInternalID="15">
+      <referenceToFlowDataSet type="flow data set" refObjectId="d7fe48a5-4103-49c8-9aae-b0b5dfdbd6ae">
+        <shortDescription xml:lang="en" xmlns="http://lca.jrc.it/ILCD/Common">Materials for recycling (MFR)</shortDescription>
+      </referenceToFlowDataSet>
+      <functionType>General reminder flow</functionType>
+      <exchangeDirection>Output</exchangeDirection>
+      <meanAmount>0.0</meanAmount>
+      <other xmlns="http://lca.jrc.it/ILCD/Common">
+        <amount d5p1:module="A1-A3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.000817</amount>
+        <amount d5p1:module="A4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="A5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.00175</amount>
+        <amount d5p1:module="B1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="B3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B6" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="B7" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="C1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="C2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="C3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.035</amount>
+        <amount d5p1:module="C4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="D" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <referenceToUnitGroupDataSet refObjectId="ad38d542-3fe9-439d-9b95-2f5f7752acaf" type="unit group data set" uri="../unitgroups/ad38d542-3fe9-439d-9b95-2f5f7752acaf" xmlns="http://www.iai.kit.edu/EPD/2013">
+          <shortDescription xmlns="http://lca.jrc.it/ILCD/Common">kg</shortDescription>
+        </referenceToUnitGroupDataSet>
+      </other>
+    </exchange>
+    <exchange dataSetInternalID="16">
+      <referenceToFlowDataSet type="flow data set" refObjectId="59a9181c-3aaf-46ee-8b13-2b3723b6e447">
+        <shortDescription xml:lang="en" xmlns="http://lca.jrc.it/ILCD/Common">Materials for energy recovery (MER)</shortDescription>
+      </referenceToFlowDataSet>
+      <functionType>General reminder flow</functionType>
+      <exchangeDirection>Output</exchangeDirection>
+      <meanAmount>0.0</meanAmount>
+      <other xmlns="http://lca.jrc.it/ILCD/Common">
+        <amount d5p1:module="A1-A3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.00000183</amount>
+        <amount d5p1:module="A4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="A5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.000582</amount>
+        <amount d5p1:module="B1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="B3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B6" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="B7" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="C1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="C2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="C3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="C4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="D" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <referenceToUnitGroupDataSet refObjectId="ad38d542-3fe9-439d-9b95-2f5f7752acaf" type="unit group data set" uri="../unitgroups/ad38d542-3fe9-439d-9b95-2f5f7752acaf" xmlns="http://www.iai.kit.edu/EPD/2013">
+          <shortDescription xmlns="http://lca.jrc.it/ILCD/Common">kg</shortDescription>
+        </referenceToUnitGroupDataSet>
+      </other>
+    </exchange>
+    <exchange dataSetInternalID="17">
+      <referenceToFlowDataSet type="flow data set" refObjectId="4da0c987-2b76-40d6-9e9e-82a017aaaf29">
+        <shortDescription xml:lang="en" xmlns="http://lca.jrc.it/ILCD/Common">Exported electrical energy (EEE)</shortDescription>
+      </referenceToFlowDataSet>
+      <functionType>General reminder flow</functionType>
+      <exchangeDirection>Output</exchangeDirection>
+      <meanAmount>0.0</meanAmount>
+      <other xmlns="http://lca.jrc.it/ILCD/Common">
+        <amount d5p1:module="A1-A3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="A4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="A5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="B1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="B3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B6" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="B7" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="C1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="C2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="C3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="C4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.00165</amount>
+        <amount d5p1:module="D" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <referenceToUnitGroupDataSet refObjectId="93a60a57-a3c8-11da-a746-0800200c9a66" type="unit group data set" uri="../unitgroups/93a60a57-a3c8-11da-a746-0800200c9a66" xmlns="http://www.iai.kit.edu/EPD/2013">
+          <shortDescription xmlns="http://lca.jrc.it/ILCD/Common">MJ</shortDescription>
+        </referenceToUnitGroupDataSet>
+      </other>
+    </exchange>
+    <exchange dataSetInternalID="18">
+      <referenceToFlowDataSet type="flow data set" refObjectId="98daf38a-7a79-46d3-9a37-2b7bd0955810">
+        <shortDescription xml:lang="en" xmlns="http://lca.jrc.it/ILCD/Common">Exported thermal energy (EET)</shortDescription>
+      </referenceToFlowDataSet>
+      <functionType>General reminder flow</functionType>
+      <exchangeDirection>Output</exchangeDirection>
+      <meanAmount>0.0</meanAmount>
+      <other xmlns="http://lca.jrc.it/ILCD/Common">
+        <amount d5p1:module="A1-A3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="A4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="A5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="B1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="B3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B6" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="B7" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="C1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="C2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="C3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="C4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.000255</amount>
+        <amount d5p1:module="D" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <referenceToUnitGroupDataSet refObjectId="93a60a57-a3c8-11da-a746-0800200c9a66" type="unit group data set" uri="../unitgroups/93a60a57-a3c8-11da-a746-0800200c9a66" xmlns="http://www.iai.kit.edu/EPD/2013">
+          <shortDescription xmlns="http://lca.jrc.it/ILCD/Common">MJ</shortDescription>
+        </referenceToUnitGroupDataSet>
+      </other>
+    </exchange>
+  </exchanges>
+  <LCIAResults>
+    <LCIAResult>
+      <referenceToLCIAMethodDataSet type="LCIA method data set" refObjectId="5f635281-343e-44fb-83df-1971b155e6b6" uri="../lciamethods/5f635281-343e-44fb-83df-1971b155e6b6">
+        <shortDescription xml:lang="en" xmlns="http://lca.jrc.it/ILCD/Common">Global Warming Potential - fossil fuels (GWP-fossil)</shortDescription>
+      </referenceToLCIAMethodDataSet>
+      <meanAmount>0.0</meanAmount>
+      <other xmlns="http://lca.jrc.it/ILCD/Common">
+        <amount d5p1:module="A1-A3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.437</amount>
+        <amount d5p1:module="A4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0124</amount>
+        <amount d5p1:module="A5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.00187</amount>
+        <amount d5p1:module="B1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0000235</amount>
+        <amount d5p1:module="B3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B6" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="B7" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="C1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.00138</amount>
+        <amount d5p1:module="C2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.000467</amount>
+        <amount d5p1:module="C3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.00487</amount>
+        <amount d5p1:module="C4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.000599</amount>
+        <amount d5p1:module="D" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">-0.07</amount>
+        <referenceToUnitGroupDataSet refObjectId="1ebf3012-d0db-4de2-aefd-ef30cedb0be1" type="unit group data set" uri="../unitgroups/1ebf3012-d0db-4de2-aefd-ef30cedb0be1" xmlns="http://www.iai.kit.edu/EPD/2013">
+          <shortDescription xmlns="http://lca.jrc.it/ILCD/Common">kg CO2 eq.</shortDescription>
+        </referenceToUnitGroupDataSet>
+      </other>
+    </LCIAResult>
+    <LCIAResult>
+      <referenceToLCIAMethodDataSet type="LCIA method data set" refObjectId="2356e1ab-0185-4db5-86e5-16de51c7485c" uri="../lciamethods/2356e1ab-0185-4db5-86e5-16de51c7485c">
+        <shortDescription xml:lang="en" xmlns="http://lca.jrc.it/ILCD/Common">Global Warming Potential - biogenic (GWP-biogenic)</shortDescription>
+      </referenceToLCIAMethodDataSet>
+      <meanAmount>0.0</meanAmount>
+      <other xmlns="http://lca.jrc.it/ILCD/Common">
+        <amount d5p1:module="A1-A3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">-0.00125</amount>
+        <amount d5p1:module="A4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.00000492</amount>
+        <amount d5p1:module="A5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.00123</amount>
+        <amount d5p1:module="B1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.00000013</amount>
+        <amount d5p1:module="B3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B6" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="B7" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="C1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.000000538</amount>
+        <amount d5p1:module="C2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.000000428</amount>
+        <amount d5p1:module="C3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.00018</amount>
+        <amount d5p1:module="C4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.00000161</amount>
+        <amount d5p1:module="D" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.000863</amount>
+        <referenceToUnitGroupDataSet refObjectId="1ebf3012-d0db-4de2-aefd-ef30cedb0be1" type="unit group data set" uri="../unitgroups/1ebf3012-d0db-4de2-aefd-ef30cedb0be1" xmlns="http://www.iai.kit.edu/EPD/2013">
+          <shortDescription xmlns="http://lca.jrc.it/ILCD/Common">kg CO2 eq.</shortDescription>
+        </referenceToUnitGroupDataSet>
+      </other>
+    </LCIAResult>
+    <LCIAResult>
+      <referenceToLCIAMethodDataSet type="LCIA method data set" refObjectId="4331bbdb-978a-490d-8707-eeb047f01a55" uri="../lciamethods/4331bbdb-978a-490d-8707-eeb047f01a55">
+        <shortDescription xml:lang="en" xmlns="http://lca.jrc.it/ILCD/Common">Global Warming Potential - land use and land use change (GWP-luluc)</shortDescription>
+      </referenceToLCIAMethodDataSet>
+      <meanAmount>0.0</meanAmount>
+      <other xmlns="http://lca.jrc.it/ILCD/Common">
+        <amount d5p1:module="A1-A3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.000483</amount>
+        <amount d5p1:module="A4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.00000726</amount>
+        <amount d5p1:module="A5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.000000304</amount>
+        <amount d5p1:module="B1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0000000376</amount>
+        <amount d5p1:module="B3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B6" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="B7" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="C1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.000000243</amount>
+        <amount d5p1:module="C2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.000000231</amount>
+        <amount d5p1:module="C3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0000122</amount>
+        <amount d5p1:module="C4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0000000656</amount>
+        <amount d5p1:module="D" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">-0.000151</amount>
+        <referenceToUnitGroupDataSet refObjectId="1ebf3012-d0db-4de2-aefd-ef30cedb0be1" type="unit group data set" uri="../unitgroups/1ebf3012-d0db-4de2-aefd-ef30cedb0be1" xmlns="http://www.iai.kit.edu/EPD/2013">
+          <shortDescription xmlns="http://lca.jrc.it/ILCD/Common">kg CO2 eq.</shortDescription>
+        </referenceToUnitGroupDataSet>
+      </other>
+    </LCIAResult>
+    <LCIAResult>
+      <referenceToLCIAMethodDataSet type="LCIA method data set" refObjectId="6a37f984-a4b3-458a-a20a-64418c145fa2" uri="../lciamethods/6a37f984-a4b3-458a-a20a-64418c145fa2">
+        <shortDescription xml:lang="en" xmlns="http://lca.jrc.it/ILCD/Common">Global Warming Potential - total (GWP-total)</shortDescription>
+      </referenceToLCIAMethodDataSet>
+      <meanAmount>0.0</meanAmount>
+      <other xmlns="http://lca.jrc.it/ILCD/Common">
+        <amount d5p1:module="A1-A3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.436</amount>
+        <amount d5p1:module="A4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0124</amount>
+        <amount d5p1:module="A5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0031</amount>
+        <amount d5p1:module="B1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0000237</amount>
+        <amount d5p1:module="B3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B6" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="B7" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="C1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.00138</amount>
+        <amount d5p1:module="C2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.000468</amount>
+        <amount d5p1:module="C3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.00506</amount>
+        <amount d5p1:module="C4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0006</amount>
+        <amount d5p1:module="D" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">-0.0693</amount>
+        <referenceToUnitGroupDataSet refObjectId="1ebf3012-d0db-4de2-aefd-ef30cedb0be1" type="unit group data set" uri="../unitgroups/1ebf3012-d0db-4de2-aefd-ef30cedb0be1" xmlns="http://www.iai.kit.edu/EPD/2013">
+          <shortDescription xmlns="http://lca.jrc.it/ILCD/Common">kg CO2 eq.</shortDescription>
+        </referenceToUnitGroupDataSet>
+      </other>
+    </LCIAResult>
+    <LCIAResult>
+      <referenceToLCIAMethodDataSet type="LCIA method data set" refObjectId="b5c629d6-def3-11e6-bf01-fe55135034f3" uri="../lciamethods/b5c629d6-def3-11e6-bf01-fe55135034f3">
+        <shortDescription xml:lang="en" xmlns="http://lca.jrc.it/ILCD/Common">Depletion potential of the stratospheric ozone layer (ODP)</shortDescription>
+      </referenceToLCIAMethodDataSet>
+      <meanAmount>0.0</meanAmount>
+      <other xmlns="http://lca.jrc.it/ILCD/Common">
+        <amount d5p1:module="A1-A3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0000000381</amount>
+        <amount d5p1:module="A4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.000000000221</amount>
+        <amount d5p1:module="A5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0000000000248</amount>
+        <amount d5p1:module="B1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.00000000000365</amount>
+        <amount d5p1:module="B3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B6" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="B7" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="C1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0000000000215</amount>
+        <amount d5p1:module="C2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0000000000102</amount>
+        <amount d5p1:module="C3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0000000000876</amount>
+        <amount d5p1:module="C4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0000000000131</amount>
+        <amount d5p1:module="D" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">-0.000000000886</amount>
+        <referenceToUnitGroupDataSet refObjectId="d9e957c9-7309-4474-bf3a-7777df6c4e5b" type="unit group data set" uri="../unitgroups/d9e957c9-7309-4474-bf3a-7777df6c4e5b" xmlns="http://www.iai.kit.edu/EPD/2013">
+          <shortDescription xmlns="http://lca.jrc.it/ILCD/Common">kg CFC-11 eq.</shortDescription>
+        </referenceToUnitGroupDataSet>
+      </other>
+    </LCIAResult>
+    <LCIAResult>
+      <referenceToLCIAMethodDataSet type="LCIA method data set" refObjectId="b5c611c6-def3-11e6-bf01-fe55135034f3" uri="../lciamethods/b5c611c6-def3-11e6-bf01-fe55135034f3">
+        <shortDescription xml:lang="en" xmlns="http://lca.jrc.it/ILCD/Common">Acidifcation potential, Accumulated Exceedance (AP)</shortDescription>
+      </referenceToLCIAMethodDataSet>
+      <meanAmount>0.0</meanAmount>
+      <other xmlns="http://lca.jrc.it/ILCD/Common">
+        <amount d5p1:module="A1-A3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.00251</amount>
+        <amount d5p1:module="A4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.00013</amount>
+        <amount d5p1:module="A5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0000131</amount>
+        <amount d5p1:module="B1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.000000126</amount>
+        <amount d5p1:module="B3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B6" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="B7" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="C1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0000126</amount>
+        <amount d5p1:module="C2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.00000102</amount>
+        <amount d5p1:module="C3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0000245</amount>
+        <amount d5p1:module="C4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.000000633</amount>
+        <amount d5p1:module="D" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">-0.000421</amount>
+        <referenceToUnitGroupDataSet refObjectId="42e089ac-92bf-4bf2-8ca1-5fc40d18f2ed" type="unit group data set" uri="../unitgroups/42e089ac-92bf-4bf2-8ca1-5fc40d18f2ed" xmlns="http://www.iai.kit.edu/EPD/2013">
+          <shortDescription xmlns="http://lca.jrc.it/ILCD/Common">mol H+ eq.</shortDescription>
+        </referenceToUnitGroupDataSet>
+      </other>
+    </LCIAResult>
+    <LCIAResult>
+      <referenceToLCIAMethodDataSet type="LCIA method data set" refObjectId="b53ec18f-7377-4ad3-86eb-cc3f4f276b2b" uri="../lciamethods/b53ec18f-7377-4ad3-86eb-cc3f4f276b2b">
+        <shortDescription xml:lang="en" xmlns="http://lca.jrc.it/ILCD/Common">Europhication potential - freshwater (EP-freshwater)</shortDescription>
+      </referenceToLCIAMethodDataSet>
+      <meanAmount>0.0</meanAmount>
+      <other xmlns="http://lca.jrc.it/ILCD/Common">
+        <amount d5p1:module="A1-A3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.000132</amount>
+        <amount d5p1:module="A4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.000000782</amount>
+        <amount d5p1:module="A5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0000000741</amount>
+        <amount d5p1:module="B1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0000000103</amount>
+        <amount d5p1:module="B3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B6" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="B7" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="C1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0000000612</amount>
+        <amount d5p1:module="C2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0000000332</amount>
+        <amount d5p1:module="C3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.00000445</amount>
+        <amount d5p1:module="C4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0000000253</amount>
+        <amount d5p1:module="D" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">-0.0000232</amount>
+        <referenceToUnitGroupDataSet refObjectId="0429039d-a61d-4590-ba67-aa4a20a810a1" type="unit group data set" uri="../unitgroups/0429039d-a61d-4590-ba67-aa4a20a810a1" xmlns="http://www.iai.kit.edu/EPD/2013">
+          <shortDescription xmlns="http://lca.jrc.it/ILCD/Common">kg P eq.</shortDescription>
+        </referenceToUnitGroupDataSet>
+      </other>
+    </LCIAResult>
+    <LCIAResult>
+      <referenceToLCIAMethodDataSet type="LCIA method data set" refObjectId="b5c619fa-def3-11e6-bf01-fe55135034f3" uri="../lciamethods/b5c619fa-def3-11e6-bf01-fe55135034f3">
+        <shortDescription xml:lang="en" xmlns="http://lca.jrc.it/ILCD/Common">Europhication potential - marine (EP-marine)</shortDescription>
+      </referenceToLCIAMethodDataSet>
+      <meanAmount>0.0</meanAmount>
+      <other xmlns="http://lca.jrc.it/ILCD/Common">
+        <amount d5p1:module="A1-A3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.000563</amount>
+        <amount d5p1:module="A4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0000324</amount>
+        <amount d5p1:module="A5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.00000596</amount>
+        <amount d5p1:module="B1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0000000254</amount>
+        <amount d5p1:module="B3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B6" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="B7" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="C1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.00000578</amount>
+        <amount d5p1:module="C2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.000000258</amount>
+        <amount d5p1:module="C3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.00000435</amount>
+        <amount d5p1:module="C4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.000000234</amount>
+        <amount d5p1:module="D" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">-0.0000909</amount>
+        <referenceToUnitGroupDataSet refObjectId="d05bb823-ecdf-4686-8c40-bf1d9257859f" type="unit group data set" uri="../unitgroups/d05bb823-ecdf-4686-8c40-bf1d9257859f" xmlns="http://www.iai.kit.edu/EPD/2013">
+          <shortDescription xmlns="http://lca.jrc.it/ILCD/Common">kg N eq.</shortDescription>
+        </referenceToUnitGroupDataSet>
+      </other>
+    </LCIAResult>
+    <LCIAResult>
+      <referenceToLCIAMethodDataSet type="LCIA method data set" refObjectId="b5c614d2-def3-11e6-bf01-fe55135034f3" uri="../lciamethods/b5c614d2-def3-11e6-bf01-fe55135034f3">
+        <shortDescription xml:lang="en" xmlns="http://lca.jrc.it/ILCD/Common">Europhication potential - terrestrial (EP-terrestrial)</shortDescription>
+      </referenceToLCIAMethodDataSet>
+      <meanAmount>0.0</meanAmount>
+      <other xmlns="http://lca.jrc.it/ILCD/Common">
+        <amount d5p1:module="A1-A3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.00553</amount>
+        <amount d5p1:module="A4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.000355</amount>
+        <amount d5p1:module="A5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0000646</amount>
+        <amount d5p1:module="B1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.000000256</amount>
+        <amount d5p1:module="B3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B6" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="B7" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="C1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0000628</amount>
+        <amount d5p1:module="C2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.00000262</amount>
+        <amount d5p1:module="C3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0000384</amount>
+        <amount d5p1:module="C4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0000023</amount>
+        <amount d5p1:module="D" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">-0.00105</amount>
+        <referenceToUnitGroupDataSet refObjectId="71b4d617-0ec9-4d3f-b65e-e438940c2401" type="unit group data set" uri="../unitgroups/71b4d617-0ec9-4d3f-b65e-e438940c2401" xmlns="http://www.iai.kit.edu/EPD/2013">
+          <shortDescription xmlns="http://lca.jrc.it/ILCD/Common">mol N eq.</shortDescription>
+        </referenceToUnitGroupDataSet>
+      </other>
+    </LCIAResult>
+    <LCIAResult>
+      <referenceToLCIAMethodDataSet type="LCIA method data set" refObjectId="b5c610fe-def3-11e6-bf01-fe55135034f3" uri="../lciamethods/b5c610fe-def3-11e6-bf01-fe55135034f3">
+        <shortDescription xml:lang="en" xmlns="http://lca.jrc.it/ILCD/Common">Photochemical Ozone Creation Potential (POCP)</shortDescription>
+      </referenceToLCIAMethodDataSet>
+      <meanAmount>0.0</meanAmount>
+      <other xmlns="http://lca.jrc.it/ILCD/Common">
+        <amount d5p1:module="A1-A3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.00164</amount>
+        <amount d5p1:module="A4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.000111</amount>
+        <amount d5p1:module="A5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0000192</amount>
+        <amount d5p1:module="B1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0000000835</amount>
+        <amount d5p1:module="B3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B6" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="B7" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="C1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0000186</amount>
+        <amount d5p1:module="C2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.00000159</amount>
+        <amount d5p1:module="C3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0000124</amount>
+        <amount d5p1:module="C4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.000000851</amount>
+        <amount d5p1:module="D" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">-0.000293</amount>
+        <referenceToUnitGroupDataSet refObjectId="d27c25f8-fbc1-44c6-b47b-4adbae4199c6" type="unit group data set" uri="../unitgroups/d27c25f8-fbc1-44c6-b47b-4adbae4199c6" xmlns="http://www.iai.kit.edu/EPD/2013">
+          <shortDescription xmlns="http://lca.jrc.it/ILCD/Common">kg NMVOC eq.</shortDescription>
+        </referenceToUnitGroupDataSet>
+      </other>
+    </LCIAResult>
+    <LCIAResult>
+      <referenceToLCIAMethodDataSet type="LCIA method data set" refObjectId="b2ad6494-c78d-11e6-9d9d-cec0c932ce01" uri="../lciamethods/b2ad6494-c78d-11e6-9d9d-cec0c932ce01">
+        <shortDescription xml:lang="en" xmlns="http://lca.jrc.it/ILCD/Common">Abiotic depletion potential - non-fossil resources (ADPE)</shortDescription>
+      </referenceToLCIAMethodDataSet>
+      <meanAmount>0.0</meanAmount>
+      <other xmlns="http://lca.jrc.it/ILCD/Common">
+        <amount d5p1:module="A1-A3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0000196</amount>
+        <amount d5p1:module="A4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0000000318</amount>
+        <amount d5p1:module="A5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.00000000088</amount>
+        <amount d5p1:module="B1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.000000000109</amount>
+        <amount d5p1:module="B3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B6" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="B7" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="C1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.000000000507</amount>
+        <amount d5p1:module="C2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.00000000153</amount>
+        <amount d5p1:module="C3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0000000097</amount>
+        <amount d5p1:module="C4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.000000000378</amount>
+        <amount d5p1:module="D" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">-0.00000452</amount>
+        <referenceToUnitGroupDataSet refObjectId="54ccd2d9-a32a-4fc2-923d-f2c8c93e89d4" type="unit group data set" uri="../unitgroups/54ccd2d9-a32a-4fc2-923d-f2c8c93e89d4" xmlns="http://www.iai.kit.edu/EPD/2013">
+          <shortDescription xmlns="http://lca.jrc.it/ILCD/Common">kg Sb eq.</shortDescription>
+        </referenceToUnitGroupDataSet>
+      </other>
+    </LCIAResult>
+    <LCIAResult>
+      <referenceToLCIAMethodDataSet type="LCIA method data set" refObjectId="b2ad6110-c78d-11e6-9d9d-cec0c932ce01" uri="../lciamethods/b2ad6110-c78d-11e6-9d9d-cec0c932ce01">
+        <shortDescription xml:lang="en" xmlns="http://lca.jrc.it/ILCD/Common">Abiotic depletion potential - fossil resources (ADPF)</shortDescription>
+      </referenceToLCIAMethodDataSet>
+      <meanAmount>0.0</meanAmount>
+      <other xmlns="http://lca.jrc.it/ILCD/Common">
+        <amount d5p1:module="A1-A3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">5.29</amount>
+        <amount d5p1:module="A4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.168</amount>
+        <amount d5p1:module="A5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0196</amount>
+        <amount d5p1:module="B1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.000301</amount>
+        <amount d5p1:module="B3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B6" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="B7" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="C1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0181</amount>
+        <amount d5p1:module="C2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.00664</amount>
+        <amount d5p1:module="C3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.112</amount>
+        <amount d5p1:module="C4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.00192</amount>
+        <amount d5p1:module="D" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">-0.879</amount>
+        <referenceToUnitGroupDataSet refObjectId="93a60a57-a3c8-11da-a746-0800200c9a66" type="unit group data set" uri="../unitgroups/93a60a57-a3c8-11da-a746-0800200c9a66" xmlns="http://www.iai.kit.edu/EPD/2013">
+          <shortDescription xmlns="http://lca.jrc.it/ILCD/Common">MJ</shortDescription>
+        </referenceToUnitGroupDataSet>
+      </other>
+    </LCIAResult>
+    <LCIAResult>
+      <referenceToLCIAMethodDataSet type="LCIA method data set" refObjectId="b2ad66ce-c78d-11e6-9d9d-cec0c932ce01" uri="../lciamethods/b2ad66ce-c78d-11e6-9d9d-cec0c932ce01">
+        <shortDescription xml:lang="en" xmlns="http://lca.jrc.it/ILCD/Common">Water (user) deprivation potential (WDP)</shortDescription>
+      </referenceToLCIAMethodDataSet>
+      <meanAmount>0.0</meanAmount>
+      <other xmlns="http://lca.jrc.it/ILCD/Common">
+        <amount d5p1:module="A1-A3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.558</amount>
+        <amount d5p1:module="A4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.000626</amount>
+        <amount d5p1:module="A5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0000561</amount>
+        <amount d5p1:module="B1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0011</amount>
+        <amount d5p1:module="B3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B6" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="B7" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="C1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0000452</amount>
+        <amount d5p1:module="C2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0000274</amount>
+        <amount d5p1:module="C3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.00116</amount>
+        <amount d5p1:module="C4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0000704</amount>
+        <amount d5p1:module="D" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">-0.0103</amount>
+        <referenceToUnitGroupDataSet refObjectId="6ae2df01-888e-46c8-b17d-49fa3869b476" type="unit group data set" uri="../unitgroups/6ae2df01-888e-46c8-b17d-49fa3869b476" xmlns="http://www.iai.kit.edu/EPD/2013">
+          <shortDescription xmlns="http://lca.jrc.it/ILCD/Common">m3 world eq. deprived</shortDescription>
+        </referenceToUnitGroupDataSet>
+      </other>
+    </LCIAResult>
+    <LCIAResult>
+      <referenceToLCIAMethodDataSet type="LCIA method data set" refObjectId="fb774615-0575-45de-9a89-1ded92f19770" uri="../lciamethods/fb774615-0575-45de-9a89-1ded92f19770">
+        <shortDescription xml:lang="en" xmlns="http://lca.jrc.it/ILCD/Common">Global Warming Potential (GWP-GHG)</shortDescription>
+      </referenceToLCIAMethodDataSet>
+      <meanAmount>0.0</meanAmount>
+      <other xmlns="http://lca.jrc.it/ILCD/Common">
+        <amount d5p1:module="A1-A3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.437</amount>
+        <amount d5p1:module="A4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0124</amount>
+        <amount d5p1:module="A5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.00187</amount>
+        <amount d5p1:module="B1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.0000235</amount>
+        <amount d5p1:module="B3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B5" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="B6" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0</amount>
+        <amount d5p1:module="B7" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">ND</amount>
+        <amount d5p1:module="C1" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.00138</amount>
+        <amount d5p1:module="C2" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.000467</amount>
+        <amount d5p1:module="C3" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.00489</amount>
+        <amount d5p1:module="C4" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">0.000599</amount>
+        <amount d5p1:module="D" xmlns:d5p1="http://www.iai.kit.edu/EPD/2013" xmlns="http://www.iai.kit.edu/EPD/2013">-0.0702</amount>
+        <referenceToUnitGroupDataSet refObjectId="1ebf3012-d0db-4de2-aefd-ef30cedb0be1" type="unit group data set" uri="../unitgroups/1ebf3012-d0db-4de2-aefd-ef30cedb0be1" xmlns="http://www.iai.kit.edu/EPD/2013">
+          <shortDescription xmlns="http://lca.jrc.it/ILCD/Common">kg CO2 eq.</shortDescription>
+        </referenceToUnitGroupDataSet>
+      </other>
+    </LCIAResult>
+  </LCIAResults>
+</processDataSet>

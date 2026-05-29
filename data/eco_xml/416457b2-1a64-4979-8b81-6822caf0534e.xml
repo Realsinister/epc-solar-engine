@@ -1,0 +1,854 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<processDataSet xmlns="http://lca.jrc.it/ILCD/Process" xmlns:common="http://lca.jrc.it/ILCD/Common" version="1.1">
+   <processInformation>
+      <dataSetInformation>
+         <common:UUID>416457b2-1a64-4979-8b81-6822caf0534e</common:UUID>
+         <name>
+            <baseName xml:lang="en">MAXEON 3 MONO-CRYSTALLINE PHOTOVOLTAIC MODULE (1m2)</baseName>
+         </name>
+         <classificationInformation>
+            <common:classification name="EPDNorge">
+               <common:class level="0" classId="f0167df9-d436-462f-9969-0234c152f514">Bygg</common:class>
+               <common:class level="1" classId="4ca14ed6-294f-45ee-80af-a1c9840f6cec">Solcellepaneler og komponenter</common:class>
+            </common:classification>
+         </classificationInformation>
+         <common:generalComment xml:lang="en">Specific data provided by SunPower for the year 2019.
+The procedures defined by the PCR regarding the data quality 
+have been respected according to the following criteria:
+• Temporal factor: LCI data has been sourced from the database
+ecoinvent 3.6, which was updated in 2019, and ELCD, updated in
+2018. As such all LCI data has been updated within the last 10
+years All primary data dates from product specific data collections
+from within the last 5 years.
+• Geographical factor: Datasets appropriate to the location of the
+modelled flow have been selected when available. Certain
+datasets have been modified to better reflect the specific energy
+consumptions (see Appendix 2) of certain countries which are not
+available in the database. When specific data for a country is not
+available and could not be created, European processes were
+selected for flows attributed to Europe, and Global or Rest of
+World flows were used for all other flows.
+• Technological factor: Datasets have been selected according to
+the actual processes used by the manufacturer. For generic
+products where no upstream data is available (e.g. packaging),
+manufacturing has been modelled according current practices.
+
+
+The allocation is made in accordance with the provisions of ISO 
+14025. Incoming energy and water and waste production in-house is 
+allocated equally among all products through mass allocation. Effects 
+of primary production of recycled materials allocated to the main 
+product in which the material was used. The recycling process and 
+transportation of the material is allocated to this analysis.
+
+All major raw materials and all the essential energy is 
+included. The production process for raw materials and 
+energy flows that are included with very small amounts (&lt;1%) 
+are not included – this included certain packaging materials 
+used for the transport of components to the main production 
+facility. The infrastructure relating to the manufacturing facility 
+has also been exclude as it has negligeable impacts when 
+considering the quantity of panels produced.
+This cut-off rule does not apply for hazardous materials and 
+substances.
+</common:generalComment>
+      </dataSetInformation>
+      <quantitativeReference type="Reference flow(s)">
+         <referenceToReferenceFlow>1</referenceToReferenceFlow>
+      </quantitativeReference>
+      <time>
+         <common:referenceYear>2021</common:referenceYear>
+         <common:dataSetValidUntil>2026</common:dataSetValidUntil>
+         <common:timeRepresentativenessDescription xml:lang="no">"01.08.2022" - "01.08.2027"</common:timeRepresentativenessDescription>
+      </time>
+      <geography>
+         <locationOfOperationSupplyOrProduction location="">
+            <descriptionOfRestrictions xml:lang="en">Norway / Europe / World</descriptionOfRestrictions>
+         </locationOfOperationSupplyOrProduction>
+      </geography>
+      <technology>
+         <technologyDescriptionAndIncludedProcesses xml:lang="en">The panel considered for this EPD has a power rating of 400W.
+1 complete panel has a mass of 19 kg without packaging.
+The packaging per panel weighs 1.36 kg.
+The overall dimensions are 1690x1046x40 mm.
+Certified: IEC 61215, IEC 61730 Class 1 fire rated per UNI
+9177</technologyDescriptionAndIncludedProcesses>
+         <technologicalApplicability xml:lang="en">400Wp mono-crystalline solar photovoltaic 
+module with back-contact conductivity, solid 
+metal backing and thick connectors. The 
+panels are designed to be installed on roofs 
+or as stand-alone systems for local power 
+production.
+The 2 other products covered by the PEP 
+differ only in colour for the BLK product and 
+the connector type for the COM product. 
+As the differences between products is 
+minor, no averaging has been performed.
+To produce their panels, SunPower sources 
+silicon wafers from Norway and the US, 
+which are sent to their factory in the 
+Phillipines to produce the solar cells. These 
+cells are then sent to their factory in 
+Mexico, where they are assembled with the 
+backsheet, frame and electrical connections 
+to produce the finished solar module. Sold as individual panels, with an effective 
+surface area of 1.77m². The packaging 
+consists of LDPE film, PP, PET and a 
+cardboard box, and the panels are 
+delivered on a wooden pallet.</technologicalApplicability>
+      </technology>
+   </processInformation>
+   <modellingAndValidation>
+      <LCIMethodAndAllocation>
+         <typeOfDataSet>EPD</typeOfDataSet>
+         <referenceToLCAMethodDetails type="source data set" refObjectId="c3df1d50-4430-4808-8d12-a1690b23f861" version="00.00.000">
+            <common:shortDescription xml:lang="en">PCR EPDItaly022 – Use of Highways, streets, roads and airfield</common:shortDescription>
+         </referenceToLCAMethodDetails>
+         <common:other>
+            <epd:subType xmlns:epd="http://www.iai.kit.edu/EPD/2013">specific dataset</epd:subType>
+         </common:other>
+      </LCIMethodAndAllocation>
+      <dataSourcesTreatmentAndRepresentativeness>
+         <referenceToDataSource type="source data set" refObjectId="b497a91f-e14b-4b69-8f28-f50eb1576766" version="00.03.001" uri="http://openlca.org/ilcd/resource/sources/b497a91f-e14b-4b69-8f28-f50eb1576766">
+            <common:shortDescription xml:lang="en">ecoinvent database (all versions)</common:shortDescription>
+         </referenceToDataSource>
+         <referenceToDataSource type="source data set" refObjectId="19087369-d1eb-4c3a-a763-b04958314537" version="00.01.000">
+            <common:shortDescription xml:lang="en">NEPD-3087-1726_MAXEON-3-MONO-CRYSTALLINE-PHOTOVOLTAIC-MODULE.pdf</common:shortDescription>
+         </referenceToDataSource>
+      </dataSourcesTreatmentAndRepresentativeness>
+      <validation>
+         <review type="Independent external review">
+            <common:referenceToNameOfReviewerAndInstitution type="contact data set" refObjectId="4bfe55b6-9617-4781-a8f1-00a5d3c9a61a" version="00.00.001">
+               <common:shortDescription xml:lang="en">Michael M. Jenssen - Asplan Viak AS</common:shortDescription>
+            </common:referenceToNameOfReviewerAndInstitution>
+         </review>
+      </validation>
+      <complianceDeclarations>
+         <compliance>
+            <common:referenceToComplianceSystem type="source data set" refObjectId="b00f9ec0-7874-11e3-981f-0800200c9a66" version="00.02.000">
+               <common:shortDescription xml:lang="de">EN 15804</common:shortDescription>
+               <common:shortDescription xml:lang="en">EN 15804</common:shortDescription>
+            </common:referenceToComplianceSystem>
+            <common:approvalOfOverallCompliance>Fully compliant</common:approvalOfOverallCompliance>
+            <common:nomenclatureCompliance>Fully compliant</common:nomenclatureCompliance>
+            <common:methodologicalCompliance>Fully compliant</common:methodologicalCompliance>
+            <common:reviewCompliance>Fully compliant</common:reviewCompliance>
+            <common:documentationCompliance>Fully compliant</common:documentationCompliance>
+            <common:qualityCompliance>Fully compliant</common:qualityCompliance>
+         </compliance>
+         <compliance>
+            <common:referenceToComplianceSystem type="source data set" refObjectId="4f2eb655-6e44-4874-a95a-e28f5442cd4d" version="00.00.001">
+               <common:shortDescription xml:lang="en">ISO 14025</common:shortDescription>
+            </common:referenceToComplianceSystem>
+            <common:approvalOfOverallCompliance>Fully compliant</common:approvalOfOverallCompliance>
+            <common:nomenclatureCompliance>Fully compliant</common:nomenclatureCompliance>
+            <common:methodologicalCompliance>Fully compliant</common:methodologicalCompliance>
+            <common:reviewCompliance>Fully compliant</common:reviewCompliance>
+            <common:documentationCompliance>Fully compliant</common:documentationCompliance>
+            <common:qualityCompliance>Fully compliant</common:qualityCompliance>
+         </compliance>
+         <compliance>
+            <common:referenceToComplianceSystem type="source data set" refObjectId="9c1e8451-2321-4498-b459-b6568b6b6547" version="00.00.001">
+               <common:shortDescription xml:lang="en">ISO 21930</common:shortDescription>
+            </common:referenceToComplianceSystem>
+            <common:approvalOfOverallCompliance>Fully compliant</common:approvalOfOverallCompliance>
+            <common:nomenclatureCompliance>Fully compliant</common:nomenclatureCompliance>
+            <common:methodologicalCompliance>Fully compliant</common:methodologicalCompliance>
+            <common:reviewCompliance>Fully compliant</common:reviewCompliance>
+            <common:documentationCompliance>Fully compliant</common:documentationCompliance>
+            <common:qualityCompliance>Fully compliant</common:qualityCompliance>
+         </compliance>
+      </complianceDeclarations>
+   </modellingAndValidation>
+   <administrativeInformation>
+      <dataEntryBy>
+         <common:timeStamp>2022-08-02T18:28:20</common:timeStamp>
+         <common:referenceToDataSetFormat type="source data set" refObjectId="a97a0155-0234-4b87-b4ce-a45da52f2a40" version="01.00.000" uri="http://lca.jrc.ec.europa.eu/lcainfohub/sample_data/ilcd/sources/ILCD_Format_a97a0155-0234-4b87-b4ce-a45da52f2a40_01.00.000.xml">
+            <common:shortDescription xml:lang="en">ILCD format</common:shortDescription>
+         </common:referenceToDataSetFormat>
+         <common:referenceToDataSetFormat type="source data set" refObjectId="cba73800-7874-11e3-981f-0800200c9a66" version="00.01.000">
+            <common:shortDescription xml:lang="de">EPD Data Format Extension</common:shortDescription>
+         </common:referenceToDataSetFormat>
+      </dataEntryBy>
+      <publicationAndOwnership>
+         <common:dataSetVersion>00.03.001</common:dataSetVersion>
+         <common:dateOfLastRevision>2022-01-19T12:15:21.9000288Z</common:dateOfLastRevision>
+         <common:registrationNumber>NEPD-3087-1726-EN</common:registrationNumber>
+         <common:referenceToOwnershipOfDataSet type="contact data set" refObjectId="e70a00a5-f4d6-40cd-8f79-b38f06bae901" version="00.00.000">
+            <common:shortDescription xml:lang="en">SunPower</common:shortDescription>
+         </common:referenceToOwnershipOfDataSet>
+         <common:copyright>true</common:copyright>
+         <common:licenseType>Free of charge for all users and uses</common:licenseType>
+      </publicationAndOwnership>
+   </administrativeInformation>
+   <exchanges>
+      <exchange dataSetInternalID="1">
+         <referenceToFlowDataSet type="flow data set" refObjectId="056278f9-e987-4c2a-9db4-6f7919fb864c" version="00.01.001">
+            <common:shortDescription xml:lang="en">MAXEON 3 MONO-CRYSTALLINE PHOTOVOLTAIC MODULE (1m2)</common:shortDescription>
+         </referenceToFlowDataSet>
+         <functionType>General reminder flow</functionType>
+         <exchangeDirection>Output</exchangeDirection>
+         <meanAmount>1</meanAmount>
+         <resultingAmount>1</resultingAmount>
+         <minimumAmount>0</minimumAmount>
+         <maximumAmount>0</maximumAmount>
+         <uncertaintyDistributionType>undefined</uncertaintyDistributionType>
+         <relativeStandardDeviation95In>0</relativeStandardDeviation95In>
+         <dataSourceType>Primary</dataSourceType>
+         <dataDerivationTypeStatus>Measured</dataDerivationTypeStatus>
+      </exchange>
+      <exchange dataSetInternalID="2">
+         <referenceToFlowDataSet type="flow data set" refObjectId="20f32be5-0398-4288-9b6d-accddd195317" version="30.00.000">
+            <common:shortDescription xml:lang="en">Use of renewable primary energy (PERE)</common:shortDescription>
+            <common:shortDescription xml:lang="no">Fornybar primærenergi brukt som energibærer (RPEE)</common:shortDescription>
+         </referenceToFlowDataSet>
+         <functionType>General reminder flow</functionType>
+         <exchangeDirection>Input</exchangeDirection>
+         <meanAmount>0</meanAmount>
+         <resultingAmount>0</resultingAmount>
+         <minimumAmount>0</minimumAmount>
+         <maximumAmount>0</maximumAmount>
+         <uncertaintyDistributionType>undefined</uncertaintyDistributionType>
+         <relativeStandardDeviation95In>0</relativeStandardDeviation95In>
+         <dataSourceType>Primary</dataSourceType>
+         <dataDerivationTypeStatus>Measured</dataDerivationTypeStatus>
+         <common:other>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A1-A3">319.000000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A4">0.798000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A5">0.040900000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C2">0.038700000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C3">0.390000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C4">0.000029500000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="D">-107.000000000000</epd:amount>
+            <epd:referenceToUnitGroupDataSet xmlns:epd="http://www.iai.kit.edu/EPD/2013" refObjectId="93a60a57-a3c8-11da-a746-0800200c9a66" type="unit group data set" uri="../unitgroups/93a60a57-a3c8-11da-a746-0800200c9a66">
+               <common:shortDescription>MJ</common:shortDescription>
+            </epd:referenceToUnitGroupDataSet>
+         </common:other>
+      </exchange>
+      <exchange dataSetInternalID="3">
+         <referenceToFlowDataSet type="flow data set" refObjectId="fb3ec0de-548d-4508-aea5-00b73bf6f702" version="30.00.000">
+            <common:shortDescription xml:lang="en">Use of renewable primary energy resources used as raw materials (PERM)</common:shortDescription>
+            <common:shortDescription xml:lang="no">Fornybar primærenergi brukt som energibærer (RPEE)</common:shortDescription>
+         </referenceToFlowDataSet>
+         <functionType>General reminder flow</functionType>
+         <exchangeDirection>Input</exchangeDirection>
+         <meanAmount>0</meanAmount>
+         <resultingAmount>0</resultingAmount>
+         <minimumAmount>0</minimumAmount>
+         <maximumAmount>0</maximumAmount>
+         <uncertaintyDistributionType>undefined</uncertaintyDistributionType>
+         <relativeStandardDeviation95In>0</relativeStandardDeviation95In>
+         <dataSourceType>Primary</dataSourceType>
+         <dataDerivationTypeStatus>Measured</dataDerivationTypeStatus>
+         <common:other>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A1-A3">9.290000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A4">0.000000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A5">0.000000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C2">0.000000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C3">0.000000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C4">0.000000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="D">0.000000000000</epd:amount>
+            <epd:referenceToUnitGroupDataSet xmlns:epd="http://www.iai.kit.edu/EPD/2013" refObjectId="93a60a57-a3c8-11da-a746-0800200c9a66" type="unit group data set" uri="../unitgroups/93a60a57-a3c8-11da-a746-0800200c9a66">
+               <common:shortDescription>MJ</common:shortDescription>
+            </epd:referenceToUnitGroupDataSet>
+         </common:other>
+      </exchange>
+      <exchange dataSetInternalID="4">
+         <referenceToFlowDataSet type="flow data set" refObjectId="53f97275-fa8a-4cdd-9024-65936002acd0" version="30.00.000">
+            <common:shortDescription xml:lang="en">Total use of renewable primary energy resource (PERT)</common:shortDescription>
+            <common:shortDescription xml:lang="no">Total bruk av fornybar primærenergi (TPE)</common:shortDescription>
+         </referenceToFlowDataSet>
+         <functionType>General reminder flow</functionType>
+         <exchangeDirection>Input</exchangeDirection>
+         <meanAmount>0</meanAmount>
+         <resultingAmount>0</resultingAmount>
+         <minimumAmount>0</minimumAmount>
+         <maximumAmount>0</maximumAmount>
+         <uncertaintyDistributionType>undefined</uncertaintyDistributionType>
+         <relativeStandardDeviation95In>0</relativeStandardDeviation95In>
+         <dataSourceType>Primary</dataSourceType>
+         <dataDerivationTypeStatus>Measured</dataDerivationTypeStatus>
+         <common:other>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A1-A3">364.000000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A4">0.798000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A5">0.040900000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C2">0.038700000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C3">0.390000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C4">0.000029500000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="D">-107.000000000000</epd:amount>
+            <epd:referenceToUnitGroupDataSet xmlns:epd="http://www.iai.kit.edu/EPD/2013" refObjectId="93a60a57-a3c8-11da-a746-0800200c9a66" type="unit group data set" uri="../unitgroups/93a60a57-a3c8-11da-a746-0800200c9a66">
+               <common:shortDescription>MJ</common:shortDescription>
+            </epd:referenceToUnitGroupDataSet>
+         </common:other>
+      </exchange>
+      <exchange dataSetInternalID="5">
+         <referenceToFlowDataSet type="flow data set" refObjectId="ac857178-2b45-46ec-892a-a9a4332f0372" version="30.00.000">
+            <common:shortDescription xml:lang="en">Use of non renewable primary energy (PENRE)</common:shortDescription>
+            <common:shortDescription xml:lang="no">Ikke fornybar primærenergi brukt som energibærer (NRPE)</common:shortDescription>
+         </referenceToFlowDataSet>
+         <functionType>General reminder flow</functionType>
+         <exchangeDirection>Input</exchangeDirection>
+         <meanAmount>0</meanAmount>
+         <resultingAmount>0</resultingAmount>
+         <minimumAmount>0</minimumAmount>
+         <maximumAmount>0</maximumAmount>
+         <uncertaintyDistributionType>undefined</uncertaintyDistributionType>
+         <relativeStandardDeviation95In>0</relativeStandardDeviation95In>
+         <dataSourceType>Primary</dataSourceType>
+         <dataDerivationTypeStatus>Measured</dataDerivationTypeStatus>
+         <common:other>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A1-A3">1030.000000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A4">44.100000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A5">0.541000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C2">2.740000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C3">2.120000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C4">0.000906000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="D">-350.000000000000</epd:amount>
+            <epd:referenceToUnitGroupDataSet xmlns:epd="http://www.iai.kit.edu/EPD/2013" refObjectId="93a60a57-a3c8-11da-a746-0800200c9a66" type="unit group data set" uri="../unitgroups/93a60a57-a3c8-11da-a746-0800200c9a66">
+               <common:shortDescription>MJ</common:shortDescription>
+            </epd:referenceToUnitGroupDataSet>
+         </common:other>
+      </exchange>
+      <exchange dataSetInternalID="6">
+         <referenceToFlowDataSet type="flow data set" refObjectId="1421caa0-679d-4bf4-b282-0eb850ccae27" version="30.00.000">
+            <common:shortDescription xml:lang="en">Use of non renewable primary energy resources used as raw materials (PENRM)</common:shortDescription>
+            <common:shortDescription xml:lang="no">Ikke fornybar primærenergi brukt som råmateriale (NRPM)</common:shortDescription>
+         </referenceToFlowDataSet>
+         <functionType>General reminder flow</functionType>
+         <exchangeDirection>Input</exchangeDirection>
+         <meanAmount>0</meanAmount>
+         <resultingAmount>0</resultingAmount>
+         <minimumAmount>0</minimumAmount>
+         <maximumAmount>0</maximumAmount>
+         <uncertaintyDistributionType>undefined</uncertaintyDistributionType>
+         <relativeStandardDeviation95In>0</relativeStandardDeviation95In>
+         <dataSourceType>Primary</dataSourceType>
+         <dataDerivationTypeStatus>Measured</dataDerivationTypeStatus>
+         <common:other>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A1-A3">47.300000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A4">0.000000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A5">0.000000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C2">0.000000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C3">0.000000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C4">0.000000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="D">0.000000000000</epd:amount>
+            <epd:referenceToUnitGroupDataSet xmlns:epd="http://www.iai.kit.edu/EPD/2013" refObjectId="93a60a57-a3c8-11da-a746-0800200c9a66" type="unit group data set" uri="../unitgroups/93a60a57-a3c8-11da-a746-0800200c9a66">
+               <common:shortDescription>MJ</common:shortDescription>
+            </epd:referenceToUnitGroupDataSet>
+         </common:other>
+      </exchange>
+      <exchange dataSetInternalID="7">
+         <referenceToFlowDataSet type="flow data set" refObjectId="06159210-646b-4c8d-8583-da9b3b95a6c1" version="30.00.000">
+            <common:shortDescription xml:lang="en">Total use of non renewable primary energy resource (PENRT)</common:shortDescription>
+            <common:shortDescription xml:lang="no">Total nicht erneuerbare Primärenergie (PENRT)</common:shortDescription>
+         </referenceToFlowDataSet>
+         <functionType>General reminder flow</functionType>
+         <exchangeDirection>Input</exchangeDirection>
+         <meanAmount>0</meanAmount>
+         <resultingAmount>0</resultingAmount>
+         <minimumAmount>0</minimumAmount>
+         <maximumAmount>0</maximumAmount>
+         <uncertaintyDistributionType>undefined</uncertaintyDistributionType>
+         <relativeStandardDeviation95In>0</relativeStandardDeviation95In>
+         <dataSourceType>Primary</dataSourceType>
+         <dataDerivationTypeStatus>Measured</dataDerivationTypeStatus>
+         <common:other>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A1-A3">1080.000000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A4">44.100000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A5">0.541000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C2">2.740000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C3">2.120000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C4">0.000906000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="D">-349.000000000000</epd:amount>
+            <epd:referenceToUnitGroupDataSet xmlns:epd="http://www.iai.kit.edu/EPD/2013" refObjectId="93a60a57-a3c8-11da-a746-0800200c9a66" type="unit group data set" uri="../unitgroups/93a60a57-a3c8-11da-a746-0800200c9a66">
+               <common:shortDescription>MJ</common:shortDescription>
+            </epd:referenceToUnitGroupDataSet>
+         </common:other>
+      </exchange>
+      <exchange dataSetInternalID="8">
+         <referenceToFlowDataSet type="flow data set" refObjectId="c6a1f35f-2d09-4f54-8dfb-97e502e1ce92" version="30.00.000">
+            <common:shortDescription xml:lang="en">Use of secondary material (SM)</common:shortDescription>
+            <common:shortDescription xml:lang="no">Bruk av sekundære materialer (SM)</common:shortDescription>
+         </referenceToFlowDataSet>
+         <functionType>General reminder flow</functionType>
+         <exchangeDirection>Input</exchangeDirection>
+         <meanAmount>0</meanAmount>
+         <resultingAmount>0</resultingAmount>
+         <minimumAmount>0</minimumAmount>
+         <maximumAmount>0</maximumAmount>
+         <uncertaintyDistributionType>undefined</uncertaintyDistributionType>
+         <relativeStandardDeviation95In>0</relativeStandardDeviation95In>
+         <dataSourceType>Primary</dataSourceType>
+         <dataDerivationTypeStatus>Measured</dataDerivationTypeStatus>
+         <common:other>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A1-A3">0.645000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A4">0.000000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A5">0.000000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C2">0.000000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C3">0.000000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C4">0.000000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="D">0.000000000000</epd:amount>
+            <epd:referenceToUnitGroupDataSet xmlns:epd="http://www.iai.kit.edu/EPD/2013" refObjectId="ad38d542-3fe9-439d-9b95-2f5f7752acaf" type="unit group data set" uri="../unitgroups/ad38d542-3fe9-439d-9b95-2f5f7752acaf">
+               <common:shortDescription>kg</common:shortDescription>
+            </epd:referenceToUnitGroupDataSet>
+         </common:other>
+      </exchange>
+      <exchange dataSetInternalID="9">
+         <referenceToFlowDataSet type="flow data set" refObjectId="64333088-a55f-4aa2-9a31-c10b07816787" version="30.00.000">
+            <common:shortDescription xml:lang="en">Use of renewable secondary fuels (RSF)</common:shortDescription>
+            <common:shortDescription xml:lang="no">Bruk av fornybart sekundære brensel (RSF)</common:shortDescription>
+         </referenceToFlowDataSet>
+         <functionType>General reminder flow</functionType>
+         <exchangeDirection>Input</exchangeDirection>
+         <meanAmount>0</meanAmount>
+         <resultingAmount>0</resultingAmount>
+         <minimumAmount>0</minimumAmount>
+         <maximumAmount>0</maximumAmount>
+         <uncertaintyDistributionType>undefined</uncertaintyDistributionType>
+         <relativeStandardDeviation95In>0</relativeStandardDeviation95In>
+         <dataSourceType>Primary</dataSourceType>
+         <dataDerivationTypeStatus>Measured</dataDerivationTypeStatus>
+         <common:other>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A1-A3">0.000000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A4">0.000000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A5">0.000000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C2">0.000000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C3">0.000000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C4">0.000000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="D">0.000000000000</epd:amount>
+            <epd:referenceToUnitGroupDataSet xmlns:epd="http://www.iai.kit.edu/EPD/2013" refObjectId="93a60a57-a3c8-11da-a746-0800200c9a66" type="unit group data set" uri="../unitgroups/93a60a57-a3c8-11da-a746-0800200c9a66">
+               <common:shortDescription>MJ</common:shortDescription>
+            </epd:referenceToUnitGroupDataSet>
+         </common:other>
+      </exchange>
+      <exchange dataSetInternalID="10">
+         <referenceToFlowDataSet type="flow data set" refObjectId="89def144-d39a-4287-b86f-efde453ddcb2" version="30.00.000">
+            <common:shortDescription xml:lang="en">Use of non renewable secondary fuels (NRSF)</common:shortDescription>
+            <common:shortDescription xml:lang="no">Bruk av ikke fornybart sekundære brensel (NRSF)</common:shortDescription>
+         </referenceToFlowDataSet>
+         <functionType>General reminder flow</functionType>
+         <exchangeDirection>Input</exchangeDirection>
+         <meanAmount>0</meanAmount>
+         <resultingAmount>0</resultingAmount>
+         <minimumAmount>0</minimumAmount>
+         <maximumAmount>0</maximumAmount>
+         <uncertaintyDistributionType>undefined</uncertaintyDistributionType>
+         <relativeStandardDeviation95In>0</relativeStandardDeviation95In>
+         <dataSourceType>Primary</dataSourceType>
+         <dataDerivationTypeStatus>Measured</dataDerivationTypeStatus>
+         <common:other>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A1-A3">0.000000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A4">0.000000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A5">0.000000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C2">0.000000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C3">0.000000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C4">0.000000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="D">0.000000000000</epd:amount>
+            <epd:referenceToUnitGroupDataSet xmlns:epd="http://www.iai.kit.edu/EPD/2013" refObjectId="93a60a57-a3c8-11da-a746-0800200c9a66" type="unit group data set" uri="../unitgroups/93a60a57-a3c8-11da-a746-0800200c9a66">
+               <common:shortDescription>MJ</common:shortDescription>
+            </epd:referenceToUnitGroupDataSet>
+         </common:other>
+      </exchange>
+      <exchange dataSetInternalID="11">
+         <referenceToFlowDataSet type="flow data set" refObjectId="3cf952c8-f3a4-461d-8c96-96456ca62246" version="30.00.000">
+            <common:shortDescription xml:lang="en">Use of net fresh water (FW)</common:shortDescription>
+            <common:shortDescription xml:lang="no">Netto bruk av ferskvann (W)</common:shortDescription>
+         </referenceToFlowDataSet>
+         <functionType>General reminder flow</functionType>
+         <exchangeDirection>Input</exchangeDirection>
+         <meanAmount>0</meanAmount>
+         <resultingAmount>0</resultingAmount>
+         <minimumAmount>0</minimumAmount>
+         <maximumAmount>0</maximumAmount>
+         <uncertaintyDistributionType>undefined</uncertaintyDistributionType>
+         <relativeStandardDeviation95In>0</relativeStandardDeviation95In>
+         <dataSourceType>Primary</dataSourceType>
+         <dataDerivationTypeStatus>Measured</dataDerivationTypeStatus>
+         <common:other>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A1-A3">3.690000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A4">0.004910000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A5">0.000496000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C2">0.000283000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C3">0.002500000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C4">0.000003220000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="D">-0.261000000000</epd:amount>
+            <epd:referenceToUnitGroupDataSet xmlns:epd="http://www.iai.kit.edu/EPD/2013" refObjectId="cd950537-0a98-4044-9ba7-9f9a68d0a504" type="unit group data set" uri="../unitgroups/cd950537-0a98-4044-9ba7-9f9a68d0a504">
+               <common:shortDescription>m3</common:shortDescription>
+            </epd:referenceToUnitGroupDataSet>
+         </common:other>
+      </exchange>
+      <exchange dataSetInternalID="12">
+         <referenceToFlowDataSet type="flow data set" refObjectId="430f9e0f-59b2-46a0-8e0d-55e0e84948fc" version="30.00.000">
+            <common:shortDescription xml:lang="en">Hazardous waste disposed (HWD)</common:shortDescription>
+            <common:shortDescription xml:lang="no">Avhendet farlig avfall (HW)</common:shortDescription>
+         </referenceToFlowDataSet>
+         <functionType>General reminder flow</functionType>
+         <exchangeDirection>Output</exchangeDirection>
+         <meanAmount>0</meanAmount>
+         <resultingAmount>0</resultingAmount>
+         <minimumAmount>0</minimumAmount>
+         <maximumAmount>0</maximumAmount>
+         <uncertaintyDistributionType>undefined</uncertaintyDistributionType>
+         <relativeStandardDeviation95In>0</relativeStandardDeviation95In>
+         <dataSourceType>Primary</dataSourceType>
+         <dataDerivationTypeStatus>Measured</dataDerivationTypeStatus>
+         <common:other>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A1-A3">5.680000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A4">0.032900000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A5">0.007780000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C2">0.001760000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C3">0.007410000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C4">0.000742000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="D">-0.304000000000</epd:amount>
+            <epd:referenceToUnitGroupDataSet xmlns:epd="http://www.iai.kit.edu/EPD/2013" refObjectId="ad38d542-3fe9-439d-9b95-2f5f7752acaf" type="unit group data set" uri="../unitgroups/ad38d542-3fe9-439d-9b95-2f5f7752acaf">
+               <common:shortDescription>kg</common:shortDescription>
+            </epd:referenceToUnitGroupDataSet>
+         </common:other>
+      </exchange>
+      <exchange dataSetInternalID="13">
+         <referenceToFlowDataSet type="flow data set" refObjectId="b29ef66b-e286-4afa-949f-62f1a7b4d7fa" version="30.00.000">
+            <common:shortDescription xml:lang="en">Non hazardous waste dispose (NHWD)</common:shortDescription>
+            <common:shortDescription xml:lang="no">Avhendet ikke-farlig avfall (NHW)</common:shortDescription>
+         </referenceToFlowDataSet>
+         <functionType>General reminder flow</functionType>
+         <exchangeDirection>Output</exchangeDirection>
+         <meanAmount>0</meanAmount>
+         <resultingAmount>0</resultingAmount>
+         <minimumAmount>0</minimumAmount>
+         <maximumAmount>0</maximumAmount>
+         <uncertaintyDistributionType>undefined</uncertaintyDistributionType>
+         <relativeStandardDeviation95In>0</relativeStandardDeviation95In>
+         <dataSourceType>Primary</dataSourceType>
+         <dataDerivationTypeStatus>Measured</dataDerivationTypeStatus>
+         <common:other>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A1-A3">39.900000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A4">1.700000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A5">0.098300000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C2">0.144000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C3">0.040100000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C4">0.000035200000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="D">-8.860000000000</epd:amount>
+            <epd:referenceToUnitGroupDataSet xmlns:epd="http://www.iai.kit.edu/EPD/2013" refObjectId="ad38d542-3fe9-439d-9b95-2f5f7752acaf" type="unit group data set" uri="../unitgroups/ad38d542-3fe9-439d-9b95-2f5f7752acaf">
+               <common:shortDescription>kg</common:shortDescription>
+            </epd:referenceToUnitGroupDataSet>
+         </common:other>
+      </exchange>
+      <exchange dataSetInternalID="14">
+         <referenceToFlowDataSet type="flow data set" refObjectId="3449546e-52ad-4b39-b809-9fb77cea8ff6" version="30.00.000">
+            <common:shortDescription xml:lang="en">Radioactive waste disposed (RWD)</common:shortDescription>
+            <common:shortDescription xml:lang="no">Avhendet radioaktivt avfall (RW)</common:shortDescription>
+         </referenceToFlowDataSet>
+         <functionType>General reminder flow</functionType>
+         <exchangeDirection>Output</exchangeDirection>
+         <meanAmount>0</meanAmount>
+         <resultingAmount>0</resultingAmount>
+         <minimumAmount>0</minimumAmount>
+         <maximumAmount>0</maximumAmount>
+         <uncertaintyDistributionType>undefined</uncertaintyDistributionType>
+         <relativeStandardDeviation95In>0</relativeStandardDeviation95In>
+         <dataSourceType>Primary</dataSourceType>
+         <dataDerivationTypeStatus>Measured</dataDerivationTypeStatus>
+         <common:other>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A1-A3">0.003780000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A4">0.000296000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A5">0.000002910000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C2">0.000018700000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C3">0.000015300000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C4">0.000000003210</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="D">-0.001010000000</epd:amount>
+            <epd:referenceToUnitGroupDataSet xmlns:epd="http://www.iai.kit.edu/EPD/2013" refObjectId="ad38d542-3fe9-439d-9b95-2f5f7752acaf" type="unit group data set" uri="../unitgroups/ad38d542-3fe9-439d-9b95-2f5f7752acaf">
+               <common:shortDescription>kg</common:shortDescription>
+            </epd:referenceToUnitGroupDataSet>
+         </common:other>
+      </exchange>
+      <exchange dataSetInternalID="15">
+         <referenceToFlowDataSet type="flow data set" refObjectId="a2b32f97-3fc7-4af2-b209-525bc6426f33" version="30.00.000">
+            <common:shortDescription xml:lang="en">Components for re-use (CRU)</common:shortDescription>
+            <common:shortDescription xml:lang="no">Komponenter for gjenbruk (CR)</common:shortDescription>
+         </referenceToFlowDataSet>
+         <functionType>General reminder flow</functionType>
+         <exchangeDirection>Output</exchangeDirection>
+         <meanAmount>0</meanAmount>
+         <resultingAmount>0</resultingAmount>
+         <minimumAmount>0</minimumAmount>
+         <maximumAmount>0</maximumAmount>
+         <uncertaintyDistributionType>undefined</uncertaintyDistributionType>
+         <relativeStandardDeviation95In>0</relativeStandardDeviation95In>
+         <dataSourceType>Primary</dataSourceType>
+         <dataDerivationTypeStatus>Measured</dataDerivationTypeStatus>
+         <common:other>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A1-A3">0.000000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A4">0.000000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A5">0.000000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C2">0.000000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C3">0.000000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C4">0.000000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="D">0.000000000000</epd:amount>
+            <epd:referenceToUnitGroupDataSet xmlns:epd="http://www.iai.kit.edu/EPD/2013" refObjectId="ad38d542-3fe9-439d-9b95-2f5f7752acaf" type="unit group data set" uri="../unitgroups/ad38d542-3fe9-439d-9b95-2f5f7752acaf">
+               <common:shortDescription>kg</common:shortDescription>
+            </epd:referenceToUnitGroupDataSet>
+         </common:other>
+      </exchange>
+      <exchange dataSetInternalID="16">
+         <referenceToFlowDataSet type="flow data set" refObjectId="d7fe48a5-4103-49c8-9aae-b0b5dfdbd6ae" version="30.00.000">
+            <common:shortDescription xml:lang="en">Materials for recycling (MFR)</common:shortDescription>
+            <common:shortDescription xml:lang="no">Materialer for resirkulering (MR)</common:shortDescription>
+         </referenceToFlowDataSet>
+         <functionType>General reminder flow</functionType>
+         <exchangeDirection>Output</exchangeDirection>
+         <meanAmount>0</meanAmount>
+         <resultingAmount>0</resultingAmount>
+         <minimumAmount>0</minimumAmount>
+         <maximumAmount>0</maximumAmount>
+         <uncertaintyDistributionType>undefined</uncertaintyDistributionType>
+         <relativeStandardDeviation95In>0</relativeStandardDeviation95In>
+         <dataSourceType>Primary</dataSourceType>
+         <dataDerivationTypeStatus>Measured</dataDerivationTypeStatus>
+         <common:other>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A1-A3">0.849000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A4">0.000000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A5">0.500000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C2">0.000000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C3">9.770000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C4">0.000000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="D">0.000000000000</epd:amount>
+            <epd:referenceToUnitGroupDataSet xmlns:epd="http://www.iai.kit.edu/EPD/2013" refObjectId="ad38d542-3fe9-439d-9b95-2f5f7752acaf" type="unit group data set" uri="../unitgroups/ad38d542-3fe9-439d-9b95-2f5f7752acaf">
+               <common:shortDescription>kg</common:shortDescription>
+            </epd:referenceToUnitGroupDataSet>
+         </common:other>
+      </exchange>
+      <exchange dataSetInternalID="17">
+         <referenceToFlowDataSet type="flow data set" refObjectId="59a9181c-3aaf-46ee-8b13-2b3723b6e447" version="30.00.000">
+            <common:shortDescription xml:lang="en">Materials for energy recovery (MER)</common:shortDescription>
+            <common:shortDescription xml:lang="no">Materialer for energigjenvinning (MER)</common:shortDescription>
+         </referenceToFlowDataSet>
+         <functionType>General reminder flow</functionType>
+         <exchangeDirection>Output</exchangeDirection>
+         <meanAmount>0</meanAmount>
+         <resultingAmount>0</resultingAmount>
+         <minimumAmount>0</minimumAmount>
+         <maximumAmount>0</maximumAmount>
+         <uncertaintyDistributionType>undefined</uncertaintyDistributionType>
+         <relativeStandardDeviation95In>0</relativeStandardDeviation95In>
+         <dataSourceType>Primary</dataSourceType>
+         <dataDerivationTypeStatus>Measured</dataDerivationTypeStatus>
+         <common:other>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A1-A3">0.036300000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A4">0.000000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A5">0.128000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C2">0.000000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C3">0.000000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C4">0.000000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="D">0.000000000000</epd:amount>
+            <epd:referenceToUnitGroupDataSet xmlns:epd="http://www.iai.kit.edu/EPD/2013" refObjectId="ad38d542-3fe9-439d-9b95-2f5f7752acaf" type="unit group data set" uri="../unitgroups/ad38d542-3fe9-439d-9b95-2f5f7752acaf">
+               <common:shortDescription>kg</common:shortDescription>
+            </epd:referenceToUnitGroupDataSet>
+         </common:other>
+      </exchange>
+      <exchange dataSetInternalID="18">
+         <referenceToFlowDataSet type="flow data set" refObjectId="4da0c987-2b76-40d6-9e9e-82a017aaaf29" version="30.00.000">
+            <common:shortDescription xml:lang="en">Exported electrical energy (EEE)</common:shortDescription>
+            <common:shortDescription xml:lang="no">Eksportert elektrisk energi(EEE)</common:shortDescription>
+         </referenceToFlowDataSet>
+         <functionType>General reminder flow</functionType>
+         <exchangeDirection>Output</exchangeDirection>
+         <meanAmount>0</meanAmount>
+         <resultingAmount>0</resultingAmount>
+         <minimumAmount>0</minimumAmount>
+         <maximumAmount>0</maximumAmount>
+         <uncertaintyDistributionType>undefined</uncertaintyDistributionType>
+         <relativeStandardDeviation95In>0</relativeStandardDeviation95In>
+         <dataSourceType>Primary</dataSourceType>
+         <dataDerivationTypeStatus>Measured</dataDerivationTypeStatus>
+         <common:other>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A1-A3">0.000000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A4">0.000000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A5">0.000000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C2">0.000000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C3">0.000000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C4">0.000000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="D">0.000000000000</epd:amount>
+            <epd:referenceToUnitGroupDataSet xmlns:epd="http://www.iai.kit.edu/EPD/2013" refObjectId="93a60a57-a3c8-11da-a746-0800200c9a66" type="unit group data set" uri="../unitgroups/93a60a57-a3c8-11da-a746-0800200c9a66">
+               <common:shortDescription>MJ</common:shortDescription>
+            </epd:referenceToUnitGroupDataSet>
+         </common:other>
+      </exchange>
+      <exchange dataSetInternalID="19">
+         <referenceToFlowDataSet type="flow data set" refObjectId="98daf38a-7a79-46d3-9a37-2b7bd0955810" version="30.00.000">
+            <common:shortDescription xml:lang="en">Exported thermal energy (EET)</common:shortDescription>
+            <common:shortDescription xml:lang="no">Eksportert termisk energi (ETE)</common:shortDescription>
+         </referenceToFlowDataSet>
+         <functionType>General reminder flow</functionType>
+         <exchangeDirection>Output</exchangeDirection>
+         <meanAmount>0</meanAmount>
+         <resultingAmount>0</resultingAmount>
+         <minimumAmount>0</minimumAmount>
+         <maximumAmount>0</maximumAmount>
+         <uncertaintyDistributionType>undefined</uncertaintyDistributionType>
+         <relativeStandardDeviation95In>0</relativeStandardDeviation95In>
+         <dataSourceType>Primary</dataSourceType>
+         <dataDerivationTypeStatus>Measured</dataDerivationTypeStatus>
+         <common:other>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A1-A3">0.036300000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A4">44.900000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A5">0.582000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C2">2.780000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C3">2.510000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C4">0.000935000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="D">-456.000000000000</epd:amount>
+            <epd:referenceToUnitGroupDataSet xmlns:epd="http://www.iai.kit.edu/EPD/2013" refObjectId="93a60a57-a3c8-11da-a746-0800200c9a66" type="unit group data set" uri="../unitgroups/93a60a57-a3c8-11da-a746-0800200c9a66">
+               <common:shortDescription>MJ</common:shortDescription>
+            </epd:referenceToUnitGroupDataSet>
+         </common:other>
+      </exchange>
+   </exchanges>
+   <LCIAResults>
+      <LCIAResult>
+         <referenceToLCIAMethodDataSet type="LCIA method data set" refObjectId="77e416eb-a363-4258-a04e-171d843a6460" version="00.01.000">
+            <common:shortDescription xml:lang="en">Global warming potential (GWP)</common:shortDescription>
+            <common:shortDescription xml:lang="no">Globalt oppvarmingspotensial (GWP)</common:shortDescription>
+         </referenceToLCIAMethodDataSet>
+         <meanAmount>0</meanAmount>
+         <uncertaintyDistributionType>undefined</uncertaintyDistributionType>
+         <relativeStandardDeviation95In>0</relativeStandardDeviation95In>
+         <common:other>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A1-A3">77.200000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A4">3.040000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A5">0.193000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C2">0.180000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C3">0.129000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C4">0.001450000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="D">-31.200000000000</epd:amount>
+            <epd:referenceToUnitGroupDataSet xmlns:epd="http://www.iai.kit.edu/EPD/2013" refObjectId="1ebf3012-d0db-4de2-aefd-ef30cedb0be1" type="unit group data set" uri="../unitgroups/1ebf3012-d0db-4de2-aefd-ef30cedb0be1">
+               <common:shortDescription>kg CO2-Äqv.</common:shortDescription>
+            </epd:referenceToUnitGroupDataSet>
+         </common:other>
+      </LCIAResult>
+      <LCIAResult>
+         <referenceToLCIAMethodDataSet type="LCIA method data set" refObjectId="06dcd26f-025f-401a-a7c1-5e457eb54637" version="00.02.000">
+            <common:shortDescription xml:lang="en">Ozone Depletion Potential (ODP)</common:shortDescription>
+            <common:shortDescription xml:lang="no">Potensial for nedbryting av stratosfærisk ozon (ODP)</common:shortDescription>
+         </referenceToLCIAMethodDataSet>
+         <meanAmount>0</meanAmount>
+         <uncertaintyDistributionType>undefined</uncertaintyDistributionType>
+         <relativeStandardDeviation95In>0</relativeStandardDeviation95In>
+         <common:other>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A1-A3">0.000078400000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A4">0.000000515000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A5">0.000000004670</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C2">0.000000033000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C3">0.000000013300</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C4">0.000000000010</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="D">-0.000002040000</epd:amount>
+            <epd:referenceToUnitGroupDataSet xmlns:epd="http://www.iai.kit.edu/EPD/2013" refObjectId="88054749-b0a6-47ea-a82b-dc5b29326512" type="unit group data set" uri="../unitgroups/88054749-b0a6-47ea-a82b-dc5b29326512">
+               <common:shortDescription>kg CFC 11 eq.</common:shortDescription>
+            </epd:referenceToUnitGroupDataSet>
+         </common:other>
+      </LCIAResult>
+      <LCIAResult>
+         <referenceToLCIAMethodDataSet type="LCIA method data set" refObjectId="b4274add-93b7-4905-a5e4-2e878c4e4216" version="00.02.000">
+            <common:shortDescription xml:lang="en">Acidification potential (AP)</common:shortDescription>
+            <common:shortDescription xml:lang="no">Forsuringspotensial for kilder på land og vann (AP)</common:shortDescription>
+         </referenceToLCIAMethodDataSet>
+         <meanAmount>0</meanAmount>
+         <uncertaintyDistributionType>undefined</uncertaintyDistributionType>
+         <relativeStandardDeviation95In>0</relativeStandardDeviation95In>
+         <common:other>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A1-A3">0.058700000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A4">0.003090000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A5">0.000035100000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C2">0.000093800000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C3">0.000069000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C4">0.000000202000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="D">-0.015500000000</epd:amount>
+            <epd:referenceToUnitGroupDataSet xmlns:epd="http://www.iai.kit.edu/EPD/2013" refObjectId="bc50c624-a9bc-45b1-a9b0-e6b10d00476f" type="unit group data set" uri="../unitgroups/bc50c624-a9bc-45b1-a9b0-e6b10d00476f">
+               <common:shortDescription>kg SO2-Äqv.</common:shortDescription>
+            </epd:referenceToUnitGroupDataSet>
+         </common:other>
+      </LCIAResult>
+      <LCIAResult>
+         <referenceToLCIAMethodDataSet type="LCIA method data set" refObjectId="f58827d0-b407-4ec6-be75-8b69efb98a0f" version="00.01.000">
+            <common:shortDescription xml:lang="en">Eutrophication potential (EP)</common:shortDescription>
+            <common:shortDescription xml:lang="no">Overgjødslingspotensial (EP)</common:shortDescription>
+         </referenceToLCIAMethodDataSet>
+         <meanAmount>0</meanAmount>
+         <uncertaintyDistributionType>undefined</uncertaintyDistributionType>
+         <relativeStandardDeviation95In>0</relativeStandardDeviation95In>
+         <common:other>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A1-A3">0.058700000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A4">0.003090000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A5">0.000035100000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C2">0.000093800000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C3">0.000069000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C4">0.000000202000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="D">-0.015500000000</epd:amount>
+            <epd:referenceToUnitGroupDataSet xmlns:epd="http://www.iai.kit.edu/EPD/2013" refObjectId="67b5401d-873c-485f-bcf3-6ae83b918822" type="unit group data set" uri="../unitgroups/67b5401d-873c-485f-bcf3-6ae83b918822">
+               <common:shortDescription>kg Phosphat-Äqv.</common:shortDescription>
+            </epd:referenceToUnitGroupDataSet>
+         </common:other>
+      </LCIAResult>
+      <LCIAResult>
+         <referenceToLCIAMethodDataSet type="LCIA method data set" refObjectId="1e84a202-dae6-42aa-9e9d-71ea48b8be00" version="00.02.000">
+            <common:shortDescription xml:lang="en">Photochemical Ozone Creation Potential (POCP)</common:shortDescription>
+            <common:shortDescription xml:lang="no">Potensial for fotokjemisk oksidantdanning (POCP)</common:shortDescription>
+         </referenceToLCIAMethodDataSet>
+         <meanAmount>0</meanAmount>
+         <uncertaintyDistributionType>undefined</uncertaintyDistributionType>
+         <relativeStandardDeviation95In>0</relativeStandardDeviation95In>
+         <common:other>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A1-A3">0.065300000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A4">0.002560000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A5">0.000028400000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C2">0.000093700000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C3">0.000037300000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C4">0.000000058400</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="D">-0.010900000000</epd:amount>
+            <epd:referenceToUnitGroupDataSet xmlns:epd="http://www.iai.kit.edu/EPD/2013" refObjectId="01c26c17-9a76-406e-8295-f17b55fd909e" type="unit group data set" uri="../unitgroups/01c26c17-9a76-406e-8295-f17b55fd909e">
+               <common:shortDescription>kg Ethen-Äqv.</common:shortDescription>
+            </epd:referenceToUnitGroupDataSet>
+         </common:other>
+      </LCIAResult>
+      <LCIAResult>
+         <referenceToLCIAMethodDataSet type="LCIA method data set" refObjectId="f7c73bb9-ab1a-4249-9c6d-379a0de6f67e" version="00.01.000">
+            <common:shortDescription xml:lang="en">Abiotic depletion potential for non fossil resources (ADPE)</common:shortDescription>
+            <common:shortDescription xml:lang="no">Abiotisk uttømmingspotensial for ikke-fossile ressurser (ADPM)</common:shortDescription>
+         </referenceToLCIAMethodDataSet>
+         <meanAmount>0</meanAmount>
+         <uncertaintyDistributionType>undefined</uncertaintyDistributionType>
+         <relativeStandardDeviation95In>0</relativeStandardDeviation95In>
+         <common:other>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A1-A3">0.011800000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A4">0.000053900000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A5">0.000000835000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C2">0.000004930000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C3">0.000000738000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C4">0.000000000808</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="D">-0.003230000000</epd:amount>
+            <epd:referenceToUnitGroupDataSet xmlns:epd="http://www.iai.kit.edu/EPD/2013" refObjectId="54ccd2d9-a32a-4fc2-923d-f2c8c93e89d4" type="unit group data set" uri="../unitgroups/54ccd2d9-a32a-4fc2-923d-f2c8c93e89d4">
+               <common:shortDescription>kg Sb-Äqv.</common:shortDescription>
+            </epd:referenceToUnitGroupDataSet>
+         </common:other>
+      </LCIAResult>
+      <LCIAResult>
+         <referenceToLCIAMethodDataSet type="LCIA method data set" refObjectId="804ebcdf-309d-4098-8ed8-fdaf2f389981" version="00.01.000">
+            <common:shortDescription xml:lang="en">Abiotic depletion potential for fossil resources (ADPF)</common:shortDescription>
+            <common:shortDescription xml:lang="no">Abiotisk uttømmingspotensial for fossile ressurser (ADPE)</common:shortDescription>
+         </referenceToLCIAMethodDataSet>
+         <meanAmount>0</meanAmount>
+         <uncertaintyDistributionType>undefined</uncertaintyDistributionType>
+         <relativeStandardDeviation95In>0</relativeStandardDeviation95In>
+         <common:other>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A1-A3">42.900000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A4">0.465000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="A5">2.690000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C2">1.210000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C3">0.000865000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="C4">-306.000000000000</epd:amount>
+            <epd:amount xmlns:epd="http://www.iai.kit.edu/EPD/2013" epd:module="D">0.000865000000</epd:amount>
+            <epd:referenceToUnitGroupDataSet xmlns:epd="http://www.iai.kit.edu/EPD/2013" refObjectId="93a60a57-a3c8-11da-a746-0800200c9a66" type="unit group data set" uri="../unitgroups/93a60a57-a3c8-11da-a746-0800200c9a66">
+               <common:shortDescription>MJ</common:shortDescription>
+            </epd:referenceToUnitGroupDataSet>
+         </common:other>
+      </LCIAResult>
+   </LCIAResults>
+</processDataSet>

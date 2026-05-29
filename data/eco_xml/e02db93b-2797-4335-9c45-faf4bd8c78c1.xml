@@ -1,0 +1,1074 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<processDataSet xmlns:m="http://lca.jrc.it/ILCD/LCIAMethod" xmlns:common="http://lca.jrc.it/ILCD/Common" xmlns:s="http://lca.jrc.it/ILCD/Source" xmlns:epd2="http://www.indata.network/EPD/2019" xmlns:c="http://lca.jrc.it/ILCD/Contact" xmlns:epd="http://www.iai.kit.edu/EPD/2013" xmlns:f="http://lca.jrc.it/ILCD/Flow" xmlns="http://lca.jrc.it/ILCD/Process" xmlns:fp="http://lca.jrc.it/ILCD/FlowProperty" xmlns:u="http://lca.jrc.it/ILCD/UnitGroup" xmlns:ns11="http://openlca.org/epd_ilcd" xmlns:ns10="http://www.okworx.com/ILCD/Extensions/2018/Profile" version="1.1" epd2:epd-version="1.2" ns10:profile="EN_15804_A2">
+    <processInformation>
+        <dataSetInformation>
+            <common:UUID>e02db93b-2797-4335-9c45-faf4bd8c78c1</common:UUID>
+            <name>
+                <baseName xml:lang="en">Tongwei TWMNF-66HD (TNC-G12-66 Half Cell Bifacial Module) (photovoltaic module)</baseName>
+                <baseName xml:lang="de">Tongwei TWMNF-66HD (TNC-G12-66 Halbzellen-Bifacialmodul) (Photovoltaikmodul)</baseName>
+            </name>
+            <classificationInformation>
+                <common:classification name="OEKOBAU.DAT">
+                    <common:class level="0" classId="8">Gebäudetechnik</common:class>
+                    <common:class level="1" classId="8.4">Elektro</common:class>
+                </common:classification>
+            </classificationInformation>
+            <common:generalComment xml:lang="en">This EPD is based on the life cycle assessment of the photovoltaic module TWMNF-66HD which is produced and distributed by Tongwei Co., Ltd., located in Hefei City (P. R. China). The EPD refers to the specific product.&#13;
+&#13;
+EPD type: Cradle to Grave + Module D&#13;
+&#13;
+Kiwa-Ecobility Experts assumes no liability for manufacturer's information, LCA data and evidence.&#13;
+&#13;
+Functional unit: &#13;
+1 Wp of manufactured photovoltaic module, from cradle-to-grave, with activities needed for a study period for a defined reference ser-vice life (≥80% of the labelled power output).&#13;
+Note: The EPD results have been calculated for the declared / functional unit of m^2 and Wp. The results displayed in this dataset refer to the declared unit of m^2. The m^2 results can be converted into the Wp functional unit with a conversion factor (1/233.39) or can be seen in the EPD document.</common:generalComment>
+            <common:other>
+                <epd:scenarios>
+                    <epd:scenario epd:name="Standard scenario" epd:default="true">
+                        <epd:description>Transport to manufacturer (A2):  It was assumed that all transportation from suppliers is carried out using trucks. The environmental profile used for this purpose is "T0001 - Lorry (Truck), unspecified (default) | market group for (GLO)." Production process (A3) | Production waste: The production waste data was based on the data sheets provided by the manufacturer. It is assumed that the waste scenarios for both production waste and end-of-life waste are similar. Production process (A3) | Energy consumption: The energy consumption data was sourced from the manufacturer based on the onsite production data. Since the production takes place in China, the electricity grid mix for China is applied, using the environmental profile "Electricity, medium voltage {CN} | market group for | Cut-off, U."</epd:description>
+                    </epd:scenario>
+                </epd:scenarios>
+                <ns11:modules name="A1" scenario="Standard scenario"></ns11:modules>
+                <ns11:modules name="A2" scenario="Standard scenario"></ns11:modules>
+                <ns11:modules name="A3" scenario="Standard scenario"></ns11:modules>
+                <ns11:modules name="A4" scenario="Standard scenario"></ns11:modules>
+                <ns11:modules name="A5" scenario="Standard scenario"></ns11:modules>
+                <ns11:modules name="B2" scenario="Standard scenario"></ns11:modules>
+                <ns11:modules name="C1" scenario="Standard scenario"></ns11:modules>
+                <ns11:modules name="C2" scenario="Standard scenario"></ns11:modules>
+                <ns11:modules name="C3" scenario="Standard scenario"></ns11:modules>
+                <ns11:modules name="C4" scenario="Standard scenario"></ns11:modules>
+                <ns11:modules name="D" scenario="Standard scenario"></ns11:modules>
+            </common:other>
+        </dataSetInformation>
+        <quantitativeReference type="Reference flow(s)">
+            <referenceToReferenceFlow>1</referenceToReferenceFlow>
+        </quantitativeReference>
+        <time>
+            <common:referenceYear>2024</common:referenceYear>
+            <common:dataSetValidUntil>2029</common:dataSetValidUntil>
+            <common:timeRepresentativenessDescription xml:lang="en">The production data have been collected for the year 2024 (01/01/2024 – 31/07/2024) and are there-fore up-to-date.</common:timeRepresentativenessDescription>
+            <common:other>
+                <epd2:publicationDateOfEPD>2024-11-27</epd2:publicationDateOfEPD>
+            </common:other>
+        </time>
+        <geography>
+            <locationOfOperationSupplyOrProduction location="CN">
+                <descriptionOfRestrictions xml:lang="en">The product is produced and manufactured in Hefei City, Anhui Province, P. R. China and the main mar-ket areas are China, the European Union, the Middle East, Latin America, etc.&#13;
+The geographical reference area is China and Europe.&#13;
+</descriptionOfRestrictions>
+            </locationOfOperationSupplyOrProduction>
+        </geography>
+        <technology>
+            <technologyDescriptionAndIncludedProcesses xml:lang="en">TWMNF-66HD is part of Tongwei G12-TNC series of photovoltaic module products, which adopts the new efficient N-type TNC cell independently developed by Tongwei for module packaging. And inte-grate the industry's leading multi-main gate design to reduce hidden crack loss, non-destructive slicing technology cutting surface smooth and flat, high-density packaging technology to improve the "screen ratio" of components to ensure the perfect balance of efficiency and reliability, the use of optical gap film technology to improve the power of components and other technologies. The product has the industry-leading characteristics of high power, high efficiency, high double-sided rate, high power gen-eration, high yield, etc. According to the calculation of 10 typical projects in the world, G12-TNC has advantages in BOS cost and LCOE compared with G12-TPC, bringing better return on investment for customers. In addition, Tongwei module size is consistent with the mainstream of the industry, compat-ible with various types of photovoltaic brackets, and can provide a variety of installation options.&#13;
+TWMNF-66HD has a power output range from 700 W to 725 W and a weight of 37.9 kg. 725 W is cho-sen as the representative product power output. The manufacturing site is located in No.888, Changning Road, High-tech District, Hefei City, Anhui Prov-ince, 230088, P.R. China.&#13;
+</technologyDescriptionAndIncludedProcesses>
+            <technologicalApplicability xml:lang="en">Tongwei solar PV modules are widely used in various "PV+" applications, such as industrial, commercial distributed, and large-scale centralized power stations, to meet the growing global demand for clean energy.</technologicalApplicability>
+            <referenceToTechnologyFlowDiagrammOrPicture type="source data set" refObjectId="0636f57d-3e99-4ae5-a0b6-58b8183aa309" version="00.00.001">
+                <common:shortDescription xml:lang="en">Flowchart Tongwei TWMNF-66HD (EPD-Kiwa-EE-000419-EN)</common:shortDescription>
+            </referenceToTechnologyFlowDiagrammOrPicture>
+        </technology>
+    </processInformation>
+    <modellingAndValidation>
+        <LCIMethodAndAllocation>
+            <typeOfDataSet>EPD</typeOfDataSet>
+            <common:other>
+                <epd:subType>average dataset</epd:subType>
+            </common:other>
+        </LCIMethodAndAllocation>
+        <dataSourcesTreatmentAndRepresentativeness>
+            <referenceToDataSource type="source data set" refObjectId="766b9973-5ee8-48a2-8098-72c8e20b369f" version="00.00.001">
+                <common:shortDescription xml:lang="en">ecoinvent 3.6 database</common:shortDescription>
+            </referenceToDataSource>
+            <referenceToDataSource type="source data set" refObjectId="b497a91f-e14b-4b69-8f28-f50eb1576766" version="00.03.002">
+                <common:shortDescription xml:lang="en">ecoinvent database (general)</common:shortDescription>
+            </referenceToDataSource>
+            <useAdviceForDataSet xml:lang="en">Tongwei solar PV modules are widely used in various "PV+" applications, such as industrial, commercial distributed, and large-scale centralized power stations, to meet the growing global demand for clean energy.</useAdviceForDataSet>
+            <common:other>
+                <epd2:referenceToOriginalEPD type="source data set" refObjectId="0fef14ee-6334-439d-8813-f2b1bb7a2a87" version="00.00.001">
+                    <common:shortDescription xml:lang="en">Tongwei TWMNF-66HD (EPD-Kiwa-EE-000419-EN) EPD</common:shortDescription>
+                </epd2:referenceToOriginalEPD>
+            </common:other>
+        </dataSourcesTreatmentAndRepresentativeness>
+        <validation>
+            <review type="Independent external review">
+                <common:reviewDetails xml:lang="en">Independent verification of the declaration and data, according to EN ISO 14025:2010.</common:reviewDetails>
+                <common:referenceToNameOfReviewerAndInstitution type="contact data set" refObjectId="2cfcd328-c30d-44c5-b920-7c09e39315a8" version="00.00.001">
+                    <common:shortDescription xml:lang="en">Elisabet Amat - Greenize Projects S.L.U.</common:shortDescription>
+                </common:referenceToNameOfReviewerAndInstitution>
+            </review>
+        </validation>
+        <complianceDeclarations>
+            <compliance>
+                <common:referenceToComplianceSystem type="source data set" refObjectId="d4aa3ec7-b1d7-4a4a-a6cb-37af88dcc902" version="00.01.000">
+                    <common:shortDescription xml:lang="de">EN 15804+A2 (EF 3.1)</common:shortDescription>
+                    <common:shortDescription xml:lang="en">EN 15804+A2 (EF 3.1)</common:shortDescription>
+                </common:referenceToComplianceSystem>
+            </compliance>
+            <compliance>
+                <common:referenceToComplianceSystem type="source data set" refObjectId="4f2eb655-6e44-4874-a95a-e28f5442cd4d" version="00.00.001">
+                    <common:shortDescription xml:lang="en">ISO 14025</common:shortDescription>
+                </common:referenceToComplianceSystem>
+            </compliance>
+        </complianceDeclarations>
+    </modellingAndValidation>
+    <administrativeInformation>
+        <common:commissionerAndGoal>
+            <common:referenceToCommissioner type="contact data set" refObjectId="1c53b4af-7830-4a38-9c53-c22d671f03fa" version="00.00.001">
+                <common:shortDescription xml:lang="en">Tongwei Co., Ltd.</common:shortDescription>
+            </common:referenceToCommissioner>
+        </common:commissionerAndGoal>
+        <dataGenerator>
+            <common:referenceToPersonOrEntityGeneratingTheDataSet type="contact data set" refObjectId="3ea4a87a-3f88-4633-b7e7-1bbdd272be43" version="00.00.002">
+                <common:shortDescription xml:lang="en">Kiwa GmbH (Berlin)</common:shortDescription>
+            </common:referenceToPersonOrEntityGeneratingTheDataSet>
+        </dataGenerator>
+        <dataEntryBy>
+            <common:timeStamp>2025-05-16T14:37:31.182+02:00</common:timeStamp>
+            <common:referenceToDataSetFormat type="source data set" refObjectId="a29449fd-aa2f-4de8-b5d7-4b06b43c6fde" version="00.01.000">
+                <common:shortDescription xml:lang="en">EPD Data Format Extensions v1.2</common:shortDescription>
+                <common:shortDescription xml:lang="de">EPD-Datenformaterweiterungen v1.2</common:shortDescription>
+            </common:referenceToDataSetFormat>
+            <common:referenceToDataSetFormat type="source data set" refObjectId="a97a0155-0234-4b87-b4ce-a45da52f2a40" version="01.00.000" uri="http://lca.jrc.ec.europa.eu/lcainfohub/sample_data/ilcd/sources/ILCD_Format_a97a0155-0234-4b87-b4ce-a45da52f2a40_01.00.000.xml">
+                <common:shortDescription xml:lang="en">ILCD format</common:shortDescription>
+            </common:referenceToDataSetFormat>
+            <common:referenceToPersonOrEntityEnteringTheData type="contact data set" refObjectId="3ea4a87a-3f88-4633-b7e7-1bbdd272be43" version="00.00.002">
+                <common:shortDescription xml:lang="en">Kiwa GmbH (Berlin)</common:shortDescription>
+            </common:referenceToPersonOrEntityEnteringTheData>
+        </dataEntryBy>
+        <publicationAndOwnership>
+            <common:dataSetVersion>00.00.021</common:dataSetVersion>
+            <common:referenceToRegistrationAuthority type="contact data set" refObjectId="eb52a9a8-9d0f-40ce-a5c9-7b78f5615e5a" version="00.00.002">
+                <common:shortDescription xml:lang="en">Kiwa-Ecobility Experts, Kiwa GmbH (Berlin)</common:shortDescription>
+            </common:referenceToRegistrationAuthority>
+            <common:registrationNumber>EPD-Kiwa-EE-000419-EN</common:registrationNumber>
+            <common:referenceToOwnershipOfDataSet type="contact data set" refObjectId="1c53b4af-7830-4a38-9c53-c22d671f03fa" version="00.00.001">
+                <common:shortDescription xml:lang="en">Tongwei Co., Ltd.</common:shortDescription>
+            </common:referenceToOwnershipOfDataSet>
+            <common:copyright>true</common:copyright>
+            <common:licenseType>Free of charge for all users and uses</common:licenseType>
+            <common:accessRestrictions xml:lang="en">None.</common:accessRestrictions>
+            <common:other>
+                <epd2:referenceToPublisher type="contact data set" refObjectId="eb52a9a8-9d0f-40ce-a5c9-7b78f5615e5a" version="00.00.002">
+                    <common:shortDescription xml:lang="en">Kiwa-Ecobility Experts, Kiwa GmbH (Berlin)</common:shortDescription>
+                </epd2:referenceToPublisher>
+            </common:other>
+        </publicationAndOwnership>
+    </administrativeInformation>
+    <exchanges>
+        <exchange dataSetInternalID="1">
+            <referenceToFlowDataSet type="flow data set" refObjectId="c8a66f3f-b81b-4635-8635-31454bf56a44" version="00.00.003">
+                <common:shortDescription xml:lang="en">Tongwei TWMNF-66HD</common:shortDescription>
+            </referenceToFlowDataSet>
+            <meanAmount>1.0</meanAmount>
+            <resultingAmount>1.0</resultingAmount>
+        </exchange>
+        <exchange dataSetInternalID="2">
+            <referenceToFlowDataSet type="flow data set" refObjectId="a2b32f97-3fc7-4af2-b209-525bc6426f33" version="30.00.000">
+                <common:shortDescription xml:lang="en">Components for re-use (CRU)</common:shortDescription>
+                <common:shortDescription xml:lang="de">Komponenten für die Wiederverwendung (CRU)</common:shortDescription>
+                <common:shortDescription xml:lang="es">Componentes para su reutilización (CRU)</common:shortDescription>
+            </referenceToFlowDataSet>
+            <functionType>General reminder flow</functionType>
+            <exchangeDirection>Output</exchangeDirection>
+            <meanAmount>0.0</meanAmount>
+            <common:other>
+                <epd:amount epd:module="A1" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="A2" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="A3" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="A4" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="A5" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="B2" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="C1" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="C2" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="C3" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="C4" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="D" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:referenceToUnitGroupDataSet type="unit group data set" refObjectId="ad38d542-3fe9-439d-9b95-2f5f7752acaf" uri="../unitgroups/ad38d542-3fe9-439d-9b95-2f5f7752acaf">
+                    <common:shortDescription>kg</common:shortDescription>
+                </epd:referenceToUnitGroupDataSet>
+            </common:other>
+        </exchange>
+        <exchange dataSetInternalID="3">
+            <referenceToFlowDataSet type="flow data set" refObjectId="4da0c987-2b76-40d6-9e9e-82a017aaaf29" version="30.00.000">
+                <common:shortDescription xml:lang="en">Exported electrical energy (EEE)</common:shortDescription>
+                <common:shortDescription xml:lang="de">Exportierte elektrische Energie (EEE)</common:shortDescription>
+                <common:shortDescription xml:lang="es">Energía exportada electrica (EEE)</common:shortDescription>
+            </referenceToFlowDataSet>
+            <functionType>General reminder flow</functionType>
+            <exchangeDirection>Output</exchangeDirection>
+            <meanAmount>0.0</meanAmount>
+            <common:other>
+                <epd:amount epd:module="A1" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="A2" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="A3" epd:scenario="Standard scenario">-0.0225</epd:amount>
+                <epd:amount epd:module="A4" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="A5" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="B2" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="C1" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="C2" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="C3" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="C4" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="D" epd:scenario="Standard scenario">-7.22</epd:amount>
+                <epd:referenceToUnitGroupDataSet type="unit group data set" refObjectId="93a60a57-a3c8-11da-a746-0800200c9a66" uri="../unitgroups/93a60a57-a3c8-11da-a746-0800200c9a66">
+                    <common:shortDescription>MJ</common:shortDescription>
+                </epd:referenceToUnitGroupDataSet>
+            </common:other>
+        </exchange>
+        <exchange dataSetInternalID="4">
+            <referenceToFlowDataSet type="flow data set" refObjectId="98daf38a-7a79-46d3-9a37-2b7bd0955810" version="30.00.000">
+                <common:shortDescription xml:lang="en">Exported thermal energy (EET)</common:shortDescription>
+                <common:shortDescription xml:lang="de">Exportierte thermische Energie (EET)</common:shortDescription>
+                <common:shortDescription xml:lang="es">Energía exportada termal (EET)</common:shortDescription>
+            </referenceToFlowDataSet>
+            <functionType>General reminder flow</functionType>
+            <exchangeDirection>Output</exchangeDirection>
+            <meanAmount>0.0</meanAmount>
+            <common:other>
+                <epd:amount epd:module="A1" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="A2" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="A3" epd:scenario="Standard scenario">-0.0388</epd:amount>
+                <epd:amount epd:module="A4" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="A5" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="B2" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="C1" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="C2" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="C3" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="C4" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="D" epd:scenario="Standard scenario">-12.4</epd:amount>
+                <epd:referenceToUnitGroupDataSet type="unit group data set" refObjectId="93a60a57-a3c8-11da-a746-0800200c9a66" uri="../unitgroups/93a60a57-a3c8-11da-a746-0800200c9a66">
+                    <common:shortDescription>MJ</common:shortDescription>
+                </epd:referenceToUnitGroupDataSet>
+            </common:other>
+        </exchange>
+        <exchange dataSetInternalID="5">
+            <referenceToFlowDataSet type="flow data set" refObjectId="430f9e0f-59b2-46a0-8e0d-55e0e84948fc" version="30.00.000">
+                <common:shortDescription xml:lang="en">Hazardous waste disposed (HWD)</common:shortDescription>
+                <common:shortDescription xml:lang="de">Gefährlicher Abfall zur Deponie (HWD)</common:shortDescription>
+                <common:shortDescription xml:lang="es">Residuos peligrosos eliminados (HWD)</common:shortDescription>
+            </referenceToFlowDataSet>
+            <functionType>General reminder flow</functionType>
+            <exchangeDirection>Output</exchangeDirection>
+            <meanAmount>0.0</meanAmount>
+            <common:other>
+                <epd:amount epd:module="A1" epd:scenario="Standard scenario">0.0414</epd:amount>
+                <epd:amount epd:module="A2" epd:scenario="Standard scenario">1.16E-5</epd:amount>
+                <epd:amount epd:module="A3" epd:scenario="Standard scenario">2.25E-4</epd:amount>
+                <epd:amount epd:module="A4" epd:scenario="Standard scenario">1.52E-4</epd:amount>
+                <epd:amount epd:module="A5" epd:scenario="Standard scenario">3.22E-5</epd:amount>
+                <epd:amount epd:module="B2" epd:scenario="Standard scenario">4.2E-6</epd:amount>
+                <epd:amount epd:module="C1" epd:scenario="Standard scenario">3.16E-5</epd:amount>
+                <epd:amount epd:module="C2" epd:scenario="Standard scenario">4.07E-6</epd:amount>
+                <epd:amount epd:module="C3" epd:scenario="Standard scenario">0.00613</epd:amount>
+                <epd:amount epd:module="C4" epd:scenario="Standard scenario">3.57E-7</epd:amount>
+                <epd:amount epd:module="D" epd:scenario="Standard scenario">0.00744</epd:amount>
+                <epd:referenceToUnitGroupDataSet type="unit group data set" refObjectId="ad38d542-3fe9-439d-9b95-2f5f7752acaf" uri="../unitgroups/ad38d542-3fe9-439d-9b95-2f5f7752acaf">
+                    <common:shortDescription>kg</common:shortDescription>
+                </epd:referenceToUnitGroupDataSet>
+            </common:other>
+        </exchange>
+        <exchange dataSetInternalID="6">
+            <referenceToFlowDataSet type="flow data set" refObjectId="59a9181c-3aaf-46ee-8b13-2b3723b6e447" version="30.00.000">
+                <common:shortDescription xml:lang="en">Materials for energy recovery (MER)</common:shortDescription>
+                <common:shortDescription xml:lang="de">Stoffe für die Energierückgewinnung (MER)</common:shortDescription>
+                <common:shortDescription xml:lang="es">Materiales para valorización energética (recuperación de energía) (MER)</common:shortDescription>
+            </referenceToFlowDataSet>
+            <functionType>General reminder flow</functionType>
+            <exchangeDirection>Output</exchangeDirection>
+            <meanAmount>0.0</meanAmount>
+            <common:other>
+                <epd:amount epd:module="A1" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="A2" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="A3" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="A4" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="A5" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="B2" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="C1" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="C2" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="C3" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="C4" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="D" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:referenceToUnitGroupDataSet type="unit group data set" refObjectId="ad38d542-3fe9-439d-9b95-2f5f7752acaf" uri="../unitgroups/ad38d542-3fe9-439d-9b95-2f5f7752acaf">
+                    <common:shortDescription>kg</common:shortDescription>
+                </epd:referenceToUnitGroupDataSet>
+            </common:other>
+        </exchange>
+        <exchange dataSetInternalID="7">
+            <referenceToFlowDataSet type="flow data set" refObjectId="d7fe48a5-4103-49c8-9aae-b0b5dfdbd6ae" version="30.00.000">
+                <common:shortDescription xml:lang="en">Materials for recycling (MFR)</common:shortDescription>
+                <common:shortDescription xml:lang="de">Stoffe zum Recycling (MFR)</common:shortDescription>
+                <common:shortDescription xml:lang="es">Materiales para el reciclaje (MFR)</common:shortDescription>
+            </referenceToFlowDataSet>
+            <functionType>General reminder flow</functionType>
+            <exchangeDirection>Output</exchangeDirection>
+            <meanAmount>0.0</meanAmount>
+            <common:other>
+                <epd:amount epd:module="A1" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="A2" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="A3" epd:scenario="Standard scenario">4.67E-4</epd:amount>
+                <epd:amount epd:module="A4" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="A5" epd:scenario="Standard scenario">0.108</epd:amount>
+                <epd:amount epd:module="B2" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="C1" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="C2" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="C3" epd:scenario="Standard scenario">1.02</epd:amount>
+                <epd:amount epd:module="C4" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="D" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:referenceToUnitGroupDataSet type="unit group data set" refObjectId="ad38d542-3fe9-439d-9b95-2f5f7752acaf" uri="../unitgroups/ad38d542-3fe9-439d-9b95-2f5f7752acaf">
+                    <common:shortDescription>kg</common:shortDescription>
+                </epd:referenceToUnitGroupDataSet>
+            </common:other>
+        </exchange>
+        <exchange dataSetInternalID="8">
+            <referenceToFlowDataSet type="flow data set" refObjectId="3cf952c8-f3a4-461d-8c96-96456ca62246" version="30.00.000">
+                <common:shortDescription xml:lang="en">Use of net fresh water (FW)</common:shortDescription>
+                <common:shortDescription xml:lang="de">Einsatz von Süßwasserressourcen (FW)</common:shortDescription>
+                <common:shortDescription xml:lang="es">Uso neto de recursos de agua dulce (FW)</common:shortDescription>
+            </referenceToFlowDataSet>
+            <functionType>General reminder flow</functionType>
+            <exchangeDirection>Input</exchangeDirection>
+            <meanAmount>0.0</meanAmount>
+            <common:other>
+                <epd:amount epd:module="A1" epd:scenario="Standard scenario">2.52</epd:amount>
+                <epd:amount epd:module="A2" epd:scenario="Standard scenario">5.56E-4</epd:amount>
+                <epd:amount epd:module="A3" epd:scenario="Standard scenario">0.0227</epd:amount>
+                <epd:amount epd:module="A4" epd:scenario="Standard scenario">0.00679</epd:amount>
+                <epd:amount epd:module="A5" epd:scenario="Standard scenario">8.11E-4</epd:amount>
+                <epd:amount epd:module="B2" epd:scenario="Standard scenario">0.0276</epd:amount>
+                <epd:amount epd:module="C1" epd:scenario="Standard scenario">5.88E-4</epd:amount>
+                <epd:amount epd:module="C2" epd:scenario="Standard scenario">1.96E-4</epd:amount>
+                <epd:amount epd:module="C3" epd:scenario="Standard scenario">0.00389</epd:amount>
+                <epd:amount epd:module="C4" epd:scenario="Standard scenario">3.21E-4</epd:amount>
+                <epd:amount epd:module="D" epd:scenario="Standard scenario">-0.15</epd:amount>
+                <epd:referenceToUnitGroupDataSet type="unit group data set" refObjectId="cd950537-0a98-4044-9ba7-9f9a68d0a504" uri="../unitgroups/cd950537-0a98-4044-9ba7-9f9a68d0a504">
+                    <common:shortDescription>m3</common:shortDescription>
+                </epd:referenceToUnitGroupDataSet>
+            </common:other>
+        </exchange>
+        <exchange dataSetInternalID="9">
+            <referenceToFlowDataSet type="flow data set" refObjectId="b29ef66b-e286-4afa-949f-62f1a7b4d7fa" version="30.00.000">
+                <common:shortDescription xml:lang="en">Non hazardous waste dispose (NHWD)</common:shortDescription>
+                <common:shortDescription xml:lang="de">Entsorgter nicht gefährlicher Abfall (NHWD)</common:shortDescription>
+                <common:shortDescription xml:lang="es">Residuos no peligrosos eliminados (NHWD)</common:shortDescription>
+            </referenceToFlowDataSet>
+            <functionType>General reminder flow</functionType>
+            <exchangeDirection>Output</exchangeDirection>
+            <meanAmount>0.0</meanAmount>
+            <common:other>
+                <epd:amount epd:module="A1" epd:scenario="Standard scenario">10.9</epd:amount>
+                <epd:amount epd:module="A2" epd:scenario="Standard scenario">0.29</epd:amount>
+                <epd:amount epd:module="A3" epd:scenario="Standard scenario">0.172</epd:amount>
+                <epd:amount epd:module="A4" epd:scenario="Standard scenario">2.3</epd:amount>
+                <epd:amount epd:module="A5" epd:scenario="Standard scenario">0.0631</epd:amount>
+                <epd:amount epd:module="B2" epd:scenario="Standard scenario">0.0467</epd:amount>
+                <epd:amount epd:module="C1" epd:scenario="Standard scenario">0.0131</epd:amount>
+                <epd:amount epd:module="C2" epd:scenario="Standard scenario">0.102</epd:amount>
+                <epd:amount epd:module="C3" epd:scenario="Standard scenario">0.534</epd:amount>
+                <epd:amount epd:module="C4" epd:scenario="Standard scenario">1.63</epd:amount>
+                <epd:amount epd:module="D" epd:scenario="Standard scenario">-3.67</epd:amount>
+                <epd:referenceToUnitGroupDataSet type="unit group data set" refObjectId="ad38d542-3fe9-439d-9b95-2f5f7752acaf" uri="../unitgroups/ad38d542-3fe9-439d-9b95-2f5f7752acaf">
+                    <common:shortDescription>kg</common:shortDescription>
+                </epd:referenceToUnitGroupDataSet>
+            </common:other>
+        </exchange>
+        <exchange dataSetInternalID="10">
+            <referenceToFlowDataSet type="flow data set" refObjectId="ac857178-2b45-46ec-892a-a9a4332f0372" version="30.00.000">
+                <common:shortDescription xml:lang="en">Use of non renewable primary energy (PENRE)</common:shortDescription>
+                <common:shortDescription xml:lang="de">Nicht-erneuerbare Primärenergie als Energieträger (PENRE)</common:shortDescription>
+                <common:shortDescription xml:lang="es">Uso de energía primaria no renovable, excluyendo los recursos de energía primaria no renovable utilizada como materia prima (PENRE)</common:shortDescription>
+            </referenceToFlowDataSet>
+            <functionType>General reminder flow</functionType>
+            <exchangeDirection>Input</exchangeDirection>
+            <meanAmount>0.0</meanAmount>
+            <common:other>
+                <epd:amount epd:module="A1" epd:scenario="Standard scenario">1250.0</epd:amount>
+                <epd:amount epd:module="A2" epd:scenario="Standard scenario">4.85</epd:amount>
+                <epd:amount epd:module="A3" epd:scenario="Standard scenario">16.7</epd:amount>
+                <epd:amount epd:module="A4" epd:scenario="Standard scenario">82.0</epd:amount>
+                <epd:amount epd:module="A5" epd:scenario="Standard scenario">12.0</epd:amount>
+                <epd:amount epd:module="B2" epd:scenario="Standard scenario">2.37</epd:amount>
+                <epd:amount epd:module="C1" epd:scenario="Standard scenario">11.7</epd:amount>
+                <epd:amount epd:module="C2" epd:scenario="Standard scenario">1.7</epd:amount>
+                <epd:amount epd:module="C3" epd:scenario="Standard scenario">6.06</epd:amount>
+                <epd:amount epd:module="C4" epd:scenario="Standard scenario">0.352</epd:amount>
+                <epd:amount epd:module="D" epd:scenario="Standard scenario">-241.0</epd:amount>
+                <epd:referenceToUnitGroupDataSet type="unit group data set" refObjectId="93a60a57-a3c8-11da-a746-0800200c9a66" uri="../unitgroups/93a60a57-a3c8-11da-a746-0800200c9a66">
+                    <common:shortDescription>MJ</common:shortDescription>
+                </epd:referenceToUnitGroupDataSet>
+            </common:other>
+        </exchange>
+        <exchange dataSetInternalID="11">
+            <referenceToFlowDataSet type="flow data set" refObjectId="1421caa0-679d-4bf4-b282-0eb850ccae27" version="30.00.000">
+                <common:shortDescription xml:lang="en">Use of non renewable primary energy resources used as raw materials (PENRM)</common:shortDescription>
+                <common:shortDescription xml:lang="de">Nicht-erneuerbare Primärenergie zur stofflichen Nutzung (PENRM)</common:shortDescription>
+                <common:shortDescription xml:lang="es">Uso de la energía primaria no renovable utilizada como materia prima (PENRM)</common:shortDescription>
+            </referenceToFlowDataSet>
+            <functionType>General reminder flow</functionType>
+            <exchangeDirection>Input</exchangeDirection>
+            <meanAmount>0.0</meanAmount>
+            <common:other>
+                <epd:amount epd:module="A1" epd:scenario="Standard scenario">36.4</epd:amount>
+                <epd:amount epd:module="A2" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="A3" epd:scenario="Standard scenario">0.128</epd:amount>
+                <epd:amount epd:module="A4" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="A5" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="B2" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="C1" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="C2" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="C3" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="C4" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="D" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:referenceToUnitGroupDataSet type="unit group data set" refObjectId="93a60a57-a3c8-11da-a746-0800200c9a66" uri="../unitgroups/93a60a57-a3c8-11da-a746-0800200c9a66">
+                    <common:shortDescription>MJ</common:shortDescription>
+                </epd:referenceToUnitGroupDataSet>
+            </common:other>
+        </exchange>
+        <exchange dataSetInternalID="12">
+            <referenceToFlowDataSet type="flow data set" refObjectId="89def144-d39a-4287-b86f-efde453ddcb2" version="30.00.000">
+                <common:shortDescription xml:lang="en">Use of non renewable secondary fuels (NRSF)</common:shortDescription>
+                <common:shortDescription xml:lang="de">Nicht erneuerbare Sekundärbrennstoffe (NRSF)</common:shortDescription>
+                <common:shortDescription xml:lang="es">Uso de combustibles secundarios no renovables (NRSF)</common:shortDescription>
+            </referenceToFlowDataSet>
+            <functionType>General reminder flow</functionType>
+            <exchangeDirection>Input</exchangeDirection>
+            <meanAmount>0.0</meanAmount>
+            <common:other>
+                <epd:amount epd:module="A1" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="A2" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="A3" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="A4" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="A5" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="B2" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="C1" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="C2" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="C3" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="C4" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="D" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:referenceToUnitGroupDataSet type="unit group data set" refObjectId="93a60a57-a3c8-11da-a746-0800200c9a66" uri="../unitgroups/93a60a57-a3c8-11da-a746-0800200c9a66">
+                    <common:shortDescription>MJ</common:shortDescription>
+                </epd:referenceToUnitGroupDataSet>
+            </common:other>
+        </exchange>
+        <exchange dataSetInternalID="13">
+            <referenceToFlowDataSet type="flow data set" refObjectId="3449546e-52ad-4b39-b809-9fb77cea8ff6" version="30.00.000">
+                <common:shortDescription xml:lang="en">Radioactive waste disposed (RWD)</common:shortDescription>
+                <common:shortDescription xml:lang="de">Entsorgter radioaktiver Abfall (RWD)</common:shortDescription>
+                <common:shortDescription xml:lang="es">Residuos radiactivos eliminados (RWD)</common:shortDescription>
+            </referenceToFlowDataSet>
+            <functionType>General reminder flow</functionType>
+            <exchangeDirection>Output</exchangeDirection>
+            <meanAmount>0.0</meanAmount>
+            <common:other>
+                <epd:amount epd:module="A1" epd:scenario="Standard scenario">0.0031</epd:amount>
+                <epd:amount epd:module="A2" epd:scenario="Standard scenario">3.0E-5</epd:amount>
+                <epd:amount epd:module="A3" epd:scenario="Standard scenario">2.85E-5</epd:amount>
+                <epd:amount epd:module="A4" epd:scenario="Standard scenario">5.19E-4</epd:amount>
+                <epd:amount epd:module="A5" epd:scenario="Standard scenario">7.92E-5</epd:amount>
+                <epd:amount epd:module="B2" epd:scenario="Standard scenario">5.74E-6</epd:amount>
+                <epd:amount epd:module="C1" epd:scenario="Standard scenario">7.78E-5</epd:amount>
+                <epd:amount epd:module="C2" epd:scenario="Standard scenario">1.05E-5</epd:amount>
+                <epd:amount epd:module="C3" epd:scenario="Standard scenario">2.67E-5</epd:amount>
+                <epd:amount epd:module="C4" epd:scenario="Standard scenario">1.98E-6</epd:amount>
+                <epd:amount epd:module="D" epd:scenario="Standard scenario">-4.04E-4</epd:amount>
+                <epd:referenceToUnitGroupDataSet type="unit group data set" refObjectId="ad38d542-3fe9-439d-9b95-2f5f7752acaf" uri="../unitgroups/ad38d542-3fe9-439d-9b95-2f5f7752acaf">
+                    <common:shortDescription>kg</common:shortDescription>
+                </epd:referenceToUnitGroupDataSet>
+            </common:other>
+        </exchange>
+        <exchange dataSetInternalID="14">
+            <referenceToFlowDataSet type="flow data set" refObjectId="20f32be5-0398-4288-9b6d-accddd195317" version="30.00.000">
+                <common:shortDescription xml:lang="en">Use of renewable primary energy (PERE)</common:shortDescription>
+                <common:shortDescription xml:lang="de">Erneuerbare Primärenergie als Energieträger (PERE)</common:shortDescription>
+                <common:shortDescription xml:lang="es">Uso de energía primaria renovable excluyendo los recursos de energía primaria renovable utilizada como materia prima (PERE)</common:shortDescription>
+            </referenceToFlowDataSet>
+            <functionType>General reminder flow</functionType>
+            <exchangeDirection>Input</exchangeDirection>
+            <meanAmount>0.0</meanAmount>
+            <common:other>
+                <epd:amount epd:module="A1" epd:scenario="Standard scenario">188.0</epd:amount>
+                <epd:amount epd:module="A2" epd:scenario="Standard scenario">0.0572</epd:amount>
+                <epd:amount epd:module="A3" epd:scenario="Standard scenario">9.53</epd:amount>
+                <epd:amount epd:module="A4" epd:scenario="Standard scenario">0.73</epd:amount>
+                <epd:amount epd:module="A5" epd:scenario="Standard scenario">0.0939</epd:amount>
+                <epd:amount epd:module="B2" epd:scenario="Standard scenario">3.63</epd:amount>
+                <epd:amount epd:module="C1" epd:scenario="Standard scenario">0.0875</epd:amount>
+                <epd:amount epd:module="C2" epd:scenario="Standard scenario">0.0201</epd:amount>
+                <epd:amount epd:module="C3" epd:scenario="Standard scenario">0.592</epd:amount>
+                <epd:amount epd:module="C4" epd:scenario="Standard scenario">0.00885</epd:amount>
+                <epd:amount epd:module="D" epd:scenario="Standard scenario">-38.1</epd:amount>
+                <epd:referenceToUnitGroupDataSet type="unit group data set" refObjectId="93a60a57-a3c8-11da-a746-0800200c9a66" uri="../unitgroups/93a60a57-a3c8-11da-a746-0800200c9a66">
+                    <common:shortDescription>MJ</common:shortDescription>
+                </epd:referenceToUnitGroupDataSet>
+            </common:other>
+        </exchange>
+        <exchange dataSetInternalID="15">
+            <referenceToFlowDataSet type="flow data set" refObjectId="fb3ec0de-548d-4508-aea5-00b73bf6f702" version="30.00.000">
+                <common:shortDescription xml:lang="en">Use of renewable primary energy resources used as raw materials (PERM)</common:shortDescription>
+                <common:shortDescription xml:lang="de">Erneuerbare Primärenergie zur stofflichen Nutzung (PERM)</common:shortDescription>
+                <common:shortDescription xml:lang="es">Uso de energía primaria renovable utilizada como materia prima (PERM)</common:shortDescription>
+            </referenceToFlowDataSet>
+            <functionType>General reminder flow</functionType>
+            <exchangeDirection>Input</exchangeDirection>
+            <meanAmount>0.0</meanAmount>
+            <common:other>
+                <epd:amount epd:module="A1" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="A2" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="A3" epd:scenario="Standard scenario">6.98</epd:amount>
+                <epd:amount epd:module="A4" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="A5" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="B2" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="C1" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="C2" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="C3" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="C4" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="D" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:referenceToUnitGroupDataSet type="unit group data set" refObjectId="93a60a57-a3c8-11da-a746-0800200c9a66" uri="../unitgroups/93a60a57-a3c8-11da-a746-0800200c9a66">
+                    <common:shortDescription>MJ</common:shortDescription>
+                </epd:referenceToUnitGroupDataSet>
+            </common:other>
+        </exchange>
+        <exchange dataSetInternalID="16">
+            <referenceToFlowDataSet type="flow data set" refObjectId="64333088-a55f-4aa2-9a31-c10b07816787" version="30.00.000">
+                <common:shortDescription xml:lang="en">Use of renewable secondary fuels (RSF)</common:shortDescription>
+                <common:shortDescription xml:lang="de">Erneuerbare Sekundärbrennstoffe (RSF)</common:shortDescription>
+                <common:shortDescription xml:lang="es">Uso de combustibles secundarios renovables (RSF)</common:shortDescription>
+            </referenceToFlowDataSet>
+            <functionType>General reminder flow</functionType>
+            <exchangeDirection>Input</exchangeDirection>
+            <meanAmount>0.0</meanAmount>
+            <common:other>
+                <epd:amount epd:module="A1" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="A2" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="A3" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="A4" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="A5" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="B2" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="C1" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="C2" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="C3" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="C4" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="D" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:referenceToUnitGroupDataSet type="unit group data set" refObjectId="93a60a57-a3c8-11da-a746-0800200c9a66" uri="../unitgroups/93a60a57-a3c8-11da-a746-0800200c9a66">
+                    <common:shortDescription>MJ</common:shortDescription>
+                </epd:referenceToUnitGroupDataSet>
+            </common:other>
+        </exchange>
+        <exchange dataSetInternalID="17">
+            <referenceToFlowDataSet type="flow data set" refObjectId="c6a1f35f-2d09-4f54-8dfb-97e502e1ce92" version="30.00.000">
+                <common:shortDescription xml:lang="en">Use of secondary material (SM)</common:shortDescription>
+                <common:shortDescription xml:lang="de">Einsatz von Sekundärstoffen (SM)</common:shortDescription>
+                <common:shortDescription xml:lang="es">Uso de materiales secundarios (SM)</common:shortDescription>
+            </referenceToFlowDataSet>
+            <functionType>General reminder flow</functionType>
+            <exchangeDirection>Input</exchangeDirection>
+            <meanAmount>0.0</meanAmount>
+            <common:other>
+                <epd:amount epd:module="A1" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="A2" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="A3" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="A4" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="A5" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="B2" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="C1" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="C2" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="C3" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="C4" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:amount epd:module="D" epd:scenario="Standard scenario">0.0</epd:amount>
+                <epd:referenceToUnitGroupDataSet type="unit group data set" refObjectId="ad38d542-3fe9-439d-9b95-2f5f7752acaf" uri="../unitgroups/ad38d542-3fe9-439d-9b95-2f5f7752acaf">
+                    <common:shortDescription>kg</common:shortDescription>
+                </epd:referenceToUnitGroupDataSet>
+            </common:other>
+        </exchange>
+        <exchange dataSetInternalID="18">
+            <referenceToFlowDataSet type="flow data set" refObjectId="06159210-646b-4c8d-8583-da9b3b95a6c1" version="30.00.000">
+                <common:shortDescription xml:lang="en">Total use of non renewable primary energy resource (PENRT)</common:shortDescription>
+                <common:shortDescription xml:lang="de">Total nicht erneuerbare Primärenergie (PENRT)</common:shortDescription>
+                <common:shortDescription xml:lang="es">Uso total de la energía primaria no renovable (energía primaria y recursos de energía primaria renovable utilizada como materia prima) (PENRT)</common:shortDescription>
+            </referenceToFlowDataSet>
+            <functionType>General reminder flow</functionType>
+            <exchangeDirection>Input</exchangeDirection>
+            <meanAmount>0.0</meanAmount>
+            <common:other>
+                <epd:amount epd:module="A1" epd:scenario="Standard scenario">1280.0</epd:amount>
+                <epd:amount epd:module="A2" epd:scenario="Standard scenario">4.85</epd:amount>
+                <epd:amount epd:module="A3" epd:scenario="Standard scenario">16.9</epd:amount>
+                <epd:amount epd:module="A4" epd:scenario="Standard scenario">82.0</epd:amount>
+                <epd:amount epd:module="A5" epd:scenario="Standard scenario">12.0</epd:amount>
+                <epd:amount epd:module="B2" epd:scenario="Standard scenario">2.37</epd:amount>
+                <epd:amount epd:module="C1" epd:scenario="Standard scenario">11.7</epd:amount>
+                <epd:amount epd:module="C2" epd:scenario="Standard scenario">1.7</epd:amount>
+                <epd:amount epd:module="C3" epd:scenario="Standard scenario">6.07</epd:amount>
+                <epd:amount epd:module="C4" epd:scenario="Standard scenario">0.352</epd:amount>
+                <epd:amount epd:module="D" epd:scenario="Standard scenario">-241.0</epd:amount>
+                <epd:referenceToUnitGroupDataSet type="unit group data set" refObjectId="93a60a57-a3c8-11da-a746-0800200c9a66" uri="../unitgroups/93a60a57-a3c8-11da-a746-0800200c9a66">
+                    <common:shortDescription>MJ</common:shortDescription>
+                </epd:referenceToUnitGroupDataSet>
+            </common:other>
+        </exchange>
+        <exchange dataSetInternalID="19">
+            <referenceToFlowDataSet type="flow data set" refObjectId="53f97275-fa8a-4cdd-9024-65936002acd0" version="30.00.000">
+                <common:shortDescription xml:lang="en">Total use of renewable primary energy resources (PERT)</common:shortDescription>
+                <common:shortDescription xml:lang="de">Total erneuerbare Primärenergie (PERT)</common:shortDescription>
+                <common:shortDescription xml:lang="es">Uso total de la energía primaria renovable (energía primaria y recursos de energía primaria renovable utilizada como materia prima) (PERT)</common:shortDescription>
+            </referenceToFlowDataSet>
+            <functionType>General reminder flow</functionType>
+            <exchangeDirection>Input</exchangeDirection>
+            <meanAmount>0.0</meanAmount>
+            <common:other>
+                <epd:amount epd:module="A1" epd:scenario="Standard scenario">188.0</epd:amount>
+                <epd:amount epd:module="A2" epd:scenario="Standard scenario">0.0572</epd:amount>
+                <epd:amount epd:module="A3" epd:scenario="Standard scenario">16.5</epd:amount>
+                <epd:amount epd:module="A4" epd:scenario="Standard scenario">0.73</epd:amount>
+                <epd:amount epd:module="A5" epd:scenario="Standard scenario">0.0939</epd:amount>
+                <epd:amount epd:module="B2" epd:scenario="Standard scenario">3.63</epd:amount>
+                <epd:amount epd:module="C1" epd:scenario="Standard scenario">0.0875</epd:amount>
+                <epd:amount epd:module="C2" epd:scenario="Standard scenario">0.0201</epd:amount>
+                <epd:amount epd:module="C3" epd:scenario="Standard scenario">0.592</epd:amount>
+                <epd:amount epd:module="C4" epd:scenario="Standard scenario">0.00886</epd:amount>
+                <epd:amount epd:module="D" epd:scenario="Standard scenario">-38.1</epd:amount>
+                <epd:referenceToUnitGroupDataSet type="unit group data set" refObjectId="93a60a57-a3c8-11da-a746-0800200c9a66" uri="../unitgroups/93a60a57-a3c8-11da-a746-0800200c9a66">
+                    <common:shortDescription>MJ</common:shortDescription>
+                </epd:referenceToUnitGroupDataSet>
+            </common:other>
+        </exchange>
+    </exchanges>
+    <LCIAResults>
+        <LCIAResult>
+            <referenceToLCIAMethodDataSet type="LCIA method data set" refObjectId="b2ad6494-c78d-11e6-9d9d-cec0c932ce01" version="01.00.011" uri="">
+                <common:shortDescription xml:lang="en">Abiotic depletion potential - non-fossil resources (ADPE)</common:shortDescription>
+                <common:shortDescription xml:lang="de">Potenzial für die Verknappung abiotischer Ressourcen – nicht fossile Ressourcen (ADPE)</common:shortDescription>
+            </referenceToLCIAMethodDataSet>
+            <meanAmount>0.0</meanAmount>
+            <common:other>
+                <epd:amount epd:module="A1" epd:scenario="Standard scenario">0.0105</epd:amount>
+                <epd:amount epd:module="A2" epd:scenario="Standard scenario">7.67E-6</epd:amount>
+                <epd:amount epd:module="A3" epd:scenario="Standard scenario">2.27E-4</epd:amount>
+                <epd:amount epd:module="A4" epd:scenario="Standard scenario">1.02E-4</epd:amount>
+                <epd:amount epd:module="A5" epd:scenario="Standard scenario">4.84E-6</epd:amount>
+                <epd:amount epd:module="B2" epd:scenario="Standard scenario">1.22E-5</epd:amount>
+                <epd:amount epd:module="C1" epd:scenario="Standard scenario">4.44E-6</epd:amount>
+                <epd:amount epd:module="C2" epd:scenario="Standard scenario">2.7E-6</epd:amount>
+                <epd:amount epd:module="C3" epd:scenario="Standard scenario">1.15E-5</epd:amount>
+                <epd:amount epd:module="C4" epd:scenario="Standard scenario">1.23E-6</epd:amount>
+                <epd:amount epd:module="D" epd:scenario="Standard scenario">0.00328</epd:amount>
+                <epd:referenceToUnitGroupDataSet type="unit group data set" refObjectId="54ccd2d9-a32a-4fc2-923d-f2c8c93e89d4" uri="../unitgroups/54ccd2d9-a32a-4fc2-923d-f2c8c93e89d4">
+                    <common:shortDescription>kg Sb-Äqv.</common:shortDescription>
+                </epd:referenceToUnitGroupDataSet>
+            </common:other>
+        </LCIAResult>
+        <LCIAResult>
+            <referenceToLCIAMethodDataSet type="LCIA method data set" refObjectId="b2ad6110-c78d-11e6-9d9d-cec0c932ce01" version="01.00.011" uri="">
+                <common:shortDescription xml:lang="en">Abiotic depletion potential - fossil resources (ADPF)</common:shortDescription>
+                <common:shortDescription xml:lang="de">Potenzial für die Verknappung abiotischer Ressourcen – fossile Brennstoffe (ADPF)</common:shortDescription>
+            </referenceToLCIAMethodDataSet>
+            <meanAmount>0.0</meanAmount>
+            <common:other>
+                <epd:amount epd:module="A1" epd:scenario="Standard scenario">1200.0</epd:amount>
+                <epd:amount epd:module="A2" epd:scenario="Standard scenario">4.57</epd:amount>
+                <epd:amount epd:module="A3" epd:scenario="Standard scenario">15.9</epd:amount>
+                <epd:amount epd:module="A4" epd:scenario="Standard scenario">77.3</epd:amount>
+                <epd:amount epd:module="A5" epd:scenario="Standard scenario">11.3</epd:amount>
+                <epd:amount epd:module="B2" epd:scenario="Standard scenario">1.88</epd:amount>
+                <epd:amount epd:module="C1" epd:scenario="Standard scenario">11.1</epd:amount>
+                <epd:amount epd:module="C2" epd:scenario="Standard scenario">1.61</epd:amount>
+                <epd:amount epd:module="C3" epd:scenario="Standard scenario">5.71</epd:amount>
+                <epd:amount epd:module="C4" epd:scenario="Standard scenario">0.332</epd:amount>
+                <epd:amount epd:module="D" epd:scenario="Standard scenario">-226.0</epd:amount>
+                <epd:referenceToUnitGroupDataSet type="unit group data set" refObjectId="93a60a57-a3c8-11da-a746-0800200c9a66" uri="../unitgroups/93a60a57-a3c8-11da-a746-0800200c9a66">
+                    <common:shortDescription>MJ</common:shortDescription>
+                </epd:referenceToUnitGroupDataSet>
+            </common:other>
+        </LCIAResult>
+        <LCIAResult>
+            <referenceToLCIAMethodDataSet type="LCIA method data set" refObjectId="b5c611c6-def3-11e6-bf01-fe55135034f3" version="01.03.010" uri="http://lca.jrc.ec.europa.eu/lcainfohub/datasets/elcd/lciamethods/f6cbd466-253f-4145-a4bb-8dae7d266e89.xml">
+                <common:shortDescription xml:lang="en">Acidification potential, Accumulated Exceedance (AP)</common:shortDescription>
+                <common:shortDescription xml:lang="de">Versauerungspotenzial, kumulierte Überschreitung (AP)</common:shortDescription>
+            </referenceToLCIAMethodDataSet>
+            <meanAmount>0.0</meanAmount>
+            <common:other>
+                <epd:amount epd:module="A1" epd:scenario="Standard scenario">0.607</epd:amount>
+                <epd:amount epd:module="A2" epd:scenario="Standard scenario">0.00176</epd:amount>
+                <epd:amount epd:module="A3" epd:scenario="Standard scenario">0.00959</epd:amount>
+                <epd:amount epd:module="A4" epd:scenario="Standard scenario">0.0896</epd:amount>
+                <epd:amount epd:module="A5" epd:scenario="Standard scenario">0.0116</epd:amount>
+                <epd:amount epd:module="B2" epd:scenario="Standard scenario">0.00241</epd:amount>
+                <epd:amount epd:module="C1" epd:scenario="Standard scenario">0.0114</epd:amount>
+                <epd:amount epd:module="C2" epd:scenario="Standard scenario">6.17E-4</epd:amount>
+                <epd:amount epd:module="C3" epd:scenario="Standard scenario">0.00284</epd:amount>
+                <epd:amount epd:module="C4" epd:scenario="Standard scenario">1.28E-4</epd:amount>
+                <epd:amount epd:module="D" epd:scenario="Standard scenario">-0.14</epd:amount>
+                <epd:referenceToUnitGroupDataSet type="unit group data set" refObjectId="42e089ac-92bf-4bf2-8ca1-5fc40d18f2ed" uri="../unitgroups/42e089ac-92bf-4bf2-8ca1-5fc40d18f2ed">
+                    <common:shortDescription>mol H+ eqv.</common:shortDescription>
+                </epd:referenceToUnitGroupDataSet>
+            </common:other>
+        </LCIAResult>
+        <LCIAResult>
+            <referenceToLCIAMethodDataSet type="LCIA method data set" refObjectId="b53ec18f-7377-4ad3-86eb-cc3f4f276b2b" version="01.00.011" uri="http://lca.jrc.ec.europa.eu/lcainfohub/datasets/elcd/lciamethods/a4630d5b-df2f-48ae-b3f2-5e5257606d68.xml">
+                <common:shortDescription xml:lang="en">Eutrophication potential - freshwater (EP-freshwater)</common:shortDescription>
+                <common:shortDescription xml:lang="de">Eutrophierungspotenzial - Süßwasser (EP-freshwater)</common:shortDescription>
+            </referenceToLCIAMethodDataSet>
+            <meanAmount>0.0</meanAmount>
+            <common:other>
+                <epd:amount epd:module="A1" epd:scenario="Standard scenario">0.00595</epd:amount>
+                <epd:amount epd:module="A2" epd:scenario="Standard scenario">3.05E-6</epd:amount>
+                <epd:amount epd:module="A3" epd:scenario="Standard scenario">6.88E-5</epd:amount>
+                <epd:amount epd:module="A4" epd:scenario="Standard scenario">3.93E-5</epd:amount>
+                <epd:amount epd:module="A5" epd:scenario="Standard scenario">3.79E-6</epd:amount>
+                <epd:amount epd:module="B2" epd:scenario="Standard scenario">2.33E-5</epd:amount>
+                <epd:amount epd:module="C1" epd:scenario="Standard scenario">3.52E-6</epd:amount>
+                <epd:amount epd:module="C2" epd:scenario="Standard scenario">1.07E-6</epd:amount>
+                <epd:amount epd:module="C3" epd:scenario="Standard scenario">2.16E-5</epd:amount>
+                <epd:amount epd:module="C4" epd:scenario="Standard scenario">3.4E-7</epd:amount>
+                <epd:amount epd:module="D" epd:scenario="Standard scenario">-7.97E-4</epd:amount>
+                <epd:referenceToUnitGroupDataSet type="unit group data set" refObjectId="0429039d-a61d-4590-ba67-aa4a20a810a1" uri="../unitgroups/0429039d-a61d-4590-ba67-aa4a20a810a1">
+                    <common:shortDescription>kg P eqv.</common:shortDescription>
+                </epd:referenceToUnitGroupDataSet>
+            </common:other>
+        </LCIAResult>
+        <LCIAResult>
+            <referenceToLCIAMethodDataSet type="LCIA method data set" refObjectId="b5c619fa-def3-11e6-bf01-fe55135034f3" version="02.00.011" uri="http://lca.jrc.ec.europa.eu/lcainfohub/datasets/elcd/lciamethods/5296e2be-060b-4e50-b033-d45f85f6ac92.xml">
+                <common:shortDescription xml:lang="en">Eutrophication potential - marine (EP-marine)</common:shortDescription>
+                <common:shortDescription xml:lang="de">Eutrophierungspotenzial - Salzwasser (EP-marine)</common:shortDescription>
+            </referenceToLCIAMethodDataSet>
+            <meanAmount>0.0</meanAmount>
+            <common:other>
+                <epd:amount epd:module="A1" epd:scenario="Standard scenario">0.103</epd:amount>
+                <epd:amount epd:module="A2" epd:scenario="Standard scenario">6.19E-4</epd:amount>
+                <epd:amount epd:module="A3" epd:scenario="Standard scenario">0.00171</epd:amount>
+                <epd:amount epd:module="A4" epd:scenario="Standard scenario">0.0226</epd:amount>
+                <epd:amount epd:module="A5" epd:scenario="Standard scenario">0.00509</epd:amount>
+                <epd:amount epd:module="B2" epd:scenario="Standard scenario">0.00238</epd:amount>
+                <epd:amount epd:module="C1" epd:scenario="Standard scenario">0.00501</epd:amount>
+                <epd:amount epd:module="C2" epd:scenario="Standard scenario">2.17E-4</epd:amount>
+                <epd:amount epd:module="C3" epd:scenario="Standard scenario">5.97E-4</epd:amount>
+                <epd:amount epd:module="C4" epd:scenario="Standard scenario">4.2E-5</epd:amount>
+                <epd:amount epd:module="D" epd:scenario="Standard scenario">-0.0209</epd:amount>
+                <epd:referenceToUnitGroupDataSet type="unit group data set" refObjectId="d05bb823-ecdf-4686-8c40-bf1d9257859f" uri="../unitgroups/d05bb823-ecdf-4686-8c40-bf1d9257859f">
+                    <common:shortDescription>kg N eqv.</common:shortDescription>
+                </epd:referenceToUnitGroupDataSet>
+            </common:other>
+        </LCIAResult>
+        <LCIAResult>
+            <referenceToLCIAMethodDataSet type="LCIA method data set" refObjectId="b5c614d2-def3-11e6-bf01-fe55135034f3" version="01.02.010" uri="http://lca.jrc.ec.europa.eu/lcainfohub/datasets/elcd/lciamethods/40054970-5936-477c-9bec-29fa23b1cb77.xml">
+                <common:shortDescription xml:lang="en">Eutrophication potential - terrestrial (EP-terrestrial)</common:shortDescription>
+                <common:shortDescription xml:lang="de">Eutrophierungspotenzial - Land (EP-terrestrial)</common:shortDescription>
+            </referenceToLCIAMethodDataSet>
+            <meanAmount>0.0</meanAmount>
+            <common:other>
+                <epd:amount epd:module="A1" epd:scenario="Standard scenario">1.11</epd:amount>
+                <epd:amount epd:module="A2" epd:scenario="Standard scenario">0.00682</epd:amount>
+                <epd:amount epd:module="A3" epd:scenario="Standard scenario">0.019</epd:amount>
+                <epd:amount epd:module="A4" epd:scenario="Standard scenario">0.251</epd:amount>
+                <epd:amount epd:module="A5" epd:scenario="Standard scenario">0.0558</epd:amount>
+                <epd:amount epd:module="B2" epd:scenario="Standard scenario">0.0087</epd:amount>
+                <epd:amount epd:module="C1" epd:scenario="Standard scenario">0.0549</epd:amount>
+                <epd:amount epd:module="C2" epd:scenario="Standard scenario">0.0024</epd:amount>
+                <epd:amount epd:module="C3" epd:scenario="Standard scenario">0.00649</epd:amount>
+                <epd:amount epd:module="C4" epd:scenario="Standard scenario">4.65E-4</epd:amount>
+                <epd:amount epd:module="D" epd:scenario="Standard scenario">-0.246</epd:amount>
+                <epd:referenceToUnitGroupDataSet type="unit group data set" refObjectId="71b4d617-0ec9-4d3f-b65e-e438940c2401" uri="../unitgroups/71b4d617-0ec9-4d3f-b65e-e438940c2401">
+                    <common:shortDescription>mol N eqv.</common:shortDescription>
+                </epd:referenceToUnitGroupDataSet>
+            </common:other>
+        </LCIAResult>
+        <LCIAResult>
+            <referenceToLCIAMethodDataSet type="LCIA method data set" refObjectId="6a37f984-a4b3-458a-a20a-64418c145fa2" version="04.00.017" uri="">
+                <common:shortDescription xml:lang="en">Global Warming Potential - total (GWP-total)</common:shortDescription>
+                <common:shortDescription xml:lang="de">Globales Erwärmungspotenzial - total (GWP-total)</common:shortDescription>
+            </referenceToLCIAMethodDataSet>
+            <meanAmount>0.0</meanAmount>
+            <common:other>
+                <epd:amount epd:module="A1" epd:scenario="Standard scenario">95.5</epd:amount>
+                <epd:amount epd:module="A2" epd:scenario="Standard scenario">0.303</epd:amount>
+                <epd:amount epd:module="A3" epd:scenario="Standard scenario">0.633</epd:amount>
+                <epd:amount epd:module="A4" epd:scenario="Standard scenario">5.56</epd:amount>
+                <epd:amount epd:module="A5" epd:scenario="Standard scenario">1.67</epd:amount>
+                <epd:amount epd:module="B2" epd:scenario="Standard scenario">0.0196</epd:amount>
+                <epd:amount epd:module="C1" epd:scenario="Standard scenario">0.823</epd:amount>
+                <epd:amount epd:module="C2" epd:scenario="Standard scenario">0.107</epd:amount>
+                <epd:amount epd:module="C3" epd:scenario="Standard scenario">2.9</epd:amount>
+                <epd:amount epd:module="C4" epd:scenario="Standard scenario">0.0256</epd:amount>
+                <epd:amount epd:module="D" epd:scenario="Standard scenario">-22.8</epd:amount>
+                <epd:referenceToUnitGroupDataSet type="unit group data set" refObjectId="1ebf3012-d0db-4de2-aefd-ef30cedb0be1" uri="../unitgroups/1ebf3012-d0db-4de2-aefd-ef30cedb0be1">
+                    <common:shortDescription>kg CO2-Äqv.</common:shortDescription>
+                </epd:referenceToUnitGroupDataSet>
+            </common:other>
+        </LCIAResult>
+        <LCIAResult>
+            <referenceToLCIAMethodDataSet type="LCIA method data set" refObjectId="5f635281-343e-44fb-83df-1971b155e6b6" version="01.00.009" uri="">
+                <common:shortDescription xml:lang="en">Global Warming Potential - fossil fuels (GWP-fossil)</common:shortDescription>
+                <common:shortDescription xml:lang="de">Globales Erwärmungspotenzial - fossil (GWP-fossil)</common:shortDescription>
+            </referenceToLCIAMethodDataSet>
+            <meanAmount>0.0</meanAmount>
+            <common:other>
+                <epd:amount epd:module="A1" epd:scenario="Standard scenario">94.9</epd:amount>
+                <epd:amount epd:module="A2" epd:scenario="Standard scenario">0.303</epd:amount>
+                <epd:amount epd:module="A3" epd:scenario="Standard scenario">1.47</epd:amount>
+                <epd:amount epd:module="A4" epd:scenario="Standard scenario">5.55</epd:amount>
+                <epd:amount epd:module="A5" epd:scenario="Standard scenario">0.84</epd:amount>
+                <epd:amount epd:module="B2" epd:scenario="Standard scenario">0.177</epd:amount>
+                <epd:amount epd:module="C1" epd:scenario="Standard scenario">0.822</epd:amount>
+                <epd:amount epd:module="C2" epd:scenario="Standard scenario">0.106</epd:amount>
+                <epd:amount epd:module="C3" epd:scenario="Standard scenario">2.83</epd:amount>
+                <epd:amount epd:module="C4" epd:scenario="Standard scenario">0.0253</epd:amount>
+                <epd:amount epd:module="D" epd:scenario="Standard scenario">-22.6</epd:amount>
+                <epd:referenceToUnitGroupDataSet type="unit group data set" refObjectId="1ebf3012-d0db-4de2-aefd-ef30cedb0be1" uri="../unitgroups/1ebf3012-d0db-4de2-aefd-ef30cedb0be1">
+                    <common:shortDescription>kg CO2-Äqv.</common:shortDescription>
+                </epd:referenceToUnitGroupDataSet>
+            </common:other>
+        </LCIAResult>
+        <LCIAResult>
+            <referenceToLCIAMethodDataSet type="LCIA method data set" refObjectId="2356e1ab-0185-4db5-86e5-16de51c7485c" version="01.00.006" uri="">
+                <common:shortDescription xml:lang="en">Global Warming Potential - biogenic (GWP-biogenic)</common:shortDescription>
+                <common:shortDescription xml:lang="de">Globales Erwärmungspotenzial - biogen (GWP-biogenic)</common:shortDescription>
+            </referenceToLCIAMethodDataSet>
+            <meanAmount>0.0</meanAmount>
+            <common:other>
+                <epd:amount epd:module="A1" epd:scenario="Standard scenario">0.521</epd:amount>
+                <epd:amount epd:module="A2" epd:scenario="Standard scenario">1.4E-4</epd:amount>
+                <epd:amount epd:module="A3" epd:scenario="Standard scenario">-0.837</epd:amount>
+                <epd:amount epd:module="A4" epd:scenario="Standard scenario">5.23E-4</epd:amount>
+                <epd:amount epd:module="A5" epd:scenario="Standard scenario">0.832</epd:amount>
+                <epd:amount epd:module="B2" epd:scenario="Standard scenario">-0.412</epd:amount>
+                <epd:amount epd:module="C1" epd:scenario="Standard scenario">8.33E-4</epd:amount>
+                <epd:amount epd:module="C2" epd:scenario="Standard scenario">4.91E-5</epd:amount>
+                <epd:amount epd:module="C3" epd:scenario="Standard scenario">0.0713</epd:amount>
+                <epd:amount epd:module="C4" epd:scenario="Standard scenario">2.18E-4</epd:amount>
+                <epd:amount epd:module="D" epd:scenario="Standard scenario">-0.0959</epd:amount>
+                <epd:referenceToUnitGroupDataSet type="unit group data set" refObjectId="1ebf3012-d0db-4de2-aefd-ef30cedb0be1" uri="../unitgroups/1ebf3012-d0db-4de2-aefd-ef30cedb0be1">
+                    <common:shortDescription>kg CO2-Äqv.</common:shortDescription>
+                </epd:referenceToUnitGroupDataSet>
+            </common:other>
+        </LCIAResult>
+        <LCIAResult>
+            <referenceToLCIAMethodDataSet type="LCIA method data set" refObjectId="4331bbdb-978a-490d-8707-eeb047f01a55" version="01.00.006" uri="">
+                <common:shortDescription xml:lang="en">Global Warming Potential - land use and land use change (GWP-luluc)</common:shortDescription>
+                <common:shortDescription xml:lang="de">Globales Erwärmungspotenzial - luluc (GWP-luluc)</common:shortDescription>
+            </referenceToLCIAMethodDataSet>
+            <meanAmount>0.0</meanAmount>
+            <common:other>
+                <epd:amount epd:module="A1" epd:scenario="Standard scenario">0.138</epd:amount>
+                <epd:amount epd:module="A2" epd:scenario="Standard scenario">1.11E-4</epd:amount>
+                <epd:amount epd:module="A3" epd:scenario="Standard scenario">0.00134</epd:amount>
+                <epd:amount epd:module="A4" epd:scenario="Standard scenario">0.00277</epd:amount>
+                <epd:amount epd:module="A5" epd:scenario="Standard scenario">1.33E-4</epd:amount>
+                <epd:amount epd:module="B2" epd:scenario="Standard scenario">0.254</epd:amount>
+                <epd:amount epd:module="C1" epd:scenario="Standard scenario">1.26E-4</epd:amount>
+                <epd:amount epd:module="C2" epd:scenario="Standard scenario">3.9E-5</epd:amount>
+                <epd:amount epd:module="C3" epd:scenario="Standard scenario">4.55E-4</epd:amount>
+                <epd:amount epd:module="C4" epd:scenario="Standard scenario">7.89E-6</epd:amount>
+                <epd:amount epd:module="D" epd:scenario="Standard scenario">-0.0689</epd:amount>
+                <epd:referenceToUnitGroupDataSet type="unit group data set" refObjectId="1ebf3012-d0db-4de2-aefd-ef30cedb0be1" uri="../unitgroups/1ebf3012-d0db-4de2-aefd-ef30cedb0be1">
+                    <common:shortDescription>kg CO2-Äqv.</common:shortDescription>
+                </epd:referenceToUnitGroupDataSet>
+            </common:other>
+        </LCIAResult>
+        <LCIAResult>
+            <referenceToLCIAMethodDataSet type="LCIA method data set" refObjectId="b5c629d6-def3-11e6-bf01-fe55135034f3" version="02.00.013" uri="http://lca.jrc.ec.europa.eu/lcainfohub/datasets/elcd/lciamethods/8b723200-3d8f-4eec-9e10-444edb029476.xml">
+                <common:shortDescription xml:lang="en">Depletion potential of the stratospheric ozone layer (ODP)</common:shortDescription>
+                <common:shortDescription xml:lang="de">Abbaupotenzial der stratosphärischen Ozonschicht (ODP)</common:shortDescription>
+            </referenceToLCIAMethodDataSet>
+            <meanAmount>0.0</meanAmount>
+            <common:other>
+                <epd:amount epd:module="A1" epd:scenario="Standard scenario">9.21E-6</epd:amount>
+                <epd:amount epd:module="A2" epd:scenario="Standard scenario">6.68E-8</epd:amount>
+                <epd:amount epd:module="A3" epd:scenario="Standard scenario">6.88E-8</epd:amount>
+                <epd:amount epd:module="A4" epd:scenario="Standard scenario">1.17E-6</epd:amount>
+                <epd:amount epd:module="A5" epd:scenario="Standard scenario">1.78E-7</epd:amount>
+                <epd:amount epd:module="B2" epd:scenario="Standard scenario">2.93E-8</epd:amount>
+                <epd:amount epd:module="C1" epd:scenario="Standard scenario">1.74E-7</epd:amount>
+                <epd:amount epd:module="C2" epd:scenario="Standard scenario">2.35E-8</epd:amount>
+                <epd:amount epd:module="C3" epd:scenario="Standard scenario">4.13E-8</epd:amount>
+                <epd:amount epd:module="C4" epd:scenario="Standard scenario">4.31E-9</epd:amount>
+                <epd:amount epd:module="D" epd:scenario="Standard scenario">-1.02E-6</epd:amount>
+                <epd:referenceToUnitGroupDataSet type="unit group data set" refObjectId="d9e957c9-7309-4474-bf3a-7777df6c4e5b" uri="../unitgroups/d9e957c9-7309-4474-bf3a-7777df6c4e5b">
+                    <common:shortDescription>kg CFC 11-Äquiv.</common:shortDescription>
+                </epd:referenceToUnitGroupDataSet>
+            </common:other>
+        </LCIAResult>
+        <LCIAResult>
+            <referenceToLCIAMethodDataSet type="LCIA method data set" refObjectId="b5c610fe-def3-11e6-bf01-fe55135034f3" version="02.00.016" uri="http://lca.jrc.ec.europa.eu/lcainfohub/datasets/elcd/lciamethods/ec7836be-83eb-41da-bcda-1a6a3fe2d149.xml">
+                <common:shortDescription xml:lang="en">Photochemical Ozone Creation Potential (POCP)</common:shortDescription>
+                <common:shortDescription xml:lang="de">Bildungspotenzial für troposphärisches Ozon (POCP)</common:shortDescription>
+            </referenceToLCIAMethodDataSet>
+            <meanAmount>0.0</meanAmount>
+            <common:other>
+                <epd:amount epd:module="A1" epd:scenario="Standard scenario">0.361</epd:amount>
+                <epd:amount epd:module="A2" epd:scenario="Standard scenario">0.00195</epd:amount>
+                <epd:amount epd:module="A3" epd:scenario="Standard scenario">0.00882</epd:amount>
+                <epd:amount epd:module="A4" epd:scenario="Standard scenario">0.067</epd:amount>
+                <epd:amount epd:module="A5" epd:scenario="Standard scenario">0.0146</epd:amount>
+                <epd:amount epd:module="B2" epd:scenario="Standard scenario">0.00114</epd:amount>
+                <epd:amount epd:module="C1" epd:scenario="Standard scenario">0.0144</epd:amount>
+                <epd:amount epd:module="C2" epd:scenario="Standard scenario">6.85E-4</epd:amount>
+                <epd:amount epd:module="C3" epd:scenario="Standard scenario">0.00195</epd:amount>
+                <epd:amount epd:module="C4" epd:scenario="Standard scenario">1.29E-4</epd:amount>
+                <epd:amount epd:module="D" epd:scenario="Standard scenario">-0.0695</epd:amount>
+                <epd:referenceToUnitGroupDataSet type="unit group data set" refObjectId="d27c25f8-fbc1-44c6-b47b-4adbae4199c6" uri="../unitgroups/d27c25f8-fbc1-44c6-b47b-4adbae4199c6">
+                    <common:shortDescription>kg NMVOC eqv.</common:shortDescription>
+                </epd:referenceToUnitGroupDataSet>
+            </common:other>
+        </LCIAResult>
+        <LCIAResult>
+            <referenceToLCIAMethodDataSet type="LCIA method data set" refObjectId="b2ad66ce-c78d-11e6-9d9d-cec0c932ce01" version="03.00.015" uri="">
+                <common:shortDescription xml:lang="en">Water (user) deprivation potential (WDP)</common:shortDescription>
+                <common:shortDescription xml:lang="de">Wasser-Entzugspotenzial (Benutzer) (WDP)</common:shortDescription>
+            </referenceToLCIAMethodDataSet>
+            <meanAmount>0.0</meanAmount>
+            <common:other>
+                <epd:amount epd:module="A1" epd:scenario="Standard scenario">72.9</epd:amount>
+                <epd:amount epd:module="A2" epd:scenario="Standard scenario">0.0163</epd:amount>
+                <epd:amount epd:module="A3" epd:scenario="Standard scenario">0.783</epd:amount>
+                <epd:amount epd:module="A4" epd:scenario="Standard scenario">0.197</epd:amount>
+                <epd:amount epd:module="A5" epd:scenario="Standard scenario">0.0143</epd:amount>
+                <epd:amount epd:module="B2" epd:scenario="Standard scenario">0.69</epd:amount>
+                <epd:amount epd:module="C1" epd:scenario="Standard scenario">0.0117</epd:amount>
+                <epd:amount epd:module="C2" epd:scenario="Standard scenario">0.00574</epd:amount>
+                <epd:amount epd:module="C3" epd:scenario="Standard scenario">0.0807</epd:amount>
+                <epd:amount epd:module="C4" epd:scenario="Standard scenario">0.00326</epd:amount>
+                <epd:amount epd:module="D" epd:scenario="Standard scenario">-2.73</epd:amount>
+                <epd:referenceToUnitGroupDataSet type="unit group data set" refObjectId="6ae2df01-888e-46c8-b17d-49fa3869b476" uri="../unitgroups/6ae2df01-888e-46c8-b17d-49fa3869b476">
+                    <common:shortDescription>m3 world eqv.</common:shortDescription>
+                </epd:referenceToUnitGroupDataSet>
+            </common:other>
+        </LCIAResult>
+        <LCIAResult>
+            <referenceToLCIAMethodDataSet type="LCIA method data set" refObjectId="b5c602c6-def3-11e6-bf01-fe55135034f3" version="02.00.012" uri="http://lca.jrc.ec.europa.eu/lcainfohub/datasets/elcd/lciamethods/72ce3013-f678-4c6a-935b-f4752ff8901b.xml">
+                <common:shortDescription xml:lang="en">Potential incidence of disease due to PM emissions (PM)</common:shortDescription>
+                <common:shortDescription xml:lang="de">Potenzielles Auftreten von Krankheiten aufgrund von Feinstaubemissionen (PM)</common:shortDescription>
+            </referenceToLCIAMethodDataSet>
+            <meanAmount>0.0</meanAmount>
+            <common:other>
+                <epd:amount epd:module="A1" epd:scenario="Standard scenario">5.65E-6</epd:amount>
+                <epd:amount epd:module="A2" epd:scenario="Standard scenario">2.72E-8</epd:amount>
+                <epd:amount epd:module="A3" epd:scenario="Standard scenario">1.08E-7</epd:amount>
+                <epd:amount epd:module="A4" epd:scenario="Standard scenario">2.93E-7</epd:amount>
+                <epd:amount epd:module="A5" epd:scenario="Standard scenario">1.85E-8</epd:amount>
+                <epd:amount epd:module="B2" epd:scenario="Standard scenario">3.48E-8</epd:amount>
+                <epd:amount epd:module="C1" epd:scenario="Standard scenario">1.63E-8</epd:amount>
+                <epd:amount epd:module="C2" epd:scenario="Standard scenario">9.57E-9</epd:amount>
+                <epd:amount epd:module="C3" epd:scenario="Standard scenario">3.2E-8</epd:amount>
+                <epd:amount epd:module="C4" epd:scenario="Standard scenario">1.94E-9</epd:amount>
+                <epd:amount epd:module="D" epd:scenario="Standard scenario">-1.5E-6</epd:amount>
+                <epd:referenceToUnitGroupDataSet type="unit group data set" refObjectId="3883559b-648f-4afc-8ba2-0bd24f3affa3" uri="../unitgroups/3883559b-648f-4afc-8ba2-0bd24f3affa3">
+                    <common:shortDescription>disease incidence</common:shortDescription>
+                </epd:referenceToUnitGroupDataSet>
+            </common:other>
+        </LCIAResult>
+        <LCIAResult>
+            <referenceToLCIAMethodDataSet type="LCIA method data set" refObjectId="b5c632be-def3-11e6-bf01-fe55135034f3" version="01.00.012" uri="http://lca.jrc.ec.europa.eu/lcainfohub/datasets/elcd/lciamethods/a6f4cbc8-5388-44d6-9a67-53d05684f93e.xml">
+                <common:shortDescription xml:lang="en">Potential Human exposure efficiency relative to U235 (IRP)</common:shortDescription>
+                <common:shortDescription xml:lang="de">Potenzielle Wirkung durch Exposition des Menschen mit U235 (IRP)</common:shortDescription>
+            </referenceToLCIAMethodDataSet>
+            <meanAmount>0.0</meanAmount>
+            <common:other>
+                <epd:amount epd:module="A1" epd:scenario="Standard scenario">3.72</epd:amount>
+                <epd:amount epd:module="A2" epd:scenario="Standard scenario">0.0191</epd:amount>
+                <epd:amount epd:module="A3" epd:scenario="Standard scenario">0.0315</epd:amount>
+                <epd:amount epd:module="A4" epd:scenario="Standard scenario">0.325</epd:amount>
+                <epd:amount epd:module="A5" epd:scenario="Standard scenario">0.0493</epd:amount>
+                <epd:amount epd:module="B2" epd:scenario="Standard scenario">0.00555</epd:amount>
+                <epd:amount epd:module="C1" epd:scenario="Standard scenario">0.0484</epd:amount>
+                <epd:amount epd:module="C2" epd:scenario="Standard scenario">0.00673</epd:amount>
+                <epd:amount epd:module="C3" epd:scenario="Standard scenario">0.0269</epd:amount>
+                <epd:amount epd:module="C4" epd:scenario="Standard scenario">0.00133</epd:amount>
+                <epd:amount epd:module="D" epd:scenario="Standard scenario">-0.398</epd:amount>
+                <epd:referenceToUnitGroupDataSet type="unit group data set" refObjectId="456b05bf-1415-44a9-9993-02452f554c09" uri="../unitgroups/456b05bf-1415-44a9-9993-02452f554c09">
+                    <common:shortDescription>kBq U235 eqv.</common:shortDescription>
+                </epd:referenceToUnitGroupDataSet>
+            </common:other>
+        </LCIAResult>
+        <LCIAResult>
+            <referenceToLCIAMethodDataSet type="LCIA method data set" refObjectId="ee1082d1-b0f7-43ca-a1f0-21e2a4a74511" version="01.00.003" uri="http://lca.jrc.ec.europa.eu/lcainfohub/datasets/elcd/lciamethods/ee1082d1-b0f7-43ca-a1f0-21e2a4a74511.xml">
+                <common:shortDescription xml:lang="en">Potential Comparative Toxic Unit for ecosystems (ETP-fw)</common:shortDescription>
+                <common:shortDescription xml:lang="de">Potenzielle Toxizitätsvergleichseinheit für Ökosysteme (ETP-fw)</common:shortDescription>
+            </referenceToLCIAMethodDataSet>
+            <meanAmount>0.0</meanAmount>
+            <common:other>
+                <epd:amount epd:module="A1" epd:scenario="Standard scenario">3190.0</epd:amount>
+                <epd:amount epd:module="A2" epd:scenario="Standard scenario">4.07</epd:amount>
+                <epd:amount epd:module="A3" epd:scenario="Standard scenario">58.2</epd:amount>
+                <epd:amount epd:module="A4" epd:scenario="Standard scenario">60.9</epd:amount>
+                <epd:amount epd:module="A5" epd:scenario="Standard scenario">7.56</epd:amount>
+                <epd:amount epd:module="B2" epd:scenario="Standard scenario">21.8</epd:amount>
+                <epd:amount epd:module="C1" epd:scenario="Standard scenario">7.18</epd:amount>
+                <epd:amount epd:module="C2" epd:scenario="Standard scenario">1.43</epd:amount>
+                <epd:amount epd:module="C3" epd:scenario="Standard scenario">42.4</epd:amount>
+                <epd:amount epd:module="C4" epd:scenario="Standard scenario">18.8</epd:amount>
+                <epd:amount epd:module="D" epd:scenario="Standard scenario">-564.0</epd:amount>
+                <epd:referenceToUnitGroupDataSet type="unit group data set" refObjectId="aa959ded-f1eb-4efb-9c5c-2d60be36b3e6" uri="../unitgroups/aa959ded-f1eb-4efb-9c5c-2d60be36b3e6">
+                    <common:shortDescription>CTUe</common:shortDescription>
+                </epd:referenceToUnitGroupDataSet>
+            </common:other>
+        </LCIAResult>
+        <LCIAResult>
+            <referenceToLCIAMethodDataSet type="LCIA method data set" refObjectId="2299222a-bbd8-474f-9d4f-4dd1f18aea7c" version="01.00.004" uri="http://lca.jrc.ec.europa.eu/lcainfohub/datasets/elcd/lciamethods/2299222a-bbd8-474f-9d4f-4dd1f18aea7c.xml">
+                <common:shortDescription xml:lang="en">Potential Comparative Toxic Unit for humans - cancer effects (HTP-c)</common:shortDescription>
+                <common:shortDescription xml:lang="de">Potenzielle Toxizitätsvergleichseinheit für den Menschen - kanzerogene Wirkung (HTP-c)</common:shortDescription>
+            </referenceToLCIAMethodDataSet>
+            <meanAmount>0.0</meanAmount>
+            <common:other>
+                <epd:amount epd:module="A1" epd:scenario="Standard scenario">6.27E-8</epd:amount>
+                <epd:amount epd:module="A2" epd:scenario="Standard scenario">1.32E-10</epd:amount>
+                <epd:amount epd:module="A3" epd:scenario="Standard scenario">1.21E-9</epd:amount>
+                <epd:amount epd:module="A4" epd:scenario="Standard scenario">2.4E-9</epd:amount>
+                <epd:amount epd:module="A5" epd:scenario="Standard scenario">2.41E-10</epd:amount>
+                <epd:amount epd:module="B2" epd:scenario="Standard scenario">6.09E-10</epd:amount>
+                <epd:amount epd:module="C1" epd:scenario="Standard scenario">1.27E-10</epd:amount>
+                <epd:amount epd:module="C2" epd:scenario="Standard scenario">4.64E-11</epd:amount>
+                <epd:amount epd:module="C3" epd:scenario="Standard scenario">3.34E-9</epd:amount>
+                <epd:amount epd:module="C4" epd:scenario="Standard scenario">2.0E-11</epd:amount>
+                <epd:amount epd:module="D" epd:scenario="Standard scenario">-3.08E-8</epd:amount>
+                <epd:referenceToUnitGroupDataSet type="unit group data set" refObjectId="d4c9523e-2d7e-49fd-8469-998f547d3a70" uri="../unitgroups/d4c9523e-2d7e-49fd-8469-998f547d3a70">
+                    <common:shortDescription>CTUh</common:shortDescription>
+                </epd:referenceToUnitGroupDataSet>
+            </common:other>
+        </LCIAResult>
+        <LCIAResult>
+            <referenceToLCIAMethodDataSet type="LCIA method data set" refObjectId="3af763a5-b7a1-48c9-9cee-1f223481fcef" version="01.00.003" uri="http://lca.jrc.ec.europa.eu/lcainfohub/datasets/elcd/lciamethods/3af763a5-b7a1-48c9-9cee-1f223481fcef.xml">
+                <common:shortDescription xml:lang="en">Potential Comparative Toxic Unit for humans - non-cancer effects (HTP-nc)</common:shortDescription>
+                <common:shortDescription xml:lang="de">Potenzielle Toxizitätsvergleichseinheit für den Menschen - nicht kanzerogene Wirkung (HTP-nc)</common:shortDescription>
+            </referenceToLCIAMethodDataSet>
+            <meanAmount>0.0</meanAmount>
+            <common:other>
+                <epd:amount epd:module="A1" epd:scenario="Standard scenario">3.22E-6</epd:amount>
+                <epd:amount epd:module="A2" epd:scenario="Standard scenario">4.45E-9</epd:amount>
+                <epd:amount epd:module="A3" epd:scenario="Standard scenario">4.81E-8</epd:amount>
+                <epd:amount epd:module="A4" epd:scenario="Standard scenario">5.72E-8</epd:amount>
+                <epd:amount epd:module="A5" epd:scenario="Standard scenario">1.06E-8</epd:amount>
+                <epd:amount epd:module="B2" epd:scenario="Standard scenario">1.48E-8</epd:amount>
+                <epd:amount epd:module="C1" epd:scenario="Standard scenario">1.01E-8</epd:amount>
+                <epd:amount epd:module="C2" epd:scenario="Standard scenario">1.57E-9</epd:amount>
+                <epd:amount epd:module="C3" epd:scenario="Standard scenario">2.33E-8</epd:amount>
+                <epd:amount epd:module="C4" epd:scenario="Standard scenario">7.74E-10</epd:amount>
+                <epd:amount epd:module="D" epd:scenario="Standard scenario">-6.38E-7</epd:amount>
+                <epd:referenceToUnitGroupDataSet type="unit group data set" refObjectId="d4c9523e-2d7e-49fd-8469-998f547d3a70" uri="../unitgroups/d4c9523e-2d7e-49fd-8469-998f547d3a70">
+                    <common:shortDescription>CTUh</common:shortDescription>
+                </epd:referenceToUnitGroupDataSet>
+            </common:other>
+        </LCIAResult>
+        <LCIAResult>
+            <referenceToLCIAMethodDataSet type="LCIA method data set" refObjectId="b2ad6890-c78d-11e6-9d9d-cec0c932ce01" version="01.00.011" uri="">
+                <common:shortDescription xml:lang="en">Potential Soil quality index (SQP)</common:shortDescription>
+                <common:shortDescription xml:lang="de">Potenzieller Bodenqualitätsindex (SQP)</common:shortDescription>
+            </referenceToLCIAMethodDataSet>
+            <meanAmount>0.0</meanAmount>
+            <common:other>
+                <epd:amount epd:module="A1" epd:scenario="Standard scenario">313.0</epd:amount>
+                <epd:amount epd:module="A2" epd:scenario="Standard scenario">3.96</epd:amount>
+                <epd:amount epd:module="A3" epd:scenario="Standard scenario">105.0</epd:amount>
+                <epd:amount epd:module="A4" epd:scenario="Standard scenario">36.0</epd:amount>
+                <epd:amount epd:module="A5" epd:scenario="Standard scenario">1.6</epd:amount>
+                <epd:amount epd:module="B2" epd:scenario="Standard scenario">19.0</epd:amount>
+                <epd:amount epd:module="C1" epd:scenario="Standard scenario">1.43</epd:amount>
+                <epd:amount epd:module="C2" epd:scenario="Standard scenario">1.39</epd:amount>
+                <epd:amount epd:module="C3" epd:scenario="Standard scenario">3.94</epd:amount>
+                <epd:amount epd:module="C4" epd:scenario="Standard scenario">0.631</epd:amount>
+                <epd:amount epd:module="D" epd:scenario="Standard scenario">-96.3</epd:amount>
+                <epd:referenceToUnitGroupDataSet type="unit group data set" refObjectId="f130951c-e67f-4f7f-8dd4-665de3974e18" uri="../unitgroups/f130951c-e67f-4f7f-8dd4-665de3974e18">
+                    <common:shortDescription>dimensionless</common:shortDescription>
+                </epd:referenceToUnitGroupDataSet>
+            </common:other>
+        </LCIAResult>
+    </LCIAResults>
+</processDataSet>

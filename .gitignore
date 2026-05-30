@@ -1,22 +1,21 @@
-# Python Cache
+# Environments
+.env
+.venv/
 __pycache__/
 *.pyc
-.venv/
+*.pyo
 
-# Environment Variables
-.env
+# Python Builds
+backend/build/
+backend/dist/
+*.spec
 
-# Data (Optional: Keep raw data local if it's huge, but upload processed)
-# data/raw/
+# Node/Vite
+node_modules/
+desktop-app/dist/
+desktop-app/dist-electron/
+desktop-app/.vscode/
 
-# Archives & Junk
-archive/
-*.bak
-*.zip
-
-# OS Junk
+# OS specific
 .DS_Store
 Thumbs.db
-
-# Secrets
-.streamlit/secrets.toml

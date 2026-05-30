@@ -1,98 +1,48 @@
 <div align="center">
-  
-# ⚡ EPC Solar Engine
-**Next-Generation PV Lifecycle Assessment & Procurement Decision Engine**
-
-[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
-[![Streamlit App](https://img.shields.io/badge/Streamlit-FF4B4B?style=flat&logo=Streamlit&logoColor=white)](https://streamlit.io/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Environdec API](https://img.shields.io/badge/Data-Environdec_Live-success)](#)
-[![Compliance](https://img.shields.io/badge/Ready-CBAM_|_ESPR-purple)](#)
-
-*Transitioning solar procurement from static compliance to strategic asset intelligence.*
-
+  <img src="https://img.shields.io/badge/Status-Premium_Desktop_App-green?style=for-the-badge&logo=electron" alt="Status" />
+  <img src="https://img.shields.io/badge/Engine-FastAPI%20%2B%20Python-blue?style=for-the-badge&logo=fastapi" alt="Backend" />
+  <img src="https://img.shields.io/badge/Frontend-React%20%2B%20Vite-61DAFB?style=for-the-badge&logo=react" alt="Frontend" />
+  <h1>EPC Solar Engine</h1>
+  <p><strong>A Next-Generation Standalone Desktop Software for PV Module Analysis, Multi-Criteria Decision Making (MCDA), and Executive Financial Modeling.</strong></p>
 </div>
 
 ---
 
-## 🌍 Executive Summary
+## 🌟 Overview
+**EPC Solar Engine** has officially evolved from a basic web-based calculator into a powerful, **standalone Windows desktop application**. Tailored for EPC (Engineering, Procurement, and Construction) firms, this software seamlessly combines real-time Physics calculations with advanced Multi-Criteria Decision Analysis (MCDA) and a dedicated Executive Financial Dashboard.
 
-As the European Union and global markets aggressively tighten sustainability regulations (ESPR, CBAM), static spreadsheets and generic Carbon Footprint averages are no longer sufficient for utility-scale solar procurement.
+This tool acts as your ultimate "pitch generator" for PV module procurement, calculating real-world technical yields, carbon footprints (LCA), and massive project-scale economics instantly.
 
-**EPC Solar Engine** is a highly robust, API-driven procurement tool designed specifically for Engineering, Procurement, and Construction (EPC) firms and Project Developers. By seamlessly fusing live Environmental Product Declarations (EPDs) with rigorous financial forecasting, this engine empowers stakeholders to make mathematically optimal, multi-criteria decisions that balance Levelized Cost of Energy (LCOE), hardware reliability, and Scope 3 carbon penalties.
+## ✨ Key Features
+- ⚡ **Standalone Desktop Experience:** No more python terminals or complex setups. Double-click the installer and launch the app offline.
+- 🧮 **Physics-based MCDA Engine:** A Python/FastAPI backend instantly scores modules based on dynamic weighting of Cost, Performance, and Eco-Footprint.
+- 🎨 **Premium UI/UX:** Built with React & Vite, featuring a sleek dark-mode glassmorphism interface and interactive leaderboards.
+- 📊 **Deep-Dive Analytics Dashboard:**
+  - **Radar Charts:** Compare Eco, Cost, and Tech dimensions visually.
+  - **Tornado Charts:** Perform instant sensitivity analysis on Carbon Footprints (e.g., how does a ±20% swing in grid emissions impact the module?).
+- 💼 **Executive Financial Layer:** Input your *Project Size (MWp)* and *PPA Rate (€/MWh)* to dynamically generate:
+  - Net Present Value (NPV)
+  - Payback Periods & Lifetime Revenue
+  - CBAM Import Tax Exposure calculations
+  - **Elevator Pitch Generator:** Ready-to-copy executive summaries for stakeholders.
 
----
+## 🚀 Installation & Usage
+The application has been compiled into a single production `.exe` using PyInstaller and Electron-Builder.
 
-## ✨ Core Capabilities
+1. Locate the standalone installer file: `EPC Solar Engine Setup.exe`
+2. **Double-click** to install it natively on Windows.
+3. Launch the app from the start menu or desktop shortcut. The background Python physics engine and React UI will spin up automatically!
 
-### 🗄️ Live EPD Integration (Environdec API)
-Stop relying on outdated PDFs. The Engine queries the global **Environdec API** in real-time to fetch specific, third-party verified Life Cycle Inventories for top-tier solar modules (Jinko, Trina, First Solar, etc.), instantly injecting carbon intensities into your local SQLite cache.
+## 🛠️ Architecture
+- **Backend:** `FastAPI`, `Pydantic`, `Pandas` (Frozen into an executable via PyInstaller).
+- **Frontend:** `React`, `Vite`, `Recharts` for interactive graphing, and `TailwindCSS` (glassmorphism tokens).
+- **Desktop Wrapper:** `Electron` to merge the frontend and background processes into a seamless native OS window.
 
-### ⚖️ Carbon Border Adjustment Mechanism (CBAM) Modeler
-Stay ahead of regulatory tariffs. The Engine dynamically calculates CBAM financial penalties based on the manufacturing origin's carbon intensity, automatically internalizing import taxes directly into your upfront CAPEX and final LCOE calculations.
-
-### ♻️ Cradle-to-Cradle (C2C) Circularity
-Moving beyond standard "Cradle-to-Gate" assessments, the Engine introduces dynamic **End-of-Life (EoL)** recycling credits. Highly recyclable modules receive net-carbon reductions against their A1-A3 footprint, strategically rewarding circular economy investments.
-
-### 🕸️ Multi-Criteria Decision Analysis (MCDA)
-Utilizing the **TOPSIS** (Technique for Order of Preference by Similarity to Ideal Solution) algorithm, the software evaluates thousands of data points to rank modules against customizable scenarios:
-- **Eco-Flagship:** Maximize carbon reduction for green-bidding tenders.
-- **Utility Scale:** Heavily weight financial LCOE.
-- **Space Constrained:** Prioritize raw technical efficiency (Wp/m²).
-
-### 📊 Stochastic Risk Analysis
-Solar assets live for 30+ years; your data should account for the unknown. Built-in **Monte Carlo Simulations** assess supply chain data uncertainties, while dynamic **Tornado Plots** expose precisely how sensitive your LCOE is to module degradation and O&M inflation.
-
----
-
-## 🛠️ System Architecture
-
-Built for scale, speed, and analytical rigor.
-- **Frontend:** Streamlit (Python) for rapid, interactive dashboards and data visualization.
-- **Backend Physics Engine:** Custom-built OOP Python engine (`PVEngine`) strictly adhering to EN 15804+A2 standards.
-- **Data Persistence:** Lightweight SQLite database caching for lightning-fast scenario rendering and offline tender evaluations.
-- **Visuals:** Plotly Express & Plotly Graph Objects for publication-ready charting.
+## 🔮 Future Roadmap (Scale-Ready)
+The Python engine's architecture has been strictly modularized. Future expansions will easily plug into the existing Executive Financial Model:
+- **Inverter Clipping Models**
+- **Hourly Irradiance Profiles**
+- **Battery Storage LCA Integration**
 
 ---
-
-## 🚀 Getting Started
-
-### Prerequisites
-- Python 3.10 or higher
-- An Environdec API Token (Optional, for live fetching)
-
-### Installation
-
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/yourusername/epc-solar-engine.git
-   cd epc-solar-engine
-   ```
-
-2. **Set up a Virtual Environment:**
-   ```bash
-   python -m venv .venv
-   source .venv/bin/activate  # On Windows use `\.venv\Scripts\activate`
-   ```
-
-3. **Install Dependencies:**
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-4. **Launch the Engine:**
-   ```bash
-   streamlit run streamlit_app.py
-   # Or simply execute launch.bat on Windows
-   ```
-
----
-
-## 🎓 Academic & Industry Origins
-*EPC Solar Engine* evolved from a comprehensive Master Thesis Project investigating the intersection of Photovoltaic Life Cycle Assessments and multi-criteria optimization. It bridges the gap between rigorous academic environmental science and real-world industrial procurement workflows.
-
-> **Interested in collaboration, live demos, or technical deep-dives?**  
-> Connect with me on [LinkedIn](#) or read the foundational methodology on [ResearchGate](#).
-
----
-*Built for the clean energy transition. ☀️*
+*Developed as a premium solution for solar engineering procurement.*

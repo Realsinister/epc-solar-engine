@@ -46,3 +46,5 @@ The Python engine's architecture has been strictly modularized. Future expansion
 
 ---
 *Developed as a premium solution for solar engineering procurement.*
+
+👨‍💻 **Connect with the developer:** [Yash J Gupta on LinkedIn](https://www.linkedin.com/in/yashjgupta/)

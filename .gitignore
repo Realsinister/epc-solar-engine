@@ -12,9 +12,13 @@ backend/dist/
 
 # Node/Vite
 node_modules/
-desktop-app/dist/
-desktop-app/dist-electron/
-desktop-app/.vscode/
+frontend/dist/
+frontend/dist-electron/
+frontend/.vscode/
+
+# Binaries
+EPC_Solar_Engine_Installer.exe
+*.exe
 
 # OS specific
 .DS_Store

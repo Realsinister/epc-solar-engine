@@ -106,7 +106,7 @@ function App() {
         {/* SIDEBAR CONTROLS */}
         <aside className="controls-sidebar">
           <div className="glass-panel">
-            <h2 style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '20px' }}>
+            <h2 style={{ display: 'flex', alignItems: 'center', gap: '8px', margin: '0 0 20px 0' }}>
               <Sliders size={20} color="var(--accent-cyan)" />
               <span className="text-gradient">Simulation Parameters</span>
             </h2>
@@ -167,7 +167,7 @@ function App() {
           
           {/* TOP BAR CHART */}
           <div className="glass-panel" style={{ height: '300px' }}>
-            <h3 style={{ marginBottom: '16px', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <h3 style={{ margin: '0 0 16px 0', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '8px' }}>
               <Target size={18} /> Market Overview (TOPSIS Score)
             </h3>
             <ResponsiveContainer width="100%" height="100%">

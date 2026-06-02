@@ -311,9 +311,9 @@ function App() {
                       <br/>
                       <strong>{result.Display_Name}</strong>
                       <div style={{fontSize: '0.85rem', color: 'var(--text-muted)', marginTop: '6px'}}>
-                        Carbon: {Number(result.Carbon_Intensity_Mean).toFixed(0)} kg CO2
+                        Carbon: {Number(result.Carbon_Intensity_Mean).toFixed(0)} gCO2/kWh
                         <br/>
-                        LCOE: €{Number(result.LCOE_Mean).toFixed(4)}
+                        LCOE: €{result.LCOE_EUR_MWh ? (Number(result.LCOE_EUR_MWh) / 1000).toFixed(4) : '0.0000'}/kWh
                       </div>
                     </div>
                   ))}

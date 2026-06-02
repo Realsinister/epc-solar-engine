@@ -1,7 +1,7 @@
 {
   "name": "desktop-app",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "main": "electron/main.cjs",
   "scripts": {
@@ -20,7 +20,7 @@
       "output": "dist-electron"
     },
     "win": {
-      "target": "nsis",
+      "target": "portable",
       "signAndEditExecutable": false,
       "verifyUpdateCodeSignature": false
     },

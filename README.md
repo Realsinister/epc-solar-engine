@@ -26,12 +26,18 @@ This tool acts as your ultimate "pitch generator" for PV module procurement, cal
   - CBAM Import Tax Exposure calculations
   - **Elevator Pitch Generator:** Ready-to-copy executive summaries for stakeholders.
 
-## 🚀 Installation & Usage
-The application has been compiled into a single production `.exe` using PyInstaller and Electron-Builder.
+## 🆕 What's New in v0.1.0
+- **Interactive Sandbox:** The left sidebar inputs are now "sticky", allowing you to tweak simulation parameters on the fly without losing sight of the bottom charts.
+- **Dynamic Pareto Grid:** The Top 3 modules are displayed in a wide horizontal grid at the bottom. Clicking any module dynamically updates the radar charts, sensitivity analysis, and Executive Financial Pitch to strictly reflect that specific module's data.
+- **Smart Stale-State Animation:** The "Run Simulation" button instantly turns grayscale and shakes if you tweak inputs after a run, reminding you to update the simulation.
+- **Portable Architecture:** The software is now compiled into a standalone, portable `.exe` file that doesn't even require installation.
 
-1. Locate the standalone installer file: `EPC Solar Engine Setup.exe`
-2. **Double-click** to install it natively on Windows.
-3. Launch the app from the start menu or desktop shortcut. The background Python physics engine and React UI will spin up automatically!
+## 🚀 Launching the Software
+The application has been compiled into a single portable `.exe` using PyInstaller and Electron-Builder.
+
+1. Locate the standalone executable file: `EPC Solar Engine 0.1.0.exe` in the main folder.
+2. **Double-click** to run it natively on Windows (no installation required).
+3. The background Python physics engine and React UI will spin up automatically!
 
 ## 🛠️ Architecture
 - **Backend:** `FastAPI`, `Pydantic`, `Pandas` (Frozen into an executable via PyInstaller).

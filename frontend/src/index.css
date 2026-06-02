@@ -69,6 +69,28 @@ h1, h2, h3, h4 {
 }
 
 /* Form Controls */
+.pareto-item {
+  background: var(--bg-card);
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  font-size: 13px;
+  color: var(--text-main);
+  transition: all 0.2s;
+}
+
+.pareto-item:hover {
+  border-color: var(--accent-cyan);
+  background: rgba(59, 130, 246, 0.05);
+  transform: translateY(-2px);
+}
+
+.selected-pareto {
+  border: 2px solid var(--accent-blue) !important;
+  background: rgba(59, 130, 246, 0.15) !important;
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.2);
+}
+
 .input-glass {
   background: rgba(0, 0, 0, 0.2);
   border: 1px solid var(--border-light);
@@ -119,46 +141,203 @@ h1, h2, h3, h4 {
   filter: brightness(1.1);
 }
 
+.btn-stale {
+  background: linear-gradient(135deg, #374151, #1f2937); /* Black/White/Grayscale */
+  color: #9ca3af;
+  border: 1px solid #4b5563;
+  box-shadow: none;
+  animation: shake-pulse 3s infinite ease-in-out;
+}
+
+@keyframes shake-pulse {
+  0%, 100% { transform: translateX(0); }
+  2%, 6%, 10% { transform: translateX(-2px); box-shadow: 0 0 10px rgba(255,255,255,0.1); }
+  4%, 8% { transform: translateX(2px); }
+  12% { transform: translateX(0); }
+}
+
 .btn-primary:active {
   transform: translateY(0);
 }
 
 /* Layout Utilities */
-.dashboard-grid {
-  display: grid;
-  grid-template-columns: 320px 1fr;
-  gap: 24px;
+.app-wrapper {
+  display: flex;
   padding: 24px;
+  padding-top: 60px; /* Title bar space */
+  gap: 24px;
   min-height: 100vh;
-  margin-top: 20px; /* Title bar space */
+  transition: all 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+  width: 100%;
+  flex-direction: row; /* ALWAYS row to prevent chart blowout */
+}
+
+.app-wrapper.layout-home {
+  justify-content: center;
+  align-items: center;
+  padding-top: 250px; /* Space for the absolute hero title */
+}
+
+.app-wrapper.layout-dashboard {
+  justify-content: flex-start;
+  align-items: stretch;
 }
 
 .controls-sidebar {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  transition: all 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+  flex-shrink: 0;
+}
+
+.layout-home .controls-sidebar {
+  width: 900px;
+  transform: translateY(0);
+}
+
+.layout-dashboard .controls-sidebar {
+  width: 320px;
+  transform: translateY(0);
+  flex-shrink: 0;
+  position: sticky;
+  top: 84px; /* Title bar height + padding */
+  max-height: calc(100vh - 108px);
+  overflow-y: auto;
+}
+
+.leaderboard-panel {
+  transition: all 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.layout-home .leaderboard-panel {
+  opacity: 0;
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin: 0;
+  border-width: 0;
+}
+
+.layout-dashboard .leaderboard-panel {
+  opacity: 1;
+  max-height: 1000px;
+  flex-grow: 1;
 }
 
 .main-content {
   display: flex;
   flex-direction: column;
   gap: 24px;
+  transition: all 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+  flex-grow: 1;
+  overflow: hidden;
+  min-width: 0; /* Prevents flex children from blowing out container width */
+}
+
+.layout-home .main-content {
+  opacity: 0;
+  max-width: 0;
+  padding: 0;
+  margin: 0;
+  pointer-events: none;
+  transform: translateX(50px);
+}
+
+.layout-dashboard .main-content {
+  opacity: 1;
+  max-width: 2000px;
+  transform: translateX(0);
+}
+
+/* Physics Engine Dynamic Layout */
+.physics-inputs-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 20px;
+  transition: all 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* In home layout, inputs sit side-by-side */
+.layout-home .physics-inputs-grid > div {
+  flex: 1 1 calc(33% - 16px);
+  min-width: 250px;
+}
+
+/* Specificity fix so executive section always spans full width */
+.layout-home .physics-inputs-grid > div.executive-section,
+.layout-dashboard .physics-inputs-grid > div.executive-section {
+  flex: 1 1 100%;
+  margin-top: 10px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-light);
+}
+
+/* In dashboard layout, inputs stack vertically */
+.layout-dashboard .physics-inputs-grid > div {
+  flex: 1 1 100%;
+}
+
+/* Home Page Hero Header */
+.home-hero {
+  text-align: center;
+  position: absolute;
+  top: 120px;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  transition: all 0.5s ease;
+  width: 100%;
+}
+
+.home-hero.hidden-hero {
+  opacity: 0;
+  transform: translateY(-50px);
+  pointer-events: none;
 }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
-  height: 8px;
 }
+
 ::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.1);
+  background: transparent;
 }
+
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 4px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Pareto Wide Grid */
+.pareto-wide-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.pareto-item {
+  padding: 16px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--border-light);
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.pareto-item:hover {
+  background: rgba(59, 130, 246, 0.1);
+  border-color: var(--accent-blue);
+  transform: translateY(-2px);
 }
 
 /* Title Bar for Electron (draggable area) */

@@ -171,7 +171,7 @@ def analyze_module(dataset_uuid: str, request: CalculationRequest):
 
     # Run Executive Financial Model
     # Pass the calculated module row (with 'Net_GWP_kgCO2e' etc)
-    calc_row = df_calc.iloc[0].to_dict()
+    calc_row = module_scores.to_dict()
     exec_financials = ExecutiveFinancialModel.calculate_project_financials(
         module_row=calc_row,
         project_size_mwp=request.project_size_mwp,

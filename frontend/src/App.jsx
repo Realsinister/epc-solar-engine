@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Sliders, Zap, Leaf, Truck, Activity, Target } from 'lucide-react';
+import { Sliders, Zap, Leaf, Truck, Activity, Target, Sun, Mountain } from 'lucide-react';
 import { 
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell, 
   Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis 
@@ -26,18 +26,26 @@ function App() {
     opex_annual: 15.0,
     cbam_tax_rate_eur_t: 80.0,
     eol_recycling_rate_pct: 85.0,
-    transport_distance_km: 20000.0,
+    system_topology: "Fixed Tilt",
+    ground_albedo: "None",
     scenario: "Eco-Flagship (Minimize Carbon)",
     project_size_mwp: 50.0,
+    project_size_unit: "MWp",
     ppa_rate_eur_mwh: 45.0,
     discount_rate_pct: 5.0
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    
+    let finalValue = value;
+    if (value !== '' && name !== 'ground_albedo' && name !== 'system_topology' && name !== 'project_size_unit' && name !== 'scenario') {
+      finalValue = isNaN(value) ? value : Number(value);
+    }
+    
     setParams(prev => ({ 
       ...prev, 
-      [name]: value === '' ? '' : (isNaN(value) ? value : Number(value)) 
+      [name]: finalValue 
     }));
     if (hasSimulated) setIsStale(true);
   };
@@ -45,13 +53,23 @@ function App() {
   const calculateResults = async () => {
     setLoading(true);
     try {
+      const payload = { 
+        ...params, 
+        project_size_mwp: params.project_size_unit === 'kWp' ? params.project_size_mwp / 1000 : params.project_size_mwp,
+        ground_albedo: params.ground_albedo === "None" ? null : parseFloat(params.ground_albedo)
+      };
+      
       const response = await fetch('http://127.0.0.1:8000/api/calculate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(params)
+        body: JSON.stringify(payload)
       });
       const data = await response.json();
-      setResults(data.results.slice(0, 10)); // Keep top 10 for Leaderboard
+      const topResults = data.results.slice(0, 10).map(row => ({
+        ...row,
+        Short_Name: `${row.manufacturer.replace(/\s*(Co\.,?\s*Ltd\.?|Inc\.?|Corp\.?|LLC|GmbH|Company|Corporation)\b/gi, '').trim()} - ${row.module_power_Wp}W`
+      }));
+      setResults(topResults); // Keep top 10 for Leaderboard
       
       // Trigger UI slide animation
       setHasSimulated(true);
@@ -71,10 +89,16 @@ function App() {
     setSelectedModule(moduleRow);
     setAnalyzing(true);
     try {
+      const payload = { 
+        ...params, 
+        project_size_mwp: params.project_size_unit === 'kWp' ? params.project_size_mwp / 1000 : params.project_size_mwp,
+        ground_albedo: params.ground_albedo === "None" ? null : parseFloat(params.ground_albedo)
+      };
+      
       const response = await fetch(`http://127.0.0.1:8000/api/analyze/${moduleRow.dataset_uuid}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(params)
+        body: JSON.stringify(payload)
       });
       const data = await response.json();
       setAnalysisData(data);
@@ -127,8 +151,21 @@ function App() {
               </div>
               
               <div>
-                <label className="label-muted"><Truck size={14} style={{display:'inline', marginRight: '4px'}}/> Transport Distance (km)</label>
-                <input type="number" className="input-glass" name="transport_distance_km" value={params.transport_distance_km} onChange={handleChange} step="1000" />
+                <label className="label-muted"><Sun size={14} style={{display:'inline', marginRight: '4px'}}/> System Topology</label>
+                <select className="input-glass" name="system_topology" value={params.system_topology} onChange={handleChange}>
+                  <option value="Fixed Tilt">Fixed Tilt</option>
+                  <option value="Single-Axis Tracker">Single-Axis Tracker</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="label-muted"><Mountain size={14} style={{display:'inline', marginRight: '4px'}}/> Ground Albedo (Rear)</label>
+                <select className="input-glass" name="ground_albedo" value={params.ground_albedo} onChange={handleChange}>
+                  <option value="None">Disabled (No Filter)</option>
+                  <option value="0.15">0.15 - Grass / Dark Soil</option>
+                  <option value="0.30">0.30 - Concrete / Sand</option>
+                  <option value="0.65">0.65 - White Roof / Snow</option>
+                </select>
               </div>
 
               <div>
@@ -141,8 +178,14 @@ function App() {
               </div>
                 
               <div>
-                <label className="label-muted">Project Size (MWp)</label>
-                <input type="number" className="input-glass" name="project_size_mwp" value={params.project_size_mwp} onChange={handleChange} step="5" />
+                <label className="label-muted">Project Size</label>
+                <div style={{ display: 'flex', gap: '8px' }}>
+                  <input type="number" className="input-glass" name="project_size_mwp" value={params.project_size_mwp} onChange={handleChange} step={params.project_size_unit === 'kWp' ? "10" : "5"} style={{ flex: 1 }} />
+                  <select className="input-glass" name="project_size_unit" value={params.project_size_unit} onChange={handleChange} style={{ width: '80px', padding: '8px' }}>
+                    <option value="MWp">MWp</option>
+                    <option value="kWp">kWp</option>
+                  </select>
+                </div>
               </div>
               
               <div>
@@ -166,18 +209,19 @@ function App() {
         <main className="main-content">
           
           {/* TOP BAR CHART */}
-          <div className="glass-panel" style={{ height: '300px' }}>
+          <div className="glass-panel" style={{ height: '300px', position: 'relative' }}>
             <h3 style={{ margin: '0 0 16px 0', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '8px' }}>
               <Target size={18} /> Market Overview (TOPSIS Score)
             </h3>
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={results} layout="vertical" margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
                 <XAxis type="number" domain={[0, 100]} stroke="var(--border-highlight)" tick={{ fill: 'var(--text-muted)' }} />
-                <YAxis dataKey="Display_Name" type="category" width={180} stroke="var(--text-muted)" style={{fontSize: '11px'}} />
+                <YAxis dataKey="Short_Name" type="category" width={180} stroke="var(--text-muted)" style={{fontSize: '11px'}} />
                 <Tooltip 
                   cursor={{fill: 'rgba(255,255,255,0.05)'}} 
                   contentStyle={{ backgroundColor: 'var(--bg-panel)', border: '1px solid var(--border-light)', borderRadius: '8px' }}
                   itemStyle={{ color: 'var(--text-main)' }}
+                  labelFormatter={(label, payload) => payload?.[0]?.payload?.Display_Name || label}
                 />
                 <Bar dataKey="TOPSIS_Score" radius={[0, 4, 4, 0]}>
                   {results.map((entry, index) => (
@@ -195,6 +239,13 @@ function App() {
                 </defs>
               </BarChart>
             </ResponsiveContainer>
+            {results.length === 0 && (
+              <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center', color: 'var(--text-muted)' }}>
+                <Mountain size={32} style={{ opacity: 0.5, marginBottom: '8px' }} />
+                <p>No panels match your filter criteria.</p>
+                <p style={{ fontSize: '11px', opacity: 0.7 }}>Try adjusting Albedo or Project Size.</p>
+              </div>
+            )}
           </div>
 
           {/* DEEP DIVE SECTION */}
@@ -262,7 +313,7 @@ function App() {
                 {/* EXECUTIVE FINANCIAL SUMMARY */}
                 <div className="glass-panel" style={{ gridColumn: '1 / -1' }}>
                   <h3 style={{ marginBottom: '12px', color: 'var(--accent-purple)', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <Activity size={18} /> Executive Financial Projection ({params.project_size_mwp} MWp)
+                    <Activity size={18} /> Executive Financial Projection ({params.project_size_mwp} {params.project_size_unit})
                   </h3>
                   
                   {analyzing ? (

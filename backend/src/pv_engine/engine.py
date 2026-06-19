@@ -83,7 +83,14 @@ class PVEngine:
                 deg_rate = 0.50
                 weight_t = 0.08
                 
-            return pd.Series({'Panel_Temp_Coef': temp_coef, 'Annual_Degradation_Pct': deg_rate, 'Weight_t_kWp': weight_t})
+            is_bifacial = any(k in desc for k in ['bifacial', 'glass-glass', 'dual-glass'])
+                
+            return pd.Series({
+                'Panel_Temp_Coef': temp_coef, 
+                'Annual_Degradation_Pct': deg_rate, 
+                'Weight_t_kWp': weight_t,
+                'Is_Bifacial': is_bifacial
+            })
             
         physics_df = df.apply(parse_physics, axis=1)
         df = pd.concat([df, physics_df], axis=1)
@@ -111,12 +118,16 @@ class PVEngine:
         opex_annual: float,
         cbam_tax_rate_eur_t: float = 0.0,
         eol_recycling_rate_pct: float = 0.0,
-        transport_distance_km: float = 0.0,
-        transport_emission_factor: float = 0.010 # kgCO2e / tonne-km
+        system_topology: str = "Fixed Tilt",
+        ground_albedo: float = None,
+        transport_emission_factor: float = 0.010, # kgCO2e / tonne-km
+        project_size_mwp: float = 50.0
     ) -> pd.DataFrame:
         """
         Calculates LCOE, Carbon Intensity, and Suitability scores with EoL and CBAM.
         """
+        transport_distance_km = 20000.0 # Hardcoded scope 3 assumption
+        
         if df.empty or 'GWP_total_A1A3_per_kWp_kgCO2e' not in df.columns:
             return df
 
@@ -131,7 +142,28 @@ class PVEngine:
         
         # Apply temperature penalty per panel
         df['Dynamic_Temp_Loss_Pct'] = np.where(temp_diff > 0, temp_diff * abs(df['Panel_Temp_Coef']), 0)
-        df['Effective_Yield'] = base_irradiance * (1 - (df['Dynamic_Temp_Loss_Pct'] / 100))
+        
+        # --- System Topology Multipliers ---
+        if system_topology == "Single-Axis Tracker":
+            tracker_yield_multiplier = 1.15
+            tracker_bos_multiplier = 1.10
+            tracker_opex_multiplier = 1.20
+        else:
+            tracker_yield_multiplier = 1.0
+            tracker_bos_multiplier = 1.0
+            tracker_opex_multiplier = 1.0
+            
+        # --- Bifacial Gain Physics ---
+        if ground_albedo is not None:
+            df['Bifacial_Gain_Pct'] = np.where(
+                df['Is_Bifacial'] == True,
+                ground_albedo * 0.70 * 0.90 * 100, # Albedo * Bifaciality Factor * View Factor
+                0.0
+            )
+        else:
+            df['Bifacial_Gain_Pct'] = 0.0
+        
+        df['Effective_Yield'] = base_irradiance * (1 - (df['Dynamic_Temp_Loss_Pct'] / 100)) * tracker_yield_multiplier * (1 + (df['Bifacial_Gain_Pct'] / 100))
         
         # --- Scope 3 Logistics (Transport) ---
         df['Logistics_GWP_kgCO2e'] = df['Weight_t_kWp'] * transport_distance_km * transport_emission_factor
@@ -152,6 +184,17 @@ class PVEngine:
         # 1. Environmental: Carbon Intensity (gCO2e/kWh)
         df['Carbon_Intensity_Mean'] = (df['Net_GWP_kgCO2e'] * 1000) / df['Production_kWh_kWp']
         
+        # --- Economies of Scale (BOS & OPEX Optimization) ---
+        if project_size_mwp < 1.0:
+            scale_multiplier = 1.20 # 20% premium for tiny/residential projects
+        elif project_size_mwp > 20.0:
+            scale_multiplier = 0.90 # 10% discount for massive utility scale
+        else:
+            scale_multiplier = 1.0
+            
+        scaled_bos = bos_cost_wp * scale_multiplier * tracker_bos_multiplier
+        scaled_opex = opex_annual * scale_multiplier * tracker_opex_multiplier
+
         # 2. Economic: LCOE (€/MWh)
         df['Estimated_Price_Wp'] = avg_price_wp * (1 + (df['Efficiency_Pct'] - 20) / 100)
         
@@ -159,19 +202,54 @@ class PVEngine:
         # Tax = (Net_GWP_kgCO2e / 1000) * CBAM Rate per tonne 
         df['CBAM_Penalty_EUR_kWp'] = (df['Net_GWP_kgCO2e'] / 1000) * cbam_tax_rate_eur_t
         
-        capex = (df['Estimated_Price_Wp'] + bos_cost_wp) * 1000 + df['CBAM_Penalty_EUR_kWp'] # €/kWp
-        opex = opex_annual * lifetime # Total lifetime OPEX per kWp
+        capex = (df['Estimated_Price_Wp'] + scaled_bos) * 1000 + df['CBAM_Penalty_EUR_kWp'] # €/kWp
+        opex = scaled_opex * lifetime # Total lifetime OPEX per kWp
         
         # ((CAPEX + OPEX) / production) * 1000 to get €/MWh
         df['LCOE_EUR_MWh'] = ((capex + opex) / df['Production_kWh_kWp']) * 1000
+
+        return df
         
+    @staticmethod
+    def filter_by_project_size(df: pd.DataFrame, project_size_mwp: float, ground_albedo: float = None) -> pd.DataFrame:
+        """
+        Hard filtering layer to eliminate modules that are physically incompatible
+        with the scale of the project, prior to running the MCDA scenario optimization.
+        Also filters out monofacial modules if the user has explicitly selected a ground albedo target.
+        """
+        if df.empty or 'module_power_Wp' not in df.columns:
+            return df
+            
+        initial_count = len(df)
+        
+        # Bifaciality constraint
+        if ground_albedo is not None:
+            df = df[df['Is_Bifacial'].astype(str).str.lower() == 'true'].copy()
+        
+        if project_size_mwp < 1.0:
+            # SME / Commercial: Filter out massive utility-scale panels
+            df = df[df['module_power_Wp'] <= 450]
+        elif project_size_mwp > 10.0:
+            # Utility Scale: Filter out tiny residential panels
+            df = df[df['module_power_Wp'] >= 400]
+            
         return df
 
     @staticmethod
-    def normalize_scores(df: pd.DataFrame, scenario: str) -> pd.DataFrame:
+    def normalize_scores(df: pd.DataFrame, scenario: str) -> tuple[pd.DataFrame, tuple[float, float, float]]:
         """
         Applies MCDA normalization and weighting based on scenario.
         """
+        if scenario == "Eco-Flagship (Minimize Carbon)":
+            w_eco, w_cost, w_tech = 0.70, 0.15, 0.15
+        elif scenario == "Utility Scale (Lowest LCOE)":
+            w_eco, w_cost, w_tech = 0.20, 0.60, 0.20
+        else: # Space Constrained
+            w_eco, w_cost, w_tech = 0.20, 0.20, 0.60
+
+        if df.empty:
+            return df, (w_eco, w_cost, w_tech)
+
         df = df.copy()
         
         def normalize(series, invert=False):
@@ -185,12 +263,6 @@ class PVEngine:
         df['Score_Cost'] = normalize(df['LCOE_EUR_MWh'], invert=True)
         df['Score_Tech'] = normalize(df['Efficiency_Pct'], invert=False)
 
-        if scenario == "Eco-Flagship (Minimize Carbon)":
-            w_eco, w_cost, w_tech = 0.70, 0.15, 0.15
-        elif scenario == "Utility Scale (Lowest LCOE)":
-            w_eco, w_cost, w_tech = 0.20, 0.60, 0.20
-        else: # Space Constrained
-            w_eco, w_cost, w_tech = 0.20, 0.20, 0.60
 
         df['Suitability_Index'] = (
             (df['Score_Eco'] * w_eco) + 
@@ -206,6 +278,9 @@ class PVEngine:
         Technique for Order of Preference by Similarity to Ideal Solution (TOPSIS).
         A more robust MCDA method for industry decision making.
         """
+        if df.empty:
+            return df
+            
         df = df.copy()
         criteria_cols = ['Carbon_Intensity_Mean', 'LCOE_EUR_MWh', 'Efficiency_Pct']
         

@@ -23,3 +23,6 @@ EPC_Solar_Engine_Installer.exe
 # OS specific
 .DS_Store
 Thumbs.db
+
+# Legacy Archived Modules
+_legacy_api_integrations/

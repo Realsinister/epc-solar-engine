@@ -49,6 +49,7 @@ The Python engine's architecture has been strictly modularized. Future expansion
 - **Inverter Clipping Models**
 - **Hourly Irradiance Profiles**
 - **Battery Storage LCA Integration**
+- **User Profiles & Simulation History Database:** SQLite-backed local repository to store historical simulation inputs and results, supporting side-by-side comparative analysis of multiple runs.
 
 ---
 *Developed as a premium solution for solar engineering procurement.*

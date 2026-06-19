@@ -2,6 +2,7 @@ import os
 import sys
 import pandas as pd
 import numpy as np
+from typing import Optional
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -26,44 +27,49 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Global variables for caching data
-MASTER_DF = None
+def load_data_from_parquet(project_size_mwp: float = None, ground_albedo: float = None):
+    parquet_path = os.path.join(os.path.dirname(__file__), "src", "pv_engine", "data", "pv_database_v2.parquet")
+    
+    filters = []
+    
+    # 1. Albedo / Bifaciality Filter (Instant physical exclusion)
+    if ground_albedo is not None:
+         filters.append(('Is_Bifacial', '==', 'true'))
+         
+    # 2. Project Size Filter (SME vs Utility)
+    if project_size_mwp is not None:
+        if project_size_mwp < 1.0: # SME / Commercial
+            filters.append(('module_power_Wp', '<=', 450.0))
+        elif project_size_mwp > 10.0: # Utility Scale
+            filters.append(('module_power_Wp', '>=', 400.0))
 
-def load_data():
-    global MASTER_DF
-    if MASTER_DF is None:
-        wb = os.path.join(os.path.dirname(__file__), "data", "EPD_Hub_V3_PV_master_curated_v1.xlsx")
-        try:
-            df = pd.read_excel(wb, sheet_name="INDICATORS_NORMALIZED")
-            df = PVEngine.process_dataframe(df)
-            MASTER_DF = PVEngine.validate_data(df)
-        except Exception as e:
-            print(f"Error loading master dataset: {e}")
-            MASTER_DF = pd.DataFrame()
-    return MASTER_DF
+    if not filters:
+        filters = None
+        
+    try:
+        # PyArrow Predicate Pushdown: Only loads the rows that match the filters!
+        df = pd.read_parquet(parquet_path, filters=filters)
+        return df
+    except Exception as e:
+        print(f"Error loading parquet dataset: {e}")
+        return pd.DataFrame()
 
 class CalculationRequest(BaseModel):
     base_irradiance: float
     ambient_temp_c: float
     lifetime: int
     avg_price_wp: float
-    bos_cost_wp: float
-    opex_annual: float
-    cbam_tax_rate_eur_t: float
-    eol_recycling_rate_pct: float
-    transport_distance_km: float
-    scenario: str
+    bos_cost_wp: float = 0.45
+    opex_annual: float = 15.0
+    cbam_tax_rate_eur_t: float = 80.0
+    eol_recycling_rate_pct: float = 85.0
+    system_topology: str = "Fixed Tilt"
+    ground_albedo: Optional[float] = None
+    scenario: str = "Eco-Flagship (Minimize Carbon)"
     project_size_mwp: float = 50.0
     ppa_rate_eur_mwh: float = 45.0
     discount_rate_pct: float = 5.0
 
-@app.on_event("startup")
-def startup_event():
-    # Verify API key is loaded discreetly from .env
-    api_key = os.getenv("ENVIRONDEC_API_KEY")
-    if api_key:
-        print("Environdec API Key loaded securely.")
-    load_data()
 
 @app.get("/")
 def read_root():
@@ -71,15 +77,18 @@ def read_root():
 
 @app.get("/api/modules")
 def get_modules():
-    df = load_data()
+    df = load_data_from_parquet()
     # Replace NaN with None for JSON serialization
     return df.replace({np.nan: None}).to_dict(orient="records")
 
 @app.post("/api/calculate")
 def calculate_leaderboard(request: CalculationRequest):
-    df = load_data()
+    df = load_data_from_parquet(project_size_mwp=request.project_size_mwp, ground_albedo=request.ground_albedo)
     if df.empty:
         raise HTTPException(status_code=500, detail="Database not loaded")
+        
+    if request.project_size_mwp <= 0:
+        raise HTTPException(status_code=400, detail="Project size must be greater than 0")
 
     df_calc = PVEngine.calculate_metrics(
         df, 
@@ -91,8 +100,12 @@ def calculate_leaderboard(request: CalculationRequest):
         opex_annual=request.opex_annual,
         cbam_tax_rate_eur_t=request.cbam_tax_rate_eur_t,
         eol_recycling_rate_pct=request.eol_recycling_rate_pct,
-        transport_distance_km=request.transport_distance_km
+        system_topology=request.system_topology,
+        ground_albedo=request.ground_albedo,
+        project_size_mwp=request.project_size_mwp
     )
+    
+    df_calc = PVEngine.filter_by_project_size(df_calc, request.project_size_mwp, ground_albedo=request.ground_albedo)
 
     df_calc, weights = PVEngine.normalize_scores(df_calc, request.scenario)
     df_calc = PVEngine.calculate_topsis(df_calc, request.scenario)
@@ -105,13 +118,16 @@ def calculate_leaderboard(request: CalculationRequest):
 
 @app.post("/api/analyze/{dataset_uuid}")
 def analyze_module(dataset_uuid: str, request: CalculationRequest):
-    df = load_data()
+    df = load_data_from_parquet(project_size_mwp=request.project_size_mwp, ground_albedo=request.ground_albedo)
     if df.empty:
         raise HTTPException(status_code=500, detail="Database not loaded")
         
     module_row = df[df['dataset_uuid'] == dataset_uuid]
     if module_row.empty:
         raise HTTPException(status_code=404, detail="Module not found")
+        
+    if request.project_size_mwp <= 0:
+        raise HTTPException(status_code=400, detail="Project size must be greater than 0")
         
     df_calc = PVEngine.calculate_metrics(
         module_row, 
@@ -123,7 +139,9 @@ def analyze_module(dataset_uuid: str, request: CalculationRequest):
         opex_annual=request.opex_annual,
         cbam_tax_rate_eur_t=request.cbam_tax_rate_eur_t,
         eol_recycling_rate_pct=request.eol_recycling_rate_pct,
-        transport_distance_km=request.transport_distance_km
+        system_topology=request.system_topology,
+        ground_albedo=request.ground_albedo,
+        project_size_mwp=request.project_size_mwp
     )
     
     # We need the full dataframe to normalize scores properly against the dataset
@@ -137,8 +155,12 @@ def analyze_module(dataset_uuid: str, request: CalculationRequest):
         opex_annual=request.opex_annual,
         cbam_tax_rate_eur_t=request.cbam_tax_rate_eur_t,
         eol_recycling_rate_pct=request.eol_recycling_rate_pct,
-        transport_distance_km=request.transport_distance_km
+        system_topology=request.system_topology,
+        ground_albedo=request.ground_albedo,
+        project_size_mwp=request.project_size_mwp
     )
+    
+    full_calc = PVEngine.filter_by_project_size(full_calc, request.project_size_mwp, ground_albedo=request.ground_albedo)
     full_calc, _ = PVEngine.normalize_scores(full_calc, request.scenario)
     
     module_scores = full_calc[full_calc['dataset_uuid'] == dataset_uuid].iloc[0]
@@ -159,7 +181,9 @@ def analyze_module(dataset_uuid: str, request: CalculationRequest):
         'opex_annual': request.opex_annual,
         'cbam_tax_rate_eur_t': request.cbam_tax_rate_eur_t,
         'eol_recycling_rate_pct': request.eol_recycling_rate_pct,
-        'transport_distance_km': request.transport_distance_km
+        'transport_distance_km': 20000.0,
+        'system_topology': request.system_topology,
+        'ground_albedo': request.ground_albedo
     }
     
     sens_df = PVEngine.run_sensitivity_analysis(module_row.iloc[0], base_params, variation=0.20)
@@ -190,4 +214,6 @@ def analyze_module(dataset_uuid: str, request: CalculationRequest):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("api:app", host="127.0.0.1", port=8000, reload=True)
+    import multiprocessing
+    multiprocessing.freeze_support()
+    uvicorn.run(app, host="127.0.0.1", port=8000)

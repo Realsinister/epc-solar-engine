@@ -49,6 +49,7 @@ The Python engine's architecture has been strictly modularized. Future expansion
 - **Inverter Clipping Models**
 - **Hourly Irradiance Profiles**
 - **Battery Storage LCA Integration**
+- **AI Predictive Integration:** Machine Learning models to forecast yield degradation and predict long-term financial impacts based on local climate data.
 - **User Profiles & Simulation History Database:** SQLite-backed local repository to store historical simulation inputs and results, supporting side-by-side comparative analysis of multiple runs.
 
 ---

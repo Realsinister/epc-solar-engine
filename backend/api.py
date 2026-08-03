@@ -15,6 +15,7 @@ load_dotenv()
 sys.path.append(os.path.join(os.path.dirname(__file__), "src"))
 from pv_engine.engine import PVEngine
 from pv_engine.financial_model import ExecutiveFinancialModel
+from pv_engine.history import history_db
 
 app = FastAPI(title="EPC Solar Engine Premium API")
 
@@ -111,8 +112,13 @@ def calculate_leaderboard(request: CalculationRequest):
     df_calc = PVEngine.calculate_topsis(df_calc, request.scenario)
 
     top_panels = df_calc.head(50).replace({np.nan: None}).to_dict(orient="records")
+    
+    weights_dict = {"eco": weights[0], "cost": weights[1], "tech": weights[2]}
+    # Log to history
+    history_db.log_simulation(request.model_dump(), top_panels, weights_dict)
+    
     return {
-        "weights": {"eco": weights[0], "cost": weights[1], "tech": weights[2]},
+        "weights": weights_dict,
         "results": top_panels
     }
 
@@ -211,6 +217,17 @@ def analyze_module(dataset_uuid: str, request: CalculationRequest):
         },
         "executive": exec_financials
     }
+
+@app.get("/api/history")
+def get_history():
+    return history_db.get_history()
+
+@app.get("/api/history/{sim_id}")
+def get_simulation_history(sim_id: str):
+    data = history_db.get_simulation(sim_id)
+    if not data:
+        raise HTTPException(status_code=404, detail="Simulation not found")
+    return data
 
 if __name__ == "__main__":
     import uvicorn

@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
-import { Sliders, Zap, Leaf, Truck, Activity, Target, Sun, Mountain } from 'lucide-react';
+import { Sliders, Zap, Leaf, Truck, Activity, Target, Sun, Mountain, Clock, LayoutDashboard } from 'lucide-react';
 import { 
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell, 
   Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis 
 } from 'recharts';
+import HistoryCompare from './HistoryCompare';
 
 function App() {
+  const [activeTab, setActiveTab] = useState('dashboard');
   const [loading, setLoading] = useState(false);
   const [analyzing, setAnalyzing] = useState(false);
   const [results, setResults] = useState([]);
@@ -125,10 +127,31 @@ function App() {
         <p className="label-muted" style={{ fontSize: '1rem', marginTop: '10px' }}>MCDA Physics & Executive Financial Optimizer</p>
       </div>
 
+      {hasSimulated && (
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '16px', marginBottom: '20px', zIndex: 10, position: 'relative' }}>
+          <button 
+            className={`tab-btn ${activeTab === 'dashboard' ? 'tab-btn-active' : ''}`} 
+            onClick={() => setActiveTab('dashboard')}
+          >
+            <LayoutDashboard size={18} /> Dashboard
+          </button>
+          <button 
+            className={`tab-btn ${activeTab === 'history' ? 'tab-btn-active' : ''}`} 
+            onClick={() => setActiveTab('history')}
+          >
+            <Clock size={18} /> History & Compare
+          </button>
+        </div>
+      )}
+
       <div className={`app-wrapper ${hasSimulated ? 'layout-dashboard' : 'layout-home'}`}>
         
-        {/* SIDEBAR CONTROLS */}
-        <aside className="controls-sidebar">
+        {activeTab === 'history' ? (
+          <HistoryCompare />
+        ) : (
+          <>
+            {/* SIDEBAR CONTROLS */}
+            <aside className="controls-sidebar">
           <div className="glass-panel">
             <h2 style={{ display: 'flex', alignItems: 'center', gap: '8px', margin: '0 0 20px 0' }}>
               <Sliders size={20} color="var(--accent-cyan)" />
@@ -374,6 +397,8 @@ function App() {
           )}
 
         </main>
+        </>
+        )}
       </div>
     </>
   );

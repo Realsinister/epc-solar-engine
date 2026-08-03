@@ -58,6 +58,12 @@ class ExecutiveFinancialModel:
             revenue = yearly_production_mwh * ppa_rate_eur_mwh
             net_cash_flow = revenue - total_annual_opex
             
+            # Year 15 Inverter Replacement CAPEX reinvestment with 10% recycling credit
+            inverter_capex_kwp = module_row.get('Inverter_CAPEX_kWp', 40.0)
+            if year == 15 and inverter_capex_kwp > 0:
+                inverter_reinvest = (inverter_capex_kwp * 0.90) * total_kwp # 10% EoL recycling credit
+                net_cash_flow -= inverter_reinvest
+            
             cash_flows.append(net_cash_flow)
             total_lifetime_revenue += revenue
             cumulative_cash += net_cash_flow

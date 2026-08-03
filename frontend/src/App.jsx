@@ -18,6 +18,11 @@ function App() {
   const [selectedModule, setSelectedModule] = useState(null);
   const [analysisData, setAnalysisData] = useState(null);
 
+  // Inverter & System State
+  const [inverters, setInverters] = useState([]);
+  const [selectedInverterId, setSelectedInverterId] = useState('auto');
+  const [targetDcAcRatio, setTargetDcAcRatio] = useState(1.25);
+
   // Physics Parameters State
   const [params, setParams] = useState({
     base_irradiance: 1050,
@@ -55,10 +60,13 @@ function App() {
   const calculateResults = async () => {
     setLoading(true);
     try {
+      const actualSizeMwp = params.project_size_unit === 'kWp' ? params.project_size_mwp / 1000 : params.project_size_mwp;
       const payload = { 
         ...params, 
-        project_size_mwp: params.project_size_unit === 'kWp' ? params.project_size_mwp / 1000 : params.project_size_mwp,
-        ground_albedo: params.ground_albedo === "None" ? null : parseFloat(params.ground_albedo)
+        project_size_mwp: actualSizeMwp,
+        ground_albedo: params.ground_albedo === "None" ? null : parseFloat(params.ground_albedo),
+        inverter_id: selectedInverterId,
+        target_dc_ac_ratio: targetDcAcRatio
       };
       
       const response = await fetch('http://127.0.0.1:8000/api/calculate', {
@@ -91,10 +99,13 @@ function App() {
     setSelectedModule(moduleRow);
     setAnalyzing(true);
     try {
+      const actualSizeMwp = params.project_size_unit === 'kWp' ? params.project_size_mwp / 1000 : params.project_size_mwp;
       const payload = { 
         ...params, 
-        project_size_mwp: params.project_size_unit === 'kWp' ? params.project_size_mwp / 1000 : params.project_size_mwp,
-        ground_albedo: params.ground_albedo === "None" ? null : parseFloat(params.ground_albedo)
+        project_size_mwp: actualSizeMwp,
+        ground_albedo: params.ground_albedo === "None" ? null : parseFloat(params.ground_albedo),
+        inverter_id: selectedInverterId,
+        target_dc_ac_ratio: targetDcAcRatio
       };
       
       const response = await fetch(`http://127.0.0.1:8000/api/analyze/${moduleRow.dataset_uuid}`, {
@@ -110,10 +121,19 @@ function App() {
     setAnalyzing(false);
   };
 
-  // Wait for user to explicitly click Run to show animation
   useEffect(() => {
-    // calculateResults();
-  }, []);
+    const fetchInverters = async () => {
+      try {
+        const actualSize = params.project_size_unit === 'kWp' ? params.project_size_mwp / 1000 : params.project_size_mwp;
+        const res = await fetch(`http://127.0.0.1:8000/api/inverters?project_size_mwp=${actualSize}`);
+        const data = await res.json();
+        setInverters(data);
+      } catch (err) {
+        console.error("Failed to load inverters", err);
+      }
+    };
+    fetchInverters();
+  }, [params.project_size_mwp, params.project_size_unit]);
 
   return (
     <>
@@ -194,6 +214,39 @@ function App() {
               <div>
                 <label className="label-muted"><Zap size={14} style={{display:'inline', marginRight: '4px'}}/> Lifetime (Years)</label>
                 <input type="number" className="input-glass" name="lifetime" value={params.lifetime} onChange={handleChange} />
+              </div>
+
+              <div className="executive-section">
+                <h4 style={{ color: 'var(--accent-cyan)', marginBottom: '12px' }}>Inverter & BOS Configuration</h4>
+              </div>
+
+              <div>
+                <label className="label-muted">Inverter Selection</label>
+                <select 
+                  className="input-glass" 
+                  value={selectedInverterId} 
+                  onChange={(e) => { setSelectedInverterId(e.target.value); if (hasSimulated) setIsStale(true); }}
+                >
+                  <option value="auto">⭐ Auto-Pairing (Optimal Match for {params.project_size_mwp} {params.project_size_unit})</option>
+                  {inverters.map((inv) => (
+                    <option key={inv.inverter_id} value={inv.inverter_id}>
+                      {inv.is_auto_paired ? '⭐ ' : ''}{inv.manufacturer} {inv.model_name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label className="label-muted">Target DC/AC Ratio (ILR)</label>
+                <input 
+                  type="number" 
+                  className="input-glass" 
+                  value={targetDcAcRatio} 
+                  onChange={(e) => { setTargetDcAcRatio(parseFloat(e.target.value) || 1.25); if (hasSimulated) setIsStale(true); }} 
+                  step="0.05" 
+                  min="1.0" 
+                  max="1.5" 
+                />
               </div>
 
               <div className="executive-section">
@@ -367,8 +420,36 @@ function App() {
                       </div>
                     </div>
                   ) : null}
+                {/* SYSTEM CARBON STACKED BREAKDOWN CHART */}
+                <div className="glass-panel" style={{ gridColumn: '1 / -1' }}>
+                  <h3 style={{ marginBottom: '12px', color: 'var(--accent-cyan)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <Leaf size={18} /> System Embodied Carbon Breakdown (kgCO2e/kWp)
+                  </h3>
+                  
+                  {analyzing ? (
+                    <div style={{ color: 'var(--text-muted)' }}>Calculating Carbon Footprint Stack...</div>
+                  ) : analysisData?.gwp_breakdown ? (
+                    <div style={{ height: '220px', width: '100%' }}>
+                      <ResponsiveContainer width="100%" height="100%">
+                        <BarChart data={[{
+                          name: selectedModule?.Display_Name || 'Selected System',
+                          Module: analysisData.gwp_breakdown[0].gwp,
+                          Inverter: analysisData.gwp_breakdown[1].gwp,
+                          BOS: analysisData.gwp_breakdown[2].gwp
+                        }]} layout="vertical" margin={{ top: 10, right: 30, left: 100, bottom: 5 }}>
+                          <XAxis type="number" stroke="var(--border-highlight)" tick={{ fill: 'var(--text-muted)' }} />
+                          <YAxis dataKey="name" type="category" width={180} stroke="var(--text-muted)" style={{fontSize: '11px'}} />
+                          <Tooltip 
+                            contentStyle={{ backgroundColor: 'var(--bg-panel)', border: '1px solid var(--border-highlight)', borderRadius: '8px' }}
+                          />
+                          <Bar dataKey="Module" stackId="a" fill="#3b82f6" name="PV Module Net (kgCO2e/kWp)" />
+                          <Bar dataKey="Inverter" stackId="a" fill="#8b5cf6" name="Inverter System (kgCO2e/kWp)" />
+                          <Bar dataKey="BOS" stackId="a" fill="#06b6d4" name="BOS & Racking (kgCO2e/kWp)" />
+                        </BarChart>
+                      </ResponsiveContainer>
+                    </div>
+                  ) : null}
                 </div>
-              </div>
 
               {/* PARETO MODULES (Now in Main Deck) */}
               <div className="glass-panel" style={{ marginTop: '24px' }}>

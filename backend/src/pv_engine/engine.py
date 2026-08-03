@@ -3,6 +3,8 @@ import numpy as np
 from typing import Dict, Any, Optional, Tuple
 from .schemas import PVModuleSchema
 from .logger import get_logger
+from .inverter_engine import InverterEngine
+from .bos_engine import BOSEngine
 import pandera as pa
 
 logger = get_logger(__name__)
@@ -121,7 +123,9 @@ class PVEngine:
         system_topology: str = "Fixed Tilt",
         ground_albedo: float = None,
         transport_emission_factor: float = 0.010, # kgCO2e / tonne-km
-        project_size_mwp: float = 50.0
+        project_size_mwp: float = 50.0,
+        inverter_id: str = "auto",
+        target_dc_ac_ratio: float = 1.25
     ) -> pd.DataFrame:
         """
         Calculates LCOE, Carbon Intensity, and Suitability scores with EoL and CBAM.
@@ -143,34 +147,32 @@ class PVEngine:
         # Apply temperature penalty per panel
         df['Dynamic_Temp_Loss_Pct'] = np.where(temp_diff > 0, temp_diff * abs(df['Panel_Temp_Coef']), 0)
         
-        # --- System Topology Multipliers ---
-        if system_topology == "Single-Axis Tracker":
-            tracker_yield_multiplier = 1.15
-            tracker_bos_multiplier = 1.10
-            tracker_opex_multiplier = 1.20
+        # --- Inverter & BOS Integration ---
+        if inverter_id == "auto" or not inverter_id:
+            inverter_data = InverterEngine.auto_pair_inverter(project_size_mwp)
         else:
-            tracker_yield_multiplier = 1.0
-            tracker_bos_multiplier = 1.0
-            tracker_opex_multiplier = 1.0
+            df_inv = InverterEngine.load_database()
+            match = df_inv[df_inv['inverter_id'] == inverter_id]
+            inverter_data = match.iloc[0].to_dict() if not match.empty else InverterEngine.auto_pair_inverter(project_size_mwp)
             
-        # --- Bifacial Gain Physics ---
-        if ground_albedo is not None:
-            df['Bifacial_Gain_Pct'] = np.where(
-                df['Is_Bifacial'] == True,
-                ground_albedo * 0.70 * 0.90 * 100, # Albedo * Bifaciality Factor * View Factor
-                0.0
-            )
-        else:
-            df['Bifacial_Gain_Pct'] = 0.0
-        
-        df['Effective_Yield'] = base_irradiance * (1 - (df['Dynamic_Temp_Loss_Pct'] / 100)) * tracker_yield_multiplier * (1 + (df['Bifacial_Gain_Pct'] / 100))
+        inv_perf = InverterEngine.calculate_inverter_performance(inverter_data, target_dc_ac_ratio)
+        bos_perf = BOSEngine.get_bos_performance(system_topology)
+
+        system_eff = inv_perf['euro_efficiency'] * bos_perf['bos_electrical_efficiency'] * (1 - (inv_perf['clipping_loss_pct'] / 100.0))
+        df['Effective_Yield'] = base_irradiance * (1 - (df['Dynamic_Temp_Loss_Pct'] / 100)) * bos_perf['yield_multiplier'] * (1 + (df['Bifacial_Gain_Pct'] / 100)) * system_eff
         
         # --- Scope 3 Logistics (Transport) ---
         df['Logistics_GWP_kgCO2e'] = df['Weight_t_kWp'] * transport_distance_km * transport_emission_factor
         
-        # --- End of Life (EoL) Circularity ---
+        # --- System Carbon Footprint (Module + Inverter + BOS) ---
         max_eol_credit_factor = 0.15 
-        df['Net_GWP_kgCO2e'] = (df['GWP_total_A1A3_per_kWp_kgCO2e'] + df['Logistics_GWP_kgCO2e']) * (1 - (max_eol_credit_factor * (eol_recycling_rate_pct / 100)))
+        df['GWP_Inverter_kgCO2e'] = inv_perf['inverter_gwp_kgco2e_per_kwp']
+        df['GWP_BOS_kgCO2e'] = bos_perf['total_bos_gwp_kgco2e_per_kwp']
+        df['GWP_Module_Net_kgCO2e'] = (df['GWP_total_A1A3_per_kWp_kgCO2e'] + df['Logistics_GWP_kgCO2e']) * (1 - (max_eol_credit_factor * (eol_recycling_rate_pct / 100)))
+        
+        # Total System GWP
+        df['Net_GWP_kgCO2e'] = df['GWP_Module_Net_kgCO2e'] + df['GWP_Inverter_kgCO2e'] + df['GWP_BOS_kgCO2e']
+        df['Inverter_CAPEX_kWp'] = inv_perf['inverter_capex_eur_per_wp'] * 1000.0
 
         # --- Dynamic Degradation ---
         years = np.arange(1, lifetime + 1)

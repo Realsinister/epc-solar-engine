@@ -16,6 +16,8 @@ sys.path.append(os.path.join(os.path.dirname(__file__), "src"))
 from pv_engine.engine import PVEngine
 from pv_engine.financial_model import ExecutiveFinancialModel
 from pv_engine.history import history_db
+from pv_engine.inverter_engine import InverterEngine
+from pv_engine.bos_engine import BOSEngine
 
 app = FastAPI(title="EPC Solar Engine Premium API")
 
@@ -70,6 +72,8 @@ class CalculationRequest(BaseModel):
     project_size_mwp: float = 50.0
     ppa_rate_eur_mwh: float = 45.0
     discount_rate_pct: float = 5.0
+    inverter_id: Optional[str] = "auto"
+    target_dc_ac_ratio: float = 1.25
 
 
 @app.get("/")
@@ -81,6 +85,23 @@ def get_modules():
     df = load_data_from_parquet()
     # Replace NaN with None for JSON serialization
     return df.replace({np.nan: None}).to_dict(orient="records")
+
+@app.get("/api/inverters")
+def get_inverters(project_size_mwp: float = 50.0):
+    df_inv = InverterEngine.load_database()
+    if df_inv.empty:
+        return []
+    records = df_inv.replace({np.nan: None}).to_dict(orient="records")
+    
+    auto_paired = InverterEngine.auto_pair_inverter(project_size_mwp)
+    auto_id = auto_paired.get('inverter_id')
+    
+    for r in records:
+        r['is_auto_paired'] = (r.get('inverter_id') == auto_id)
+        
+    # Sort so auto-paired is ALWAYS at index 0 (top of dropdown)
+    records.sort(key=lambda x: 0 if x.get('is_auto_paired') else 1)
+    return records
 
 @app.post("/api/calculate")
 def calculate_leaderboard(request: CalculationRequest):
@@ -103,7 +124,9 @@ def calculate_leaderboard(request: CalculationRequest):
         eol_recycling_rate_pct=request.eol_recycling_rate_pct,
         system_topology=request.system_topology,
         ground_albedo=request.ground_albedo,
-        project_size_mwp=request.project_size_mwp
+        project_size_mwp=request.project_size_mwp,
+        inverter_id=request.inverter_id,
+        target_dc_ac_ratio=request.target_dc_ac_ratio
     )
     
     df_calc = PVEngine.filter_by_project_size(df_calc, request.project_size_mwp, ground_albedo=request.ground_albedo)
@@ -117,9 +140,14 @@ def calculate_leaderboard(request: CalculationRequest):
     # Log to history
     history_db.log_simulation(request.model_dump(), top_panels, weights_dict)
     
+    auto_paired = InverterEngine.auto_pair_inverter(request.project_size_mwp)
+    bos_info = BOSEngine.get_bos_performance(request.system_topology)
+    
     return {
         "weights": weights_dict,
-        "results": top_panels
+        "results": top_panels,
+        "auto_paired_inverter": auto_paired,
+        "bos_info": bos_info
     }
 
 @app.post("/api/analyze/{dataset_uuid}")
@@ -147,7 +175,9 @@ def analyze_module(dataset_uuid: str, request: CalculationRequest):
         eol_recycling_rate_pct=request.eol_recycling_rate_pct,
         system_topology=request.system_topology,
         ground_albedo=request.ground_albedo,
-        project_size_mwp=request.project_size_mwp
+        project_size_mwp=request.project_size_mwp,
+        inverter_id=request.inverter_id,
+        target_dc_ac_ratio=request.target_dc_ac_ratio
     )
     
     # We need the full dataframe to normalize scores properly against the dataset
@@ -163,7 +193,9 @@ def analyze_module(dataset_uuid: str, request: CalculationRequest):
         eol_recycling_rate_pct=request.eol_recycling_rate_pct,
         system_topology=request.system_topology,
         ground_albedo=request.ground_albedo,
-        project_size_mwp=request.project_size_mwp
+        project_size_mwp=request.project_size_mwp,
+        inverter_id=request.inverter_id,
+        target_dc_ac_ratio=request.target_dc_ac_ratio
     )
     
     full_calc = PVEngine.filter_by_project_size(full_calc, request.project_size_mwp, ground_albedo=request.ground_albedo)
@@ -209,13 +241,20 @@ def analyze_module(dataset_uuid: str, request: CalculationRequest):
         discount_rate_pct=request.discount_rate_pct
     )
 
+    gwp_breakdown = [
+        {"component": "PV Module (Net)", "gwp": float(module_scores.get('GWP_Module_Net_kgCO2e', 0))},
+        {"component": "Inverter System", "gwp": float(module_scores.get('GWP_Inverter_kgCO2e', 0))},
+        {"component": "BOS & Racking", "gwp": float(module_scores.get('GWP_BOS_kgCO2e', 0))}
+    ]
+
     return {
         "radar": radar_data,
         "sensitivity": {
             "carbon": carbon_sens,
             "lcoe": lcoe_sens
         },
-        "executive": exec_financials
+        "executive": exec_financials,
+        "gwp_breakdown": gwp_breakdown
     }
 
 @app.get("/api/history")

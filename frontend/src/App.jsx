@@ -415,11 +415,15 @@ function App() {
                         </div>
                       </div>
                       
-                      <div style={{ padding: '16px', background: 'rgba(59, 130, 246, 0.1)', border: '1px solid rgba(59, 130, 246, 0.3)', borderRadius: '8px', fontStyle: 'italic', lineHeight: '1.5' }}>
-                        "{analysisData.executive.executive_pitch}"
-                      </div>
+                      {analysisData.executive.executive_pitch && (
+                        <div style={{ padding: '16px', background: 'rgba(59, 130, 246, 0.1)', border: '1px solid rgba(59, 130, 246, 0.3)', borderRadius: '8px', fontStyle: 'italic', lineHeight: '1.5' }}>
+                          "{analysisData.executive.executive_pitch}"
+                        </div>
+                      )}
                     </div>
                   ) : null}
+                </div>
+
                 {/* SYSTEM CARBON STACKED BREAKDOWN CHART */}
                 <div className="glass-panel" style={{ gridColumn: '1 / -1' }}>
                   <h3 style={{ marginBottom: '12px', color: 'var(--accent-cyan)', display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -450,6 +454,7 @@ function App() {
                     </div>
                   ) : null}
                 </div>
+              </div>
 
               {/* PARETO MODULES (Now in Main Deck) */}
               <div className="glass-panel" style={{ marginTop: '24px' }}>
@@ -468,7 +473,7 @@ function App() {
                       <div style={{fontSize: '0.85rem', color: 'var(--text-muted)', marginTop: '6px'}}>
                         Carbon: {Number(result.Carbon_Intensity_Mean).toFixed(0)} gCO2/kWh
                         <br/>
-                        LCOE: €{result.LCOE_EUR_MWh ? (Number(result.LCOE_EUR_MWh) / 1000).toFixed(4) : '0.0000'}/kWh
+                        LCOE: €{result.LCOE_EUR_MWh ? (Number(result.LCOE_EUR_MWh) / 1000).toFixed(4) : '0.0000'} per kWh
                       </div>
                     </div>
                   ))}

@@ -158,6 +158,16 @@ class PVEngine:
         inv_perf = InverterEngine.calculate_inverter_performance(inverter_data, target_dc_ac_ratio)
         bos_perf = BOSEngine.get_bos_performance(system_topology)
 
+        # --- Bifacial Gain Physics ---
+        if ground_albedo is not None:
+            df['Bifacial_Gain_Pct'] = np.where(
+                df['Is_Bifacial'] == True,
+                ground_albedo * 0.70 * 0.90 * 100, # Albedo * Bifaciality Factor * View Factor
+                0.0
+            )
+        else:
+            df['Bifacial_Gain_Pct'] = 0.0
+
         system_eff = inv_perf['euro_efficiency'] * bos_perf['bos_electrical_efficiency'] * (1 - (inv_perf['clipping_loss_pct'] / 100.0))
         df['Effective_Yield'] = base_irradiance * (1 - (df['Dynamic_Temp_Loss_Pct'] / 100)) * bos_perf['yield_multiplier'] * (1 + (df['Bifacial_Gain_Pct'] / 100)) * system_eff
         
@@ -194,8 +204,11 @@ class PVEngine:
         else:
             scale_multiplier = 1.0
             
-        scaled_bos = bos_cost_wp * scale_multiplier * tracker_bos_multiplier
-        scaled_opex = opex_annual * scale_multiplier * tracker_opex_multiplier
+        tracker_bos_mult = 1.10 if system_topology == "Single-Axis Tracker" else 1.0
+        tracker_opex_mult = 1.20 if system_topology == "Single-Axis Tracker" else 1.0
+        
+        scaled_bos = (bos_cost_wp + bos_perf['total_bos_capex_eur_per_wp']) * scale_multiplier * tracker_bos_mult
+        scaled_opex = opex_annual * scale_multiplier * tracker_opex_mult
 
         # 2. Economic: LCOE (€/MWh)
         df['Estimated_Price_Wp'] = avg_price_wp * (1 + (df['Efficiency_Pct'] - 20) / 100)

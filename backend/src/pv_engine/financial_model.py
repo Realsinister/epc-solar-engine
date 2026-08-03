@@ -104,11 +104,13 @@ class ExecutiveFinancialModel:
         
         cbam_risk = "very low CBAM import tax exposure" if cbam_tax < 50000 else "significant CBAM import tax exposure"
         
+        payback_str = f"{payback:.1f} years" if payback is not None else "N/A"
+        
         pitch = (
             f"The {module_name} is mathematically optimized for this project. "
             f"Its {temp_advantage} (Temp. Coef: {temp_coef}%/°C) secures long-term yield under these ambient conditions, "
             f"driving an estimated NPV of €{npv:,.0f}. "
             f"Furthermore, its factory carbon footprint results in {cbam_risk} (€{cbam_tax:,.0f}), "
-            f"ensuring an accelerated payback period of {payback:.1f} years."
+            f"ensuring an accelerated payback period of {payback_str}."
         )
         return pitch

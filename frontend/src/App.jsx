@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Sliders, Zap, Leaf, Truck, Activity, Target, Sun, Mountain, Clock, LayoutDashboard } from 'lucide-react';
 import { 
-  BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell, 
+  BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell, Legend,
   Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis 
 } from 'recharts';
 import HistoryCompare from './HistoryCompare';
@@ -436,19 +436,21 @@ function App() {
                     <div style={{ height: '220px', width: '100%' }}>
                       <ResponsiveContainer width="100%" height="100%">
                         <BarChart data={[{
-                          name: selectedModule?.Display_Name || 'Selected System',
+                          name: 'System Total',
                           Module: analysisData.gwp_breakdown[0].gwp,
                           Inverter: analysisData.gwp_breakdown[1].gwp,
                           BOS: analysisData.gwp_breakdown[2].gwp
-                        }]} layout="vertical" margin={{ top: 10, right: 30, left: 100, bottom: 5 }}>
+                        }]} layout="vertical" margin={{ top: 10, right: 30, left: 0, bottom: 5 }}>
                           <XAxis type="number" stroke="var(--border-highlight)" tick={{ fill: 'var(--text-muted)' }} />
-                          <YAxis dataKey="name" type="category" width={180} stroke="var(--text-muted)" style={{fontSize: '11px'}} />
+                          <YAxis dataKey="name" type="category" width={100} stroke="var(--text-muted)" style={{fontSize: '12px'}} />
                           <Tooltip 
                             contentStyle={{ backgroundColor: 'var(--bg-panel)', border: '1px solid var(--border-highlight)', borderRadius: '8px' }}
+                            formatter={(value, name) => [`${Number(value).toFixed(1)} kgCO2e/kWp`, name]}
                           />
-                          <Bar dataKey="Module" stackId="a" fill="#3b82f6" name="PV Module Net (kgCO2e/kWp)" />
-                          <Bar dataKey="Inverter" stackId="a" fill="#8b5cf6" name="Inverter System (kgCO2e/kWp)" />
-                          <Bar dataKey="BOS" stackId="a" fill="#06b6d4" name="BOS & Racking (kgCO2e/kWp)" />
+                          <Legend wrapperStyle={{ paddingTop: '8px', fontSize: '12px' }} />
+                          <Bar dataKey="Module" stackId="a" fill="#3b82f6" name="PV Module Net" />
+                          <Bar dataKey="Inverter" stackId="a" fill="#8b5cf6" name="Inverter System" />
+                          <Bar dataKey="BOS" stackId="a" fill="#06b6d4" name="BOS & Racking" />
                         </BarChart>
                       </ResponsiveContainer>
                     </div>

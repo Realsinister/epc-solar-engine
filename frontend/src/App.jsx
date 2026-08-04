@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import { Sliders, Zap, Leaf, Truck, Activity, Target, Sun, Mountain, Clock, LayoutDashboard } from 'lucide-react';
 import { 
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell, Legend,
-  Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis 
+  Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis,
+  ScatterChart, Scatter, ZAxis
 } from 'recharts';
 import HistoryCompare from './HistoryCompare';
 
@@ -284,44 +285,119 @@ function App() {
         {/* MAIN VISUALIZATIONS */}
         <main className="main-content">
           
-          {/* TOP BAR CHART */}
-          <div className="glass-panel" style={{ height: '300px', position: 'relative' }}>
-            <h3 style={{ margin: '0 0 16px 0', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <Target size={18} /> Market Overview (TOPSIS Score)
-            </h3>
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={results} layout="vertical" margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-                <XAxis type="number" domain={[0, 100]} stroke="var(--border-highlight)" tick={{ fill: 'var(--text-muted)' }} />
-                <YAxis dataKey="Short_Name" type="category" width={180} stroke="var(--text-muted)" style={{fontSize: '11px'}} />
-                <Tooltip 
-                  cursor={{fill: 'rgba(255,255,255,0.05)'}} 
-                  contentStyle={{ backgroundColor: 'var(--bg-panel)', border: '1px solid var(--border-light)', borderRadius: '8px' }}
-                  itemStyle={{ color: 'var(--text-main)' }}
-                  labelFormatter={(label, payload) => payload?.[0]?.payload?.Display_Name || label}
-                />
-                <Bar dataKey="TOPSIS_Score" radius={[0, 4, 4, 0]}>
-                  {results.map((entry, index) => (
-                    <Cell 
-                      key={`cell-${index}`} 
-                      fill={selectedModule?.dataset_uuid === entry.dataset_uuid ? "url(#colorGradient)" : "rgba(59, 130, 246, 0.4)"} 
-                    />
-                  ))}
-                </Bar>
-                <defs>
-                  <linearGradient id="colorGradient" x1="0" y1="0" x2="1" y2="0">
-                    <stop offset="0%" stopColor="#3b82f6" />
-                    <stop offset="100%" stopColor="#8b5cf6" />
-                  </linearGradient>
-                </defs>
-              </BarChart>
-            </ResponsiveContainer>
-            {results.length === 0 && (
-              <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center', color: 'var(--text-muted)' }}>
-                <Mountain size={32} style={{ opacity: 0.5, marginBottom: '8px' }} />
-                <p>No panels match your filter criteria.</p>
-                <p style={{ fontSize: '11px', opacity: 0.7 }}>Try adjusting Albedo or Project Size.</p>
+          {/* TOP DECK: MARKET OVERVIEW & PARETO TRADE-OFF FRONTIER */}
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
+            
+            {/* TOP BAR CHART */}
+            <div className="glass-panel" style={{ height: '320px', position: 'relative' }}>
+              <h3 style={{ margin: '0 0 16px 0', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <Target size={18} /> Market Overview (TOPSIS Score)
+              </h3>
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={results} layout="vertical" margin={{ top: 5, right: 30, left: 10, bottom: 5 }}>
+                  <XAxis type="number" domain={[0, 100]} stroke="var(--border-highlight)" tick={{ fill: 'var(--text-muted)' }} />
+                  <YAxis dataKey="Short_Name" type="category" width={160} stroke="var(--text-muted)" style={{fontSize: '11px'}} />
+                  <Tooltip 
+                    cursor={{fill: 'rgba(255,255,255,0.05)'}} 
+                    contentStyle={{ backgroundColor: 'var(--bg-panel)', border: '1px solid var(--border-light)', borderRadius: '8px' }}
+                    itemStyle={{ color: 'var(--text-main)' }}
+                    labelFormatter={(label, payload) => payload?.[0]?.payload?.Display_Name || label}
+                  />
+                  <Bar dataKey="TOPSIS_Score" radius={[0, 4, 4, 0]}>
+                    {results.map((entry, index) => (
+                      <Cell 
+                        key={`cell-${index}`} 
+                        fill={selectedModule?.dataset_uuid === entry.dataset_uuid ? "url(#colorGradient)" : "rgba(59, 130, 246, 0.4)"} 
+                        style={{ cursor: 'pointer' }}
+                        onClick={() => handleModuleSelect(entry)}
+                      />
+                    ))}
+                  </Bar>
+                  <defs>
+                    <linearGradient id="colorGradient" x1="0" y1="0" x2="1" y2="0">
+                      <stop offset="0%" stopColor="#3b82f6" />
+                      <stop offset="100%" stopColor="#8b5cf6" />
+                    </linearGradient>
+                  </defs>
+                </BarChart>
+              </ResponsiveContainer>
+              {results.length === 0 && (
+                <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center', color: 'var(--text-muted)' }}>
+                  <Mountain size={32} style={{ opacity: 0.5, marginBottom: '8px' }} />
+                  <p>No panels match your filter criteria.</p>
+                  <p style={{ fontSize: '11px', opacity: 0.7 }}>Try adjusting Albedo or Project Size.</p>
+                </div>
+              )}
+            </div>
+
+            {/* PARETO TRADE-OFF SCATTER PLOT */}
+            <div className="glass-panel" style={{ height: '320px', position: 'relative' }}>
+              <h3 style={{ margin: '0 0 4px 0', color: 'var(--accent-cyan)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <Activity size={18} /> Pareto Trade-Off Frontier (LCOE vs Carbon)
+              </h3>
+              <div style={{ fontSize: '11px', color: 'var(--text-muted)', marginBottom: '12px' }}>
+                Click any bubble to select panel. Bottom-left = Ideal low LCOE & low Carbon.
               </div>
-            )}
+              <ResponsiveContainer width="100%" height="80%">
+                <ScatterChart margin={{ top: 10, right: 20, left: 10, bottom: 20 }}>
+                  <XAxis 
+                    type="number" 
+                    dataKey="LCOE_EUR_MWh" 
+                    name="LCOE" 
+                    unit=" €/MWh" 
+                    stroke="var(--border-highlight)" 
+                    tick={{ fill: 'var(--text-muted)', fontSize: 10 }}
+                    domain={['auto', 'auto']}
+                  />
+                  <YAxis 
+                    type="number" 
+                    dataKey="Net_GWP_kgCO2e" 
+                    name="Carbon" 
+                    unit=" kgCO2e" 
+                    stroke="var(--border-highlight)" 
+                    tick={{ fill: 'var(--text-muted)', fontSize: 10 }}
+                    domain={['auto', 'auto']}
+                  />
+                  <ZAxis type="number" dataKey="TOPSIS_Score" range={[60, 240]} name="TOPSIS Score" />
+                  <Tooltip 
+                    cursor={{ strokeDasharray: '3 3' }}
+                    content={({ payload }) => {
+                      if (!payload || !payload.length) return null;
+                      const data = payload[0].payload;
+                      return (
+                        <div style={{ backgroundColor: 'var(--bg-panel)', border: '1px solid var(--border-highlight)', padding: '10px', borderRadius: '8px', fontSize: '12px' }}>
+                          <strong style={{ color: 'var(--accent-cyan)' }}>{data.Display_Name}</strong>
+                          <div style={{ marginTop: '4px', color: 'var(--text-muted)' }}>
+                            <div>TOPSIS Score: <span style={{ color: 'white', fontWeight: 'bold' }}>{Number(data.TOPSIS_Score).toFixed(1)}</span></div>
+                            <div>LCOE: <span style={{ color: 'white', fontWeight: 'bold' }}>€{(Number(data.LCOE_EUR_MWh) / 1000).toFixed(4)}/kWh</span></div>
+                            <div>System Carbon: <span style={{ color: 'white', fontWeight: 'bold' }}>{Number(data.Net_GWP_kgCO2e).toFixed(0)} kgCO2e/kWp</span></div>
+                          </div>
+                        </div>
+                      );
+                    }}
+                  />
+                  <Scatter 
+                    name="Modules" 
+                    data={results} 
+                    onClick={(entry) => handleModuleSelect(entry.payload || entry)}
+                  >
+                    {results.map((entry, index) => {
+                      const isSelected = selectedModule?.dataset_uuid === entry.dataset_uuid;
+                      return (
+                        <Cell 
+                          key={`scatter-cell-${index}`} 
+                          fill={isSelected ? '#06b6d4' : index < 3 ? '#8b5cf6' : '#3b82f6'} 
+                          stroke={isSelected ? '#ffffff' : 'transparent'}
+                          strokeWidth={isSelected ? 3 : 0}
+                          style={{ cursor: 'pointer', filter: isSelected ? 'drop-shadow(0px 0px 8px #06b6d4)' : 'none' }}
+                        />
+                      );
+                    })}
+                  </Scatter>
+                </ScatterChart>
+              </ResponsiveContainer>
+            </div>
+
           </div>
 
           {/* DEEP DIVE SECTION */}

@@ -52,6 +52,8 @@ def load_data_from_parquet(project_size_mwp: float = None, ground_albedo: float 
     try:
         # PyArrow Predicate Pushdown: Only loads the rows that match the filters!
         df = pd.read_parquet(parquet_path, filters=filters)
+        if not df.empty:
+            df = PVEngine.process_dataframe(df)
         return df
     except Exception as e:
         print(f"Error loading parquet dataset: {e}")

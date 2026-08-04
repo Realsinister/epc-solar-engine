@@ -78,7 +78,7 @@ function App() {
       const data = await response.json();
       const topResults = data.results.slice(0, 10).map(row => ({
         ...row,
-        Short_Name: `${row.manufacturer.replace(/\s*(Co\.,?\s*Ltd\.?|Inc\.?|Corp\.?|LLC|GmbH|Company|Corporation)\b/gi, '').trim()} - ${row.module_power_Wp}W`
+        Short_Name: `${row.manufacturer.replace(/\s*(Co\.,?\s*Ltd\.?|Inc\.?|Corp\.?|LLC|GmbH|Company|Corporation)\b/gi, '').trim()} - ${row.name || `${row.module_power_Wp}W`}`
       }));
       setResults(topResults); // Keep top 10 for Leaderboard
       

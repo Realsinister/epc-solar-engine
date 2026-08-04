@@ -53,6 +53,12 @@ class PVEngine:
         if 'GWP_total_A1A3_per_kWp_kgCO2e' in df.columns:
             df = df[df['GWP_total_A1A3_per_kWp_kgCO2e'] >= 50]
 
+        # Remove duplicate panels based on manufacturer and module power rating (retaining lowest carbon representative)
+        if 'manufacturer' in df.columns and 'module_power_Wp' in df.columns:
+            if 'GWP_total_A1A3_per_kWp_kgCO2e' in df.columns:
+                df = df.sort_values('GWP_total_A1A3_per_kWp_kgCO2e', ascending=True)
+            df = df.drop_duplicates(subset=['manufacturer', 'module_power_Wp'], keep='first')
+
         if 'manufacturer' in df.columns and 'name' in df.columns:
             df['Display_Name'] = df.apply(
                 lambda x: f"{x['manufacturer']} - {str(x['name'])[:25]}", axis=1
@@ -94,8 +100,11 @@ class PVEngine:
                 'Is_Bifacial': is_bifacial
             })
             
+        physics_cols = ['Panel_Temp_Coef', 'Annual_Degradation_Pct', 'Weight_t_kWp', 'Is_Bifacial']
+        df = df.drop(columns=[c for c in physics_cols if c in df.columns], errors='ignore')
         physics_df = df.apply(parse_physics, axis=1)
         df = pd.concat([df, physics_df], axis=1)
+        df = df.loc[:, ~df.columns.duplicated()]
 
         def calculate_uncertainty(row):
             # Heuristic-based uncertainty score

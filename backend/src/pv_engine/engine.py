@@ -59,9 +59,26 @@ class PVEngine:
                 df = df.sort_values('GWP_total_A1A3_per_kWp_kgCO2e', ascending=True)
             df = df.drop_duplicates(subset=['manufacturer', 'module_power_Wp'], keep='first')
 
+        def clean_brand_name(mfg):
+            mfg_str = str(mfg).strip()
+            mfg_clean = re.sub(r'\s*(Jiangsu|Zhejiang|Anhui|Changzhou|Hefei|Ningbo|Wuxi|Sichuan|Shanghai|Beijing|Guangdong|Suzhou)\b', '', mfg_str, flags=re.IGNORECASE)
+            mfg_clean = re.sub(r'\s*(Co\.,?\s*Ltd\.?|Inc\.?|Corp\.?|LLC|GmbH|Company|Corporation|Technology|Green Energy|New Energy|Solar Technology|Electrics|Group|Holdings|Limited|SRL)\b', '', mfg_clean, flags=re.IGNORECASE).strip()
+            upper = mfg_clean.upper()
+            if 'FIRST SOLAR' in upper: return 'First Solar'
+            if 'RUNERGY' in upper: return 'Runergy'
+            if 'JINKO' in upper: return 'JinkoSolar'
+            if 'LONGI' in upper: return 'LONGi'
+            if 'TRINA' in upper: return 'Trina Solar'
+            if 'CANADIAN' in upper: return 'Canadian Solar'
+            if 'JA SOLAR' in upper: return 'JA Solar'
+            if 'RISEN' in upper: return 'Risen Energy'
+            if 'SOLARSPACE' in upper: return 'Solarspace'
+            if 'ASTRONERGY' in upper: return 'Astronergy'
+            return mfg_clean if len(mfg_clean) > 0 else mfg_str
+
         if 'manufacturer' in df.columns and 'name' in df.columns:
             df['Display_Name'] = df.apply(
-                lambda x: f"{x['manufacturer']} - {str(x['name'])[:25]}", axis=1
+                lambda x: f"{clean_brand_name(x['manufacturer'])} - {str(x['name'])}", axis=1
             )
         
         if 'module_power_Wp' in df.columns and 'module_area_m2' in df.columns:

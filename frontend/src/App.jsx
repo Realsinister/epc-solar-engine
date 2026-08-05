@@ -75,10 +75,35 @@ function App() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       });
-      const data = await response.json();
+      const getCleanShortName = (row) => {
+        let brand = row.manufacturer || '';
+        brand = brand.replace(/\s*(Jiangsu|Zhejiang|Anhui|Changzhou|Hefei|Ningbo|Wuxi|Sichuan|Shanghai|Beijing|Guangdong|Suzhou)\b/gi, '');
+        brand = brand.replace(/\s*(Co\.,?\s*Ltd\.?|Inc\.?|Corp\.?|LLC|GmbH|Company|Corporation|Technology|Green Energy|New Energy|Solar Technology|Electrics|Group|Holdings|Limited|SRL)\b/gi, '').trim();
+        
+        const upper = brand.toUpperCase();
+        if (upper.includes('FIRST SOLAR')) brand = 'First Solar';
+        else if (upper.includes('RUNERGY')) brand = 'Runergy';
+        else if (upper.includes('JINKO')) brand = 'JinkoSolar';
+        else if (upper.includes('LONGI')) brand = 'LONGi';
+        else if (upper.includes('TRINA')) brand = 'Trina Solar';
+        else if (upper.includes('CANADIAN')) brand = 'Canadian Solar';
+        else if (upper.includes('JA SOLAR')) brand = 'JA Solar';
+        else if (upper.includes('RISEN')) brand = 'Risen Energy';
+        else if (upper.includes('SOLARSPACE')) brand = 'Solarspace';
+        else if (upper.includes('ASTRONERGY')) brand = 'Astronergy';
+        
+        let model = (row.name || `${row.module_power_Wp}W`).trim();
+        if (model.length > 14) {
+          model = model.substring(0, 14);
+        }
+        
+        const fullName = `${brand} - ${model}`;
+        return fullName.length > 25 ? `${fullName.substring(0, 24)}…` : fullName;
+      };
+
       const topResults = data.results.slice(0, 10).map(row => ({
         ...row,
-        Short_Name: `${row.manufacturer.replace(/\s*(Co\.,?\s*Ltd\.?|Inc\.?|Corp\.?|LLC|GmbH|Company|Corporation)\b/gi, '').trim()} - ${row.name || `${row.module_power_Wp}W`}`
+        Short_Name: getCleanShortName(row)
       }));
       setResults(topResults); // Keep top 10 for Leaderboard
       
@@ -297,7 +322,7 @@ function App() {
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={results} layout="vertical" margin={{ top: 5, right: 30, left: 10, bottom: 20 }}>
                     <XAxis type="number" domain={[0, 100]} stroke="var(--border-highlight)" tick={{ fill: 'var(--text-muted)', fontSize: 11 }} />
-                    <YAxis dataKey="Short_Name" type="category" width={160} stroke="var(--text-muted)" style={{fontSize: '11px'}} />
+                    <YAxis dataKey="Short_Name" type="category" width={180} interval={0} stroke="var(--text-muted)" style={{fontSize: '11px', whiteSpace: 'nowrap'}} />
                     <Tooltip 
                       cursor={{fill: 'rgba(255,255,255,0.05)'}} 
                       contentStyle={{ backgroundColor: 'var(--bg-panel)', border: '1px solid var(--border-light)', borderRadius: '8px' }}

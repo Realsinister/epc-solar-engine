@@ -40,11 +40,8 @@ The application has been compiled into a single portable `.exe` using PyInstalle
 3. The background Python physics engine and React UI will spin up automatically!
 
 ## 🌐 Public Demo & Marketing
-A stripped-down Alpha version of this software has been deployed to the web to showcase the core functionality and market the tool. 
-<<<<<<< HEAD
+A stripped-down Alpha version of this software has been deployed to the web to showcase the core functionality and market the tool.
 - **Marketing Page & Demo:** See the [EPC Solar Public Repository](https://github.com/Realsinister/epc-solar-landing-page) for the public-facing landing page and alpha web demo.
-=======
-- **Marketing Page & Demo:** See the [EPC Solar Public Repository](https://github.com/yashjgupta/epc-solar-landing-page) for the public-facing landing page and alpha web demo.
 - **Software Website:** [EPC Solar Engine Website](https://realsinister.github.io/epc-solar-landing-page/)
   
 *Note: This premium repository (`epc-solar-premium`) remains private and contains the full suite of features, including Executive Financial modeling and local database capabilities, which are excluded from the public alpha for proprietary reasons.*

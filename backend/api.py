@@ -260,8 +260,13 @@ def analyze_module(dataset_uuid: str, request: CalculationRequest):
     }
 
 @app.get("/api/history")
-def get_history():
-    return history_db.get_history()
+def get_history(limit: int = 50):
+    return history_db.get_history(limit=limit)
+
+@app.delete("/api/history")
+def clear_history():
+    history_db.clear_all_history()
+    return {"status": "success", "message": "Simulation history cleared"}
 
 @app.get("/api/history/{sim_id}")
 def get_simulation_history(sim_id: str):

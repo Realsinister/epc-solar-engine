@@ -82,21 +82,42 @@ class HistoryDatabase:
             ))
             conn.commit()
             
+        # Keep database sustainable with rolling max_runs limit
+        self.prune_old_runs(max_runs=100)
         return sim_id
 
-    def get_history(self) -> List[Dict[str, Any]]:
+    def prune_old_runs(self, max_runs: int = 100):
+        """Automatically keeps the database capped at the N most recent runs."""
+        with sqlite3.connect(self.db_path) as conn:
+            cursor = conn.cursor()
+            cursor.execute('''
+                DELETE FROM sim_logs 
+                WHERE id NOT IN (
+                    SELECT id FROM sim_logs ORDER BY timestamp DESC LIMIT ?
+                )
+            ''', (max_runs,))
+            conn.commit()
+
+    def clear_all_history(self):
+        """Manually wipes all simulation history logs."""
+        with sqlite3.connect(self.db_path) as conn:
+            cursor = conn.cursor()
+            cursor.execute('DELETE FROM sim_logs')
+            conn.commit()
+
+    def get_history(self, limit: int = 50) -> List[Dict[str, Any]]:
         """Retrieves a summary of past simulations."""
         with sqlite3.connect(self.db_path) as conn:
             conn.row_factory = sqlite3.Row
             cursor = conn.cursor()
-            # Select everything except the massive JSON blobs for the summary view
+            # Select summary view bounded by limit parameter
             cursor.execute('''
                 SELECT id, timestamp, scenario, project_size_mwp, location_or_yield,
                        winner_mfg, winner_name, winner_suitability, inputs_json, results_json
                 FROM sim_logs
                 ORDER BY timestamp DESC
-                LIMIT 100
-            ''')
+                LIMIT ?
+            ''', (limit,))
             rows = cursor.fetchall()
             
             history = []

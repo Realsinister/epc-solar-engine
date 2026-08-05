@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Clock, Activity, Target, Mountain } from 'lucide-react';
+import { Clock, Activity, Trash2 } from 'lucide-react';
 import { 
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell, 
   Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis 
@@ -19,13 +19,27 @@ export default function HistoryCompare() {
   const fetchHistory = async () => {
     setLoading(true);
     try {
-      const res = await fetch('http://127.0.0.1:8000/api/history');
+      const res = await fetch('http://127.0.0.1:8000/api/history?limit=50');
       const data = await res.json();
       setHistory(data);
     } catch (err) {
       console.error('Failed to fetch history', err);
     }
     setLoading(false);
+  };
+
+  const handleClearHistory = async () => {
+    if (window.confirm("Are you sure you want to clear all simulation history logs? This action cannot be undone.")) {
+      try {
+        await fetch('http://127.0.0.1:8000/api/history', { method: 'DELETE' });
+        setHistory([]);
+        setSelectedIds([]);
+        setRunA(null);
+        setRunB(null);
+      } catch (err) {
+        console.error('Failed to clear history', err);
+      }
+    }
   };
 
   const handleSelect = (id) => {
@@ -69,10 +83,34 @@ export default function HistoryCompare() {
   return (
     <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '20px' }}>
       <div className="glass-panel" style={{ maxHeight: '400px', overflowY: 'auto' }}>
-        <h2 style={{ display: 'flex', alignItems: 'center', gap: '8px', margin: '0 0 20px 0', color: 'var(--text-main)' }}>
-          <Clock size={20} color="var(--accent-cyan)" />
-          Simulation History
-        </h2>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+          <h2 style={{ display: 'flex', alignItems: 'center', gap: '8px', margin: 0, color: 'var(--text-main)' }}>
+            <Clock size={20} color="var(--accent-cyan)" />
+            Simulation History (Top 50)
+          </h2>
+          {history.length > 0 && (
+            <button 
+              onClick={handleClearHistory}
+              style={{
+                backgroundColor: 'rgba(239, 68, 68, 0.15)',
+                border: '1px solid rgba(239, 68, 68, 0.4)',
+                color: '#f87171',
+                padding: '6px 12px',
+                borderRadius: '6px',
+                cursor: 'pointer',
+                fontSize: '12px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                transition: 'all 0.2s ease'
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(239, 68, 68, 0.3)'}
+              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'rgba(239, 68, 68, 0.15)'}
+            >
+              <Trash2 size={14} /> Clear History
+            </button>
+          )}
+        </div>
         <p className="label-muted" style={{marginBottom: '10px'}}>Select exactly 2 runs to compare them side-by-side.</p>
         
         {loading ? (

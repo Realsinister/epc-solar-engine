@@ -50,9 +50,16 @@ class PVEngine:
         # Re-drop after numeric coercion in case of garbage strings
         df = df.dropna(subset=[col for col in numeric_cols if col in df.columns])
 
-        # Remove impossible physical outliers (e.g. data entry typos < 50 kgCO2e/kWp)
+        # Remove impossible physical outliers (e.g. data entry typos < 50 kgCO2e/kWp or unphysical efficiency > 24.5%)
         if 'GWP_total_A1A3_per_kWp_kgCO2e' in df.columns:
             df = df[df['GWP_total_A1A3_per_kWp_kgCO2e'] >= 50]
+        
+        if 'module_power_Wp' in df.columns and 'module_area_m2' in df.columns:
+            df['Efficiency_Pct'] = (df['module_power_Wp'] / (df['module_area_m2'] * 1000)) * 100
+            # Filter out corrupt area entries with impossible efficiency values
+            df = df[(df['Efficiency_Pct'] >= 14.0) & (df['Efficiency_Pct'] <= 24.5)]
+        else:
+            df['Efficiency_Pct'] = 0
 
         # Remove duplicate panels based on manufacturer and module power rating (retaining lowest carbon representative)
         if 'manufacturer' in df.columns and 'module_power_Wp' in df.columns:
@@ -283,11 +290,11 @@ class PVEngine:
         Applies MCDA normalization and weighting based on scenario.
         """
         if scenario == "Eco-Flagship (Minimize Carbon)":
-            w_eco, w_cost, w_tech = 0.70, 0.15, 0.15
+            w_eco, w_cost, w_tech = 0.75, 0.15, 0.10
         elif scenario == "Utility Scale (Lowest LCOE)":
-            w_eco, w_cost, w_tech = 0.20, 0.60, 0.20
+            w_eco, w_cost, w_tech = 0.15, 0.75, 0.10
         else: # Space Constrained
-            w_eco, w_cost, w_tech = 0.20, 0.20, 0.60
+            w_eco, w_cost, w_tech = 0.15, 0.15, 0.70
 
         if df.empty:
             return df, (w_eco, w_cost, w_tech)
@@ -304,7 +311,6 @@ class PVEngine:
         df['Score_Eco'] = normalize(df['Carbon_Intensity_Mean'], invert=True)
         df['Score_Cost'] = normalize(df['LCOE_EUR_MWh'], invert=True)
         df['Score_Tech'] = normalize(df['Efficiency_Pct'], invert=False)
-
 
         df['Suitability_Index'] = (
             (df['Score_Eco'] * w_eco) + 
@@ -333,11 +339,11 @@ class PVEngine:
         
         # 2. Weighted Normalized Matrix
         if scenario == "Eco-Flagship (Minimize Carbon)":
-            weights = np.array([0.70, 0.15, 0.15])
+            weights = np.array([0.75, 0.15, 0.10])
         elif scenario == "Utility Scale (Lowest LCOE)":
-            weights = np.array([0.20, 0.60, 0.20])
+            weights = np.array([0.15, 0.75, 0.10])
         else:
-            weights = np.array([0.20, 0.20, 0.60])
+            weights = np.array([0.15, 0.15, 0.70])
             
         weighted_matrix = norm_matrix * weights
         

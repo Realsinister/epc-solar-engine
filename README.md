@@ -17,9 +17,13 @@ This tool acts as your ultimate "pitch generator" for PV module procurement, cal
 - ⚡ **Standalone Desktop Experience:** No more python terminals or complex setups. Double-click the installer and launch the app offline.
 - 🧮 **Physics-based MCDA Engine:** A Python/FastAPI backend instantly scores modules based on dynamic weighting of Cost, Performance, and Eco-Footprint.
 - 🎨 **Premium UI/UX:** Built with React & Vite, featuring a sleek dark-mode glassmorphism interface and interactive leaderboards.
+- 📈 **Interactive Pareto Trade-Off Frontier (Phase 1):** 2D Scatter plot mapping **System LCOE (€/MWh)** vs **System Embodied Carbon (kgCO2e/kWp)** with TOPSIS-weighted bubble sizing. Clicking any point on the frontier dynamically focuses the Deep-Dive Analytics on that module.
+- 🔌 **Inverter Database & BOS Configurator:** Real-world inverter dataset (Sungrow, SMA, Huawei, SolarEdge) with dynamic DC/AC ratio clipping, BOS racking/cabling carbon accounting, and Year 15 inverter replacement CAPEX modeling (-10% EoL credit).
+- 💾 **SQLite Simulation History & Comparison:** Local, privacy-first SQLite repository (`sim_history.db`) logging simulation runs with a dedicated side-by-side comparative dashboard.
 - 📊 **Deep-Dive Analytics Dashboard:**
   - **Radar Charts:** Compare Eco, Cost, and Tech dimensions visually.
   - **Tornado Charts:** Perform instant sensitivity analysis on Carbon Footprints (e.g., how does a ±20% swing in grid emissions impact the module?).
+  - **System Carbon Stacked Chart:** Visualizes $GWP_{module}$ vs $GWP_{inverter}$ vs $GWP_{BOS}$.
 - 💼 **Executive Financial Layer:** Input your *Project Size (MWp)* and *PPA Rate (€/MWh)* to dynamically generate:
   - Net Present Value (NPV)
   - Payback Periods & Lifetime Revenue
@@ -27,10 +31,11 @@ This tool acts as your ultimate "pitch generator" for PV module procurement, cal
   - **Elevator Pitch Generator:** Ready-to-copy executive summaries for stakeholders.
 
 ## 🆕 What's New in v0.1.0
-- **Interactive Sandbox:** The left sidebar inputs are now "sticky", allowing you to tweak simulation parameters on the fly without losing sight of the bottom charts.
-- **Dynamic Pareto Grid:** The Top 3 modules are displayed in a wide horizontal grid at the bottom. Clicking any module dynamically updates the radar charts, sensitivity analysis, and Executive Financial Pitch to strictly reflect that specific module's data.
-- **Smart Stale-State Animation:** The "Run Simulation" button instantly turns grayscale and shakes if you tweak inputs after a run, reminding you to update the simulation.
-- **Portable Architecture:** The software is now compiled into a standalone, portable `.exe` file that doesn't even require installation.
+- **Pareto Trade-Off Surface:** Interactive multi-objective scatter chart evaluating LCOE vs Carbon Footprint.
+- **Simulation Run History:** Local SQLite database logging previous runs with side-by-side run comparisons.
+- **Inverter & BOS Engine:** Auto-pairing inverter selection and racking/cabling embodied carbon stack.
+- **Interactive Sandbox:** The left sidebar inputs are "sticky", allowing you to tweak simulation parameters on the fly without losing sight of the bottom charts.
+- **Portable Architecture:** The software is compiled into a standalone, portable `.exe` file.
 
 ## 🚀 Launching the Software
 The application has been compiled into a single portable `.exe` using PyInstaller and Electron-Builder.
@@ -44,7 +49,7 @@ A stripped-down Alpha version of this software has been deployed to the web to s
 - **Marketing Page & Demo:** See the [EPC Solar Public Repository](https://github.com/Realsinister/epc-solar-landing-page) for the public-facing landing page and alpha web demo.
 - **Software Website:** [EPC Solar Engine Website](https://realsinister.github.io/epc-solar-landing-page/)
   
-*Note: This premium repository (`epc-solar-premium`) remains private and contains the full suite of features, including Executive Financial modeling and local database capabilities, which are excluded from the public alpha for proprietary reasons.*
+*Note: This premium repository (`epc-solar-premium`) remains private and contains the full suite of features, including Executive Financial modeling, Inverter/BOS engines, and local database capabilities, which are excluded from the public alpha for proprietary reasons.*
 
 ## 🛠️ Architecture
 - **Backend:** `FastAPI`, `Pydantic`, `Pandas` (Frozen into an executable via PyInstaller).
@@ -53,11 +58,11 @@ A stripped-down Alpha version of this software has been deployed to the web to s
 
 ## 🔮 Future Roadmap (Scale-Ready)
 The Python engine's architecture has been strictly modularized. Future expansions will easily plug into the existing Executive Financial Model:
-- **Inverter Clipping Models**
-- **Hourly Irradiance Profiles**
-- **Battery Storage LCA Integration**
+- **One-Click Executive Procurement PDF Export (Phase 2)**
+- **Custom EPD & Vendor Data Upload (Phase 3)**
+- **8,760-Hour Irradiance Profiles & Diurnal Weather Modeling (Phase 4)**
+- **Battery Storage (BESS) LCA Integration (Phase 5)**
 - **AI Predictive Integration:** Machine Learning models to forecast yield degradation and predict long-term financial impacts based on local climate data.
-- **User Profiles & Simulation History Database:** SQLite-backed local repository to store historical simulation inputs and results, supporting side-by-side comparative analysis of multiple runs.
 
 ---
 *Developed as a premium solution for solar engineering procurement.*

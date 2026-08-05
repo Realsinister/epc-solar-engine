@@ -75,6 +75,7 @@ function App() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       });
+      const data = await response.json();
       const getCleanShortName = (row) => {
         let brand = row.manufacturer || '';
         brand = brand.replace(/\s*(Jiangsu|Zhejiang|Anhui|Changzhou|Hefei|Ningbo|Wuxi|Sichuan|Shanghai|Beijing|Guangdong|Suzhou)\b/gi, '');

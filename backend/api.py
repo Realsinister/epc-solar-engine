@@ -4,6 +4,7 @@ import pandas as pd
 import numpy as np
 from typing import Optional
 from fastapi import FastAPI, HTTPException
+from fastapi.responses import StreamingResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from dotenv import load_dotenv
@@ -18,6 +19,7 @@ from pv_engine.financial_model import ExecutiveFinancialModel
 from pv_engine.history import history_db
 from pv_engine.inverter_engine import InverterEngine
 from pv_engine.bos_engine import BOSEngine
+from pv_engine.report_gen import ReportGenerator
 
 app = FastAPI(title="EPC Solar Engine Premium API")
 
@@ -274,6 +276,66 @@ def get_simulation_history(sim_id: str):
     if not data:
         raise HTTPException(status_code=404, detail="Simulation not found")
     return data
+
+@app.post("/api/export-pdf/{dataset_uuid}")
+def export_pdf(dataset_uuid: str, request: CalculationRequest):
+    df = load_data_from_parquet(project_size_mwp=request.project_size_mwp, ground_albedo=request.ground_albedo)
+    if df.empty:
+        raise HTTPException(status_code=500, detail="Database not loaded")
+        
+    df_calc = PVEngine.calculate_metrics(
+        df, 
+        base_irradiance=request.base_irradiance,
+        ambient_temp_c=request.ambient_temp_c,
+        lifetime=request.lifetime,
+        avg_price_wp=request.avg_price_wp,
+        bos_cost_wp=request.bos_cost_wp,
+        opex_annual=request.opex_annual,
+        cbam_tax_rate_eur_t=request.cbam_tax_rate_eur_t,
+        eol_recycling_rate_pct=request.eol_recycling_rate_pct,
+        system_topology=request.system_topology,
+        ground_albedo=request.ground_albedo,
+        project_size_mwp=request.project_size_mwp,
+        inverter_id=request.inverter_id,
+        target_dc_ac_ratio=request.target_dc_ac_ratio
+    )
+    df_calc = PVEngine.filter_by_project_size(df_calc, request.project_size_mwp, ground_albedo=request.ground_albedo)
+    df_calc, _ = PVEngine.normalize_scores(df_calc, request.scenario)
+    df_topsis = PVEngine.calculate_topsis(df_calc, request.scenario)
+
+    top_3 = df_topsis.head(3).replace({np.nan: None}).to_dict(orient="records")
+    
+    winner_row = df_topsis[df_topsis['dataset_uuid'] == dataset_uuid]
+    if winner_row.empty:
+        winner = top_3[0]
+    else:
+        winner = winner_row.iloc[0].to_dict()
+        
+    exec_financials = ExecutiveFinancialModel.calculate_project_financials(
+        module_row=winner,
+        project_size_mwp=request.project_size_mwp,
+        ppa_rate_eur_mwh=request.ppa_rate_eur_mwh,
+        discount_rate_pct=request.discount_rate_pct
+    )
+    
+    auto_paired = InverterEngine.auto_pair_inverter(request.project_size_mwp)
+    bos_info = BOSEngine.get_bos_performance(request.system_topology)
+    
+    pdf_buffer = ReportGenerator.generate_csuite_briefing(
+        winner=winner,
+        top_3=top_3,
+        request_params=request.model_dump(),
+        exec_financials=exec_financials,
+        inverter_info=auto_paired,
+        bos_info=bos_info
+    )
+    
+    filename = f"Executive_Procurement_Briefing_{winner.get('name', 'Module')}.pdf"
+    return StreamingResponse(
+        pdf_buffer, 
+        media_type="application/pdf", 
+        headers={"Content-Disposition": f'attachment; filename="{filename}"'}
+    )
 
 if __name__ == "__main__":
     import uvicorn

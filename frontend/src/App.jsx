@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Sliders, Zap, Leaf, Truck, Activity, Target, Sun, Mountain, Clock, LayoutDashboard } from 'lucide-react';
+import { Sliders, Zap, Leaf, Truck, Activity, Target, Sun, Mountain, Clock, LayoutDashboard, FileText } from 'lucide-react';
 import { 
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell, Legend, Label,
   Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis,
@@ -18,11 +18,55 @@ function App() {
   // Selected Module State for Deep Dive
   const [selectedModule, setSelectedModule] = useState(null);
   const [analysisData, setAnalysisData] = useState(null);
+  const [exportingPdf, setExportingPdf] = useState(false);
 
   // Inverter & System State
   const [inverters, setInverters] = useState([]);
   const [selectedInverterId, setSelectedInverterId] = useState('auto');
   const [targetDcAcRatio, setTargetDcAcRatio] = useState(1.25);
+
+  const handleExportPdf = async () => {
+    if (!selectedModule) return;
+    setExportingPdf(true);
+    try {
+      const payload = {
+        base_irradiance: parseFloat(baseIrradiance),
+        ambient_temp_c: parseFloat(ambientTemp),
+        lifetime: parseInt(lifetime),
+        avg_price_wp: parseFloat(avgPriceWp),
+        bos_cost_wp: parseFloat(bosCostWp),
+        opex_annual: parseFloat(opexAnnual),
+        cbam_tax_rate_eur_t: parseFloat(cbamTaxRate),
+        eol_recycling_rate_pct: parseFloat(eolRecyclingRate),
+        system_topology: systemTopology,
+        ground_albedo: groundAlbedo ? parseFloat(groundAlbedo) : null,
+        scenario: scenario,
+        project_size_mwp: parseFloat(projectSizeMwp),
+        ppa_rate_eur_mwh: parseFloat(ppaRate),
+        discount_rate_pct: parseFloat(discountRate),
+        inverter_id: selectedInverterId,
+        target_dc_ac_ratio: parseFloat(targetDcAcRatio)
+      };
+
+      const res = await fetch(`http://127.0.0.1:8000/api/export-pdf/${selectedModule.dataset_uuid}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const blob = await res.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `Executive_Procurement_Briefing_${selectedModule.name || 'Module'}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.URL.revokeObjectURL(url);
+    } catch (err) {
+      console.error("Failed to export PDF", err);
+    }
+    setExportingPdf(false);
+  };
 
   // Physics Parameters State
   const [params, setParams] = useState({
@@ -498,9 +542,34 @@ function App() {
 
                 {/* EXECUTIVE FINANCIAL SUMMARY */}
                 <div className="glass-panel" style={{ gridColumn: '1 / -1' }}>
-                  <h3 style={{ marginBottom: '12px', color: 'var(--accent-purple)', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <Activity size={18} /> Executive Financial Projection ({params.project_size_mwp} {params.project_size_unit})
-                  </h3>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                    <h3 style={{ margin: 0, color: 'var(--accent-purple)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <Activity size={18} /> Executive Financial Projection ({params.project_size_mwp} {params.project_size_unit})
+                    </h3>
+                    <button
+                      onClick={handleExportPdf}
+                      disabled={exportingPdf}
+                      style={{
+                        backgroundColor: 'rgba(139, 92, 246, 0.2)',
+                        border: '1px solid rgba(139, 92, 246, 0.5)',
+                        color: '#c084fc',
+                        padding: '8px 16px',
+                        borderRadius: '6px',
+                        cursor: exportingPdf ? 'not-allowed' : 'pointer',
+                        fontSize: '12px',
+                        fontWeight: '600',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '8px',
+                        transition: 'all 0.2s ease'
+                      }}
+                      onMouseEnter={(e) => !exportingPdf && (e.currentTarget.style.backgroundColor = 'rgba(139, 92, 246, 0.35)')}
+                      onMouseLeave={(e) => !exportingPdf && (e.currentTarget.style.backgroundColor = 'rgba(139, 92, 246, 0.2)')}
+                    >
+                      <FileText size={16} />
+                      {exportingPdf ? 'Generating PDF...' : 'Export Executive Briefing (PDF)'}
+                    </button>
+                  </div>
                   
                   {analyzing ? (
                     <div style={{ color: 'var(--text-muted)' }}>Calculating ROI...</div>

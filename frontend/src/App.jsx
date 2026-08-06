@@ -118,7 +118,17 @@ function App() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`Backend Error (${response.status}): ${errorText}`);
+      }
+
       const data = await response.json();
+      if (!data || !data.results) {
+        throw new Error("Invalid response format from backend calculation engine");
+      }
+
       const getCleanShortName = (row) => {
         let brand = row.manufacturer || '';
         brand = brand.replace(/\s*(Jiangsu|Zhejiang|Anhui|Changzhou|Hefei|Ningbo|Wuxi|Sichuan|Shanghai|Beijing|Guangdong|Suzhou)\b/gi, '');
@@ -149,9 +159,9 @@ function App() {
         ...row,
         Short_Name: getCleanShortName(row)
       }));
-      setResults(topResults); // Keep top 10 for Leaderboard
+      setResults(topResults);
       
-      // Trigger UI slide animation
+      // Trigger UI dashboard view transition immediately
       setHasSimulated(true);
       setIsStale(false);
 
@@ -160,7 +170,8 @@ function App() {
         handleModuleSelect(data.results[0]);
       }
     } catch (err) {
-      console.error("Failed to connect to backend", err);
+      console.error("Simulation failed:", err);
+      alert("Simulation failed to start: " + err.message + "\n\nPlease ensure the backend FastAPI service is running on http://127.0.0.1:8000.");
     }
     setLoading(false);
   };

@@ -20,8 +20,6 @@ function App() {
   const [selectedModule, setSelectedModule] = useState(null);
   const [analysisData, setAnalysisData] = useState(null);
   const [exportingPdf, setExportingPdf] = useState(false);
-  const [activeDatasetId, setActiveDatasetId] = useState('baseline');
-  const [activeDatasetName, setActiveDatasetName] = useState('Baseline Parquet EPD');
 
   // Inverter & System State
   const [inverters, setInverters] = useState([]);
@@ -257,11 +255,7 @@ function App() {
         {activeTab === 'history' ? (
           <HistoryCompare />
         ) : activeTab === 'vendor_data' ? (
-          <CustomEpdUpload onDatasetSelected={(id, name) => {
-            setActiveDatasetId(id);
-            setActiveDatasetName(name);
-            setIsStale(true);
-          }} />
+          <CustomEpdUpload />
         ) : (
           <>
             {/* SIDEBAR CONTROLS */}

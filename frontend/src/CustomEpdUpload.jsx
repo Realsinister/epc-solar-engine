@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { UploadCloud, FileSpreadsheet, CheckCircle2, AlertTriangle, Trash2, Download, Database } from 'lucide-react';
+import { UploadCloud, FileSpreadsheet, CheckCircle2, AlertTriangle, Trash2, Download, Database, Play } from 'lucide-react';
 
-export default function CustomEpdUpload({ onDatasetSelected }) {
+export default function CustomEpdUpload({ onDatasetSelected, onRunCustomSimulation }) {
   const [dragActive, setDragActive] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [datasets, setDatasets] = useState([]);
@@ -111,7 +111,7 @@ export default function CustomEpdUpload({ onDatasetSelected }) {
             Custom EPD & Vendor Datasheet Import
           </h2>
           <p className="label-muted" style={{ margin: 0 }}>
-            Upload custom vendor module datasheets (.csv or .xlsx) to evaluate non-standard panels against project parameters.
+            Upload custom vendor module datasheets (.csv or .xlsx) to validate vendor EPD parameters against standardized baseline schemas.
           </p>
         </div>
 
@@ -228,13 +228,12 @@ export default function CustomEpdUpload({ onDatasetSelected }) {
       <div className="glass-panel">
         <h3 style={{ display: 'flex', alignItems: 'center', gap: '8px', margin: '0 0 16px 0', color: 'var(--text-main)' }}>
           <Database size={20} color="var(--accent-blue)" />
-          Available Datasets
+          Available Imported Datasets
         </h3>
 
         <table style={{ width: '100%', textAlign: 'left', borderCollapse: 'collapse', color: 'var(--text-main)' }}>
           <thead>
             <tr style={{ borderBottom: '1px solid var(--border-light)' }}>
-              <th style={{ padding: '10px' }}>Active</th>
               <th style={{ padding: '10px' }}>Dataset Source</th>
               <th style={{ padding: '10px' }}>Modules Count</th>
               <th style={{ padding: '10px' }}>Upload Date</th>
@@ -243,32 +242,16 @@ export default function CustomEpdUpload({ onDatasetSelected }) {
           </thead>
           <tbody>
             {/* Baseline Parquet Item */}
-            <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.05)', backgroundColor: activeDatasetId === 'baseline' ? 'rgba(59, 130, 246, 0.2)' : 'transparent' }}>
-              <td style={{ padding: '10px' }}>
-                <input 
-                  type="radio" 
-                  name="active_ds" 
-                  checked={activeDatasetId === 'baseline'}
-                  onChange={() => selectDataset('baseline', 'Baseline Parquet EPD')}
-                />
-              </td>
+            <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
               <td style={{ padding: '10px', fontWeight: 'bold' }}>Baseline Parquet EPD Database (Standard)</td>
               <td style={{ padding: '10px' }}>20,000+ Modules</td>
               <td style={{ padding: '10px', fontSize: '12px', color: 'var(--text-muted)' }}>Built-in Core</td>
-              <td style={{ padding: '10px', textAlign: 'right', fontSize: '12px', color: 'var(--accent-green)' }}>Protected</td>
+              <td style={{ padding: '10px', textAlign: 'right', fontSize: '12px', color: 'var(--text-muted)' }}>Protected Core</td>
             </tr>
 
             {/* Custom Uploaded Items */}
             {datasets.map(ds => (
-              <tr key={ds.id} style={{ borderBottom: '1px solid rgba(255,255,255,0.05)', backgroundColor: activeDatasetId === ds.id ? 'rgba(59, 130, 246, 0.2)' : 'transparent' }}>
-                <td style={{ padding: '10px' }}>
-                  <input 
-                    type="radio" 
-                    name="active_ds" 
-                    checked={activeDatasetId === ds.id}
-                    onChange={() => selectDataset(ds.id, ds.filename)}
-                  />
-                </td>
+              <tr key={ds.id} style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
                 <td style={{ padding: '10px' }}>{ds.filename}</td>
                 <td style={{ padding: '10px' }}>{ds.module_count} Modules</td>
                 <td style={{ padding: '10px', fontSize: '12px', color: 'var(--text-muted)' }}>{new Date(ds.timestamp).toLocaleString()}</td>
@@ -285,7 +268,7 @@ export default function CustomEpdUpload({ onDatasetSelected }) {
                       fontSize: '12px'
                     }}
                   >
-                    <Trash2 size={14} />
+                    <Trash2 size={14} /> Delete
                   </button>
                 </td>
               </tr>

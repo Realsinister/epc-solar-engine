@@ -21,8 +21,6 @@ class HistoryDatabase:
         """Initializes the database schema with privacy in mind."""
         with sqlite3.connect(self.db_path) as conn:
             cursor = conn.cursor()
-            # Privacy measure: We deliberately avoid capturing user IPs, sessions, or PII.
-            # We strictly log the non-sensitive technical parameters and mathematical outputs.
             cursor.execute('''
                 CREATE TABLE IF NOT EXISTS sim_logs (
                     id TEXT PRIMARY KEY,
@@ -34,9 +32,15 @@ class HistoryDatabase:
                     winner_name TEXT,
                     winner_suitability REAL,
                     inputs_json TEXT NOT NULL,
-                    results_json TEXT NOT NULL
+                    results_json TEXT NOT NULL,
+                    dataset_name TEXT DEFAULT 'Baseline Parquet EPD'
                 )
             ''')
+            # Gracefully add column if table exists without dataset_name
+            try:
+                cursor.execute("ALTER TABLE sim_logs ADD COLUMN dataset_name TEXT DEFAULT 'Baseline Parquet EPD'")
+            except sqlite3.OperationalError:
+                pass # Column already exists
             conn.commit()
 
     def log_simulation(self, request_data: Dict[str, Any], results_data: List[Dict[str, Any]], weights: Dict[str, float]) -> str:
@@ -47,6 +51,7 @@ class HistoryDatabase:
         scenario = request_data.get("scenario", "Unknown")
         project_size = request_data.get("project_size_mwp", 0.0)
         loc_yield = str(request_data.get("base_irradiance", "Unknown"))
+        dataset_name = request_data.get("dataset_name", "Baseline Parquet EPD")
         
         # Determine the winner from the results (assuming sorted by rank or passing the top one)
         if results_data and len(results_data) > 0:
@@ -74,11 +79,11 @@ class HistoryDatabase:
             cursor.execute('''
                 INSERT INTO sim_logs (
                     id, timestamp, scenario, project_size_mwp, location_or_yield,
-                    winner_mfg, winner_name, winner_suitability, inputs_json, results_json
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    winner_mfg, winner_name, winner_suitability, inputs_json, results_json, dataset_name
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             ''', (
                 sim_id, timestamp, scenario, project_size, loc_yield,
-                winner_mfg, winner_name, winner_suitability, inputs_json, results_json
+                winner_mfg, winner_name, winner_suitability, inputs_json, results_json, dataset_name
             ))
             conn.commit()
             
@@ -113,7 +118,8 @@ class HistoryDatabase:
             # Select summary view bounded by limit parameter
             cursor.execute('''
                 SELECT id, timestamp, scenario, project_size_mwp, location_or_yield,
-                       winner_mfg, winner_name, winner_suitability, inputs_json, results_json
+                       winner_mfg, winner_name, winner_suitability, inputs_json, results_json,
+                       COALESCE(dataset_name, 'Baseline Parquet EPD') as dataset_name
                 FROM sim_logs
                 ORDER BY timestamp DESC
                 LIMIT ?

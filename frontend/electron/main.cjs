@@ -21,6 +21,19 @@ function createWindow() {
   const isDev = process.env.NODE_ENV === 'development';
 
   if (isDev) {
+    const projectRoot = path.join(__dirname, '../..');
+    const venvPython = path.join(projectRoot, 'backend', '.venv', 'Scripts', 'python.exe');
+    
+    try {
+      pythonProcess = spawn(venvPython, ['-m', 'uvicorn', 'backend.api:app', '--port', '8000', '--reload'], {
+        cwd: projectRoot
+      });
+      pythonProcess.stdout?.on('data', (data) => console.log(`[Backend]: ${data}`));
+      pythonProcess.stderr?.on('data', (data) => console.error(`[Backend Log]: ${data}`));
+    } catch (e) {
+      console.error("Failed to spawn Python dev server", e);
+    }
+
     mainWindow.loadURL('http://localhost:5173');
     mainWindow.webContents.openDevTools();
   } else {

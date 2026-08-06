@@ -154,8 +154,22 @@ def calculate(request: CalculationRequest):
     top_panels = df_calc.head(50).replace({np.nan: None}).to_dict(orient="records")
     
     weights_dict = {"eco": weights[0], "cost": weights[1], "tech": weights[2]}
+    
+    # Resolve dataset_name for history logging
+    dataset_name = "Baseline Parquet EPD"
+    if request.custom_dataset_id and request.custom_dataset_id != "baseline":
+        custom_meta = custom_epd_engine.list_custom_datasets()
+        matching = [d for d in custom_meta if d['id'] == request.custom_dataset_id]
+        if matching:
+            dataset_name = f"Custom: {matching[0]['filename']}"
+        else:
+            dataset_name = f"Custom: {request.custom_dataset_id}"
+
+    request_dump = request.model_dump()
+    request_dump["dataset_name"] = dataset_name
+    
     # Log to history
-    history_db.log_simulation(request.model_dump(), top_panels, weights_dict)
+    history_db.log_simulation(request_dump, top_panels, weights_dict)
     
     auto_paired = InverterEngine.auto_pair_inverter(request.project_size_mwp)
     bos_info = BOSEngine.get_bos_performance(request.system_topology)
@@ -201,9 +215,13 @@ def analyze_module(dataset_uuid: str, request: CalculationRequest):
         target_dc_ac_ratio=request.target_dc_ac_ratio
     )
     
-    # We need the full dataframe to normalize scores properly against the dataset
+    full_calc = load_data_from_parquet(
+        project_size_mwp=request.project_size_mwp, 
+        ground_albedo=request.ground_albedo,
+        custom_dataset_id=request.custom_dataset_id
+    )
     full_calc = PVEngine.calculate_metrics(
-        df,
+        full_calc,
         base_irradiance=request.base_irradiance,
         ambient_temp_c=request.ambient_temp_c,
         lifetime=request.lifetime,
@@ -242,19 +260,16 @@ def analyze_module(dataset_uuid: str, request: CalculationRequest):
         'eol_recycling_rate_pct': request.eol_recycling_rate_pct,
         'transport_distance_km': 20000.0,
         'system_topology': request.system_topology,
-        'ground_albedo': request.ground_albedo
+        'ground_albedo': request.ground_albedo,
+        'project_size_mwp': request.project_size_mwp,
+        'inverter_id': request.inverter_id,
+        'target_dc_ac_ratio': request.target_dc_ac_ratio
     }
     
-    sens_df = PVEngine.run_sensitivity_analysis(module_row.iloc[0], base_params, variation=0.20)
-    
-    # Format sensitivity for Tornado chart
-    # Recharts needs a format like { name: 'Parameter', Low: -0.5, High: +0.6 }
-    carbon_sens = sens_df[sens_df['Metric'] == 'Carbon Intensity'].to_dict(orient="records")
-    lcoe_sens = sens_df[sens_df['Metric'] == 'LCOE'].to_dict(orient="records")
+    carbon_sens = PVEngine.run_sensitivity(module_row.iloc[0], base_params, parameter_name='grid_decarb_rate', variation_pct=20.0)
+    lcoe_sens = PVEngine.run_sensitivity(module_row.iloc[0], base_params, parameter_name='avg_price_wp', variation_pct=20.0)
 
-    # Run Executive Financial Model
-    # Pass the calculated module row (with 'Net_GWP_kgCO2e' etc)
-    calc_row = module_scores.to_dict()
+    calc_row = df_calc.iloc[0]
     exec_financials = ExecutiveFinancialModel.calculate_project_financials(
         module_row=calc_row,
         project_size_mwp=request.project_size_mwp,
@@ -296,7 +311,11 @@ def get_simulation_history(sim_id: str):
 
 @app.post("/api/export-pdf/{dataset_uuid}")
 def export_pdf(dataset_uuid: str, request: CalculationRequest):
-    df = load_data_from_parquet(project_size_mwp=request.project_size_mwp, ground_albedo=request.ground_albedo)
+    df = load_data_from_parquet(
+        project_size_mwp=request.project_size_mwp, 
+        ground_albedo=request.ground_albedo,
+        custom_dataset_id=request.custom_dataset_id
+    )
     if df.empty:
         raise HTTPException(status_code=500, detail="Database not loaded")
         

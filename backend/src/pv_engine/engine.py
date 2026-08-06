@@ -268,6 +268,10 @@ class PVEngine:
         """
         if df.empty or 'module_power_Wp' not in df.columns:
             return df
+
+        # For custom uploaded datasets, bypass strict baseline project size dropping
+        if 'dataset_type' in df.columns and (df['dataset_type'] == 'custom').any():
+            return df
             
         initial_count = len(df)
         

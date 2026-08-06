@@ -135,8 +135,13 @@ class CustomEPDEngine:
         mapped_df['Panel_Temp_Coef'] = mapped_df['temp_coeff_pmax']
         mapped_df['Estimated_Price_Wp'] = mapped_df['estimated_price_wp']
         mapped_df['Carbon_Intensity_Mean'] = mapped_df['carbon_intensity_mean']
+        mapped_df['GWP_total_A1A3_per_kWp_kgCO2e'] = mapped_df['carbon_intensity_mean']
         mapped_df['Efficiency_Pct'] = mapped_df['efficiency_pct']
-
+        mapped_df['module_power_Wp'] = mapped_df['module_power_Wp']
+        mapped_df['Weight_t_kWp'] = 0.05 # Default weight 50kg/kWp
+        mapped_df['Is_Bifacial'] = mapped_df['bifaciality'] > 0
+        mapped_df['Annual_Degradation_Pct'] = 0.50 # Standard default degradation 0.5%
+        
         return mapped_df, list(set(warnings))
 
     def save_custom_dataset(self, filename: str, df: pd.DataFrame) -> Dict[str, Any]:
@@ -160,8 +165,12 @@ class CustomEPDEngine:
             "module_count": len(df)
         }
 
-    def get_custom_dataset(self, dataset_id: str) -> pd.DataFrame:
+    def get_custom_dataset(self, dataset_id: Any) -> pd.DataFrame:
         """Retrieves a custom dataset by ID."""
+        if isinstance(dataset_id, dict):
+            dataset_id = dataset_id.get('id', '')
+        dataset_id = str(dataset_id)
+        
         with sqlite3.connect(self.db_path) as conn:
             cursor = conn.cursor()
             cursor.execute('SELECT data_json FROM custom_datasets WHERE id = ?', (dataset_id,))

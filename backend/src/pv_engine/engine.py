@@ -165,6 +165,7 @@ class PVEngine:
         Calculates LCOE, Carbon Intensity, and Suitability scores with EoL and CBAM.
         """
         transport_distance_km = 20000.0 # Hardcoded scope 3 assumption
+        project_size_mwp = float(project_size_mwp or 50.0)
         
         if df.empty or 'GWP_total_A1A3_per_kWp_kgCO2e' not in df.columns:
             return df

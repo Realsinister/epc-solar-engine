@@ -100,7 +100,8 @@ function App() {
   const calculateResults = async () => {
     setLoading(true);
     try {
-      const actualSizeMwp = params.project_size_unit === 'kWp' ? params.project_size_mwp / 1000 : params.project_size_mwp;
+      const rawSize = parseFloat(params.project_size_mwp) || 50.0;
+      const actualSizeMwp = params.project_size_unit === 'kWp' ? rawSize / 1000 : rawSize;
       const payload = { 
         ...params, 
         project_size_mwp: actualSizeMwp,
@@ -176,7 +177,8 @@ function App() {
     setSelectedModule(moduleRow);
     setAnalyzing(true);
     try {
-      const actualSizeMwp = params.project_size_unit === 'kWp' ? params.project_size_mwp / 1000 : params.project_size_mwp;
+      const rawSize = parseFloat(params.project_size_mwp) || 50.0;
+      const actualSizeMwp = params.project_size_unit === 'kWp' ? rawSize / 1000 : rawSize;
       const payload = { 
         ...params, 
         project_size_mwp: actualSizeMwp,
@@ -201,12 +203,18 @@ function App() {
   useEffect(() => {
     const fetchInverters = async () => {
       try {
-        const actualSize = params.project_size_unit === 'kWp' ? params.project_size_mwp / 1000 : params.project_size_mwp;
+        const rawSize = parseFloat(params.project_size_mwp) || 50.0;
+        const actualSize = params.project_size_unit === 'kWp' ? rawSize / 1000 : rawSize;
         const res = await fetch(`http://127.0.0.1:8000/api/inverters?project_size_mwp=${actualSize}`);
         const data = await res.json();
-        setInverters(data);
+        if (Array.isArray(data)) {
+          setInverters(data);
+        } else {
+          setInverters([]);
+        }
       } catch (err) {
         console.error("Failed to load inverters", err);
+        setInverters([]);
       }
     };
     fetchInverters();

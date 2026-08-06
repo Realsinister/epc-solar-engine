@@ -102,6 +102,17 @@ h1, h2, h3, h4 {
   width: 100%;
   transition: all 0.2s ease;
   outline: none;
+  position: relative;
+  z-index: 10;
+  pointer-events: auto;
+}
+
+select.input-glass {
+  cursor: pointer;
+}
+
+input.input-glass {
+  cursor: text;
 }
 
 .input-glass:focus {
@@ -320,7 +331,8 @@ h1, h2, h3, h4 {
   top: 120px;
   left: 0;
   right: 0;
-  z-index: 10;
+  z-index: 1;
+  pointer-events: none;
   transition: all 0.5s ease;
   width: 100%;
 }

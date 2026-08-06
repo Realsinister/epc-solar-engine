@@ -29,23 +29,13 @@ function App() {
     if (!selectedModule) return;
     setExportingPdf(true);
     try {
+      const actualSizeMwp = params.project_size_unit === 'kWp' ? params.project_size_mwp / 1000 : params.project_size_mwp;
       const payload = {
-        base_irradiance: parseFloat(baseIrradiance),
-        ambient_temp_c: parseFloat(ambientTemp),
-        lifetime: parseInt(lifetime),
-        avg_price_wp: parseFloat(avgPriceWp),
-        bos_cost_wp: parseFloat(bosCostWp),
-        opex_annual: parseFloat(opexAnnual),
-        cbam_tax_rate_eur_t: parseFloat(cbamTaxRate),
-        eol_recycling_rate_pct: parseFloat(eolRecyclingRate),
-        system_topology: systemTopology,
-        ground_albedo: groundAlbedo ? parseFloat(groundAlbedo) : null,
-        scenario: scenario,
-        project_size_mwp: parseFloat(projectSizeMwp),
-        ppa_rate_eur_mwh: parseFloat(ppaRate),
-        discount_rate_pct: parseFloat(discountRate),
+        ...params,
+        project_size_mwp: actualSizeMwp,
+        ground_albedo: params.ground_albedo === "None" ? null : parseFloat(params.ground_albedo),
         inverter_id: selectedInverterId,
-        target_dc_ac_ratio: parseFloat(targetDcAcRatio)
+        target_dc_ac_ratio: targetDcAcRatio
       };
 
       const res = await fetch(`http://127.0.0.1:8000/api/export-pdf/${selectedModule.dataset_uuid}`, {
@@ -53,6 +43,9 @@ function App() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       });
+      if (!res.ok) {
+        throw new Error(`Server returned status ${res.status}`);
+      }
       const blob = await res.blob();
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
@@ -64,6 +57,7 @@ function App() {
       window.URL.revokeObjectURL(url);
     } catch (err) {
       console.error("Failed to export PDF", err);
+      alert("Failed to export PDF: " + err.message);
     }
     setExportingPdf(false);
   };

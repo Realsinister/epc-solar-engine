@@ -14,12 +14,13 @@
 This tool acts as your ultimate "pitch generator" for PV module procurement, calculating real-world technical yields, carbon footprints (LCA), and massive project-scale economics instantly.
 
 ## ✨ Key Features
-- ⚡ **Standalone Desktop Experience:** No more python terminals or complex setups. Double-click the installer and launch the app offline.
-- 🧮 **Physics-based MCDA Engine:** A Python/FastAPI backend instantly scores modules based on dynamic weighting of Cost, Performance, and Eco-Footprint.
+- 📄 **1-Click Executive PDF Export (Phase 2):** Instantly generate and download formal 2-Page C-Suite Procurement Briefing PDF reports equipped with project parameters, top-3 winner comparison matrices, LCA carbon footprint stacks, and automated executive pitch defenses.
+- ⚡ **Standalone Desktop Experience:** Double-click the installer and launch the app natively on Windows (no python setup required).
+- 🧮 **Physics-based MCDA Engine:** A Python/FastAPI backend instantly scores modules based on dynamic weighting of Cost, Performance, and Eco-Footprint using vector TOPSIS algorithms.
 - 🎨 **Premium UI/UX:** Built with React & Vite, featuring a sleek dark-mode glassmorphism interface and interactive leaderboards.
-- 📈 **Interactive Pareto Trade-Off Frontier (Phase 1):** 2D Scatter plot mapping **System LCOE (€/MWh)** vs **System Embodied Carbon (kgCO2e/kWp)** with TOPSIS-weighted bubble sizing. Clicking any point on the frontier dynamically focuses the Deep-Dive Analytics on that module.
+- 📈 **Interactive Pareto Trade-Off Frontier (Phase 1):** 2D Scatter plot mapping **System LCOE (€/MWh)** vs **System Embodied Carbon (kgCO2e/kWp)** with TOPSIS-weighted bubble sizing.
 - 🔌 **Inverter Database & BOS Configurator:** Real-world inverter dataset (Sungrow, SMA, Huawei, SolarEdge) with dynamic DC/AC ratio clipping, BOS racking/cabling carbon accounting, and Year 15 inverter replacement CAPEX modeling (-10% EoL credit).
-- 💾 **SQLite Simulation History & Comparison:** Local, privacy-first SQLite repository (`sim_history.db`) logging simulation runs with a dedicated side-by-side comparative dashboard.
+- 💾 **SQLite History Engine & Comparison:** Local, privacy-first SQLite repository (`sim_history.db`) with automatic rolling 100-run pruning, top-50 UI display, and a dedicated side-by-side comparative dashboard.
 - 📊 **Deep-Dive Analytics Dashboard:**
   - **Radar Charts:** Compare Eco, Cost, and Tech dimensions visually.
   - **Tornado Charts:** Perform instant sensitivity analysis on Carbon Footprints (e.g., how does a ±20% swing in grid emissions impact the module?).
@@ -30,35 +31,47 @@ This tool acts as your ultimate "pitch generator" for PV module procurement, cal
   - CBAM Import Tax Exposure calculations
   - **Elevator Pitch Generator:** Ready-to-copy executive summaries for stakeholders.
 
-## 🆕 What's New in v0.1.0
+---
+
+## 🆕 Version Release History
+
+### **v0.2.0 - Executive PDF Export & Precision Engine Release (Current)**
+- 📄 **C-Suite Procurement Briefing PDF Export:** One-click generation of formal 2-page PDF executive briefs using ReportLab.
+- 🎯 **LCOE TOPSIS Matrix Re-Weighting:** Re-aligned Utility Scale TOPSIS weights (75% LCOE preference) so the lowest LCOE module strictly leads the leaderboard.
+- 🧹 **EPD Outlier Filtering:** Automatically filters out corrupted module area inputs (>24.5% efficiency outliers) ensuring 100% physically accurate commercial module pricing.
+- 💾 **Rolling SQLite History & Clear Button:** Automatically caps simulation history at 100 runs in SQLite and adds a one-click "Clear History" button with confirmation prompts.
+
+### **v0.1.0 - Initial Desktop & Financial Engine Release**
 - **Pareto Trade-Off Surface:** Interactive multi-objective scatter chart evaluating LCOE vs Carbon Footprint.
 - **Simulation Run History:** Local SQLite database logging previous runs with side-by-side run comparisons.
 - **Inverter & BOS Engine:** Auto-pairing inverter selection and racking/cabling embodied carbon stack.
-- **Interactive Sandbox:** The left sidebar inputs are "sticky", allowing you to tweak simulation parameters on the fly without losing sight of the bottom charts.
-- **Portable Architecture:** The software is compiled into a standalone, portable `.exe` file.
+
+---
 
 ## 🚀 Launching the Software
-The application has been compiled into a single portable `.exe` using PyInstaller and Electron-Builder.
+The application is compiled into a single portable `.exe` using PyInstaller and Electron-Builder.
 
-1. Locate the standalone executable file: `EPC Solar Engine 0.1.0.exe` in the main folder.
+1. Locate the standalone executable file: `EPC Solar Engine 0.2.0.exe` in the main folder.
 2. **Double-click** to run it natively on Windows (no installation required).
 3. The background Python physics engine and React UI will spin up automatically!
+
+---
 
 ## 🌐 Public Demo & Marketing
 A stripped-down Alpha version of this software has been deployed to the web to showcase the core functionality and market the tool.
 - **Marketing Page & Demo:** See the [EPC Solar Public Repository](https://github.com/Realsinister/epc-solar-landing-page) for the public-facing landing page and alpha web demo.
 - **Software Website:** [EPC Solar Engine Website](https://realsinister.github.io/epc-solar-landing-page/)
-  
-*Note: This premium repository (`epc-solar-premium`) remains private and contains the full suite of features, including Executive Financial modeling, Inverter/BOS engines, and local database capabilities, which are excluded from the public alpha for proprietary reasons.*
+
+---
 
 ## 🛠️ Architecture
-- **Backend:** `FastAPI`, `Pydantic`, `Pandas` (Frozen into an executable via PyInstaller).
+- **Backend:** `FastAPI`, `ReportLab`, `Pydantic`, `Pandas` (Frozen into an executable via PyInstaller).
 - **Frontend:** `React`, `Vite`, `Recharts` for interactive graphing, and `TailwindCSS` (glassmorphism tokens).
 - **Desktop Wrapper:** `Electron` to merge the frontend and background processes into a seamless native OS window.
 
+---
+
 ## 🔮 Future Roadmap (Scale-Ready)
-The Python engine's architecture has been strictly modularized. Future expansions will easily plug into the existing Executive Financial Model:
-- **One-Click Executive Procurement PDF Export (Phase 2)**
 - **Custom EPD & Vendor Data Upload (Phase 3)**
 - **8,760-Hour Irradiance Profiles & Diurnal Weather Modeling (Phase 4)**
 - **Battery Storage (BESS) LCA Integration (Phase 5)**

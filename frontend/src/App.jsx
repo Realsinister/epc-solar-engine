@@ -175,7 +175,8 @@ function App() {
         project_size_mwp: actualSizeMwp,
         ground_albedo: params.ground_albedo === "None" ? null : parseFloat(params.ground_albedo),
         inverter_id: selectedInverterId,
-        target_dc_ac_ratio: targetDcAcRatio
+        target_dc_ac_ratio: targetDcAcRatio,
+        custom_dataset_id: activeDatasetId
       };
       
       const response = await fetch(`http://127.0.0.1:8000/api/analyze/${moduleRow.dataset_uuid}`, {

@@ -169,7 +169,11 @@ def calculate(request: CalculationRequest):
 
 @app.post("/api/analyze/{dataset_uuid}")
 def analyze_module(dataset_uuid: str, request: CalculationRequest):
-    df = load_data_from_parquet(project_size_mwp=request.project_size_mwp, ground_albedo=request.ground_albedo)
+    df = load_data_from_parquet(
+        project_size_mwp=request.project_size_mwp, 
+        ground_albedo=request.ground_albedo,
+        custom_dataset_id=request.custom_dataset_id
+    )
     if df.empty:
         raise HTTPException(status_code=500, detail="Database not loaded")
         

@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
-import { Sliders, Zap, Leaf, Truck, Activity, Target, Sun, Mountain, Clock, LayoutDashboard, FileText } from 'lucide-react';
+import { Sliders, Zap, Leaf, Truck, Activity, Target, Sun, Mountain, Clock, LayoutDashboard, FileText, FileSpreadsheet } from 'lucide-react';
 import { 
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell, Legend, Label,
   Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis,
   ScatterChart, Scatter, ZAxis
 } from 'recharts';
 import HistoryCompare from './HistoryCompare';
+import CustomEpdUpload from './CustomEpdUpload';
 
 function App() {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -19,6 +20,8 @@ function App() {
   const [selectedModule, setSelectedModule] = useState(null);
   const [analysisData, setAnalysisData] = useState(null);
   const [exportingPdf, setExportingPdf] = useState(false);
+  const [activeDatasetId, setActiveDatasetId] = useState('baseline');
+  const [activeDatasetName, setActiveDatasetName] = useState('Baseline Parquet EPD');
 
   // Inverter & System State
   const [inverters, setInverters] = useState([]);
@@ -35,7 +38,8 @@ function App() {
         project_size_mwp: actualSizeMwp,
         ground_albedo: params.ground_albedo === "None" ? null : parseFloat(params.ground_albedo),
         inverter_id: selectedInverterId,
-        target_dc_ac_ratio: targetDcAcRatio
+        target_dc_ac_ratio: targetDcAcRatio,
+        custom_dataset_id: activeDatasetId
       };
 
       const res = await fetch(`http://127.0.0.1:8000/api/export-pdf/${selectedModule.dataset_uuid}`, {
@@ -105,7 +109,8 @@ function App() {
         project_size_mwp: actualSizeMwp,
         ground_albedo: params.ground_albedo === "None" ? null : parseFloat(params.ground_albedo),
         inverter_id: selectedInverterId,
-        target_dc_ac_ratio: targetDcAcRatio
+        target_dc_ac_ratio: targetDcAcRatio,
+        custom_dataset_id: activeDatasetId
       };
       
       const response = await fetch('http://127.0.0.1:8000/api/calculate', {
@@ -221,6 +226,12 @@ function App() {
             <LayoutDashboard size={18} /> Dashboard
           </button>
           <button 
+            className={`tab-btn ${activeTab === 'vendor_data' ? 'tab-btn-active' : ''}`} 
+            onClick={() => setActiveTab('vendor_data')}
+          >
+            <FileSpreadsheet size={18} /> Vendor Data Import
+          </button>
+          <button 
             className={`tab-btn ${activeTab === 'history' ? 'tab-btn-active' : ''}`} 
             onClick={() => setActiveTab('history')}
           >
@@ -233,6 +244,12 @@ function App() {
         
         {activeTab === 'history' ? (
           <HistoryCompare />
+        ) : activeTab === 'vendor_data' ? (
+          <CustomEpdUpload onDatasetSelected={(id, name) => {
+            setActiveDatasetId(id);
+            setActiveDatasetName(name);
+            setIsStale(true);
+          }} />
         ) : (
           <>
             {/* SIDEBAR CONTROLS */}

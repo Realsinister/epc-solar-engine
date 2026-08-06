@@ -1,9 +1,10 @@
 import os
 import sys
+import io
 import pandas as pd
 import numpy as np
 from typing import Optional
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, UploadFile, File
 from fastapi.responses import StreamingResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -20,6 +21,7 @@ from pv_engine.history import history_db
 from pv_engine.inverter_engine import InverterEngine
 from pv_engine.bos_engine import BOSEngine
 from pv_engine.report_gen import ReportGenerator
+from pv_engine.custom_epd_engine import custom_epd_engine
 
 app = FastAPI(title="EPC Solar Engine Premium API")
 
@@ -32,7 +34,13 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-def load_data_from_parquet(project_size_mwp: float = None, ground_albedo: float = None):
+def load_data_from_parquet(project_size_mwp: float = None, ground_albedo: float = None, custom_dataset_id: str = None):
+    # If custom dataset requested, fetch custom modules from SQLite
+    if custom_dataset_id and custom_dataset_id != "baseline":
+        custom_df = custom_epd_engine.get_custom_dataset(custom_dataset_id)
+        if not custom_df.empty:
+            return custom_df
+
     parquet_path = os.path.join(os.path.dirname(__file__), "src", "pv_engine", "data", "pv_database_v2.parquet")
     
     filters = []
@@ -78,6 +86,7 @@ class CalculationRequest(BaseModel):
     discount_rate_pct: float = 5.0
     inverter_id: Optional[str] = "auto"
     target_dc_ac_ratio: float = 1.25
+    custom_dataset_id: Optional[str] = None
 
 
 @app.get("/")
@@ -108,8 +117,12 @@ def get_inverters(project_size_mwp: float = 50.0):
     return records
 
 @app.post("/api/calculate")
-def calculate_leaderboard(request: CalculationRequest):
-    df = load_data_from_parquet(project_size_mwp=request.project_size_mwp, ground_albedo=request.ground_albedo)
+def calculate(request: CalculationRequest):
+    df = load_data_from_parquet(
+        project_size_mwp=request.project_size_mwp, 
+        ground_albedo=request.ground_albedo,
+        custom_dataset_id=request.custom_dataset_id
+    )
     if df.empty:
         raise HTTPException(status_code=500, detail="Database not loaded")
         
@@ -335,6 +348,48 @@ def export_pdf(dataset_uuid: str, request: CalculationRequest):
         pdf_buffer, 
         media_type="application/pdf", 
         headers={"Content-Disposition": f'attachment; filename="{filename}"'}
+    )
+
+@app.post("/api/custom-epd/upload")
+async def upload_custom_epd(file: UploadFile = File(...)):
+    try:
+        contents = await file.read()
+        raw_df = custom_epd_engine.parse_file(contents, file.filename)
+        norm_df, warnings = custom_epd_engine.validate_and_normalize(raw_df)
+        dataset_meta = custom_epd_engine.save_custom_dataset(file.filename, norm_df)
+        
+        sample_preview = norm_df.head(5).replace({np.nan: None}).to_dict(orient="records")
+        return {
+            "status": "success",
+            "dataset": dataset_meta,
+            "warnings": warnings,
+            "sample_preview": sample_preview
+        }
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+@app.get("/api/custom-epd/list")
+def list_custom_epds():
+    return custom_epd_engine.list_custom_datasets()
+
+@app.delete("/api/custom-epd/{dataset_id}")
+def delete_custom_epd(dataset_id: str):
+    success = custom_epd_engine.delete_custom_dataset(dataset_id)
+    if not success:
+        raise HTTPException(status_code=404, detail="Custom dataset not found")
+    return {"status": "success", "message": "Custom dataset deleted"}
+
+@app.get("/api/custom-epd/sample-csv")
+def get_sample_csv():
+    sample_path = os.path.join(os.path.dirname(__file__), "..", "sample_datasets", "sample_vendor_modules.csv")
+    if not os.path.exists(sample_path):
+        raise HTTPException(status_code=404, detail="Sample dataset file not found")
+    with open(sample_path, "r", encoding="utf-8") as f:
+        content = f.read()
+    return StreamingResponse(
+        io.BytesIO(content.encode('utf-8')),
+        media_type="text/csv",
+        headers={"Content-Disposition": 'attachment; filename="sample_vendor_modules.csv"'}
     )
 
 if __name__ == "__main__":

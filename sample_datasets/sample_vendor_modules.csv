@@ -1,0 +1,9 @@
+Manufacturer,Model,Power_Wp,Efficiency_Pct,LCA_Carbon_gCO2_kWh,Price_EUR_Wp,Temp_Coeff_Pmax,Bifaciality
+LONGi Solar,LR5-72HPH-550M,550,21.3,580.5,0.175,-0.34,0.70
+JinkoSolar,JKM545M-72HL4-V,545,21.1,520.0,0.180,-0.35,0.75
+Trina Solar,TSM-670DE21,670,21.6,610.2,0.190,-0.34,0.80
+Canadian Solar,CS6W-550MS,550,21.3,565.0,0.178,-0.34,0.70
+JA Solar,JAM72S30-540/MR,540,20.9,595.0,0.172,-0.35,0.70
+First Solar,FS-7550A-FT1,550,19.6,410.0,0.210,-0.32,0.00
+Astronergy,CHSM72M-HC-545,545,21.1,570.0,0.170,-0.35,0.70
+Risen Energy,RSM130-8-550M,550,21.3,605.0,0.168,-0.34,0.70

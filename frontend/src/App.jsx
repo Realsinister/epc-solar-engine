@@ -509,10 +509,10 @@ function App() {
                     <Activity size={18} /> Dimension Balance
                   </h3>
                   <div style={{ fontSize: '13px', color: 'var(--accent-blue)', marginBottom: '8px', fontWeight: '500' }}>
-                    {selectedModule.Display_Name}
+                    {selectedModule.Display_Name || selectedModule.name}
                   </div>
                   
-                  {analyzing ? (
+                  {analyzing || !analysisData?.radar ? (
                     <div style={{ flexGrow: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-muted)' }}>Loading Analysis...</div>
                   ) : (
                     <div style={{ flexGrow: 1, minHeight: 0, width: '100%' }}>
@@ -540,7 +540,7 @@ function App() {
                     Impact of ±20% variation on {selectedModule.name}
                   </div>
 
-                  {analyzing ? (
+                  {analyzing || !analysisData?.sensitivity?.carbon ? (
                     <div style={{ flexGrow: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-muted)' }}>Loading Analysis...</div>
                   ) : (
                     <div style={{ flexGrow: 1, minHeight: 0, width: '100%' }}>
@@ -591,26 +591,26 @@ function App() {
                     </button>
                   </div>
                   
-                  {analyzing ? (
-                    <div style={{ color: 'var(--text-muted)' }}>Calculating ROI...</div>
-                  ) : analysisData.executive ? (
+                  {analyzing || !analysisData?.executive ? (
+                    <div style={{ color: 'var(--text-muted)', padding: '16px' }}>Calculating ROI...</div>
+                  ) : (
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px' }}>
                         <div style={{ background: 'rgba(0,0,0,0.3)', padding: '12px', borderRadius: '8px', borderLeft: '4px solid var(--accent-blue)' }}>
                           <div className="label-muted">Net Present Value (NPV)</div>
-                          <div style={{ fontSize: '20px', fontWeight: 'bold', color: 'white' }}>€ {Number(analysisData.executive.npv_eur).toLocaleString(undefined, {maximumFractionDigits: 0})}</div>
+                          <div style={{ fontSize: '20px', fontWeight: 'bold', color: 'white' }}>€ {Number(analysisData.executive.npv_eur || 0).toLocaleString(undefined, {maximumFractionDigits: 0})}</div>
                         </div>
                         <div style={{ background: 'rgba(0,0,0,0.3)', padding: '12px', borderRadius: '8px', borderLeft: '4px solid var(--accent-green)' }}>
                           <div className="label-muted">Payback Period</div>
-                          <div style={{ fontSize: '20px', fontWeight: 'bold', color: 'white' }}>{Number(analysisData.executive.payback_years).toFixed(1)} Years</div>
+                          <div style={{ fontSize: '20px', fontWeight: 'bold', color: 'white' }}>{Number(analysisData.executive.payback_years || 0).toFixed(1)} Years</div>
                         </div>
                         <div style={{ background: 'rgba(0,0,0,0.3)', padding: '12px', borderRadius: '8px', borderLeft: '4px solid var(--accent-purple)' }}>
                           <div className="label-muted">Lifetime Revenue</div>
-                          <div style={{ fontSize: '20px', fontWeight: 'bold', color: 'white' }}>€ {Number(analysisData.executive.total_lifetime_revenue_eur).toLocaleString(undefined, {maximumFractionDigits: 0})}</div>
+                          <div style={{ fontSize: '20px', fontWeight: 'bold', color: 'white' }}>€ {Number(analysisData.executive.total_lifetime_revenue_eur || 0).toLocaleString(undefined, {maximumFractionDigits: 0})}</div>
                         </div>
                         <div style={{ background: 'rgba(0,0,0,0.3)', padding: '12px', borderRadius: '8px', borderLeft: '4px solid #ef4444' }}>
                           <div className="label-muted">CBAM Tax Exposure</div>
-                          <div style={{ fontSize: '20px', fontWeight: 'bold', color: 'white' }}>€ {Number(analysisData.executive.total_cbam_tax_eur).toLocaleString(undefined, {maximumFractionDigits: 0})}</div>
+                          <div style={{ fontSize: '20px', fontWeight: 'bold', color: 'white' }}>€ {Number(analysisData.executive.total_cbam_tax_eur || 0).toLocaleString(undefined, {maximumFractionDigits: 0})}</div>
                         </div>
                       </div>
                       
@@ -665,13 +665,13 @@ function App() {
                         </div>
                       )}
 
-                      {analysisData.executive.executive_pitch && (
+                      {analysisData.executive?.executive_pitch && (
                         <div style={{ padding: '16px', background: 'rgba(59, 130, 246, 0.1)', border: '1px solid rgba(59, 130, 246, 0.3)', borderRadius: '8px', fontStyle: 'italic', lineHeight: '1.5' }}>
                           "{analysisData.executive.executive_pitch}"
                         </div>
                       )}
                     </div>
-                  ) : null}
+                  )}
                 </div>
 
                 {/* SYSTEM CARBON STACKED BREAKDOWN CHART */}

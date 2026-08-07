@@ -387,13 +387,23 @@ def export_pdf(dataset_uuid: str, request: CalculationRequest):
     auto_paired = InverterEngine.auto_pair_inverter(request.project_size_mwp)
     bos_info = BOSEngine.get_bos_performance(request.system_topology)
     
+    hybrid_layout = BlockOptimizer.generate_hybrid_layout(
+        df_calc=df_topsis,
+        project_size_mwp=request.project_size_mwp,
+        ppa_rate_eur_mwh=request.ppa_rate_eur_mwh,
+        discount_rate_pct=request.discount_rate_pct,
+        user_block_size_mwp=request.user_block_size_mwp,
+        custom_ratio_split=request.custom_ratio_split
+    )
+
     pdf_buffer = ReportGenerator.generate_csuite_briefing(
         winner=winner,
         top_3=top_3,
         request_params=request.model_dump(),
         exec_financials=exec_financials,
         inverter_info=auto_paired,
-        bos_info=bos_info
+        bos_info=bos_info,
+        hybrid_layout=hybrid_layout
     )
     
     filename = f"Executive_Procurement_Briefing_{winner.get('name', 'Module')}.pdf"

@@ -628,25 +628,36 @@ function App() {
                           
                           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '12px' }}>
                             {analysisData.hybrid_layout.allocations.map((alloc, idx) => (
-                              <div key={idx} style={{ background: 'rgba(0, 0, 0, 0.35)', border: '1px solid var(--border-highlight)', borderRadius: '8px', padding: '12px' }}>
-                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
-                                  <span style={{ fontWeight: 'bold', color: idx === 0 ? '#3b82f6' : '#8b5cf6', fontSize: '13px' }}>
-                                    Block Group {idx === 0 ? 'A' : 'B'}: {alloc.capacity_share_pct.toFixed(0)}% Capacity ({alloc.capacity_mwp.toFixed(1)} MWp / {alloc.blocks_assigned} Blocks)
-                                  </span>
-                                  <span style={{ fontSize: '10px', background: idx === 0 ? 'rgba(59, 130, 246, 0.2)' : 'rgba(139, 92, 246, 0.2)', color: idx === 0 ? '#60a5fa' : '#c084fc', padding: '2px 6px', borderRadius: '4px', fontWeight: '600' }}>
+                              <div key={idx} style={{ background: 'rgba(0, 0, 0, 0.35)', border: '1px solid var(--border-highlight)', borderRadius: '10px', padding: '14px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                                <div style={{ display: 'flex', alignItems: 'center' }}>
+                                  <span style={{ 
+                                    fontSize: '10px', 
+                                    textTransform: 'uppercase', 
+                                    letterSpacing: '0.5px', 
+                                    background: idx === 0 ? 'rgba(59, 130, 246, 0.25)' : 'rgba(139, 92, 246, 0.25)', 
+                                    color: idx === 0 ? '#93c5fd' : '#d8b4fe', 
+                                    border: idx === 0 ? '1px solid rgba(59, 130, 246, 0.4)' : '1px solid rgba(139, 92, 246, 0.4)',
+                                    padding: '3px 8px', 
+                                    borderRadius: '4px', 
+                                    fontWeight: '700' 
+                                  }}>
                                     {alloc.role}
                                   </span>
                                 </div>
                                 
-                                <div style={{ fontSize: '13px', color: 'white', fontWeight: '600', marginBottom: '4px' }}>
+                                <div style={{ fontWeight: 'bold', color: idx === 0 ? '#60a5fa' : '#c084fc', fontSize: '13px' }}>
+                                  Block Group {idx === 0 ? 'A' : 'B'}: {alloc.capacity_share_pct.toFixed(0)}% Capacity ({alloc.capacity_mwp.toFixed(1)} MWp / {alloc.blocks_assigned} Blocks)
+                                </div>
+                                
+                                <div style={{ fontSize: '13.5px', color: 'white', fontWeight: '700' }}>
                                   {alloc.module_name} ({alloc.module_power_Wp}W)
                                 </div>
                                 
-                                <div style={{ fontSize: '11px', color: 'var(--text-muted)', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4px' }}>
-                                  <div>Carbon Footprint: <span style={{ color: 'white' }}>{alloc.gwp_kgco2e_per_kwp.toFixed(0)} kgCO2e/kWp</span></div>
-                                  <div>LCOE: <span style={{ color: 'white' }}>€{alloc.lcoe_eur_mwh.toFixed(2)}/MWh</span></div>
-                                  <div>CBAM Tax: <span style={{ color: '#ef4444' }}>€{alloc.cbam_tax_eur.toLocaleString(undefined, {maximumFractionDigits: 0})}</span></div>
-                                  <div>Est. Gen: <span style={{ color: '#10b981' }}>{(alloc.annual_generation_mwh / 1000).toFixed(1)} GWh/yr</span></div>
+                                <div style={{ fontSize: '11px', color: 'var(--text-muted)', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px', paddingTop: '6px', borderTop: '1px dashed rgba(255, 255, 255, 0.1)' }}>
+                                  <div>Carbon Footprint: <span style={{ color: 'white', fontWeight: '600' }}>{alloc.gwp_kgco2e_per_kwp.toFixed(0)} kgCO2e/kWp</span></div>
+                                  <div>LCOE: <span style={{ color: 'white', fontWeight: '600' }}>€{alloc.lcoe_eur_mwh.toFixed(2)}/MWh</span></div>
+                                  <div>CBAM Tax: <span style={{ color: '#ef4444', fontWeight: '600' }}>€{alloc.cbam_tax_eur.toLocaleString(undefined, {maximumFractionDigits: 0})}</span></div>
+                                  <div>Est. Gen: <span style={{ color: '#10b981', fontWeight: '600' }}>{(alloc.annual_generation_mwh / 1000).toFixed(1)} GWh/yr</span></div>
                                 </div>
                               </div>
                             ))}

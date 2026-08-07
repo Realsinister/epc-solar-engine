@@ -185,13 +185,71 @@ def calculate(request: CalculationRequest):
         user_block_size_mwp=request.user_block_size_mwp,
         custom_ratio_split=request.custom_ratio_split
     )
+
+    # Generate instant initial_analysis for top module (#1 winner)
+    winner_scores = df_calc.iloc[0]
+    radar_data = [
+        {"subject": "Eco (Low Carbon)", "A": float(winner_scores.get('Score_Eco', 0)) * 100, "fullMark": 100},
+        {"subject": "Cost (Low LCOE)", "A": float(winner_scores.get('Score_Cost', 0)) * 100, "fullMark": 100},
+        {"subject": "Tech (High Efficiency)", "A": float(winner_scores.get('Score_Tech', 0)) * 100, "fullMark": 100}
+    ]
+    
+    base_params = {
+        'yield': request.base_irradiance,
+        'ambient_temp_c': request.ambient_temp_c,
+        'lifetime': request.lifetime,
+        'avg_price_wp': request.avg_price_wp,
+        'bos_cost_wp': request.bos_cost_wp,
+        'opex_annual': request.opex_annual,
+        'cbam_tax_rate_eur_t': request.cbam_tax_rate_eur_t,
+        'eol_recycling_rate_pct': request.eol_recycling_rate_pct,
+        'transport_distance_km': 20000.0,
+        'system_topology': request.system_topology,
+        'ground_albedo': request.ground_albedo,
+        'project_size_mwp': request.project_size_mwp,
+        'inverter_id': request.inverter_id,
+        'target_dc_ac_ratio': request.target_dc_ac_ratio
+    }
+    
+    sens_df = PVEngine.run_sensitivity_analysis(winner_scores, base_params)
+    carbon_sens = sens_df[sens_df['Metric'] == 'Carbon Intensity'].to_dict(orient='records') if not sens_df.empty else []
+    lcoe_sens = sens_df[sens_df['Metric'] == 'LCOE'].to_dict(orient='records') if not sens_df.empty else []
+
+    scaled_bos_wp, scaled_opex_kwp = BlockOptimizer.get_scaled_bos_and_opex(request.project_size_mwp)
+
+    exec_financials = ExecutiveFinancialModel.calculate_project_financials(
+        module_row=winner_scores,
+        project_size_mwp=request.project_size_mwp,
+        ppa_rate_eur_mwh=request.ppa_rate_eur_mwh,
+        discount_rate_pct=request.discount_rate_pct,
+        override_bos_wp=scaled_bos_wp,
+        override_opex_kwp=scaled_opex_kwp
+    )
+
+    gwp_breakdown = [
+        {"component": "PV Module (Net)", "gwp": float(winner_scores.get('GWP_Module_Net_kgCO2e', 0))},
+        {"component": "Inverter System", "gwp": float(winner_scores.get('GWP_Inverter_kgCO2e', 0))},
+        {"component": "BOS & Racking", "gwp": float(winner_scores.get('GWP_BOS_kgCO2e', 0))}
+    ]
+
+    initial_analysis = {
+        "radar": radar_data,
+        "sensitivity": {
+            "carbon": carbon_sens,
+            "lcoe": lcoe_sens
+        },
+        "executive": exec_financials,
+        "gwp_breakdown": gwp_breakdown,
+        "hybrid_layout": hybrid_layout
+    }
     
     return {
         "weights": weights_dict,
         "results": top_panels,
         "auto_paired_inverter": auto_paired,
         "bos_info": bos_info,
-        "hybrid_layout": hybrid_layout
+        "hybrid_layout": hybrid_layout,
+        "initial_analysis": initial_analysis
     }
 
 @app.post("/api/analyze/{dataset_uuid}")

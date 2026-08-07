@@ -162,9 +162,14 @@ function App() {
       setHasSimulated(true);
       setIsStale(false);
 
-      // Auto-select the #1 winner for deep dive
-      if (data.results.length > 0) {
-        handleModuleSelect(data.results[0]);
+      // Auto-select the #1 winner for deep dive instantly
+      if (topResults.length > 0) {
+        setSelectedModule(topResults[0]);
+        if (data.initial_analysis) {
+          setAnalysisData(data.initial_analysis);
+        } else {
+          handleModuleSelect(topResults[0]);
+        }
       }
     } catch (err) {
       console.error("Simulation failed:", err);

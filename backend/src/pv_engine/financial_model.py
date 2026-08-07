@@ -12,7 +12,9 @@ class ExecutiveFinancialModel:
         module_row, 
         project_size_mwp: float, 
         ppa_rate_eur_mwh: float, 
-        discount_rate_pct: float = 5.0
+        discount_rate_pct: float = 5.0,
+        override_bos_wp: float = None,
+        override_opex_kwp: float = None
     ) -> dict:
         """
         Scales the per-kWp physics calculations up to a full Utility/Commercial project size.
@@ -22,10 +24,11 @@ class ExecutiveFinancialModel:
         total_kwp = project_size_mwp * 1000.0
         
         # 1. Total CAPEX & OPEX
-        capex_kwp = (module_row['Estimated_Price_Wp'] + module_row.get('BOS_Cost_Wp', 0.45)) * 1000
+        bos_wp = override_bos_wp if override_bos_wp is not None else module_row.get('BOS_Cost_Wp', 0.45)
+        capex_kwp = (module_row['Estimated_Price_Wp'] + bos_wp) * 1000
         total_capex = capex_kwp * total_kwp
         
-        annual_opex_kwp = module_row.get('OPEX_Annual_kWp', 15.0)
+        annual_opex_kwp = override_opex_kwp if override_opex_kwp is not None else module_row.get('OPEX_Annual_kWp', 15.0)
         total_annual_opex = annual_opex_kwp * total_kwp
         
         # 2. CBAM Financial Exposure (Tax)

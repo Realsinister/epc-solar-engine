@@ -22,6 +22,7 @@ from pv_engine.inverter_engine import InverterEngine
 from pv_engine.bos_engine import BOSEngine
 from pv_engine.report_gen import ReportGenerator
 from pv_engine.custom_epd_engine import custom_epd_engine
+from pv_engine.block_optimizer import BlockOptimizer
 
 app = FastAPI(title="EPC Solar Engine Premium API")
 
@@ -87,6 +88,8 @@ class CalculationRequest(BaseModel):
     inverter_id: Optional[str] = "auto"
     target_dc_ac_ratio: float = 1.25
     custom_dataset_id: Optional[str] = None
+    user_block_size_mwp: Optional[float] = None
+    custom_ratio_split: Optional[float] = None
 
 
 @app.get("/")
@@ -174,11 +177,21 @@ def calculate(request: CalculationRequest):
     auto_paired = InverterEngine.auto_pair_inverter(request.project_size_mwp)
     bos_info = BOSEngine.get_bos_performance(request.system_topology)
     
+    hybrid_layout = BlockOptimizer.generate_hybrid_layout(
+        df_calc=df_calc,
+        project_size_mwp=request.project_size_mwp,
+        ppa_rate_eur_mwh=request.ppa_rate_eur_mwh,
+        discount_rate_pct=request.discount_rate_pct,
+        user_block_size_mwp=request.user_block_size_mwp,
+        custom_ratio_split=request.custom_ratio_split
+    )
+    
     return {
         "weights": weights_dict,
         "results": top_panels,
         "auto_paired_inverter": auto_paired,
-        "bos_info": bos_info
+        "bos_info": bos_info,
+        "hybrid_layout": hybrid_layout
     }
 
 @app.post("/api/analyze/{dataset_uuid}")
@@ -239,6 +252,7 @@ def analyze_module(dataset_uuid: str, request: CalculationRequest):
     
     full_calc = PVEngine.filter_by_project_size(full_calc, request.project_size_mwp, ground_albedo=request.ground_albedo)
     full_calc, _ = PVEngine.normalize_scores(full_calc, request.scenario)
+    full_calc = PVEngine.calculate_topsis(full_calc, request.scenario)
     
     module_scores = full_calc[full_calc['dataset_uuid'] == dataset_uuid].iloc[0]
     
@@ -269,12 +283,26 @@ def analyze_module(dataset_uuid: str, request: CalculationRequest):
     carbon_sens = PVEngine.run_sensitivity(module_row.iloc[0], base_params, parameter_name='grid_decarb_rate', variation_pct=20.0)
     lcoe_sens = PVEngine.run_sensitivity(module_row.iloc[0], base_params, parameter_name='avg_price_wp', variation_pct=20.0)
 
+    # Scaled BOS and OPEX for project size
+    scaled_bos_wp, scaled_opex_kwp = BlockOptimizer.get_scaled_bos_and_opex(request.project_size_mwp)
+
     calc_row = df_calc.iloc[0]
     exec_financials = ExecutiveFinancialModel.calculate_project_financials(
         module_row=calc_row,
         project_size_mwp=request.project_size_mwp,
         ppa_rate_eur_mwh=request.ppa_rate_eur_mwh,
-        discount_rate_pct=request.discount_rate_pct
+        discount_rate_pct=request.discount_rate_pct,
+        override_bos_wp=scaled_bos_wp,
+        override_opex_kwp=scaled_opex_kwp
+    )
+
+    hybrid_layout = BlockOptimizer.generate_hybrid_layout(
+        df_calc=full_calc,
+        project_size_mwp=request.project_size_mwp,
+        ppa_rate_eur_mwh=request.ppa_rate_eur_mwh,
+        discount_rate_pct=request.discount_rate_pct,
+        user_block_size_mwp=request.user_block_size_mwp,
+        custom_ratio_split=request.custom_ratio_split
     )
 
     gwp_breakdown = [
@@ -290,7 +318,8 @@ def analyze_module(dataset_uuid: str, request: CalculationRequest):
             "lcoe": lcoe_sens
         },
         "executive": exec_financials,
-        "gwp_breakdown": gwp_breakdown
+        "gwp_breakdown": gwp_breakdown,
+        "hybrid_layout": hybrid_layout
     }
 
 @app.get("/api/history")

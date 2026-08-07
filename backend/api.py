@@ -280,8 +280,9 @@ def analyze_module(dataset_uuid: str, request: CalculationRequest):
         'target_dc_ac_ratio': request.target_dc_ac_ratio
     }
     
-    carbon_sens = PVEngine.run_sensitivity(module_row.iloc[0], base_params, parameter_name='grid_decarb_rate', variation_pct=20.0)
-    lcoe_sens = PVEngine.run_sensitivity(module_row.iloc[0], base_params, parameter_name='avg_price_wp', variation_pct=20.0)
+    sens_df = PVEngine.run_sensitivity_analysis(module_scores, base_params)
+    carbon_sens = sens_df[sens_df['Metric'] == 'Carbon Intensity'].to_dict(orient='records') if not sens_df.empty else []
+    lcoe_sens = sens_df[sens_df['Metric'] == 'LCOE'].to_dict(orient='records') if not sens_df.empty else []
 
     # Scaled BOS and OPEX for project size
     scaled_bos_wp, scaled_opex_kwp = BlockOptimizer.get_scaled_bos_and_opex(request.project_size_mwp)

@@ -246,7 +246,7 @@ function App() {
         <p className="label-muted" style={{ fontSize: '1rem', marginTop: '10px' }}>MCDA Physics & Executive Financial Optimizer</p>
       </div>
 
-      <div style={{ display: 'flex', justifyContent: 'center', gap: '16px', marginTop: '50px', marginBottom: '20px', zIndex: 100, position: 'relative' }}>
+      <div style={{ display: 'flex', justifyContent: 'center', gap: '16px', marginTop: '20px', marginBottom: '16px', zIndex: 100, position: 'relative' }}>
         <button 
           className={`tab-btn ${activeTab === 'dashboard' ? 'tab-btn-active' : ''}`} 
           onClick={() => setActiveTab('dashboard')}
@@ -518,7 +518,7 @@ function App() {
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
                 
                 {/* RADAR CHART */}
-                <div className="glass-panel" style={{ height: '350px', display: 'flex', flexDirection: 'column' }}>
+                <div className="glass-panel" style={{ height: '330px', display: 'flex', flexDirection: 'column' }}>
                   <h3 style={{ marginBottom: '8px', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '8px' }}>
                     <Activity size={18} /> Dimension Balance
                   </h3>
@@ -546,7 +546,7 @@ function App() {
                 </div>
 
                 {/* TORNADO CHART (SENSITIVITY) */}
-                <div className="glass-panel" style={{ height: '350px', display: 'flex', flexDirection: 'column' }}>
+                <div className="glass-panel" style={{ height: '330px', display: 'flex', flexDirection: 'column' }}>
                   <h3 style={{ marginBottom: '8px', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '8px' }}>
                     <Activity size={18} /> Sensitivity Analysis (Carbon Swing)
                   </h3>
@@ -609,22 +609,22 @@ function App() {
                     <div style={{ color: 'var(--text-muted)', padding: '16px' }}>Calculating ROI...</div>
                   ) : (
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px' }}>
-                        <div style={{ background: 'rgba(0,0,0,0.3)', padding: '12px', borderRadius: '8px', borderLeft: '4px solid var(--accent-blue)' }}>
-                          <div className="label-muted">Net Present Value (NPV)</div>
-                          <div style={{ fontSize: '20px', fontWeight: 'bold', color: 'white' }}>€ {Number(analysisData.executive.npv_eur || 0).toLocaleString(undefined, {maximumFractionDigits: 0})}</div>
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '14px' }}>
+                        <div style={{ background: 'rgba(0,0,0,0.4)', padding: '14px 16px', borderRadius: '10px', borderLeft: '4px solid #38bdf8', border: '1px solid rgba(255,255,255,0.06)', borderLeftWidth: '4px' }}>
+                          <div className="label-muted" style={{ fontSize: '10px' }}>Net Present Value (NPV)</div>
+                          <div style={{ fontSize: '22px', fontWeight: '800', color: 'white', marginTop: '2px' }}>€ {Number(analysisData.executive.npv_eur || 0).toLocaleString(undefined, {maximumFractionDigits: 0})}</div>
                         </div>
-                        <div style={{ background: 'rgba(0,0,0,0.3)', padding: '12px', borderRadius: '8px', borderLeft: '4px solid var(--accent-green)' }}>
-                          <div className="label-muted">Payback Period</div>
-                          <div style={{ fontSize: '20px', fontWeight: 'bold', color: 'white' }}>{Number(analysisData.executive.payback_years || 0).toFixed(1)} Years</div>
+                        <div style={{ background: 'rgba(0,0,0,0.4)', padding: '14px 16px', borderRadius: '10px', borderLeft: '4px solid #10b981', border: '1px solid rgba(255,255,255,0.06)', borderLeftWidth: '4px' }}>
+                          <div className="label-muted" style={{ fontSize: '10px' }}>Payback Period</div>
+                          <div style={{ fontSize: '22px', fontWeight: '800', color: 'white', marginTop: '2px' }}>{Number(analysisData.executive.payback_years || 0).toFixed(1)} <span style={{ fontSize: '13px', color: '#94a3b8', fontWeight: '500' }}>Years</span></div>
                         </div>
-                        <div style={{ background: 'rgba(0,0,0,0.3)', padding: '12px', borderRadius: '8px', borderLeft: '4px solid var(--accent-purple)' }}>
-                          <div className="label-muted">Lifetime Revenue</div>
-                          <div style={{ fontSize: '20px', fontWeight: 'bold', color: 'white' }}>€ {Number(analysisData.executive.total_lifetime_revenue_eur || 0).toLocaleString(undefined, {maximumFractionDigits: 0})}</div>
+                        <div style={{ background: 'rgba(0,0,0,0.4)', padding: '14px 16px', borderRadius: '10px', borderLeft: '4px solid #a855f7', border: '1px solid rgba(255,255,255,0.06)', borderLeftWidth: '4px' }}>
+                          <div className="label-muted" style={{ fontSize: '10px' }}>Lifetime Revenue</div>
+                          <div style={{ fontSize: '22px', fontWeight: '800', color: 'white', marginTop: '2px' }}>€ {Number(analysisData.executive.total_lifetime_revenue_eur || 0).toLocaleString(undefined, {maximumFractionDigits: 0})}</div>
                         </div>
-                        <div style={{ background: 'rgba(0,0,0,0.3)', padding: '12px', borderRadius: '8px', borderLeft: '4px solid #ef4444' }}>
-                          <div className="label-muted">CBAM Tax Exposure</div>
-                          <div style={{ fontSize: '20px', fontWeight: 'bold', color: 'white' }}>€ {Number(analysisData.executive.total_cbam_tax_eur || 0).toLocaleString(undefined, {maximumFractionDigits: 0})}</div>
+                        <div style={{ background: 'rgba(0,0,0,0.4)', padding: '14px 16px', borderRadius: '10px', borderLeft: '4px solid #ef4444', border: '1px solid rgba(255,255,255,0.06)', borderLeftWidth: '4px' }}>
+                          <div className="label-muted" style={{ fontSize: '10px' }}>CBAM Tax Exposure</div>
+                          <div style={{ fontSize: '22px', fontWeight: '800', color: 'white', marginTop: '2px' }}>€ {Number(analysisData.executive.total_cbam_tax_eur || 0).toLocaleString(undefined, {maximumFractionDigits: 0})}</div>
                         </div>
                       </div>
                       
@@ -688,61 +688,63 @@ function App() {
                   )}
                 </div>
 
-                {/* SYSTEM CARBON STACKED BREAKDOWN CHART */}
-                <div className="glass-panel" style={{ gridColumn: '1 / -1' }}>
-                  <h3 style={{ marginBottom: '12px', color: 'var(--accent-cyan)', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <Leaf size={18} /> System Embodied Carbon Breakdown (kgCO2e/kWp)
-                  </h3>
+                {/* SYSTEM CARBON STACKED BREAKDOWN CHART & PARETO MODULES SIDE-BY-SIDE */}
+                <div style={{ gridColumn: '1 / -1', display: 'grid', gridTemplateColumns: '1.2fr 0.8fr', gap: '24px' }}>
                   
-                  {analyzing ? (
-                    <div style={{ color: 'var(--text-muted)' }}>Calculating Carbon Footprint Stack...</div>
-                  ) : analysisData?.gwp_breakdown ? (
-                    <div style={{ height: '220px', width: '100%' }}>
-                      <ResponsiveContainer width="100%" height="100%">
-                        <BarChart data={[{
-                          name: 'System Total',
-                          Module: analysisData.gwp_breakdown[0].gwp,
-                          Inverter: analysisData.gwp_breakdown[1].gwp,
-                          BOS: analysisData.gwp_breakdown[2].gwp
-                        }]} layout="vertical" margin={{ top: 10, right: 30, left: 0, bottom: 5 }}>
-                          <XAxis type="number" stroke="var(--border-highlight)" tick={{ fill: 'var(--text-muted)' }} />
-                          <YAxis dataKey="name" type="category" width={100} stroke="var(--text-muted)" style={{fontSize: '12px'}} />
-                          <Tooltip 
-                            contentStyle={{ backgroundColor: 'var(--bg-panel)', border: '1px solid var(--border-highlight)', borderRadius: '8px' }}
-                            formatter={(value, name) => [`${Number(value).toFixed(1)} kgCO2e/kWp`, name]}
-                          />
-                          <Legend wrapperStyle={{ paddingTop: '8px', fontSize: '12px' }} />
-                          <Bar dataKey="Module" stackId="a" fill="#3b82f6" name="PV Module Net" />
-                          <Bar dataKey="Inverter" stackId="a" fill="#8b5cf6" name="Inverter System" />
-                          <Bar dataKey="BOS" stackId="a" fill="#06b6d4" name="BOS & Racking" />
-                        </BarChart>
-                      </ResponsiveContainer>
-                    </div>
-                  ) : null}
-                </div>
-              </div>
-
-              {/* PARETO MODULES (Now in Main Deck) */}
-              <div className="glass-panel" style={{ marginTop: '24px' }}>
-                <h3 className="section-title">Top Pareto Modules</h3>
-                <div className="pareto-wide-grid">
-                  {results.slice(0, 3).map((result, idx) => (
-                    <div 
-                      key={idx} 
-                      className={`pareto-item ${selectedModule?.dataset_uuid === result.dataset_uuid ? 'selected-pareto' : ''}`}
-                      onClick={() => handleModuleSelect(result)}
-                      style={{ cursor: 'pointer' }}
-                    >
-                      <span style={{color: 'var(--accent-blue)', fontWeight: 'bold'}}>#{idx + 1} - TOPSIS: {result.TOPSIS_Score.toFixed(1)}</span>
-                      <br/>
-                      <strong>{result.Display_Name}</strong>
-                      <div style={{fontSize: '0.85rem', color: 'var(--text-muted)', marginTop: '6px'}}>
-                        Carbon: {Number(result.Carbon_Intensity_Mean).toFixed(0)} gCO2/kWh
-                        <br/>
-                        LCOE: €{result.LCOE_EUR_MWh ? (Number(result.LCOE_EUR_MWh) / 1000).toFixed(4) : '0.0000'} per kWh
+                  {/* CARBON FOOTPRINT STACK */}
+                  <div className="glass-panel" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                    <h3 style={{ marginBottom: '8px', color: 'var(--accent-cyan)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <Leaf size={18} /> System Embodied Carbon Breakdown (kgCO2e/kWp)
+                    </h3>
+                    
+                    {analyzing ? (
+                      <div style={{ color: 'var(--text-muted)' }}>Calculating Carbon Footprint Stack...</div>
+                    ) : analysisData?.gwp_breakdown ? (
+                      <div style={{ height: '170px', width: '100%' }}>
+                        <ResponsiveContainer width="100%" height="100%">
+                          <BarChart data={[{
+                            name: 'System Total',
+                            Module: analysisData.gwp_breakdown[0].gwp,
+                            Inverter: analysisData.gwp_breakdown[1].gwp,
+                            BOS: analysisData.gwp_breakdown[2].gwp
+                          }]} layout="vertical" margin={{ top: 10, right: 30, left: 0, bottom: 5 }}>
+                            <XAxis type="number" stroke="var(--border-highlight)" tick={{ fill: 'var(--text-muted)' }} />
+                            <YAxis dataKey="name" type="category" width={100} stroke="var(--text-muted)" style={{fontSize: '12px'}} />
+                            <Tooltip 
+                              contentStyle={{ backgroundColor: 'var(--bg-panel)', border: '1px solid var(--border-highlight)', borderRadius: '8px' }}
+                              formatter={(value, name) => [`${Number(value).toFixed(1)} kgCO2e/kWp`, name]}
+                            />
+                            <Legend wrapperStyle={{ paddingTop: '4px', fontSize: '11px' }} />
+                            <Bar dataKey="Module" stackId="a" fill="#3b82f6" name="PV Module Net" />
+                            <Bar dataKey="Inverter" stackId="a" fill="#8b5cf6" name="Inverter System" />
+                            <Bar dataKey="BOS" stackId="a" fill="#06b6d4" name="BOS & Racking" />
+                          </BarChart>
+                        </ResponsiveContainer>
                       </div>
+                    ) : null}
+                  </div>
+
+                  {/* TOP PARETO WINNER CARDS */}
+                  <div className="glass-panel" style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                    <h3 style={{ margin: 0, color: 'var(--accent-blue)', fontSize: '15px' }}>Top Pareto Winner Modules</h3>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                      {results.slice(0, 3).map((result, idx) => (
+                        <div 
+                          key={idx} 
+                          className={`pareto-item ${selectedModule?.dataset_uuid === result.dataset_uuid ? 'selected-pareto' : ''}`}
+                          onClick={() => handleModuleSelect(result)}
+                          style={{ cursor: 'pointer', padding: '10px 12px' }}
+                        >
+                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                            <span style={{color: 'var(--accent-blue)', fontWeight: 'bold', fontSize: '11px'}}>#{idx + 1} - TOPSIS: {result.TOPSIS_Score.toFixed(1)}</span>
+                            <span style={{ fontSize: '11px', color: 'var(--accent-cyan)' }}>€{(Number(result.LCOE_EUR_MWh || 0) / 1000).toFixed(4)}/kWh</span>
+                          </div>
+                          <strong style={{ fontSize: '12px' }}>{result.Display_Name}</strong>
+                        </div>
+                      ))}
                     </div>
-                  ))}
+                  </div>
+
                 </div>
               </div>
             </>

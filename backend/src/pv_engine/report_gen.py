@@ -129,7 +129,7 @@ class ReportGenerator:
         header_table_data = [
             [
                 Paragraph("<b>EPC SOLAR ENGINE</b>", title_style),
-                Paragraph("<b>C-SUITE PROCUREMENT BRIEFING</b><br/>Confidential Executive Report", subtitle_style)
+                Paragraph("<b>C-SUITE PROCUREMENT BRIEFING</b><br/>Executive Analysis & Procurement Briefing", subtitle_style)
             ]
         ]
         header_table = Table(header_table_data, colWidths=[3.2 * inch, 4.0 * inch])

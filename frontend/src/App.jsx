@@ -174,6 +174,7 @@ function App() {
   };
 
   const handleModuleSelect = async (moduleRow) => {
+    if (!moduleRow || !moduleRow.dataset_uuid) return;
     setSelectedModule(moduleRow);
     setAnalyzing(true);
     try {
@@ -192,8 +193,16 @@ function App() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       });
+
+      if (!response.ok) {
+        const errText = await response.text();
+        throw new Error(`API returned status ${response.status}: ${errText}`);
+      }
+
       const data = await response.json();
-      setAnalysisData(data);
+      if (data && data.radar) {
+        setAnalysisData(data);
+      }
     } catch (err) {
       console.error("Failed to fetch module analysis", err);
     }

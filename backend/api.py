@@ -254,7 +254,11 @@ def analyze_module(dataset_uuid: str, request: CalculationRequest):
     full_calc, _ = PVEngine.normalize_scores(full_calc, request.scenario)
     full_calc = PVEngine.calculate_topsis(full_calc, request.scenario)
     
-    module_scores = full_calc[full_calc['dataset_uuid'] == dataset_uuid].iloc[0]
+    matching_scores = full_calc[full_calc['dataset_uuid'] == dataset_uuid]
+    if matching_scores.empty:
+        module_scores = df_calc.iloc[0] if not df_calc.empty else module_row.iloc[0]
+    else:
+        module_scores = matching_scores.iloc[0]
     
     radar_data = [
         {"subject": "Eco (Low Carbon)", "A": module_scores.get('Score_Eco', 0) * 100, "fullMark": 100},

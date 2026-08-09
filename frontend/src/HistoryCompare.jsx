@@ -111,8 +111,24 @@ export default function HistoryCompare() {
             </button>
           )}
         </div>
-        <p className="label-muted" style={{marginBottom: '10px'}}>Select exactly 2 runs to compare them side-by-side.</p>
         
+        {/* User Guidance Banner */}
+        <div style={{
+          background: 'rgba(56, 189, 248, 0.08)',
+          border: '1px solid rgba(56, 189, 248, 0.25)',
+          borderRadius: '10px',
+          padding: '10px 16px',
+          marginBottom: '16px',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '10px',
+          color: '#38bdf8',
+          fontSize: '0.84rem'
+        }}>
+          <Activity size={18} />
+          <span>💡 <strong>Pro Tip:</strong> Select up to 2 simulation runs from the table below to compare parameters, winning panels, NPV differences, and carbon footprints side-by-side!</span>
+        </div>
+
         {loading ? (
           <div style={{color: 'var(--text-muted)'}}>Loading history...</div>
         ) : (

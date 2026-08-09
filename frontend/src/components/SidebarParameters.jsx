@@ -53,11 +53,11 @@ export default function SidebarParameters({
               </div>
 
               <div className="input-group">
-                <label>Annual Specific Yield (kWh/kWp):</label>
+                <label>Annual Irradiance (kWh/m²/yr):</label>
                 <input 
                   type="number" 
-                  value={params.specific_yield} 
-                  onChange={(e) => setParams({ ...params, specific_yield: parseFloat(e.target.value) || 0 })}
+                  value={params.base_irradiance} 
+                  onChange={(e) => setParams({ ...params, base_irradiance: parseFloat(e.target.value) || 0 })}
                   className="number-input"
                 />
               </div>
@@ -66,8 +66,8 @@ export default function SidebarParameters({
                 <label>Ambient Temperature (°C):</label>
                 <input 
                   type="number" 
-                  value={params.temp_ambient} 
-                  onChange={(e) => setParams({ ...params, temp_ambient: parseFloat(e.target.value) || 0 })}
+                  value={params.ambient_temp_c} 
+                  onChange={(e) => setParams({ ...params, ambient_temp_c: parseFloat(e.target.value) || 0 })}
                   className="number-input"
                 />
               </div>
@@ -122,8 +122,8 @@ export default function SidebarParameters({
                 <label>PPA Tariff Rate (€/MWh):</label>
                 <input 
                   type="number" 
-                  value={params.ppa_price_eur_mwh} 
-                  onChange={(e) => setParams({ ...params, ppa_price_eur_mwh: parseFloat(e.target.value) || 0 })}
+                  value={params.ppa_rate_eur_mwh} 
+                  onChange={(e) => setParams({ ...params, ppa_rate_eur_mwh: parseFloat(e.target.value) || 0 })}
                   className="number-input"
                 />
               </div>

@@ -79,15 +79,21 @@ function App() {
 
   // Controls / Parameters State
   const [params, setParams] = useState({
-    scenario: 'Eco-Flagship (Minimize Carbon)',
-    specific_yield: 1450.0,
-    temp_ambient: 25.0,
+    base_irradiance: 1050,
+    ambient_temp_c: 25.0,
+    lifetime: 30,
+    avg_price_wp: 0.22,
+    bos_cost_wp: 0.45,
+    opex_annual: 15.0,
+    cbam_tax_rate_eur_t: 80.0,
+    eol_recycling_rate_pct: 85.0,
+    system_topology: "Fixed Tilt",
     ground_albedo: "None",
-    shipping_origin: "China_MainPort",
+    scenario: "Eco-Flagship (Minimize Carbon)",
     project_size_mwp: 50.0,
     project_size_unit: "MWp",
-    ppa_price_eur_mwh: 45.0,
-    discount_rate_pct: 6.5
+    ppa_rate_eur_mwh: 45.0,
+    discount_rate_pct: 5.0
   });
 
   const handleSimulate = async () => {
@@ -110,14 +116,28 @@ function App() {
         body: JSON.stringify(payload)
       });
       const data = await res.json();
-      setResults(data);
+      if (!res.ok) {
+        console.error("API error response:", data);
+        alert("Calculation Engine Error: " + (data.detail || JSON.stringify(data)));
+        setResults([]);
+        return;
+      }
+
+      const moduleList = Array.isArray(data) ? data : (data.results || []);
+      setResults(moduleList);
+
+      if (data.initial_analysis) {
+        setAnalysisData(data.initial_analysis);
+      }
       
       // Auto-select #1 TOPSIS module if available
-      if (data && data.length > 0) {
-        handleModuleSelect(data[0]);
+      if (moduleList.length > 0) {
+        handleModuleSelect(moduleList[0]);
       }
     } catch (err) {
       console.error("Simulation failed", err);
+      alert("Simulation connection error: " + err.message);
+      setResults([]);
     } finally {
       setLoading(false);
     }

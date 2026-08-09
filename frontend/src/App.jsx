@@ -101,13 +101,27 @@ function App() {
     setHasSimulated(true);
     setIsStale(false);
     try {
-      const actualSizeMwp = params.project_size_unit === 'kWp' ? params.project_size_mwp / 1000 : params.project_size_mwp;
+      const rawSize = parseFloat(params.project_size_mwp) || 50.0;
+      const actualSizeMwp = params.project_size_unit === 'kWp' ? rawSize / 1000 : rawSize;
+
       const payload = {
-        ...params,
+        base_irradiance: parseFloat(params.base_irradiance) || 1050.0,
+        ambient_temp_c: parseFloat(params.ambient_temp_c) || 25.0,
+        lifetime: parseInt(params.lifetime) || 30,
+        avg_price_wp: parseFloat(params.avg_price_wp) || 0.22,
+        bos_cost_wp: parseFloat(params.bos_cost_wp) || 0.45,
+        opex_annual: parseFloat(params.opex_annual) || 15.0,
+        cbam_tax_rate_eur_t: parseFloat(params.cbam_tax_rate_eur_t) || 80.0,
+        eol_recycling_rate_pct: parseFloat(params.eol_recycling_rate_pct) || 85.0,
+        system_topology: params.system_topology || "Fixed Tilt",
+        ground_albedo: params.ground_albedo === "None" || !params.ground_albedo ? null : parseFloat(params.ground_albedo),
+        scenario: params.scenario || "Eco-Flagship (Minimize Carbon)",
         project_size_mwp: actualSizeMwp,
-        ground_albedo: params.ground_albedo === "None" ? null : parseFloat(params.ground_albedo),
-        inverter_id: selectedInverterId,
-        target_dc_ac_ratio: targetDcAcRatio
+        project_size_unit: params.project_size_unit || "MWp",
+        ppa_rate_eur_mwh: parseFloat(params.ppa_rate_eur_mwh) || 45.0,
+        discount_rate_pct: parseFloat(params.discount_rate_pct) || 5.0,
+        inverter_id: selectedInverterId || "auto",
+        target_dc_ac_ratio: parseFloat(targetDcAcRatio) || 1.25
       };
 
       const res = await fetch('http://127.0.0.1:8000/api/calculate', {
@@ -201,6 +215,7 @@ function App() {
             handleSimulate={handleSimulate}
             loading={loading}
             isStale={isStale}
+            setIsStale={setIsStale}
             selectedInverterId={selectedInverterId}
             setSelectedInverterId={setSelectedInverterId}
             inverters={inverters}

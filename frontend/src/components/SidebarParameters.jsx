@@ -7,13 +7,13 @@ export default function SidebarParameters({
   handleSimulate,
   loading,
   isStale,
+  setIsStale,
   selectedInverterId,
   setSelectedInverterId,
   inverters,
   targetDcAcRatio,
   setTargetDcAcRatio
 }) {
-  // Allow sections to be open simultaneously (all open by default)
   const [openSections, setOpenSections] = useState({
     physics: true,
     financials: true,
@@ -24,8 +24,22 @@ export default function SidebarParameters({
     setOpenSections(prev => ({ ...prev, [sec]: !prev[sec] }));
   };
 
-  const handleParamChange = (key, value) => {
+  const handleTextChange = (key, rawValue) => {
+    // When cleared, allow empty string '' so input box is completely blank without forcing '0' or '0100'
+    const value = rawValue === '' ? '' : isNaN(rawValue) ? rawValue : Number(rawValue);
     setParams(prev => ({ ...prev, [key]: value }));
+    setIsStale(true);
+  };
+
+  const handleInverterChange = (invId) => {
+    setSelectedInverterId(invId);
+    setIsStale(true);
+  };
+
+  const handleRatioChange = (rawValue) => {
+    const value = rawValue === '' ? '' : isNaN(rawValue) ? rawValue : Number(rawValue);
+    setTargetDcAcRatio(value);
+    setIsStale(true);
   };
 
   return (
@@ -34,7 +48,7 @@ export default function SidebarParameters({
         <h3 className="drawer-title">
           <Sliders size={18} color="#38bdf8" /> Simulation Inputs
         </h3>
-        {isStale && <span className="stale-pill animate-pulse">Parameters Changed</span>}
+        {isStale && <span className="stale-pill animate-pulse">Inputs Modified</span>}
       </div>
 
       <div className="drawer-scroll-body">
@@ -52,7 +66,7 @@ export default function SidebarParameters({
                 <label>Optimization Strategy:</label>
                 <select 
                   value={params.scenario} 
-                  onChange={(e) => handleParamChange('scenario', e.target.value)}
+                  onChange={(e) => handleTextChange('scenario', e.target.value)}
                   className="select-input"
                 >
                   <option value="Eco-Flagship (Minimize Carbon)">🌿 Eco-Flagship (Minimize Carbon)</option>
@@ -64,20 +78,24 @@ export default function SidebarParameters({
               <div className="input-group">
                 <label>Annual Irradiance (kWh/m²/yr):</label>
                 <input 
-                  type="number" 
-                  value={params.base_irradiance} 
-                  onChange={(e) => handleParamChange('base_irradiance', parseFloat(e.target.value) || 0)}
+                  type="text" 
+                  inputMode="decimal"
+                  value={params.base_irradiance ?? ''} 
+                  onChange={(e) => handleTextChange('base_irradiance', e.target.value)}
                   className="number-input"
+                  placeholder="e.g. 1050"
                 />
               </div>
 
               <div className="input-group">
                 <label>Ambient Temperature (°C):</label>
                 <input 
-                  type="number" 
-                  value={params.ambient_temp_c} 
-                  onChange={(e) => handleParamChange('ambient_temp_c', parseFloat(e.target.value) || 0)}
+                  type="text" 
+                  inputMode="decimal"
+                  value={params.ambient_temp_c ?? ''} 
+                  onChange={(e) => handleTextChange('ambient_temp_c', e.target.value)}
                   className="number-input"
+                  placeholder="e.g. 25"
                 />
               </div>
 
@@ -85,7 +103,7 @@ export default function SidebarParameters({
                 <label>Bifacial Ground Albedo:</label>
                 <select 
                   value={params.ground_albedo || "None"} 
-                  onChange={(e) => handleParamChange('ground_albedo', e.target.value)}
+                  onChange={(e) => handleTextChange('ground_albedo', e.target.value)}
                   className="select-input"
                 >
                   <option value="None">Monofacial / Default (0.00)</option>
@@ -111,14 +129,16 @@ export default function SidebarParameters({
                 <label>Project Capacity Scale:</label>
                 <div className="row-inputs">
                   <input 
-                    type="number" 
-                    value={params.project_size_mwp} 
-                    onChange={(e) => handleParamChange('project_size_mwp', parseFloat(e.target.value) || 0)}
+                    type="text" 
+                    inputMode="decimal"
+                    value={params.project_size_mwp ?? ''} 
+                    onChange={(e) => handleTextChange('project_size_mwp', e.target.value)}
                     className="number-input flex-1"
+                    placeholder="e.g. 50"
                   />
                   <select 
                     value={params.project_size_unit} 
-                    onChange={(e) => handleParamChange('project_size_unit', e.target.value)}
+                    onChange={(e) => handleTextChange('project_size_unit', e.target.value)}
                     className="select-input-sm"
                   >
                     <option value="MWp">MWp</option>
@@ -130,21 +150,24 @@ export default function SidebarParameters({
               <div className="input-group">
                 <label>PPA Tariff Rate (€/MWh):</label>
                 <input 
-                  type="number" 
-                  value={params.ppa_rate_eur_mwh} 
-                  onChange={(e) => handleParamChange('ppa_rate_eur_mwh', parseFloat(e.target.value) || 0)}
+                  type="text" 
+                  inputMode="decimal"
+                  value={params.ppa_rate_eur_mwh ?? ''} 
+                  onChange={(e) => handleTextChange('ppa_rate_eur_mwh', e.target.value)}
                   className="number-input"
+                  placeholder="e.g. 45"
                 />
               </div>
 
               <div className="input-group">
                 <label>Discount Rate (%):</label>
                 <input 
-                  type="number" 
-                  step="0.5"
-                  value={params.discount_rate_pct} 
-                  onChange={(e) => handleParamChange('discount_rate_pct', parseFloat(e.target.value) || 0)}
+                  type="text" 
+                  inputMode="decimal"
+                  value={params.discount_rate_pct ?? ''} 
+                  onChange={(e) => handleTextChange('discount_rate_pct', e.target.value)}
                   className="number-input"
+                  placeholder="e.g. 5.0"
                 />
               </div>
             </div>
@@ -164,7 +187,7 @@ export default function SidebarParameters({
                 <label>Inverter Selection:</label>
                 <select 
                   value={selectedInverterId} 
-                  onChange={(e) => setSelectedInverterId(e.target.value)}
+                  onChange={(e) => handleInverterChange(e.target.value)}
                   className="select-input"
                 >
                   <option value="auto">🤖 Auto-Match Best Inverter</option>
@@ -179,11 +202,12 @@ export default function SidebarParameters({
               <div className="input-group">
                 <label>Target DC/AC Sizing Ratio:</label>
                 <input 
-                  type="number" 
-                  step="0.05"
-                  value={targetDcAcRatio} 
-                  onChange={(e) => setTargetDcAcRatio(parseFloat(e.target.value) || 1.25)}
+                  type="text" 
+                  inputMode="decimal"
+                  value={targetDcAcRatio ?? ''} 
+                  onChange={(e) => handleRatioChange(e.target.value)}
                   className="number-input"
+                  placeholder="e.g. 1.25"
                 />
               </div>
             </div>
@@ -198,7 +222,7 @@ export default function SidebarParameters({
           disabled={loading}
           className={`btn-simulate-glow ${isStale ? 'nudge-shake-active' : ''}`}
         >
-          {loading ? 'Running MCDA Simulation...' : isStale ? '⚡ Re-Run Simulation (Updated Inputs)' : '🚀 Run Physics Engine Simulation'}
+          {loading ? 'Running MCDA Simulation...' : isStale ? '⚡ Re-Run Simulation (Save Run to History)' : '🚀 Run Physics Engine Simulation'}
         </button>
       </div>
     </div>

@@ -1,7 +1,7 @@
 import React from 'react';
-import { Activity, FileText, Check, DollarSign, TrendingUp, ShieldAlert, Award } from 'lucide-react';
+import { Activity, Check, ShieldAlert, Award } from 'lucide-react';
 import { 
-  BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell
+  BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer
 } from 'recharts';
 
 export default function ExecutiveFinancialView({
@@ -9,20 +9,37 @@ export default function ExecutiveFinancialView({
   selectedModule,
   handleModuleSelect,
   analysisData,
-  params,
-  handleExportPdf,
-  exportingPdf
+  params
 }) {
-  const fin = analysisData?.financials || {};
-  const pitch = analysisData?.pitch || "";
+  // Extract executive financials from either analysisData.executive or analysisData.financials
+  const fin = analysisData?.executive || analysisData?.financials || {};
+  const pitch = fin.executive_pitch || analysisData?.pitch || "";
 
-  // Prepare Carbon Stack Data for selected module
+  // Format Large Euro Numbers
+  const formatEuro = (val) => {
+    if (val === undefined || val === null || isNaN(val)) return '€ --';
+    const absVal = Math.abs(val);
+    if (absVal >= 1e6) {
+      return `€ ${(val / 1e6).toFixed(2)}M`;
+    } else if (absVal >= 1e3) {
+      return `€ ${(val / 1e3).toFixed(1)}K`;
+    }
+    return `€ ${val.toFixed(0)}`;
+  };
+
+  // Format Payback Period
+  const formatPayback = (val) => {
+    if (val === undefined || val === null || isNaN(val) || val >= 90) return '-- Yrs';
+    return `${val.toFixed(1)} Yrs`;
+  };
+
+  // Prepare Scope 3 Carbon Stack Data for selected module
   const carbonStackData = selectedModule ? [
     {
-      name: selectedModule.Short_Name || selectedModule.name || 'Module',
-      ModuleNet: Math.max(0, Math.round(selectedModule.Net_GWP_kgCO2e || 0)),
-      Inverter: Math.round(selectedModule.Inverter_GWP_kgCO2e || 25),
-      BOS: Math.round(selectedModule.BOS_GWP_kgCO2e || 45)
+      name: selectedModule.Short_Name || selectedModule.Display_Name || selectedModule.name || 'Module',
+      ModuleNet: Math.max(0, Math.round(selectedModule.GWP_Module_Net_kgCO2e || selectedModule.Net_GWP_kgCO2e || 0)),
+      Inverter: Math.round(selectedModule.GWP_Inverter_kgCO2e || 25),
+      BOS: Math.round(selectedModule.GWP_BOS_kgCO2e || 45)
     }
   ] : [];
 
@@ -38,9 +55,7 @@ export default function ExecutiveFinancialView({
           </div>
           <div className="kpi-body">
             <div className="kpi-value-lg">
-              {fin.NPV_EUR !== undefined 
-                ? `€ ${(fin.NPV_EUR / 1e6).toFixed(2)}M`
-                : '€ --'}
+              {formatEuro(fin.npv_eur ?? fin.NPV_EUR)}
             </div>
             <div className="kpi-sparkline-svg">
               <svg viewBox="0 0 100 24" className="spark-line">
@@ -59,7 +74,7 @@ export default function ExecutiveFinancialView({
           </div>
           <div className="kpi-body">
             <div className="kpi-value-lg">
-              {fin.Payback_Years !== undefined ? `${fin.Payback_Years.toFixed(1)} Yrs` : '-- Yrs'}
+              {formatPayback(fin.payback_years ?? fin.Payback_Years)}
             </div>
             <div className="kpi-progress-bar">
               <div className="kpi-progress-fill" style={{ width: '68%' }}></div>
@@ -76,9 +91,7 @@ export default function ExecutiveFinancialView({
           </div>
           <div className="kpi-body">
             <div className="kpi-value-lg">
-              {fin.Lifetime_Revenue_EUR !== undefined 
-                ? `€ ${(fin.Lifetime_Revenue_EUR / 1e6).toFixed(2)}M`
-                : '€ --'}
+              {formatEuro(fin.total_lifetime_revenue_eur ?? fin.Lifetime_Revenue_EUR)}
             </div>
             <div className="kpi-sparkline-svg">
               <svg viewBox="0 0 100 24" className="spark-line">
@@ -98,32 +111,22 @@ export default function ExecutiveFinancialView({
             <h3 className="panel-title text-cyan">
               <Activity size={18} /> Automated Board Executive Pitch
             </h3>
-            {selectedModule && (
-              <button 
-                onClick={handleExportPdf}
-                disabled={exportingPdf}
-                className="btn-glass-action"
-              >
-                <FileText size={14} />
-                <span>{exportingPdf ? 'Exporting...' : 'View Full PDF Report'}</span>
-              </button>
-            )}
           </div>
           <div className="pitch-content-box">
             <p className="pitch-text">
               {pitch || "Select a module from the TOPSIS ranking list to generate an automated C-Suite procurement briefing pitch."}
             </p>
           </div>
-          {fin.CBAM_Tax_Risk_EUR !== undefined && (
+          {(fin.total_cbam_tax_eur !== undefined || fin.CBAM_Tax_Risk_EUR !== undefined) && (
             <div className="pitch-footer-bar">
               <div className="risk-metric">
                 <ShieldAlert size={15} color="#f43f5e" />
                 <span>CBAM Import Tax Liability:</span>
-                <strong className="text-rose">€ {fin.CBAM_Tax_Risk_EUR.toLocaleString()}</strong>
+                <strong className="text-rose">{formatEuro(fin.total_cbam_tax_eur ?? fin.CBAM_Tax_Risk_EUR)}</strong>
               </div>
               <div className="risk-metric">
-                <span className="text-muted">CBAM Rate per kWp:</span>
-                <strong>€ {fin.CBAM_Tax_Per_kWp?.toFixed(2)} / kWp</strong>
+                <span className="text-muted">CBAM Rate / kWp:</span>
+                <strong>€ {((fin.total_cbam_tax_eur ?? 0) / ((params.project_size_mwp || 50) * 1000)).toFixed(2)} / kWp</strong>
               </div>
             </div>
           )}
@@ -189,8 +192,11 @@ export default function ExecutiveFinancialView({
               </tr>
             </thead>
             <tbody>
-              {results.slice(0, 8).map((mod, idx) => {
+              {results.slice(0, 10).map((mod, idx) => {
                 const isSelected = selectedModule?.dataset_uuid === mod.dataset_uuid;
+                const powerW = mod.module_power_Wp || mod.P_mp_STC || '--';
+                const mfg = mod.manufacturer || mod.Manufacturer || 'CEC Standard';
+
                 return (
                   <tr 
                     key={mod.dataset_uuid || idx} 
@@ -200,9 +206,9 @@ export default function ExecutiveFinancialView({
                     <td>
                       <span className={`rank-badge rank-${idx + 1}`}>#{idx + 1}</span>
                     </td>
-                    <td className="font-bold text-main">{mod.name || mod.Short_Name}</td>
-                    <td className="text-muted">{mod.Manufacturer || mod.bifaciality ? 'CEC Database' : 'Standard'}</td>
-                    <td>{mod.P_mp_STC ? Math.round(mod.P_mp_STC) : '--'} W</td>
+                    <td className="font-bold text-main">{mod.Display_Name || mod.name || mod.Short_Name}</td>
+                    <td className="text-muted">{mfg}</td>
+                    <td className="font-bold text-white">{typeof powerW === 'number' ? Math.round(powerW) : powerW} W</td>
                     <td className="text-cyan font-bold">€ {Number(mod.LCOE_EUR_MWh).toFixed(2)}</td>
                     <td className="text-emerald">{Math.round(mod.Net_GWP_kgCO2e || 0)}</td>
                     <td>

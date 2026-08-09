@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Sliders, Sun, Mountain, Zap, DollarSign, ChevronDown, ChevronUp } from 'lucide-react';
+import { Sliders, Sun, DollarSign, Zap, ChevronDown, ChevronUp } from 'lucide-react';
 
 export default function SidebarParameters({
   params,
@@ -13,10 +13,19 @@ export default function SidebarParameters({
   targetDcAcRatio,
   setTargetDcAcRatio
 }) {
-  const [openSection, setOpenSection] = useState('physics');
+  // Allow sections to be open simultaneously (all open by default)
+  const [openSections, setOpenSections] = useState({
+    physics: true,
+    financials: true,
+    inverter: true
+  });
 
   const toggleSection = (sec) => {
-    setOpenSection(openSection === sec ? null : sec);
+    setOpenSections(prev => ({ ...prev, [sec]: !prev[sec] }));
+  };
+
+  const handleParamChange = (key, value) => {
+    setParams(prev => ({ ...prev, [key]: value }));
   };
 
   return (
@@ -25,25 +34,25 @@ export default function SidebarParameters({
         <h3 className="drawer-title">
           <Sliders size={18} color="#38bdf8" /> Simulation Inputs
         </h3>
-        {isStale && <span className="stale-pill">Stale - Re-calculate</span>}
+        {isStale && <span className="stale-pill animate-pulse">Parameters Changed</span>}
       </div>
 
       <div className="drawer-scroll-body">
         
-        {/* ACCORDION 1: PHYSICS & CLIMATE */}
+        {/* ACCORDION 1: CLIMATE & LOCATION */}
         <div className="accordion-item">
           <div className="accordion-header" onClick={() => toggleSection('physics')}>
             <span className="acc-title"><Sun size={15} color="#38bdf8" /> Climate & Location</span>
-            {openSection === 'physics' ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+            {openSections.physics ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
           </div>
 
-          {openSection === 'physics' && (
+          {openSections.physics && (
             <div className="accordion-content">
               <div className="input-group">
                 <label>Optimization Strategy:</label>
                 <select 
                   value={params.scenario} 
-                  onChange={(e) => setParams({ ...params, scenario: e.target.value })}
+                  onChange={(e) => handleParamChange('scenario', e.target.value)}
                   className="select-input"
                 >
                   <option value="Eco-Flagship (Minimize Carbon)">🌿 Eco-Flagship (Minimize Carbon)</option>
@@ -57,7 +66,7 @@ export default function SidebarParameters({
                 <input 
                   type="number" 
                   value={params.base_irradiance} 
-                  onChange={(e) => setParams({ ...params, base_irradiance: parseFloat(e.target.value) || 0 })}
+                  onChange={(e) => handleParamChange('base_irradiance', parseFloat(e.target.value) || 0)}
                   className="number-input"
                 />
               </div>
@@ -67,7 +76,7 @@ export default function SidebarParameters({
                 <input 
                   type="number" 
                   value={params.ambient_temp_c} 
-                  onChange={(e) => setParams({ ...params, ambient_temp_c: parseFloat(e.target.value) || 0 })}
+                  onChange={(e) => handleParamChange('ambient_temp_c', parseFloat(e.target.value) || 0)}
                   className="number-input"
                 />
               </div>
@@ -75,8 +84,8 @@ export default function SidebarParameters({
               <div className="input-group">
                 <label>Bifacial Ground Albedo:</label>
                 <select 
-                  value={params.ground_albedo} 
-                  onChange={(e) => setParams({ ...params, ground_albedo: e.target.value })}
+                  value={params.ground_albedo || "None"} 
+                  onChange={(e) => handleParamChange('ground_albedo', e.target.value)}
                   className="select-input"
                 >
                   <option value="None">Monofacial / Default (0.00)</option>
@@ -89,14 +98,14 @@ export default function SidebarParameters({
           )}
         </div>
 
-        {/* ACCORDION 2: PROJECT SCALE & FINANCIALS */}
+        {/* ACCORDION 2: SCALE & ECONOMICS */}
         <div className="accordion-item">
           <div className="accordion-header" onClick={() => toggleSection('financials')}>
             <span className="acc-title"><DollarSign size={15} color="#a855f7" /> Scale & Economics</span>
-            {openSection === 'financials' ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+            {openSections.financials ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
           </div>
 
-          {openSection === 'financials' && (
+          {openSections.financials && (
             <div className="accordion-content">
               <div className="input-group">
                 <label>Project Capacity Scale:</label>
@@ -104,12 +113,12 @@ export default function SidebarParameters({
                   <input 
                     type="number" 
                     value={params.project_size_mwp} 
-                    onChange={(e) => setParams({ ...params, project_size_mwp: parseFloat(e.target.value) || 0 })}
+                    onChange={(e) => handleParamChange('project_size_mwp', parseFloat(e.target.value) || 0)}
                     className="number-input flex-1"
                   />
                   <select 
                     value={params.project_size_unit} 
-                    onChange={(e) => setParams({ ...params, project_size_unit: e.target.value })}
+                    onChange={(e) => handleParamChange('project_size_unit', e.target.value)}
                     className="select-input-sm"
                   >
                     <option value="MWp">MWp</option>
@@ -123,7 +132,7 @@ export default function SidebarParameters({
                 <input 
                   type="number" 
                   value={params.ppa_rate_eur_mwh} 
-                  onChange={(e) => setParams({ ...params, ppa_rate_eur_mwh: parseFloat(e.target.value) || 0 })}
+                  onChange={(e) => handleParamChange('ppa_rate_eur_mwh', parseFloat(e.target.value) || 0)}
                   className="number-input"
                 />
               </div>
@@ -134,7 +143,7 @@ export default function SidebarParameters({
                   type="number" 
                   step="0.5"
                   value={params.discount_rate_pct} 
-                  onChange={(e) => setParams({ ...params, discount_rate_pct: parseFloat(e.target.value) || 0 })}
+                  onChange={(e) => handleParamChange('discount_rate_pct', parseFloat(e.target.value) || 0)}
                   className="number-input"
                 />
               </div>
@@ -146,10 +155,10 @@ export default function SidebarParameters({
         <div className="accordion-item">
           <div className="accordion-header" onClick={() => toggleSection('inverter')}>
             <span className="acc-title"><Zap size={15} color="#10b981" /> Inverter Fleet</span>
-            {openSection === 'inverter' ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+            {openSections.inverter ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
           </div>
 
-          {openSection === 'inverter' && (
+          {openSections.inverter && (
             <div className="accordion-content">
               <div className="input-group">
                 <label>Inverter Selection:</label>
@@ -187,9 +196,9 @@ export default function SidebarParameters({
         <button 
           onClick={handleSimulate} 
           disabled={loading}
-          className="btn-simulate-glow"
+          className={`btn-simulate-glow ${isStale ? 'nudge-shake-active' : ''}`}
         >
-          {loading ? 'Running MCDA Simulation...' : '🚀 Run Physics Engine Simulation'}
+          {loading ? 'Running MCDA Simulation...' : isStale ? '⚡ Re-Run Simulation (Updated Inputs)' : '🚀 Run Physics Engine Simulation'}
         </button>
       </div>
     </div>

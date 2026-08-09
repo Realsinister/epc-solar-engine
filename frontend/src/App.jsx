@@ -1,15 +1,19 @@
 import { useState, useEffect } from 'react';
-import { Sliders, Zap, Leaf, Truck, Activity, Target, Sun, Mountain, Clock, LayoutDashboard, FileText, FileSpreadsheet, Layers } from 'lucide-react';
-import { 
-  BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell, Legend, Label,
-  Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis,
-  ScatterChart, Scatter, ZAxis
-} from 'recharts';
+import NavbarHeader from './components/NavbarHeader';
+import IconSidebar from './components/IconSidebar';
+import SidebarParameters from './components/SidebarParameters';
+import ExecutiveFinancialView from './components/ExecutiveFinancialView';
+import DeepDiveAnalyticsView from './components/DeepDiveAnalyticsView';
+import MultiBlockFleetView from './components/MultiBlockFleetView';
 import HistoryCompare from './HistoryCompare';
 import CustomEpdUpload from './CustomEpdUpload';
+import { Sun, Activity, Zap, Layers } from 'lucide-react';
 
 function App() {
   const [activeTab, setActiveTab] = useState('dashboard');
+  const [subView, setSubView] = useState('financials'); // 'financials' | 'analytics' | 'hybrid'
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+
   const [loading, setLoading] = useState(false);
   const [analyzing, setAnalyzing] = useState(false);
   const [results, setResults] = useState([]);
@@ -58,703 +62,202 @@ function App() {
       window.URL.revokeObjectURL(url);
     } catch (err) {
       console.error("Failed to export PDF", err);
-      alert("Failed to export PDF: " + err.message);
+    } finally {
+      setExportingPdf(false);
     }
-    setExportingPdf(false);
   };
 
-  // Physics Parameters State
+  // Load Inverters on Mount
+  useEffect(() => {
+    fetch('http://127.0.0.1:8000/api/inverters')
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data)) setInverters(data);
+      })
+      .catch(err => console.error("Failed to fetch inverters", err));
+  }, []);
+
+  // Controls / Parameters State
   const [params, setParams] = useState({
-    base_irradiance: 1050,
-    ambient_temp_c: 25.0,
-    lifetime: 30,
-    avg_price_wp: 0.22,
-    bos_cost_wp: 0.45,
-    opex_annual: 15.0,
-    cbam_tax_rate_eur_t: 80.0,
-    eol_recycling_rate_pct: 85.0,
-    system_topology: "Fixed Tilt",
+    scenario: 'Eco-Flagship (Minimize Carbon)',
+    specific_yield: 1450.0,
+    temp_ambient: 25.0,
     ground_albedo: "None",
-    scenario: "Eco-Flagship (Minimize Carbon)",
+    shipping_origin: "China_MainPort",
     project_size_mwp: 50.0,
     project_size_unit: "MWp",
-    ppa_rate_eur_mwh: 45.0,
-    discount_rate_pct: 5.0
+    ppa_price_eur_mwh: 45.0,
+    discount_rate_pct: 6.5
   });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    
-    let finalValue = value;
-    if (value !== '' && name !== 'ground_albedo' && name !== 'system_topology' && name !== 'project_size_unit' && name !== 'scenario') {
-      finalValue = isNaN(value) ? value : Number(value);
-    }
-    
-    setParams(prev => ({ 
-      ...prev, 
-      [name]: finalValue 
-    }));
-    if (hasSimulated) setIsStale(true);
-  };
-
-  const calculateResults = async () => {
+  const handleSimulate = async () => {
     setLoading(true);
+    setHasSimulated(true);
+    setIsStale(false);
     try {
-      const rawSize = parseFloat(params.project_size_mwp) || 50.0;
-      const actualSizeMwp = params.project_size_unit === 'kWp' ? rawSize / 1000 : rawSize;
-      const payload = { 
-        ...params, 
+      const actualSizeMwp = params.project_size_unit === 'kWp' ? params.project_size_mwp / 1000 : params.project_size_mwp;
+      const payload = {
+        ...params,
         project_size_mwp: actualSizeMwp,
         ground_albedo: params.ground_albedo === "None" ? null : parseFloat(params.ground_albedo),
         inverter_id: selectedInverterId,
         target_dc_ac_ratio: targetDcAcRatio
       };
-      
-      const response = await fetch('http://127.0.0.1:8000/api/calculate', {
+
+      const res = await fetch('http://127.0.0.1:8000/api/calculate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       });
-
-      if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(`Backend Error (${response.status}): ${errorText}`);
-      }
-
-      const data = await response.json();
-      if (!data || !data.results) {
-        throw new Error("Invalid response format from backend calculation engine");
-      }
-
-      const getCleanShortName = (row) => {
-        let brand = row.manufacturer || '';
-        brand = brand.replace(/\s*(Jiangsu|Zhejiang|Anhui|Changzhou|Hefei|Ningbo|Wuxi|Sichuan|Shanghai|Beijing|Guangdong|Suzhou)\b/gi, '');
-        brand = brand.replace(/\s*(Co\.,?\s*Ltd\.?|Inc\.?|Corp\.?|LLC|GmbH|Company|Corporation|Technology|Green Energy|New Energy|Solar Technology|Electrics|Group|Holdings|Limited|SRL)\b/gi, '').trim();
-        
-        const upper = brand.toUpperCase();
-        if (upper.includes('FIRST SOLAR')) brand = 'First Solar';
-        else if (upper.includes('RUNERGY')) brand = 'Runergy';
-        else if (upper.includes('JINKO')) brand = 'JinkoSolar';
-        else if (upper.includes('LONGI')) brand = 'LONGi';
-        else if (upper.includes('TRINA')) brand = 'Trina Solar';
-        else if (upper.includes('CANADIAN')) brand = 'Canadian Solar';
-        else if (upper.includes('JA SOLAR')) brand = 'JA Solar';
-        else if (upper.includes('RISEN')) brand = 'Risen Energy';
-        else if (upper.includes('SOLARSPACE')) brand = 'Solarspace';
-        else if (upper.includes('ASTRONERGY')) brand = 'Astronergy';
-        
-        let model = (row.name || `${row.module_power_Wp}W`).trim();
-        if (model.length > 14) {
-          model = model.substring(0, 14);
-        }
-        
-        const fullName = `${brand} - ${model}`;
-        return fullName.length > 25 ? `${fullName.substring(0, 24)}…` : fullName;
-      };
-
-      const topResults = data.results.slice(0, 10).map(row => ({
-        ...row,
-        Short_Name: getCleanShortName(row)
-      }));
-      setResults(topResults);
+      const data = await res.json();
+      setResults(data);
       
-      // Trigger UI dashboard view transition immediately
-      setHasSimulated(true);
-      setIsStale(false);
-
-      // Auto-select the #1 winner for deep dive instantly
-      if (topResults.length > 0) {
-        setSelectedModule(topResults[0]);
-        if (data.initial_analysis) {
-          setAnalysisData(data.initial_analysis);
-        } else {
-          handleModuleSelect(topResults[0]);
-        }
+      // Auto-select #1 TOPSIS module if available
+      if (data && data.length > 0) {
+        handleModuleSelect(data[0]);
       }
     } catch (err) {
-      console.error("Simulation failed:", err);
-      alert("Simulation failed to start: " + err.message + "\n\nPlease ensure the backend FastAPI service is running on http://127.0.0.1:8000.");
+      console.error("Simulation failed", err);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
-  const handleModuleSelect = async (moduleRow) => {
-    if (!moduleRow || !moduleRow.dataset_uuid) return;
-    setSelectedModule(moduleRow);
+  const handleModuleSelect = async (module) => {
+    setSelectedModule(module);
     setAnalyzing(true);
     try {
-      const rawSize = parseFloat(params.project_size_mwp) || 50.0;
-      const actualSizeMwp = params.project_size_unit === 'kWp' ? rawSize / 1000 : rawSize;
-      const payload = { 
-        ...params, 
+      const actualSizeMwp = params.project_size_unit === 'kWp' ? params.project_size_mwp / 1000 : params.project_size_mwp;
+      const payload = {
+        ...params,
         project_size_mwp: actualSizeMwp,
         ground_albedo: params.ground_albedo === "None" ? null : parseFloat(params.ground_albedo),
         inverter_id: selectedInverterId,
         target_dc_ac_ratio: targetDcAcRatio
       };
-      
-      const response = await fetch(`http://127.0.0.1:8000/api/analyze/${moduleRow.dataset_uuid}`, {
+
+      const res = await fetch(`http://127.0.0.1:8000/api/analyze/${module.dataset_uuid}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       });
-
-      if (!response.ok) {
-        const errText = await response.text();
-        throw new Error(`API returned status ${response.status}: ${errText}`);
-      }
-
-      const data = await response.json();
-      if (data && data.radar) {
-        setAnalysisData(data);
-      }
+      const data = await res.json();
+      setAnalysisData(data);
     } catch (err) {
-      console.error("Failed to fetch module analysis", err);
+      console.error("Analysis failed", err);
+    } finally {
+      setAnalyzing(false);
     }
-    setAnalyzing(false);
   };
 
-  useEffect(() => {
-    const fetchInverters = async () => {
-      try {
-        const rawSize = parseFloat(params.project_size_mwp) || 50.0;
-        const actualSize = params.project_size_unit === 'kWp' ? rawSize / 1000 : rawSize;
-        const res = await fetch(`http://127.0.0.1:8000/api/inverters?project_size_mwp=${actualSize}`);
-        const data = await res.json();
-        if (Array.isArray(data)) {
-          setInverters(data);
-        } else {
-          setInverters([]);
-        }
-      } catch (err) {
-        console.error("Failed to load inverters", err);
-        setInverters([]);
-      }
-    };
-    fetchInverters();
-  }, [params.project_size_mwp, params.project_size_unit]);
-
   return (
-    <>
-      <div className="title-bar" />
-      
-      {/* HERO TITLE (Isolated from flexbox reflow) */}
-      <div className={`home-hero ${hasSimulated ? 'hidden-hero' : ''}`}>
-        <h1 style={{ fontSize: '3rem', letterSpacing: '-0.02em', marginBottom: '8px', color: 'white' }}>
-          EPC Solar <span className="text-gradient">Engine</span>
-        </h1>
-        <p className="label-muted" style={{ fontSize: '1rem', marginTop: '10px' }}>MCDA Physics & Executive Financial Optimizer</p>
-      </div>
+    <div className="app-root-shell">
+      {/* TOP EXECUTIVE NAVBAR HEADER */}
+      <NavbarHeader 
+        params={params}
+        selectedModule={selectedModule}
+        handleExportPdf={handleExportPdf}
+        exportingPdf={exportingPdf}
+        hasSimulated={hasSimulated}
+      />
 
-      <div style={{ display: 'flex', justifyContent: 'center', gap: '16px', marginTop: '20px', marginBottom: '16px', zIndex: 100, position: 'relative' }}>
-        <button 
-          className={`tab-btn ${activeTab === 'dashboard' ? 'tab-btn-active' : ''}`} 
-          onClick={() => setActiveTab('dashboard')}
-        >
-          <LayoutDashboard size={18} /> Dashboard / Parameters
-        </button>
-        <button 
-          className={`tab-btn ${activeTab === 'vendor_data' ? 'tab-btn-active' : ''}`} 
-          onClick={() => setActiveTab('vendor_data')}
-        >
-          <FileSpreadsheet size={18} /> Vendor Data Import
-        </button>
-        <button 
-          className={`tab-btn ${activeTab === 'history' ? 'tab-btn-active' : ''}`} 
-          onClick={() => setActiveTab('history')}
-        >
-          <Clock size={18} /> History & Compare
-        </button>
-      </div>
+      <div className="main-app-container">
+        {/* ICON NAVIGATION RAIL */}
+        <IconSidebar 
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+          subView={subView}
+          setSubView={setSubView}
+          hasSimulated={hasSimulated}
+          sidebarCollapsed={sidebarCollapsed}
+          setSidebarCollapsed={setSidebarCollapsed}
+        />
 
-      <div className={`app-wrapper ${hasSimulated ? 'layout-dashboard' : 'layout-home'}`}>
-        
-        {activeTab === 'history' ? (
-          <HistoryCompare />
-        ) : activeTab === 'vendor_data' ? (
-          <CustomEpdUpload />
-        ) : (
-          <>
-            {/* SIDEBAR CONTROLS */}
-            <aside className="controls-sidebar">
-          <div className="glass-panel">
-            <h2 style={{ display: 'flex', alignItems: 'center', gap: '8px', margin: '0 0 20px 0' }}>
-              <Sliders size={20} color="var(--accent-cyan)" />
-              <span className="text-gradient">Simulation Parameters</span>
-            </h2>
-            
-            <div className="physics-inputs-grid">
-              <div>
-                <label className="label-muted">Optimization Scenario</label>
-                <select className="input-glass" name="scenario" value={params.scenario} onChange={handleChange}>
-                  <option value="Eco-Flagship (Minimize Carbon)">Eco-Flagship (Minimize Carbon)</option>
-                  <option value="Utility Scale (Lowest LCOE)">Utility Scale (Lowest LCOE)</option>
-                  <option value="Space Constrained">Space Constrained</option>
-                </select>
-              </div>
+        {/* PARAMETERS SIDEBAR DRAWER (Only when on Dashboard) */}
+        {activeTab === 'dashboard' && (
+          <SidebarParameters 
+            params={params}
+            setParams={setParams}
+            handleSimulate={handleSimulate}
+            loading={loading}
+            isStale={isStale}
+            selectedInverterId={selectedInverterId}
+            setSelectedInverterId={setSelectedInverterId}
+            inverters={inverters}
+            targetDcAcRatio={targetDcAcRatio}
+            setTargetDcAcRatio={setTargetDcAcRatio}
+          />
+        )}
 
-              <div>
-                <label className="label-muted"><Leaf size={14} style={{display:'inline', marginRight: '4px'}}/> Ambient Temp (°C)</label>
-                <input type="number" className="input-glass" name="ambient_temp_c" value={params.ambient_temp_c} onChange={handleChange} step="0.5" />
-              </div>
-              
-              <div>
-                <label className="label-muted"><Sun size={14} style={{display:'inline', marginRight: '4px'}}/> System Topology</label>
-                <select className="input-glass" name="system_topology" value={params.system_topology} onChange={handleChange}>
-                  <option value="Fixed Tilt">Fixed Tilt</option>
-                  <option value="Single-Axis Tracker">Single-Axis Tracker</option>
-                </select>
-              </div>
+        {/* MAIN VIEW CONTENT AREA */}
+        <main className="view-content-area">
+          {activeTab === 'dashboard' && (
+            hasSimulated ? (
+              <>
+                {subView === 'financials' && (
+                  <ExecutiveFinancialView 
+                    results={results}
+                    selectedModule={selectedModule}
+                    handleModuleSelect={handleModuleSelect}
+                    analysisData={analysisData}
+                    params={params}
+                    handleExportPdf={handleExportPdf}
+                    exportingPdf={exportingPdf}
+                  />
+                )}
 
-              <div>
-                <label className="label-muted"><Mountain size={14} style={{display:'inline', marginRight: '4px'}}/> Ground Albedo (Rear)</label>
-                <select className="input-glass" name="ground_albedo" value={params.ground_albedo} onChange={handleChange}>
-                  <option value="None">Disabled (No Filter)</option>
-                  <option value="0.15">0.15 - Grass / Dark Soil</option>
-                  <option value="0.30">0.30 - Concrete / Sand</option>
-                  <option value="0.65">0.65 - White Roof / Snow</option>
-                </select>
-              </div>
+                {subView === 'analytics' && (
+                  <DeepDiveAnalyticsView 
+                    results={results}
+                    selectedModule={selectedModule}
+                    handleModuleSelect={handleModuleSelect}
+                    analysisData={analysisData}
+                    analyzing={analyzing}
+                  />
+                )}
 
-              <div>
-                <label className="label-muted"><Zap size={14} style={{display:'inline', marginRight: '4px'}}/> Lifetime (Years)</label>
-                <input type="number" className="input-glass" name="lifetime" value={params.lifetime} onChange={handleChange} />
-              </div>
-
-              <div className="executive-section">
-                <h4 style={{ color: 'var(--accent-cyan)', marginBottom: '12px' }}>Inverter & BOS Configuration</h4>
-              </div>
-
-              <div>
-                <label className="label-muted">Inverter Selection</label>
-                <select 
-                  className="input-glass" 
-                  value={selectedInverterId} 
-                  onChange={(e) => { setSelectedInverterId(e.target.value); if (hasSimulated) setIsStale(true); }}
+                {subView === 'hybrid' && (
+                  <MultiBlockFleetView 
+                    results={results}
+                    selectedModule={selectedModule}
+                    inverters={inverters}
+                    selectedInverterId={selectedInverterId}
+                    setSelectedInverterId={setSelectedInverterId}
+                    targetDcAcRatio={targetDcAcRatio}
+                    setTargetDcAcRatio={setTargetDcAcRatio}
+                    params={params}
+                  />
+                )}
+              </>
+            ) : (
+              /* WELCOMING INITIAL STATE (BEFORE SIMULATION) */
+              <div className="glass-panel welcome-card fade-in" style={{ textAlign: 'center', padding: '60px 40px', marginTop: '40px' }}>
+                <div className="logo-icon-bg" style={{ margin: '0 auto 16px', width: '56px', height: '56px' }}>
+                  <Sun size={28} color="#38bdf8" />
+                </div>
+                <h2 style={{ fontSize: '1.6rem', marginBottom: '8px' }}>
+                  Welcome to <span className="text-gradient">EPC Solar Engine</span>
+                </h2>
+                <p style={{ color: 'var(--text-muted)', maxWidth: '560px', margin: '0 auto 24px', fontSize: '0.95rem' }}>
+                  An executive decision and procurement platform designed to sit alongside engineering CAD tools like PVsyst and Helioscope. Configure your parameters on the left and run the physics engine.
+                </p>
+                <button 
+                  onClick={handleSimulate} 
+                  disabled={loading}
+                  className="btn-simulate-glow" 
+                  style={{ maxWidth: '320px', margin: '0 auto' }}
                 >
-                  <option value="auto">⭐ Auto-Pairing (Optimal Match for {params.project_size_mwp} {params.project_size_unit})</option>
-                  {inverters.map((inv) => (
-                    <option key={inv.inverter_id} value={inv.inverter_id}>
-                      {inv.is_auto_paired ? '⭐ ' : ''}{inv.manufacturer} {inv.model_name}
-                    </option>
-                  ))}
-                </select>
+                  {loading ? 'Running MCDA Simulation...' : '🚀 Launch Physics Engine Simulation'}
+                </button>
               </div>
-
-              <div>
-                <label className="label-muted">Target DC/AC Ratio (ILR)</label>
-                <input 
-                  type="number" 
-                  className="input-glass" 
-                  value={targetDcAcRatio} 
-                  onChange={(e) => { setTargetDcAcRatio(parseFloat(e.target.value) || 1.25); if (hasSimulated) setIsStale(true); }} 
-                  step="0.05" 
-                  min="1.0" 
-                  max="1.5" 
-                />
-              </div>
-
-              <div className="executive-section">
-                <h4 style={{ color: 'var(--accent-purple)', marginBottom: '12px' }}>Executive Financials</h4>
-              </div>
-                
-              <div>
-                <label className="label-muted">Project Size</label>
-                <div style={{ display: 'flex', gap: '8px' }}>
-                  <input type="number" className="input-glass" name="project_size_mwp" value={params.project_size_mwp} onChange={handleChange} step={params.project_size_unit === 'kWp' ? "10" : "5"} style={{ flex: 1 }} />
-                  <select className="input-glass" name="project_size_unit" value={params.project_size_unit} onChange={handleChange} style={{ width: '80px', padding: '8px' }}>
-                    <option value="MWp">MWp</option>
-                    <option value="kWp">kWp</option>
-                  </select>
-                </div>
-              </div>
-              
-              <div>
-                <label className="label-muted">PPA Rate (€/MWh)</label>
-                <input type="number" className="input-glass" name="ppa_rate_eur_mwh" value={params.ppa_rate_eur_mwh} onChange={handleChange} step="1" />
-              </div>
-            </div>
-
-            <button 
-              className={`btn-primary ${isStale ? 'btn-stale' : ''}`} 
-              onClick={calculateResults}
-            >
-              {loading ? "Simulating..." : (isStale ? "Update Simulation" : "Run MCDA Simulation")}
-            </button>
-          </div>
-
-          {/* LEADERBOARD LIST MOVED */}
-        </aside>
-
-        {/* MAIN VISUALIZATIONS */}
-        <main className="main-content">
-          
-          {/* TOP DECK: MARKET OVERVIEW & PARETO TRADE-OFF FRONTIER */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
-            
-            {/* TOP BAR CHART */}
-            <div className="glass-panel" style={{ height: '350px', position: 'relative', display: 'flex', flexDirection: 'column' }}>
-              <h3 style={{ margin: '0 0 12px 0', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <Target size={18} /> Market Overview (TOPSIS Score)
-              </h3>
-              <div style={{ flex: 1, minHeight: 0 }}>
-                <ResponsiveContainer width="100%" height="100%">
-                  <BarChart data={results} layout="vertical" margin={{ top: 5, right: 30, left: 10, bottom: 20 }}>
-                    <XAxis type="number" domain={[0, 100]} stroke="var(--border-highlight)" tick={{ fill: 'var(--text-muted)', fontSize: 11 }} />
-                    <YAxis dataKey="Short_Name" type="category" width={180} interval={0} stroke="var(--text-muted)" style={{fontSize: '11px', whiteSpace: 'nowrap'}} />
-                    <Tooltip 
-                      cursor={{fill: 'rgba(255,255,255,0.05)'}} 
-                      contentStyle={{ backgroundColor: 'var(--bg-panel)', border: '1px solid var(--border-light)', borderRadius: '8px' }}
-                      itemStyle={{ color: 'var(--text-main)' }}
-                      labelFormatter={(label, payload) => payload?.[0]?.payload?.Display_Name || label}
-                    />
-                    <Bar dataKey="TOPSIS_Score" radius={[0, 4, 4, 0]}>
-                      {results.map((entry, index) => (
-                        <Cell 
-                          key={`cell-${index}`} 
-                          fill={selectedModule?.dataset_uuid === entry.dataset_uuid ? "url(#colorGradient)" : "rgba(59, 130, 246, 0.4)"} 
-                          style={{ cursor: 'pointer' }}
-                          onClick={() => handleModuleSelect(entry)}
-                        />
-                      ))}
-                    </Bar>
-                    <defs>
-                      <linearGradient id="colorGradient" x1="0" y1="0" x2="1" y2="0">
-                        <stop offset="0%" stopColor="#3b82f6" />
-                        <stop offset="100%" stopColor="#8b5cf6" />
-                      </linearGradient>
-                    </defs>
-                  </BarChart>
-                </ResponsiveContainer>
-              </div>
-              {results.length === 0 && (
-                <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center', color: 'var(--text-muted)' }}>
-                  <Mountain size={32} style={{ opacity: 0.5, marginBottom: '8px' }} />
-                  <p>No panels match your filter criteria.</p>
-                  <p style={{ fontSize: '11px', opacity: 0.7 }}>Try adjusting Albedo or Project Size.</p>
-                </div>
-              )}
-            </div>
-
-            {/* PARETO TRADE-OFF SCATTER PLOT */}
-            <div className="glass-panel" style={{ height: '350px', position: 'relative', display: 'flex', flexDirection: 'column' }}>
-              <h3 style={{ margin: '0 0 4px 0', color: 'var(--accent-cyan)', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <Activity size={18} /> Pareto Trade-Off Frontier
-              </h3>
-              <div style={{ fontSize: '11px', color: 'var(--text-muted)', marginBottom: '8px' }}>
-                Click any bubble to select panel. Bottom-left = Ideal low LCOE & low Carbon.
-              </div>
-              <div style={{ flex: 1, minHeight: 0 }}>
-                <ResponsiveContainer width="100%" height="100%">
-                  <ScatterChart margin={{ top: 15, right: 30, left: 20, bottom: 25 }}>
-                    <XAxis 
-                      type="number" 
-                      dataKey="LCOE_EUR_MWh" 
-                      name="LCOE" 
-                      stroke="var(--border-highlight)" 
-                      tick={{ fill: 'var(--text-muted)', fontSize: 10 }}
-                      tickFormatter={(val) => Number(val).toFixed(2)}
-                      domain={['auto', 'auto']}
-                    >
-                      <Label value="System LCOE (€/MWh)" position="insideBottom" offset={-15} style={{ fill: 'var(--text-muted)', fontSize: '11px', textAnchor: 'middle' }} />
-                    </XAxis>
-                    <YAxis 
-                      type="number" 
-                      dataKey="Net_GWP_kgCO2e" 
-                      name="Carbon" 
-                      stroke="var(--border-highlight)" 
-                      tick={{ fill: 'var(--text-muted)', fontSize: 10 }}
-                      tickFormatter={(val) => Math.round(val)}
-                      domain={['auto', 'auto']}
-                    >
-                      <Label value="Carbon (kgCO2e/kWp)" angle={-90} position="insideLeft" offset={10} style={{ fill: 'var(--text-muted)', fontSize: '11px', textAnchor: 'middle' }} />
-                    </YAxis>
-                    <ZAxis type="number" dataKey="TOPSIS_Score" range={[60, 240]} name="TOPSIS Score" />
-                    <Tooltip 
-                      cursor={{ strokeDasharray: '3 3' }}
-                      content={({ payload }) => {
-                        if (!payload || !payload.length) return null;
-                        const data = payload[0].payload;
-                        return (
-                          <div style={{ backgroundColor: 'var(--bg-panel)', border: '1px solid var(--border-highlight)', padding: '10px', borderRadius: '8px', fontSize: '12px' }}>
-                            <strong style={{ color: 'var(--accent-cyan)' }}>{data.Display_Name}</strong>
-                            <div style={{ marginTop: '4px', color: 'var(--text-muted)' }}>
-                              <div>TOPSIS Score: <span style={{ color: 'white', fontWeight: 'bold' }}>{Number(data.TOPSIS_Score).toFixed(1)}</span></div>
-                              <div>LCOE: <span style={{ color: 'white', fontWeight: 'bold' }}>€{(Number(data.LCOE_EUR_MWh) / 1000).toFixed(4)}/kWh (€{Number(data.LCOE_EUR_MWh).toFixed(2)}/MWh)</span></div>
-                              <div>System Carbon: <span style={{ color: 'white', fontWeight: 'bold' }}>{Number(data.Net_GWP_kgCO2e).toFixed(0)} kgCO2e/kWp</span></div>
-                            </div>
-                          </div>
-                        );
-                      }}
-                    />
-                    <Scatter 
-                      name="Modules" 
-                      data={results} 
-                      onClick={(entry) => handleModuleSelect(entry.payload || entry)}
-                    >
-                      {results.map((entry, index) => {
-                        const isSelected = selectedModule?.dataset_uuid === entry.dataset_uuid;
-                        return (
-                          <Cell 
-                            key={`scatter-cell-${index}`} 
-                            fill={isSelected ? '#06b6d4' : index < 3 ? '#8b5cf6' : '#3b82f6'} 
-                            stroke={isSelected ? '#ffffff' : 'transparent'}
-                            strokeWidth={isSelected ? 3 : 0}
-                            style={{ cursor: 'pointer', filter: isSelected ? 'drop-shadow(0px 0px 8px #06b6d4)' : 'none' }}
-                          />
-                        );
-                      })}
-                    </Scatter>
-                  </ScatterChart>
-                </ResponsiveContainer>
-              </div>
-            </div>
-
-          </div>
-
-          {/* DEEP DIVE SECTION */}
-          {selectedModule && (
-            <>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
-                
-                {/* RADAR CHART */}
-                <div className="glass-panel" style={{ height: '330px', display: 'flex', flexDirection: 'column' }}>
-                  <h3 style={{ marginBottom: '8px', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <Activity size={18} /> Dimension Balance
-                  </h3>
-                  <div style={{ fontSize: '13px', color: 'var(--accent-blue)', marginBottom: '8px', fontWeight: '500' }}>
-                    {selectedModule.Display_Name || selectedModule.name}
-                  </div>
-                  
-                  {analyzing || !analysisData?.radar ? (
-                    <div style={{ flexGrow: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-muted)' }}>Loading Analysis...</div>
-                  ) : (
-                    <div style={{ flexGrow: 1, minHeight: 0, width: '100%' }}>
-                      <ResponsiveContainer width="100%" height="100%">
-                        <RadarChart cx="50%" cy="50%" outerRadius="70%" data={analysisData.radar}>
-                          <PolarGrid stroke="var(--border-highlight)" />
-                          <PolarAngleAxis dataKey="subject" tick={{ fill: 'var(--text-muted)', fontSize: 12 }} />
-                          <PolarRadiusAxis angle={30} domain={[0, 100]} tick={false} axisLine={false} />
-                          <Radar name="Score" dataKey="A" stroke="var(--accent-cyan)" fill="var(--accent-cyan)" fillOpacity={0.4} />
-                          <Tooltip 
-                            contentStyle={{ backgroundColor: 'var(--bg-panel)', border: '1px solid var(--border-highlight)', borderRadius: '8px' }}
-                          />
-                        </RadarChart>
-                      </ResponsiveContainer>
-                    </div>
-                  )}
-                </div>
-
-                {/* TORNADO CHART (SENSITIVITY) */}
-                <div className="glass-panel" style={{ height: '330px', display: 'flex', flexDirection: 'column' }}>
-                  <h3 style={{ marginBottom: '8px', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <Activity size={18} /> Sensitivity Analysis (Carbon Swing)
-                  </h3>
-                  <div style={{ fontSize: '12px', color: 'var(--text-muted)', marginBottom: '16px' }}>
-                    Impact of ±20% variation on {selectedModule.name}
-                  </div>
-
-                  {analyzing || !analysisData?.sensitivity?.carbon ? (
-                    <div style={{ flexGrow: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-muted)' }}>Loading Analysis...</div>
-                  ) : (
-                    <div style={{ flexGrow: 1, minHeight: 0, width: '100%' }}>
-                      <ResponsiveContainer width="100%" height="100%">
-                        <BarChart data={analysisData.sensitivity.carbon} layout="vertical" margin={{ top: 5, right: 30, left: 40, bottom: 5 }} stackOffset="sign">
-                          <XAxis type="number" stroke="var(--border-highlight)" tick={{ fill: 'var(--text-muted)' }} />
-                          <YAxis dataKey="Parameter" type="category" width={110} stroke="var(--text-muted)" style={{fontSize: '10px'}} />
-                          <Tooltip 
-                            cursor={{fill: 'rgba(255,255,255,0.05)'}}
-                            contentStyle={{ backgroundColor: 'var(--bg-panel)', border: '1px solid var(--border-highlight)', borderRadius: '8px' }}
-                          />
-                          <Bar dataKey="Low" fill="#ef4444" stackId="stack" name="-20% Variation" />
-                          <Bar dataKey="High" fill="#10b981" stackId="stack" name="+20% Variation" />
-                        </BarChart>
-                      </ResponsiveContainer>
-                    </div>
-                  )}
-                </div>
-
-                {/* EXECUTIVE FINANCIAL SUMMARY */}
-                <div className="glass-panel" style={{ gridColumn: '1 / -1' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-                    <h3 style={{ margin: 0, color: 'var(--accent-purple)', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                      <Activity size={18} /> Executive Financial Projection ({params.project_size_mwp} {params.project_size_unit})
-                    </h3>
-                    <button
-                      onClick={handleExportPdf}
-                      disabled={exportingPdf}
-                      style={{
-                        backgroundColor: 'rgba(139, 92, 246, 0.2)',
-                        border: '1px solid rgba(139, 92, 246, 0.5)',
-                        color: '#c084fc',
-                        padding: '8px 16px',
-                        borderRadius: '6px',
-                        cursor: exportingPdf ? 'not-allowed' : 'pointer',
-                        fontSize: '12px',
-                        fontWeight: '600',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '8px',
-                        transition: 'all 0.2s ease'
-                      }}
-                      onMouseEnter={(e) => !exportingPdf && (e.currentTarget.style.backgroundColor = 'rgba(139, 92, 246, 0.35)')}
-                      onMouseLeave={(e) => !exportingPdf && (e.currentTarget.style.backgroundColor = 'rgba(139, 92, 246, 0.2)')}
-                    >
-                      <FileText size={16} />
-                      {exportingPdf ? 'Generating PDF...' : 'Export Executive Briefing (PDF)'}
-                    </button>
-                  </div>
-                  
-                  {analyzing || !analysisData?.executive ? (
-                    <div style={{ color: 'var(--text-muted)', padding: '16px' }}>Calculating ROI...</div>
-                  ) : (
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '14px' }}>
-                        <div style={{ background: 'rgba(0,0,0,0.4)', padding: '14px 16px', borderRadius: '10px', borderLeft: '4px solid #38bdf8', border: '1px solid rgba(255,255,255,0.06)', borderLeftWidth: '4px' }}>
-                          <div className="label-muted" style={{ fontSize: '10px' }}>Net Present Value (NPV)</div>
-                          <div style={{ fontSize: '22px', fontWeight: '800', color: 'white', marginTop: '2px' }}>€ {Number(analysisData.executive.npv_eur || 0).toLocaleString(undefined, {maximumFractionDigits: 0})}</div>
-                        </div>
-                        <div style={{ background: 'rgba(0,0,0,0.4)', padding: '14px 16px', borderRadius: '10px', borderLeft: '4px solid #10b981', border: '1px solid rgba(255,255,255,0.06)', borderLeftWidth: '4px' }}>
-                          <div className="label-muted" style={{ fontSize: '10px' }}>Payback Period</div>
-                          <div style={{ fontSize: '22px', fontWeight: '800', color: 'white', marginTop: '2px' }}>{Number(analysisData.executive.payback_years || 0).toFixed(1)} <span style={{ fontSize: '13px', color: '#94a3b8', fontWeight: '500' }}>Years</span></div>
-                        </div>
-                        <div style={{ background: 'rgba(0,0,0,0.4)', padding: '14px 16px', borderRadius: '10px', borderLeft: '4px solid #a855f7', border: '1px solid rgba(255,255,255,0.06)', borderLeftWidth: '4px' }}>
-                          <div className="label-muted" style={{ fontSize: '10px' }}>Lifetime Revenue</div>
-                          <div style={{ fontSize: '22px', fontWeight: '800', color: 'white', marginTop: '2px' }}>€ {Number(analysisData.executive.total_lifetime_revenue_eur || 0).toLocaleString(undefined, {maximumFractionDigits: 0})}</div>
-                        </div>
-                        <div style={{ background: 'rgba(0,0,0,0.4)', padding: '14px 16px', borderRadius: '10px', borderLeft: '4px solid #ef4444', border: '1px solid rgba(255,255,255,0.06)', borderLeftWidth: '4px' }}>
-                          <div className="label-muted" style={{ fontSize: '10px' }}>CBAM Tax Exposure</div>
-                          <div style={{ fontSize: '22px', fontWeight: '800', color: 'white', marginTop: '2px' }}>€ {Number(analysisData.executive.total_cbam_tax_eur || 0).toLocaleString(undefined, {maximumFractionDigits: 0})}</div>
-                        </div>
-                      </div>
-                      
-                      {/* MULTI-BLOCK HYBRID BREAKDOWN (FOR UTILITY PROJECTS) */}
-                      {analysisData.hybrid_layout?.is_hybrid && (
-                        <div style={{ background: 'rgba(139, 92, 246, 0.1)', border: '1px solid rgba(139, 92, 246, 0.3)', borderRadius: '12px', padding: '16px' }}>
-                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-                            <div style={{ fontSize: '14px', fontWeight: 'bold', color: '#c084fc', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                              <Layers size={18} /> Multi-Block Hybrid Deployment Strategy ({analysisData.hybrid_layout.total_blocks} Inverter Blocks @ {analysisData.hybrid_layout.block_size_mwp.toFixed(1)} MWp each)
-                            </div>
-                            <div style={{ fontSize: '11px', background: 'rgba(255, 255, 255, 0.1)', padding: '4px 8px', borderRadius: '4px', color: 'var(--text-muted)' }}>
-                              Strict 100% String & MPPT Uniformity
-                            </div>
-                          </div>
-                          
-                          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '12px' }}>
-                            {analysisData.hybrid_layout.allocations.map((alloc, idx) => (
-                              <div key={idx} style={{ background: 'rgba(0, 0, 0, 0.35)', border: '1px solid var(--border-highlight)', borderRadius: '10px', padding: '14px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                                <div style={{ display: 'flex', alignItems: 'center' }}>
-                                  <span style={{ 
-                                    fontSize: '10px', 
-                                    textTransform: 'uppercase', 
-                                    letterSpacing: '0.5px', 
-                                    background: idx === 0 ? 'rgba(59, 130, 246, 0.25)' : 'rgba(139, 92, 246, 0.25)', 
-                                    color: idx === 0 ? '#93c5fd' : '#d8b4fe', 
-                                    border: idx === 0 ? '1px solid rgba(59, 130, 246, 0.4)' : '1px solid rgba(139, 92, 246, 0.4)',
-                                    padding: '3px 8px', 
-                                    borderRadius: '4px', 
-                                    fontWeight: '700' 
-                                  }}>
-                                    {alloc.role}
-                                  </span>
-                                </div>
-                                
-                                <div style={{ fontWeight: 'bold', color: idx === 0 ? '#60a5fa' : '#c084fc', fontSize: '13px' }}>
-                                  Block Group {idx === 0 ? 'A' : 'B'}: {alloc.capacity_share_pct.toFixed(0)}% Capacity ({alloc.capacity_mwp.toFixed(1)} MWp / {alloc.blocks_assigned} Blocks)
-                                </div>
-                                
-                                <div style={{ fontSize: '13.5px', color: 'white', fontWeight: '700' }}>
-                                  {alloc.module_name} ({alloc.module_power_Wp}W)
-                                </div>
-                                
-                                <div style={{ fontSize: '11px', color: 'var(--text-muted)', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px', paddingTop: '6px', borderTop: '1px dashed rgba(255, 255, 255, 0.1)' }}>
-                                  <div>Carbon Footprint: <span style={{ color: 'white', fontWeight: '600' }}>{alloc.gwp_kgco2e_per_kwp.toFixed(0)} kgCO2e/kWp</span></div>
-                                  <div>LCOE: <span style={{ color: 'white', fontWeight: '600' }}>€{alloc.lcoe_eur_mwh.toFixed(2)}/MWh</span></div>
-                                  <div>CBAM Tax: <span style={{ color: '#ef4444', fontWeight: '600' }}>€{alloc.cbam_tax_eur.toLocaleString(undefined, {maximumFractionDigits: 0})}</span></div>
-                                  <div>Est. Gen: <span style={{ color: '#10b981', fontWeight: '600' }}>{(alloc.annual_generation_mwh / 1000).toFixed(1)} GWh/yr</span></div>
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-
-                      {analysisData.executive?.executive_pitch && (
-                        <div style={{ padding: '16px', background: 'rgba(59, 130, 246, 0.1)', border: '1px solid rgba(59, 130, 246, 0.3)', borderRadius: '8px', fontStyle: 'italic', lineHeight: '1.5' }}>
-                          "{analysisData.executive.executive_pitch}"
-                        </div>
-                      )}
-                    </div>
-                  )}
-                </div>
-
-                {/* SYSTEM CARBON STACKED BREAKDOWN CHART & PARETO MODULES SIDE-BY-SIDE */}
-                <div style={{ gridColumn: '1 / -1', display: 'grid', gridTemplateColumns: '1.2fr 0.8fr', gap: '24px' }}>
-                  
-                  {/* CARBON FOOTPRINT STACK */}
-                  <div className="glass-panel" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-                    <h3 style={{ marginBottom: '8px', color: 'var(--accent-cyan)', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                      <Leaf size={18} /> System Embodied Carbon Breakdown (kgCO2e/kWp)
-                    </h3>
-                    
-                    {analyzing ? (
-                      <div style={{ color: 'var(--text-muted)' }}>Calculating Carbon Footprint Stack...</div>
-                    ) : analysisData?.gwp_breakdown ? (
-                      <div style={{ height: '170px', width: '100%' }}>
-                        <ResponsiveContainer width="100%" height="100%">
-                          <BarChart data={[{
-                            name: 'System Total',
-                            Module: analysisData.gwp_breakdown[0].gwp,
-                            Inverter: analysisData.gwp_breakdown[1].gwp,
-                            BOS: analysisData.gwp_breakdown[2].gwp
-                          }]} layout="vertical" margin={{ top: 10, right: 30, left: 0, bottom: 5 }}>
-                            <XAxis type="number" stroke="var(--border-highlight)" tick={{ fill: 'var(--text-muted)' }} />
-                            <YAxis dataKey="name" type="category" width={100} stroke="var(--text-muted)" style={{fontSize: '12px'}} />
-                            <Tooltip 
-                              contentStyle={{ backgroundColor: 'var(--bg-panel)', border: '1px solid var(--border-highlight)', borderRadius: '8px' }}
-                              formatter={(value, name) => [`${Number(value).toFixed(1)} kgCO2e/kWp`, name]}
-                            />
-                            <Legend wrapperStyle={{ paddingTop: '4px', fontSize: '11px' }} />
-                            <Bar dataKey="Module" stackId="a" fill="#3b82f6" name="PV Module Net" />
-                            <Bar dataKey="Inverter" stackId="a" fill="#8b5cf6" name="Inverter System" />
-                            <Bar dataKey="BOS" stackId="a" fill="#06b6d4" name="BOS & Racking" />
-                          </BarChart>
-                        </ResponsiveContainer>
-                      </div>
-                    ) : null}
-                  </div>
-
-                  {/* TOP PARETO WINNER CARDS */}
-                  <div className="glass-panel" style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                    <h3 style={{ margin: 0, color: 'var(--accent-blue)', fontSize: '15px' }}>Top Pareto Winner Modules</h3>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                      {results.slice(0, 3).map((result, idx) => (
-                        <div 
-                          key={idx} 
-                          className={`pareto-item ${selectedModule?.dataset_uuid === result.dataset_uuid ? 'selected-pareto' : ''}`}
-                          onClick={() => handleModuleSelect(result)}
-                          style={{ cursor: 'pointer', padding: '10px 12px' }}
-                        >
-                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <span style={{color: 'var(--accent-blue)', fontWeight: 'bold', fontSize: '11px'}}>#{idx + 1} - TOPSIS: {result.TOPSIS_Score.toFixed(1)}</span>
-                            <span style={{ fontSize: '11px', color: 'var(--accent-cyan)' }}>€{(Number(result.LCOE_EUR_MWh || 0) / 1000).toFixed(4)}/kWh</span>
-                          </div>
-                          <strong style={{ fontSize: '12px' }}>{result.Display_Name}</strong>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-            </>
+            )
           )}
 
+          {activeTab === 'vendor_data' && <CustomEpdUpload />}
+          {activeTab === 'history' && <HistoryCompare />}
         </main>
-        </>
-        )}
       </div>
-    </>
+    </div>
   );
 }
 

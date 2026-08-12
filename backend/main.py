@@ -4,14 +4,22 @@ import threading
 import time
 import uvicorn
 import webview
+import multiprocessing
+
+def get_base_dir():
+    if hasattr(sys, '_MEIPASS'):
+        return sys._MEIPASS
+    return os.path.dirname(__file__)
 
 def start_fastapi():
-    # Import the FastAPI app from api.py
-    sys.path.append(os.path.dirname(__file__))
+    sys.path.append(get_base_dir())
     from api import app
     uvicorn.run(app, host="127.0.0.1", port=8000, log_level="error")
 
 if __name__ == '__main__':
+    # CRITICAL: Required for PyInstaller + Uvicorn/Multiprocessing on Windows
+    multiprocessing.freeze_support()
+    
     # 1. Start FastAPI server in a background daemon thread
     server_thread = threading.Thread(target=start_fastapi, daemon=True)
     server_thread.start()

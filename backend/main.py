@@ -20,7 +20,7 @@ if __name__ == '__main__':
     time.sleep(1.0)
 
     # 2. Launch pywebview native standalone desktop window
-    url = "http://127.0.0.1:8000/static_app/index.html"
+    url = "http://127.0.0.1:8000/"
     
     window = webview.create_window(
         title="EPC Solar Engine Premium",

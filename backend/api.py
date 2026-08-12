@@ -36,10 +36,29 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Helper to get base path for PyInstaller bundle vs local development
+def get_base_dir():
+    if hasattr(sys, '_MEIPASS'):
+        return sys._MEIPASS
+    return os.path.dirname(__file__)
+
 # Serve compiled React frontend dist folder statically if present
-frontend_dist_path = os.path.join(os.path.dirname(__file__), "..", "frontend", "dist")
-if os.path.exists(frontend_dist_path):
+base_dir = get_base_dir()
+possible_dist_paths = [
+    os.path.join(base_dir, "frontend", "dist"),
+    os.path.join(base_dir, "..", "frontend", "dist"),
+    os.path.join(base_dir, "dist")
+]
+
+frontend_dist_path = None
+for p in possible_dist_paths:
+    if os.path.exists(p) and os.path.isdir(p):
+        frontend_dist_path = p
+        break
+
+if frontend_dist_path:
     app.mount("/static_app", StaticFiles(directory=frontend_dist_path, html=True), name="static_app")
+    app.mount("/", StaticFiles(directory=frontend_dist_path, html=True), name="root_frontend")
 
 def load_data_from_parquet(project_size_mwp: float = None, ground_albedo: float = None, custom_dataset_id: str = None):
     # If custom dataset requested, fetch custom modules from SQLite
@@ -48,7 +67,15 @@ def load_data_from_parquet(project_size_mwp: float = None, ground_albedo: float 
         if not custom_df.empty:
             return custom_df
 
-    parquet_path = os.path.join(os.path.dirname(__file__), "src", "pv_engine", "data", "pv_database_v2.parquet")
+    possible_parquet_paths = [
+        os.path.join(get_base_dir(), "src", "pv_engine", "data", "pv_database_v2.parquet"),
+        os.path.join(os.path.dirname(__file__), "src", "pv_engine", "data", "pv_database_v2.parquet")
+    ]
+    parquet_path = possible_parquet_paths[0]
+    for pp in possible_parquet_paths:
+        if os.path.exists(pp):
+            parquet_path = pp
+            break
     
     filters = []
     

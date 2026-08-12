@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 from typing import Optional
 from fastapi import FastAPI, HTTPException, UploadFile, File
-from fastapi.responses import StreamingResponse
+from fastapi.responses import StreamingResponse, FileResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -57,8 +57,10 @@ for p in possible_dist_paths:
         break
 
 if frontend_dist_path:
+    assets_path = os.path.join(frontend_dist_path, "assets")
+    if os.path.exists(assets_path):
+        app.mount("/assets", StaticFiles(directory=assets_path), name="static_assets")
     app.mount("/static_app", StaticFiles(directory=frontend_dist_path, html=True), name="static_app")
-    app.mount("/", StaticFiles(directory=frontend_dist_path, html=True), name="root_frontend")
 
 def load_data_from_parquet(project_size_mwp: float = None, ground_albedo: float = None, custom_dataset_id: str = None):
     # If custom dataset requested, fetch custom modules from SQLite
@@ -127,6 +129,10 @@ class CalculationRequest(BaseModel):
 
 @app.get("/")
 def read_root():
+    if frontend_dist_path:
+        index_file = os.path.join(frontend_dist_path, "index.html")
+        if os.path.exists(index_file):
+            return FileResponse(index_file)
     return {"status": "EPC Solar Engine Premium API is running"}
 
 @app.get("/api/modules")

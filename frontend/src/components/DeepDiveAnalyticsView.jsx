@@ -1,5 +1,4 @@
-import React from 'react';
-import { Activity, BarChart2, Zap } from 'lucide-react';
+import React, { useMemo } from 'react';
 import { 
   ScatterChart, Scatter, XAxis, YAxis, ZAxis, Tooltip, ResponsiveContainer, Cell, Label,
   RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis,
@@ -13,6 +12,56 @@ export default function DeepDiveAnalyticsView({
   analysisData,
   analyzing
 }) {
+
+  // Process scatter data to ensure clean, aesthetic visual separation (no ugly overlapping clumps!)
+  const scatterData = useMemo(() => {
+    if (!results || results.length === 0) return [];
+    
+    // Take top 30 Pareto modules for crystal-clear visual clarity
+    const seenCoords = new Map();
+    
+    return results.slice(0, 30).map((mod, idx) => {
+      const origLcoe = Number(mod.LCOE_EUR_MWh) || 45.0;
+      const origCarbon = Number(mod.Net_GWP_kgCO2e || mod.GWP_total_A1A3_per_kWp_kgCO2e) || 600.0;
+      
+      const coordKey = `${origLcoe.toFixed(2)}_${Math.round(origCarbon)}`;
+      const count = seenCoords.get(coordKey) || 0;
+      seenCoords.set(coordKey, count + 1);
+      
+      // Apply deterministic micro-jitter offset for duplicate coordinates so every dot is distinct
+      const jitterX = count > 0 ? (count % 2 === 1 ? 0.06 * count : -0.06 * count) : 0;
+      const jitterY = count > 0 ? (count % 2 === 1 ? 5.5 * count : -5.5 * count) : 0;
+      
+      return {
+        ...mod,
+        displayLcoe: Number((origLcoe + jitterX).toFixed(3)),
+        displayCarbon: Number((origCarbon + jitterY).toFixed(1)),
+        origLcoe,
+        origCarbon,
+        rank: idx + 1
+      };
+    });
+  }, [results]);
+
+  // Calculate domain bounds with generous padding so dots don't stick to chart edges
+  const xDomain = useMemo(() => {
+    if (scatterData.length === 0) return [40, 50];
+    const vals = scatterData.map(d => d.displayLcoe);
+    const min = Math.min(...vals);
+    const max = Math.max(...vals);
+    const pad = Math.max(0.3, (max - min) * 0.15);
+    return [Number((min - pad).toFixed(2)), Number((max + pad).toFixed(2))];
+  }, [scatterData]);
+
+  const yDomain = useMemo(() => {
+    if (scatterData.length === 0) return [500, 700];
+    const vals = scatterData.map(d => d.displayCarbon);
+    const min = Math.min(...vals);
+    const max = Math.max(...vals);
+    const pad = Math.max(20, (max - min) * 0.15);
+    return [Math.floor(min - pad), Math.ceil(max + pad)];
+  }, [scatterData]);
+
   return (
     <div className="deep-dive-view-container fade-in">
       <div className="analytics-3panel-grid">
@@ -29,61 +78,97 @@ export default function DeepDiveAnalyticsView({
 
           <div className="chart-wrapper">
             <ResponsiveContainer width="100%" height={320}>
-              <ScatterChart margin={{ top: 15, right: 20, left: 10, bottom: 25 }}>
+              <ScatterChart margin={{ top: 20, right: 25, left: 15, bottom: 30 }}>
                 <XAxis 
                   type="number" 
-                  dataKey="LCOE_EUR_MWh" 
+                  dataKey="displayLcoe" 
                   name="LCOE" 
                   stroke="var(--border-highlight)" 
                   tick={{ fill: 'var(--text-muted)', fontSize: 10 }}
                   tickFormatter={(val) => Number(val).toFixed(2)}
-                  domain={['auto', 'auto']}
+                  domain={xDomain}
                 >
-                  <Label value="System LCOE (€/MWh)" position="insideBottom" offset={-15} style={{ fill: 'var(--text-muted)', fontSize: '11px', textAnchor: 'middle' }} />
+                  <Label value="System LCOE (€/MWh)" position="insideBottom" offset={-18} style={{ fill: 'var(--text-muted)', fontSize: '11px', textAnchor: 'middle' }} />
                 </XAxis>
                 <YAxis 
                   type="number" 
-                  dataKey="Net_GWP_kgCO2e" 
+                  dataKey="displayCarbon" 
                   name="Carbon" 
                   stroke="var(--border-highlight)" 
                   tick={{ fill: 'var(--text-muted)', fontSize: 10 }}
                   tickFormatter={(val) => Math.round(val)}
-                  domain={['auto', 'auto']}
+                  domain={yDomain}
                 >
-                  <Label value="Carbon (kgCO2e/kWp)" angle={-90} position="insideLeft" offset={10} style={{ fill: 'var(--text-muted)', fontSize: '11px', textAnchor: 'middle' }} />
+                  <Label value="Carbon (kgCO2e/kWp)" angle={-90} position="insideLeft" offset={8} style={{ fill: 'var(--text-muted)', fontSize: '11px', textAnchor: 'middle' }} />
                 </YAxis>
-                <ZAxis type="number" dataKey="TOPSIS_Score" range={[60, 240]} name="TOPSIS Score" />
+                <ZAxis type="number" dataKey="TOPSIS_Score" range={[100, 300]} name="TOPSIS Score" />
+                
                 <Tooltip 
-                  cursor={{ strokeDasharray: '3 3' }}
+                  cursor={{ stroke: 'rgba(56, 189, 248, 0.3)', strokeDasharray: '4 4' }}
                   content={({ payload }) => {
                     if (!payload || !payload.length) return null;
                     const data = payload[0].payload;
                     return (
                       <div className="scatter-tooltip-box">
-                        <strong className="text-cyan">{data.Display_Name || data.name}</strong>
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '6px' }}>
+                          <strong className="text-cyan">{data.Display_Name || data.name}</strong>
+                          <span style={{ fontSize: '10px', background: 'rgba(56, 189, 248, 0.2)', padding: '1px 6px', borderRadius: '8px', color: '#38bdf8' }}>
+                            #{data.rank} TOPSIS
+                          </span>
+                        </div>
                         <div className="tooltip-details">
                           <div>TOPSIS Score: <span className="text-white bold">{Number(data.TOPSIS_Score).toFixed(1)}</span></div>
-                          <div>LCOE: <span className="text-white bold">€{Number(data.LCOE_EUR_MWh).toFixed(2)}/MWh</span></div>
-                          <div>System Carbon: <span className="text-white bold">{Number(data.Net_GWP_kgCO2e).toFixed(0)} kgCO2e/kWp</span></div>
+                          <div>LCOE: <span className="text-white bold">€{Number(data.origLcoe || data.LCOE_EUR_MWh).toFixed(2)}/MWh</span></div>
+                          <div>System Carbon: <span className="text-white bold">{Number(data.origCarbon || data.Net_GWP_kgCO2e).toFixed(0)} kgCO2e/kWp</span></div>
+                          <div>Manufacturer: <span className="text-muted">{data.manufacturer || 'CEC Standard'}</span></div>
                         </div>
                       </div>
                     );
                   }}
                 />
+                
                 <Scatter 
                   name="Modules" 
-                  data={results} 
+                  data={scatterData} 
                   onClick={(entry) => handleModuleSelect(entry.payload || entry)}
                 >
-                  {results.map((entry, index) => {
+                  {scatterData.map((entry, index) => {
                     const isSelected = selectedModule?.dataset_uuid === entry.dataset_uuid;
+                    
+                    // Distinct, aesthetic color palette by rank
+                    let fillColor = 'rgba(56, 189, 248, 0.55)';
+                    let strokeColor = 'rgba(56, 189, 248, 0.9)';
+                    let strokeWidth = 1.5;
+
+                    if (isSelected) {
+                      fillColor = '#06b6d4';
+                      strokeColor = '#ffffff';
+                      strokeWidth = 3;
+                    } else if (index === 0) {
+                      fillColor = 'rgba(245, 158, 11, 0.9)'; // Gold for #1
+                      strokeColor = '#fef08a';
+                      strokeWidth = 2;
+                    } else if (index < 3) {
+                      fillColor = 'rgba(168, 85, 247, 0.85)'; // Purple for #2-#3
+                      strokeColor = '#e9d5ff';
+                      strokeWidth = 2;
+                    } else if (index < 10) {
+                      fillColor = 'rgba(16, 185, 129, 0.8)'; // Emerald for Top 10
+                      strokeColor = '#a7f3d0';
+                      strokeWidth = 1.5;
+                    }
+
                     return (
                       <Cell 
-                        key={`scatter-cell-${index}`} 
-                        fill={isSelected ? '#06b6d4' : index < 3 ? '#a855f7' : '#3b82f6'} 
-                        stroke={isSelected ? '#ffffff' : 'transparent'}
-                        strokeWidth={isSelected ? 3 : 0}
-                        style={{ cursor: 'pointer', filter: isSelected ? 'drop-shadow(0px 0px 8px #06b6d4)' : 'none' }}
+                        key={`scatter-cell-${entry.dataset_uuid || index}`} 
+                        fill={fillColor}
+                        stroke={strokeColor}
+                        strokeWidth={strokeWidth}
+                        style={{ 
+                          cursor: 'pointer', 
+                          filter: isSelected ? 'drop-shadow(0px 0px 10px #06b6d4)' : 'drop-shadow(0px 2px 4px rgba(0,0,0,0.5))',
+                          transition: 'all 0.2s ease'
+                        }}
                       />
                     );
                   })}

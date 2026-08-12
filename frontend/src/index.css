@@ -1194,23 +1194,29 @@ input.input-glass {
 }
 
 /* ==========================================================================
-   VIEW 2: DEEP DIVE ANALYTICS VIEW
+   VIEW 2: DEEP DIVE ANALYTICS VIEW (SINGLE PANE FIT - NO SCROLL)
    ========================================================================== */
 .deep-dive-view-container {
-  padding: 20px;
+  padding: 14px 18px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  justify-content: flex-start;
+  gap: 14px;
+  height: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .analytics-top-hero-grid {
   display: grid;
   grid-template-columns: 1.4fr 1fr;
-  gap: 20px;
+  gap: 14px;
+  flex-shrink: 0;
 }
 
 .full-width-panel {
   width: 100%;
+  flex-shrink: 0;
 }
 
 .analytics-panel {
@@ -1219,8 +1225,8 @@ input.input-glass {
   position: relative;
   background: rgba(15, 21, 33, 0.85);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 14px;
-  padding: 20px;
+  border-radius: 12px;
+  padding: 14px 16px;
 }
 
 .scatter-hero-panel {

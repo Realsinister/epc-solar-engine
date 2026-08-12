@@ -95,7 +95,7 @@ export default function DeepDiveAnalyticsView({
   // Tornado Sensitivity Data
   const tornadoData = useMemo(() => {
     if (analysisData?.sensitivity?.carbon && analysisData.sensitivity.carbon.length > 0) {
-      return analysisData.sensitivity.carbon.map(item => ({
+      return analysisData.sensitivity.carbon.slice(0, 7).map(item => ({
         Parameter: item.Parameter || item.metric || 'Parameter',
         Negative: -Math.abs(item.Low || 150),
         Positive: Math.abs(item.High || 210)
@@ -108,15 +108,14 @@ export default function DeepDiveAnalyticsView({
       { Parameter: "Module Price", Negative: -250, Positive: 220 },
       { Parameter: "BOS Cost", Negative: -210, Positive: 190 },
       { Parameter: "O&M Cost", Negative: -190, Positive: 175 },
-      { Parameter: "CBAM Tax Rate", Negative: -160, Positive: 140 },
-      { Parameter: "EoL Recycling", Negative: -110, Positive: 95 }
+      { Parameter: "CBAM Tax Rate", Negative: -160, Positive: 140 }
     ];
   }, [analysisData]);
 
   return (
     <div className="deep-dive-view-container fade-in">
       
-      {/* TOP ROW: 2 SPACIOUS HERO CARDS (Scatter Plot + Radar Chart) */}
+      {/* TOP ROW: 2 HERO CARDS (Scatter Plot + Radar Chart) */}
       <div className="analytics-top-hero-grid">
         
         {/* PANEL 1: PARETO TRADE-OFF SCATTER PLOT */}
@@ -133,14 +132,14 @@ export default function DeepDiveAnalyticsView({
           <p className="panel-sub-header">Multi-Objective Optimization: System LCOE vs Carbon Intensity</p>
 
           <div className="chart-wrapper-spacious">
-            <ResponsiveContainer width="100%" height={360}>
-              <ScatterChart margin={{ top: 20, right: 30, left: 20, bottom: 25 }}>
+            <ResponsiveContainer width="100%" height={250}>
+              <ScatterChart margin={{ top: 12, right: 25, left: 15, bottom: 18 }}>
                 <XAxis 
                   type="number" 
                   dataKey="x" 
                   name="LCOE" 
                   stroke="var(--border-highlight)" 
-                  tick={{ fill: 'var(--text-muted)', fontSize: 11 }}
+                  tick={{ fill: 'var(--text-muted)', fontSize: 10 }}
                   tickFormatter={(val) => Number(val).toFixed(1)}
                   domain={xDomain}
                 />
@@ -149,10 +148,10 @@ export default function DeepDiveAnalyticsView({
                   dataKey="y" 
                   name="Carbon" 
                   stroke="var(--border-highlight)" 
-                  tick={{ fill: 'var(--text-muted)', fontSize: 11 }}
+                  tick={{ fill: 'var(--text-muted)', fontSize: 10 }}
                   tickFormatter={(val) => Math.round(val)}
                   domain={yDomain}
-                  label={{ value: 'Carbon Intensity (gCO2e/kWh)', angle: -90, position: 'insideLeft', offset: 5, fill: 'var(--text-muted)', fontSize: 11 }}
+                  label={{ value: 'Carbon Intensity (gCO2e/kWh)', angle: -90, position: 'insideLeft', offset: 5, fill: 'var(--text-muted)', fontSize: 10 }}
                 />
                 <ZAxis type="number" range={[40, 40]} />
 
@@ -165,9 +164,9 @@ export default function DeepDiveAnalyticsView({
 
                     return (
                       <div className="scatter-tooltip-box">
-                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '6px' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '4px' }}>
                           <strong className="text-cyan">{data.Display_Name || data.name}</strong>
-                          <span style={{ fontSize: '10px', background: 'rgba(56, 189, 248, 0.2)', padding: '1px 6px', borderRadius: '8px', color: '#38bdf8' }}>
+                          <span style={{ fontSize: '10px', background: 'rgba(56, 189, 248, 0.2)', padding: '1px 5px', borderRadius: '6px', color: '#38bdf8' }}>
                             #{data.rank} Pareto
                           </span>
                         </div>
@@ -185,7 +184,7 @@ export default function DeepDiveAnalyticsView({
                 <Scatter 
                   name="Frontier" 
                   data={frontierCurve} 
-                  line={{ stroke: '#38bdf8', strokeWidth: 3, strokeDasharray: 'none' }}
+                  line={{ stroke: '#38bdf8', strokeWidth: 2.5, strokeDasharray: 'none' }}
                   lineType="joint"
                   shape={() => null}
                 />
@@ -201,28 +200,28 @@ export default function DeepDiveAnalyticsView({
 
                     let fillColor = 'rgba(56, 189, 248, 0.85)';
                     let strokeColor = 'rgba(255, 255, 255, 0.6)';
-                    let rSize = 5.5;
+                    let rSize = 4.5;
 
                     if (isSelected) {
                       fillColor = '#ffffff';
                       strokeColor = '#38bdf8';
-                      rSize = 9;
+                      rSize = 8;
                     } else if (index < 5) {
                       fillColor = '#06b6d4';
                       strokeColor = '#67e8f9';
-                      rSize = 6.5;
+                      rSize = 5.5;
                     } else if (index < 18) {
                       fillColor = '#3b82f6';
                       strokeColor = '#93c5fd';
-                      rSize = 5.5;
+                      rSize = 4.5;
                     } else if (index < 32) {
                       fillColor = '#8b5cf6';
                       strokeColor = '#c4b5fd';
-                      rSize = 5;
+                      rSize = 4;
                     } else {
                       fillColor = '#d946ef';
                       strokeColor = '#f0abfc';
-                      rSize = 4.5;
+                      rSize = 3.5;
                     }
 
                     return (
@@ -230,11 +229,11 @@ export default function DeepDiveAnalyticsView({
                         key={`scatter-cell-${index}`} 
                         fill={fillColor}
                         stroke={strokeColor}
-                        strokeWidth={isSelected ? 3 : 1.2}
+                        strokeWidth={isSelected ? 3 : 1}
                         r={rSize}
                         style={{ 
                           cursor: 'pointer', 
-                          filter: isSelected ? 'drop-shadow(0px 0px 14px #38bdf8)' : 'drop-shadow(0px 1px 4px rgba(0,0,0,0.6))',
+                          filter: isSelected ? 'drop-shadow(0px 0px 10px #38bdf8)' : 'drop-shadow(0px 1px 3px rgba(0,0,0,0.5))',
                           transition: 'all 0.2s ease'
                         }}
                       />
@@ -244,7 +243,6 @@ export default function DeepDiveAnalyticsView({
               </ScatterChart>
             </ResponsiveContainer>
             
-            {/* HTML X-Axis Legend Label cleanly inside card block */}
             <div className="x-axis-title-label">System LCOE (€/MWh)</div>
           </div>
         </div>
@@ -263,10 +261,10 @@ export default function DeepDiveAnalyticsView({
           </p>
 
           <div className="chart-wrapper-spacious">
-            <ResponsiveContainer width="100%" height={380}>
-              <RadarChart cx="50%" cy="50%" outerRadius="70%" data={radarData}>
+            <ResponsiveContainer width="100%" height={250}>
+              <RadarChart cx="50%" cy="50%" outerRadius="68%" data={radarData}>
                 <PolarGrid stroke="rgba(255, 255, 255, 0.12)" />
-                <PolarAngleAxis dataKey="subject" tick={{ fill: '#38bdf8', fontSize: 11, fontWeight: 600 }} />
+                <PolarAngleAxis dataKey="subject" tick={{ fill: '#38bdf8', fontSize: 10, fontWeight: 600 }} />
                 <PolarRadiusAxis angle={30} domain={[0, 100]} tick={false} axisLine={false} />
                 <Radar 
                   name="Optimal Design" 
@@ -276,7 +274,7 @@ export default function DeepDiveAnalyticsView({
                   fill="rgba(168, 85, 247, 0.35)" 
                 />
                 <Tooltip 
-                  contentStyle={{ backgroundColor: 'rgba(15, 21, 33, 0.95)', border: '1px solid rgba(56, 189, 248, 0.3)', borderRadius: '8px', fontSize: '12px' }}
+                  contentStyle={{ backgroundColor: 'rgba(15, 21, 33, 0.95)', border: '1px solid rgba(56, 189, 248, 0.3)', borderRadius: '8px', fontSize: '11px' }}
                 />
               </RadarChart>
             </ResponsiveContainer>
@@ -301,16 +299,16 @@ export default function DeepDiveAnalyticsView({
         <p className="panel-sub-header">Bi-directional ±20% Parameter Sensitivity Swing Mapping</p>
 
         <div className="chart-wrapper-spacious">
-          <ResponsiveContainer width="100%" height={320}>
-            <BarChart data={tornadoData} layout="vertical" margin={{ top: 15, right: 30, left: 30, bottom: 25 }} stackOffset="sign">
-              <XAxis type="number" stroke="var(--border-highlight)" tick={{ fill: 'var(--text-muted)', fontSize: 11 }} />
-              <YAxis dataKey="Parameter" type="category" width={140} stroke="var(--text-muted)" style={{fontSize: '11px', fontWeight: 500}} />
+          <ResponsiveContainer width="100%" height={260}>
+            <BarChart data={tornadoData} layout="vertical" margin={{ top: 10, right: 25, left: 25, bottom: 15 }} stackOffset="sign">
+              <XAxis type="number" stroke="var(--border-highlight)" tick={{ fill: 'var(--text-muted)', fontSize: 10 }} />
+              <YAxis dataKey="Parameter" type="category" width={125} stroke="var(--text-muted)" style={{fontSize: '10px', fontWeight: 500}} />
               <Tooltip 
                 cursor={{fill: 'rgba(255,255,255,0.05)'}}
-                contentStyle={{ backgroundColor: 'rgba(15, 21, 33, 0.95)', border: '1px solid rgba(255, 255, 255, 0.1)', borderRadius: '8px', fontSize: '12px' }}
+                contentStyle={{ backgroundColor: 'rgba(15, 21, 33, 0.95)', border: '1px solid rgba(255, 255, 255, 0.1)', borderRadius: '8px', fontSize: '11px' }}
               />
-              <Bar dataKey="Negative" fill="#06b6d4" stackId="stack" name="Negative Impact (-20%)" radius={[4, 0, 0, 4]} />
-              <Bar dataKey="Positive" fill="#3b82f6" stackId="stack" name="Positive Impact (+20%)" radius={[0, 4, 4, 0]} />
+              <Bar dataKey="Negative" fill="#06b6d4" stackId="stack" name="Negative Impact (-20%)" radius={[3, 0, 0, 3]} />
+              <Bar dataKey="Positive" fill="#3b82f6" stackId="stack" name="Positive Impact (+20%)" radius={[0, 3, 3, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>

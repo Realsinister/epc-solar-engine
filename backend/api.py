@@ -193,6 +193,10 @@ def calculate(request: CalculationRequest):
     df_calc, weights = PVEngine.normalize_scores(df_calc, request.scenario)
     df_calc = PVEngine.calculate_topsis(df_calc, request.scenario)
 
+    # Diverse Fleet Mode: 1 Best Panel per Brand
+    if not df_calc.empty and 'manufacturer' in df_calc.columns:
+        df_calc = df_calc.drop_duplicates(subset=['manufacturer'], keep='first')
+
     top_panels = df_calc.head(50).replace({np.nan: None}).to_dict(orient="records")
     
     weights_dict = {"eco": weights[0], "cost": weights[1], "tech": weights[2]}
@@ -350,6 +354,8 @@ def analyze_module(dataset_uuid: str, request: CalculationRequest):
     full_calc = PVEngine.filter_by_project_size(full_calc, request.project_size_mwp, ground_albedo=request.ground_albedo)
     full_calc, _ = PVEngine.normalize_scores(full_calc, request.scenario)
     full_calc = PVEngine.calculate_topsis(full_calc, request.scenario)
+    if not full_calc.empty and 'manufacturer' in full_calc.columns:
+        full_calc = full_calc.drop_duplicates(subset=['manufacturer'], keep='first')
     
     matching_scores = full_calc[full_calc['dataset_uuid'] == dataset_uuid]
     if matching_scores.empty:
@@ -469,6 +475,8 @@ def export_pdf(dataset_uuid: str, request: CalculationRequest):
     df_calc = PVEngine.filter_by_project_size(df_calc, request.project_size_mwp, ground_albedo=request.ground_albedo)
     df_calc, _ = PVEngine.normalize_scores(df_calc, request.scenario)
     df_topsis = PVEngine.calculate_topsis(df_calc, request.scenario)
+    if not df_topsis.empty and 'manufacturer' in df_topsis.columns:
+        df_topsis = df_topsis.drop_duplicates(subset=['manufacturer'], keep='first')
 
     top_3 = df_topsis.head(3).replace({np.nan: None}).to_dict(orient="records")
     

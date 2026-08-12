@@ -16,7 +16,7 @@
 
 Unlike traditional engineering software (like PVsyst or Helioscope) that focuses solely on electrical sizing, EPC Solar Engine combines **SAM PV performance modeling, PyArrow-accelerated EPD Scope 3 Life Cycle Assessment (LCA), and Multi-Criteria Decision Analysis (TOPSIS)** into a single executive interface. It empowers C-suite executives and procurement directors to evaluate PV modules across **LCOE (€/MWh), Net Present Value (NPV), Payback Period, and Scope 3 Embodied Carbon (kgCO2e/kWp)** simultaneously.
 
-![Executive Financial Dashboard](https://raw.githubusercontent.com/Realsinister/epc-solar-engine/main/docs/screenshots/hero_dashboard.png)
+![Executive Financial Dashboard](docs/screenshots/hero_dashboard.png)
 
 ---
 
@@ -27,7 +27,7 @@ Unlike traditional engineering software (like PVsyst or Helioscope) that focuses
 - **Automated C-Suite Executive Pitch:** Generates contextual procurement briefings evaluating thermal coefficients, degradation rates, and CBAM tax exposure.
 - **Top TOPSIS Ranking Matrix:** Ranks competing global module models based on user-defined optimization scenarios (*Eco-Flagship, Lowest LCOE, Max Efficiency*).
 
-![Executive Financial Dashboard](https://raw.githubusercontent.com/Realsinister/epc-solar-engine/main/docs/screenshots/hero_dashboard.png)
+![Executive Financial Dashboard](docs/screenshots/hero_dashboard.png)
 
 ---
 
@@ -36,7 +36,7 @@ Unlike traditional engineering software (like PVsyst or Helioscope) that focuses
 - **5-Point Dimension Radar:** Evaluates LCOE, Capacity Factor, Grid Compatibility, Land Usage Efficiency, and System Reliability.
 - **Carbon Footprint Tornado Sensitivity:** Bi-directional ±20% swing analysis mapping sensitivity across temperature coefficients, degradation, CBAM tariffs, and BOS costs.
 
-![Deep Dive Analytics](https://raw.githubusercontent.com/Realsinister/epc-solar-engine/main/docs/screenshots/deep_dive_analytics.png)
+![Deep Dive Analytics](docs/screenshots/deep_dive_analytics.png)
 
 ---
 
@@ -44,14 +44,14 @@ Unlike traditional engineering software (like PVsyst or Helioscope) that focuses
 - **Sub-Array Fleet Allocation:** Splits utility-scale projects into customizable block groups (e.g. Block Group A 70% LCOE Leader vs Block Group B 30% Carbon Offset).
 - **Auto-Paired Inverter Fleet:** Matches central & string inverter fleets with MPPT voltage window and DC/AC ratio compliance validation.
 
-![Multi-Block Fleet View](https://raw.githubusercontent.com/Realsinister/epc-solar-engine/main/docs/screenshots/executive_financials_hybrid.png)
+![Multi-Block Fleet View](docs/screenshots/executive_financials_hybrid.png)
 
 ---
 
 ### 4. 📊 Scope 3 Embodied Carbon Stack & System Breakdown
 - **Granular Lifecycle Mapping:** Breaks down embodied carbon emissions across PV module manufacturing (A1-A3 Net), central/string inverters, and BOS racking/cabling infrastructure.
 
-![Scope 3 Embodied Carbon Stack](https://raw.githubusercontent.com/Realsinister/epc-solar-engine/main/docs/screenshots/system_carbon_stack.png)
+![Scope 3 Embodied Carbon Stack](docs/screenshots/system_carbon_stack.png)
 
 ---
 
@@ -59,7 +59,7 @@ Unlike traditional engineering software (like PVsyst or Helioscope) that focuses
 - **Automatic History Logging:** Every executed simulation scenario is saved locally to an embedded SQLite database (`sim_history.db`).
 - **Side-by-Side Scenario Comparison:** Select any 2 simulation runs to compare parameters, NPV gains, payback timelines, and Scope 3 carbon reduction side-by-side.
 
-![Simulation History & Comparison](https://raw.githubusercontent.com/Realsinister/epc-solar-engine/main/docs/screenshots/simulation_history.png)
+![Simulation History & Comparison](docs/screenshots/simulation_history.png)
 
 ---
 

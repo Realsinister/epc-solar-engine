@@ -1174,10 +1174,13 @@ input.input-glass {
 }
 
 /* ==========================================================================
-   VIEW 2: DEEP DIVE ANALYTICS DECK
+   VIEW 2: DEEP DIVE ANALYTICS VIEW
    ========================================================================== */
 .deep-dive-view-container {
-  width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .analytics-3panel-grid {

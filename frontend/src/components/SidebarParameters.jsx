@@ -8,6 +8,7 @@ export default function SidebarParameters({
   loading,
   isStale,
   setIsStale,
+  hasSimulated,
   selectedInverterId,
   setSelectedInverterId,
   inverters,
@@ -25,7 +26,6 @@ export default function SidebarParameters({
   };
 
   const handleTextChange = (key, rawValue) => {
-    // When cleared, allow empty string '' so input box is completely blank without forcing '0' or '0100'
     const value = rawValue === '' ? '' : isNaN(rawValue) ? rawValue : Number(rawValue);
     setParams(prev => ({ ...prev, [key]: value }));
     setIsStale(true);
@@ -41,6 +41,24 @@ export default function SidebarParameters({
     setTargetDcAcRatio(value);
     setIsStale(true);
   };
+
+  // Determine button class and label based on state
+  let buttonClass = 'btn-simulate-glow';
+  let buttonLabel = 'Run Analytics';
+  let isButtonDisabled = loading;
+
+  if (loading) {
+    buttonLabel = 'Running Analytics...';
+    isButtonDisabled = true;
+  } else if (isStale) {
+    buttonClass = 'btn-simulate-glow nudge-shake-active';
+    buttonLabel = '⚡ Run Analytics';
+    isButtonDisabled = false;
+  } else if (hasSimulated) {
+    buttonClass = 'btn-simulate-glow btn-greyed-out';
+    buttonLabel = '✓ Analytics Up to Date';
+    isButtonDisabled = true;
+  }
 
   return (
     <div className="parameters-drawer-container">
@@ -219,10 +237,10 @@ export default function SidebarParameters({
       <div className="drawer-footer">
         <button 
           onClick={handleSimulate} 
-          disabled={loading}
-          className={`btn-simulate-glow ${isStale ? 'nudge-shake-active' : ''}`}
+          disabled={isButtonDisabled}
+          className={buttonClass}
         >
-          {loading ? 'Running MCDA Simulation...' : isStale ? '⚡ Re-Run Simulation (Save Run to History)' : '🚀 Run Physics Engine Simulation'}
+          {buttonLabel}
         </button>
       </div>
     </div>

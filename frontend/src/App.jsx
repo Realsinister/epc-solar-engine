@@ -216,6 +216,7 @@ function App() {
             loading={loading}
             isStale={isStale}
             setIsStale={setIsStale}
+            hasSimulated={hasSimulated}
             selectedInverterId={selectedInverterId}
             setSelectedInverterId={setSelectedInverterId}
             inverters={inverters}

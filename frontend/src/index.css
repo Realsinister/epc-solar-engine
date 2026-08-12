@@ -970,6 +970,26 @@ input.input-glass {
   margin-bottom: 12px;
 }
 
+.panel-head.panel-header-row-clean {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.panel-sub-header {
+  font-size: 0.76rem;
+  color: #94a3b8;
+  margin: 0 0 14px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.text-xs {
+  font-size: 0.72rem;
+}
+
 .panel-title {
   font-size: 0.95rem;
   font-weight: 700;
@@ -1180,20 +1200,77 @@ input.input-glass {
   padding: 20px;
   display: flex;
   flex-direction: column;
+  gap: 24px;
+}
+
+.analytics-top-hero-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
   gap: 20px;
 }
 
-.analytics-3panel-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
+.full-width-panel {
+  width: 100%;
 }
 
 .analytics-panel {
   display: flex;
   flex-direction: column;
-  height: 420px;
+  position: relative;
+  background: rgba(15, 21, 33, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 20px;
 }
+
+.scatter-hero-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.chart-wrapper-spacious {
+  position: relative;
+  width: 100%;
+  flex-grow: 1;
+}
+
+.x-axis-title-label {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 500;
+  margin-top: -8px;
+}
+
+.tornado-header-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.legend-tag {
+  font-size: 0.72rem;
+  padding: 2px 8px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cyan-tag {
+  background: rgba(6, 182, 212, 0.12);
+  border: 1px solid rgba(6, 182, 212, 0.3);
+  color: #06b6d4;
+}
+
+.blue-tag {
+  background: rgba(59, 130, 246, 0.12);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  color: #3b82f6;
+}
+
+.dot.cyan { background: #06b6d4; width: 6px; height: 6px; border-radius: 50%; display: inline-block; }
+.dot.blue { background: #3b82f6; width: 6px; height: 6px; border-radius: 50%; display: inline-block; }
 
 .panel-header-badge {
   display: flex;

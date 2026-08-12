@@ -93,11 +93,11 @@ Unlike traditional engineering software (like PVsyst or Helioscope) that focuses
 
 ## ⚡ Installation & Quickstart
 
-### 🚀 Option 1: 1-Click Portable Windows Release (No Python/Node Required)
-1. Download the latest **[EPC_Solar_Engine_v0.4.1_Windows.zip](https://github.com/Realsinister/epc-solar-engine/releases)** release package (< 100 MB).
-2. Extract the `.zip` archive to any local folder.
-3. Double-click `launch_epc_solar_engine.bat` (or `EPC_Solar_Engine.exe`).
-4. Your default browser will automatically open `http://127.0.0.1:8000/static_app/index.html` with the full interactive platform ready to use!
+### 🚀 Option 1: 1-Click Native Desktop Application (Zero Setup Required)
+1. Download the latest **[EPC_Solar_Engine_v0.4.1_Windows.zip](https://github.com/Realsinister/epc-solar-engine/releases)** release package (76 MB).
+2. Extract the `.zip` archive to any folder on your PC.
+3. Double-click **`EPC_Solar_Engine.exe`**.
+4. The software launches immediately as a **standalone native desktop application window** with zero browser tabs, zero web setup, and zero dependencies required!
 
 ---
 

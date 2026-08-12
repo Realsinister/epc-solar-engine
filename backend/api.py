@@ -6,6 +6,7 @@ import numpy as np
 from typing import Optional
 from fastapi import FastAPI, HTTPException, UploadFile, File
 from fastapi.responses import StreamingResponse
+from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from dotenv import load_dotenv
@@ -34,6 +35,11 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Serve compiled React frontend dist folder statically if present
+frontend_dist_path = os.path.join(os.path.dirname(__file__), "..", "frontend", "dist")
+if os.path.exists(frontend_dist_path):
+    app.mount("/static_app", StaticFiles(directory=frontend_dist_path, html=True), name="static_app")
 
 def load_data_from_parquet(project_size_mwp: float = None, ground_albedo: float = None, custom_dataset_id: str = None):
     # If custom dataset requested, fetch custom modules from SQLite

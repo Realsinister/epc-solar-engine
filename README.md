@@ -91,13 +91,23 @@ Unlike traditional engineering software (like PVsyst or Helioscope) that focuses
 
 ---
 
-## ⚡ Quickstart (Running Locally)
+## ⚡ Installation & Quickstart
 
-### Prerequisites
+### 🚀 Option 1: 1-Click Portable Windows Release (No Python/Node Required)
+1. Download the latest **[EPC_Solar_Engine_v0.4.1_Windows.zip](https://github.com/Realsinister/epc-solar-engine/releases)** release package (< 100 MB).
+2. Extract the `.zip` archive to any local folder.
+3. Double-click `launch_epc_solar_engine.bat` (or `EPC_Solar_Engine.exe`).
+4. Your default browser will automatically open `http://127.0.0.1:8000/static_app/index.html` with the full interactive platform ready to use!
+
+---
+
+### 🛠️ Option 2: Developer Setup (Building from Source)
+
+#### Prerequisites
 - Python 3.10+
 - Node.js 18+
 
-### 1. Clone & Set Up Backend
+#### 1. Clone & Set Up Backend
 ```bash
 git clone https://github.com/Realsinister/epc-solar-engine.git
 cd epc-solar-engine/backend
@@ -111,7 +121,7 @@ pip install -r requirements.txt
 uvicorn api:app --port 8000 --reload
 ```
 
-### 2. Set Up & Launch Frontend
+#### 2. Set Up & Launch Frontend
 ```bash
 cd ../frontend
 npm install

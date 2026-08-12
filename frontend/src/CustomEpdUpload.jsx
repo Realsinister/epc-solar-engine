@@ -103,6 +103,24 @@ export default function CustomEpdUpload({ onDatasetSelected, onRunCustomSimulati
   return (
     <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '20px' }}>
       
+      {/* EXPERIMENTAL FEATURE WARNING BANNER */}
+      <div style={{
+        backgroundColor: 'rgba(245, 158, 11, 0.12)',
+        border: '1px solid rgba(245, 158, 11, 0.4)',
+        borderRadius: '10px',
+        padding: '12px 16px',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '12px',
+        color: '#fbbf24',
+        fontSize: '0.84rem'
+      }}>
+        <AlertTriangle size={20} color="#f59e0b" style={{ flexShrink: 0 }} />
+        <span>
+          ⚠️ <strong>Experimental Feature Warning:</strong> Custom Vendor EPD uploading is currently in active beta testing. Calculation results or imported dataset parameter mappings may produce non-validated results or unexpected behavior in this preview release.
+        </span>
+      </div>
+
       {/* HEADER & SAMPLE TEMPLATE DOWNLOAD */}
       <div className="glass-panel" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div>

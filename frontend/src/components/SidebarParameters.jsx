@@ -76,8 +76,8 @@ export default function SidebarParameters({
       <div className="drawer-scroll-body">
         
         {/* PROJECT META */}
-        <div className="input-group" style={{ padding: '0 16px', marginTop: '16px', marginBottom: '8px' }}>
-          <label style={{ fontSize: '0.85rem', color: 'var(--text-main)', marginBottom: '6px', display: 'block' }}>Project Name / ID:</label>
+        <div className="input-group" style={{ marginBottom: '4px' }}>
+          <label>Project Name / Tag:</label>
           <input 
             type="text" 
             value={params.project_name || ''} 
@@ -85,8 +85,7 @@ export default function SidebarParameters({
               setParams(prev => ({ ...prev, project_name: e.target.value }));
               setIsStale(true);
             }}
-            className="text-input"
-            style={{ width: '100%', padding: '8px 12px', borderRadius: '6px', border: '1px solid var(--border-light)', background: 'rgba(0,0,0,0.2)', color: 'white' }}
+            className="number-input"
             placeholder="e.g. Client A - 50MW"
           />
         </div>
@@ -95,7 +94,7 @@ export default function SidebarParameters({
         <div className="accordion-item">
           <div className="accordion-header" onClick={() => toggleSection('physics')}>
             <span className="acc-title"><Sun size={15} color="#38bdf8" /> Climate & Location</span>
-            {openSections.physics ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+            {openSections.physics ? <ChevronUp size={15} /> : <ChevronDown size={15} />}
           </div>
 
           {openSections.physics && (
@@ -107,34 +106,36 @@ export default function SidebarParameters({
                   onChange={(e) => handleTextChange('scenario', e.target.value)}
                   className="select-input"
                 >
-                  <option value="Eco-Flagship (Minimize Carbon)">🌿 Eco-Flagship (Minimize Carbon)</option>
+                  <option value="Eco-Flagship (Minimize Carbon)">🌿 Eco-Flagship (Min Carbon)</option>
                   <option value="Utility Scale (Lowest LCOE)">⚡ Utility Scale (Lowest LCOE)</option>
-                  <option value="Space Constrained (Max Efficiency)">🎯 Space Constrained (Max Efficiency)</option>
+                  <option value="Space Constrained (Max Efficiency)">🎯 Space Constrained (Max Eff)</option>
                 </select>
               </div>
 
-              <div className="input-group">
-                <label>Annual Irradiance (kWh/m²/yr):</label>
-                <input 
-                  type="text" 
-                  inputMode="decimal"
-                  value={params.base_irradiance ?? ''} 
-                  onChange={(e) => handleTextChange('base_irradiance', e.target.value)}
-                  className="number-input"
-                  placeholder="e.g. 1050"
-                />
-              </div>
+              <div className="row-inputs-2col">
+                <div className="input-group">
+                  <label>Irradiance (kWh/m²):</label>
+                  <input 
+                    type="text" 
+                    inputMode="decimal"
+                    value={params.base_irradiance ?? ''} 
+                    onChange={(e) => handleTextChange('base_irradiance', e.target.value)}
+                    className="number-input"
+                    placeholder="1050"
+                  />
+                </div>
 
-              <div className="input-group">
-                <label>Ambient Temperature (°C):</label>
-                <input 
-                  type="text" 
-                  inputMode="decimal"
-                  value={params.ambient_temp_c ?? ''} 
-                  onChange={(e) => handleTextChange('ambient_temp_c', e.target.value)}
-                  className="number-input"
-                  placeholder="e.g. 25"
-                />
+                <div className="input-group">
+                  <label>Ambient Temp (°C):</label>
+                  <input 
+                    type="text" 
+                    inputMode="decimal"
+                    value={params.ambient_temp_c ?? ''} 
+                    onChange={(e) => handleTextChange('ambient_temp_c', e.target.value)}
+                    className="number-input"
+                    placeholder="25"
+                  />
+                </div>
               </div>
 
               <div className="input-group">
@@ -145,9 +146,9 @@ export default function SidebarParameters({
                   className="select-input"
                 >
                   <option value="None">Monofacial / Default (0.00)</option>
-                  <option value="0.20">Grass / Concrete (0.20 - +5.2% Gain)</option>
-                  <option value="0.50">Light Sand / Paint (0.50 - +11.8% Gain)</option>
-                  <option value="0.85">Fresh Snow / Specular (0.85 - +19.4% Gain)</option>
+                  <option value="0.20">Grass / Concrete (0.20 - +5.2%)</option>
+                  <option value="0.50">Light Sand / Paint (0.50 - +11.8%)</option>
+                  <option value="0.85">Fresh Snow / Specular (0.85 - +19.4%)</option>
                 </select>
               </div>
             </div>
@@ -158,7 +159,7 @@ export default function SidebarParameters({
         <div className="accordion-item">
           <div className="accordion-header" onClick={() => toggleSection('financials')}>
             <span className="acc-title"><DollarSign size={15} color="#a855f7" /> Scale & Economics</span>
-            {openSections.financials ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+            {openSections.financials ? <ChevronUp size={15} /> : <ChevronDown size={15} />}
           </div>
 
           {openSections.financials && (
@@ -172,7 +173,7 @@ export default function SidebarParameters({
                     value={params.project_size_mwp ?? ''} 
                     onChange={(e) => handleTextChange('project_size_mwp', e.target.value)}
                     className="number-input flex-1"
-                    placeholder="e.g. 50"
+                    placeholder="50"
                   />
                   <select 
                     value={params.project_size_unit} 
@@ -185,28 +186,30 @@ export default function SidebarParameters({
                 </div>
               </div>
 
-              <div className="input-group">
-                <label>PPA Tariff Rate ({curSym}/MWh):</label>
-                <input 
-                  type="text" 
-                  inputMode="decimal"
-                  value={params.ppa_rate_eur_mwh ?? ''} 
-                  onChange={(e) => handleTextChange('ppa_rate_eur_mwh', e.target.value)}
-                  className="number-input"
-                  placeholder="e.g. 45"
-                />
-              </div>
+              <div className="row-inputs-2col">
+                <div className="input-group">
+                  <label>PPA Tariff ({curSym}/MWh):</label>
+                  <input 
+                    type="text" 
+                    inputMode="decimal"
+                    value={params.ppa_rate_eur_mwh ?? ''} 
+                    onChange={(e) => handleTextChange('ppa_rate_eur_mwh', e.target.value)}
+                    className="number-input"
+                    placeholder="45"
+                  />
+                </div>
 
-              <div className="input-group">
-                <label>Discount Rate (%):</label>
-                <input 
-                  type="text" 
-                  inputMode="decimal"
-                  value={params.discount_rate_pct ?? ''} 
-                  onChange={(e) => handleTextChange('discount_rate_pct', e.target.value)}
-                  className="number-input"
-                  placeholder="e.g. 5.0"
-                />
+                <div className="input-group">
+                  <label>Discount Rate (%):</label>
+                  <input 
+                    type="text" 
+                    inputMode="decimal"
+                    value={params.discount_rate_pct ?? ''} 
+                    onChange={(e) => handleTextChange('discount_rate_pct', e.target.value)}
+                    className="number-input"
+                    placeholder="5.0"
+                  />
+                </div>
               </div>
             </div>
           )}
@@ -216,7 +219,7 @@ export default function SidebarParameters({
         <div className="accordion-item">
           <div className="accordion-header" onClick={() => toggleSection('inverter')}>
             <span className="acc-title"><Zap size={15} color="#10b981" /> Inverter Fleet</span>
-            {openSections.inverter ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+            {openSections.inverter ? <ChevronUp size={15} /> : <ChevronDown size={15} />}
           </div>
 
           {openSections.inverter && (
@@ -245,7 +248,7 @@ export default function SidebarParameters({
                   value={targetDcAcRatio ?? ''} 
                   onChange={(e) => handleRatioChange(e.target.value)}
                   className="number-input"
-                  placeholder="e.g. 1.25"
+                  placeholder="1.25"
                 />
               </div>
             </div>

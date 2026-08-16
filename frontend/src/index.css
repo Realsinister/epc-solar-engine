@@ -681,8 +681,9 @@ input.input-glass {
 }
 
 /* Parameters Drawer Panel */
+/* Parameters Drawer Panel */
 .parameters-drawer-container {
-  width: 310px;
+  width: 335px;
   background: rgba(15, 21, 33, 0.75);
   backdrop-filter: blur(20px);
   border-right: 1px solid rgba(255, 255, 255, 0.08);
@@ -693,7 +694,7 @@ input.input-glass {
 }
 
 .drawer-header {
-  padding: 16px 18px;
+  padding: 12px 14px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
   justify-content: space-between;
@@ -701,7 +702,7 @@ input.input-glass {
 }
 
 .drawer-title {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 700;
   display: flex;
   align-items: center;
@@ -709,7 +710,7 @@ input.input-glass {
 }
 
 .stale-pill {
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   background: rgba(239, 68, 68, 0.15);
   border: 1px solid rgba(239, 68, 68, 0.3);
   color: #f87171;
@@ -720,21 +721,22 @@ input.input-glass {
 .drawer-scroll-body {
   flex-grow: 1;
   overflow-y: auto;
-  padding: 14px 16px;
+  padding: 10px 12px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
+  overscroll-behavior: contain;
 }
 
 .accordion-item {
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255, 255, 255, 0.07);
-  border-radius: 10px;
+  border-radius: 8px;
   overflow: hidden;
 }
 
 .accordion-header {
-  padding: 12px 14px;
+  padding: 9px 12px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -748,40 +750,43 @@ input.input-glass {
 }
 
 .acc-title {
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 600;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 }
 
 .accordion-content {
-  padding: 14px;
+  padding: 10px 12px;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
 }
 
 .input-group {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 3px;
 }
 
 .input-group label {
-  font-size: 0.76rem;
+  font-size: 0.72rem;
   color: #94a3b8;
   font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .select-input, .number-input {
   background: rgba(0, 0, 0, 0.4);
   border: 1px solid rgba(255, 255, 255, 0.1);
   color: #ffffff;
-  padding: 8px 10px;
+  padding: 6px 8px;
   border-radius: 6px;
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   outline: none;
 }
 
@@ -792,23 +797,29 @@ input.input-glass {
 
 .row-inputs {
   display: flex;
+  gap: 6px;
+}
+
+.row-inputs-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 8px;
 }
 
 .flex-1 { flex: 1; }
 
 .select-input-sm {
-  width: 75px;
+  width: 70px;
   background: rgba(0, 0, 0, 0.4);
   border: 1px solid rgba(255, 255, 255, 0.1);
   color: #ffffff;
   border-radius: 6px;
   padding: 0 6px;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
 }
 
 .drawer-footer {
-  padding: 14px 16px;
+  padding: 10px 14px;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 

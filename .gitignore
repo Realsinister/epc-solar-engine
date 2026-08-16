@@ -29,3 +29,14 @@ _legacy_api_integrations/
 
 # Database Files
 *.db
+
+# Build Outputs
+*.zip
+build/
+dist/
+dist2/
+release_build/
+
+# Logs
+error_log.txt
+*.log

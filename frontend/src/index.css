@@ -769,6 +769,8 @@ input.input-glass {
   display: flex;
   flex-direction: column;
   gap: 3px;
+  min-width: 0;
+  width: 100%;
 }
 
 .input-group label {
@@ -778,9 +780,13 @@ input.input-glass {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  display: block;
 }
 
 .select-input, .number-input {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
   background: rgba(0, 0, 0, 0.4);
   border: 1px solid rgba(255, 255, 255, 0.1);
   color: #ffffff;
@@ -798,15 +804,21 @@ input.input-glass {
 .row-inputs {
   display: flex;
   gap: 6px;
+  width: 100%;
 }
 
 .row-inputs-2col {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 8px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.flex-1 { flex: 1; }
+.flex-1 { 
+  flex: 1;
+  min-width: 0;
+}
 
 .select-input-sm {
   width: 70px;

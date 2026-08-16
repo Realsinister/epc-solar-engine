@@ -147,14 +147,15 @@ export default function ExecutiveFinancialView({
 
           <div className="stack-chart-container">
             {selectedModule ? (
-              <ResponsiveContainer width="100%" height={180}>
-                <BarChart data={carbonStackData} layout="vertical" margin={{ top: 10, right: 20, left: 10, bottom: 5 }}>
-                  <XAxis type="number" stroke="var(--border-highlight)" tick={{ fill: 'var(--text-muted)', fontSize: 10 }} />
-                  <YAxis dataKey="name" type="category" width={100} stroke="var(--text-muted)" tick={{ fontSize: 10 }} />
+              <ResponsiveContainer width="100%" height={160}>
+                <BarChart data={carbonStackData} layout="vertical" margin={{ top: 10, right: 25, left: 25, bottom: 5 }}>
+                  <XAxis type="number" stroke="var(--border-highlight)" tick={{ fill: 'var(--text-muted)', fontSize: 10 }} unit=" kg" />
+                  <YAxis type="category" dataKey="name" hide={true} />
                   <Tooltip 
                     contentStyle={{ backgroundColor: 'var(--bg-panel)', border: '1px solid var(--border-highlight)', borderRadius: '8px', fontSize: '12px' }}
+                    formatter={(val, name) => [`${val} kgCO2e/kWp`, name]}
                   />
-                  <Bar dataKey="ModuleNet" name="Module (Net)" fill="#38bdf8" stackId="a" radius={[0, 0, 0, 0]} />
+                  <Bar dataKey="ModuleNet" name="Module (Net)" fill="#38bdf8" stackId="a" radius={[4, 0, 0, 4]} />
                   <Bar dataKey="Inverter" name="Inverter System" fill="#a855f7" stackId="a" radius={[0, 0, 0, 0]} />
                   <Bar dataKey="BOS" name="BOS Racking & Cabling" fill="#10b981" stackId="a" radius={[0, 4, 4, 0]} />
                 </BarChart>

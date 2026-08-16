@@ -1100,7 +1100,11 @@ input.input-glass {
 
 .stack-chart-container {
   flex-grow: 1;
-  min-height: 160px;
+  min-height: 150px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .empty-chart-notice {

@@ -13,8 +13,12 @@ export default function SidebarParameters({
   setSelectedInverterId,
   inverters,
   targetDcAcRatio,
-  setTargetDcAcRatio
+  setTargetDcAcRatio,
+  currency = 'EUR'
 }) {
+  const CURRENCY_SYMBOLS = { EUR: '€', USD: '$', GBP: '£', AUD: 'A$' };
+  const curSym = CURRENCY_SYMBOLS[currency] || '€';
+
   const [openSections, setOpenSections] = useState({
     physics: true,
     financials: true,
@@ -182,7 +186,7 @@ export default function SidebarParameters({
               </div>
 
               <div className="input-group">
-                <label>PPA Tariff Rate (€/MWh):</label>
+                <label>PPA Tariff Rate ({curSym}/MWh):</label>
                 <input 
                   type="text" 
                   inputMode="decimal"

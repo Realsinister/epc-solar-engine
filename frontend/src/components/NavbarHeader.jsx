@@ -6,7 +6,9 @@ export default function NavbarHeader({
   selectedModule, 
   handleExportPdf, 
   exportingPdf,
-  hasSimulated 
+  hasSimulated,
+  currency = 'EUR',
+  setCurrency
 }) {
   return (
     <header className="top-exec-header">
@@ -44,6 +46,38 @@ export default function NavbarHeader({
       )}
 
       <div className="header-actions">
+        {setCurrency && (
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            background: 'rgba(30, 41, 59, 0.7)',
+            border: '1px solid var(--border-light)',
+            borderRadius: '8px',
+            padding: '2px 8px',
+            fontSize: '12px'
+          }}>
+            <span style={{ color: 'var(--text-muted)', marginRight: '6px', fontSize: '11px' }}>CURRENCY:</span>
+            <select
+              value={currency}
+              onChange={(e) => setCurrency(e.target.value)}
+              style={{
+                background: 'transparent',
+                border: 'none',
+                color: '#38bdf8',
+                fontWeight: 'bold',
+                cursor: 'pointer',
+                outline: 'none',
+                fontSize: '12px'
+              }}
+            >
+              <option value="EUR" style={{ background: '#1e293b', color: '#fff' }}>EUR (€)</option>
+              <option value="USD" style={{ background: '#1e293b', color: '#fff' }}>USD ($)</option>
+              <option value="GBP" style={{ background: '#1e293b', color: '#fff' }}>GBP (£)</option>
+              <option value="AUD" style={{ background: '#1e293b', color: '#fff' }}>AUD (A$)</option>
+            </select>
+          </div>
+        )}
+
         {hasSimulated && selectedModule && (
           <button
             onClick={handleExportPdf}

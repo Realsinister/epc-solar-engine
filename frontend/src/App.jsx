@@ -29,6 +29,8 @@ function App() {
   const [inverters, setInverters] = useState([]);
   const [selectedInverterId, setSelectedInverterId] = useState('auto');
   const [targetDcAcRatio, setTargetDcAcRatio] = useState(1.25);
+  // Currency State
+  const [currency, setCurrency] = useState('EUR'); // 'EUR' | 'USD' | 'GBP' | 'AUD'
 
   const handleExportPdf = async () => {
     if (!selectedModule) return;
@@ -195,6 +197,8 @@ function App() {
         handleExportPdf={handleExportPdf}
         exportingPdf={exportingPdf}
         hasSimulated={hasSimulated}
+        currency={currency}
+        setCurrency={setCurrency}
       />
 
       <div className="main-app-container">
@@ -224,6 +228,7 @@ function App() {
             inverters={inverters}
             targetDcAcRatio={targetDcAcRatio}
             setTargetDcAcRatio={setTargetDcAcRatio}
+            currency={currency}
           />
         )}
 
@@ -241,6 +246,7 @@ function App() {
                     params={params}
                     handleExportPdf={handleExportPdf}
                     exportingPdf={exportingPdf}
+                    currency={currency}
                   />
                 )}
 
@@ -264,6 +270,7 @@ function App() {
                     targetDcAcRatio={targetDcAcRatio}
                     setTargetDcAcRatio={setTargetDcAcRatio}
                     params={params}
+                    currency={currency}
                   />
                 )}
               </>
@@ -292,7 +299,7 @@ function App() {
           )}
 
           {activeTab === 'vendor_data' && <CustomEpdUpload />}
-          {activeTab === 'history' && <HistoryCompare />}
+          {activeTab === 'history' && <HistoryCompare currency={currency} />}
         </main>
       </div>
     </div>

@@ -5,12 +5,15 @@ import {
   Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis 
 } from 'recharts';
 
-export default function HistoryCompare() {
+export default function HistoryCompare({ currency = 'EUR' }) {
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedIds, setSelectedIds] = useState([]);
   const [runA, setRunA] = useState(null);
   const [runB, setRunB] = useState(null);
+
+  const CURRENCY_SYMBOLS = { EUR: '€', USD: '$', GBP: '£', AUD: 'A$' };
+  const curSym = CURRENCY_SYMBOLS[currency] || '€';
 
   useEffect(() => {
     fetchHistory();
@@ -80,6 +83,39 @@ export default function HistoryCompare() {
     return new Date(iso).toLocaleString();
   };
 
+  const getDeltas = (runA, runB) => {
+    if (!runA || !runB) return null;
+    const modA = runA.results?.top_modules?.[0];
+    const modB = runB.results?.top_modules?.[0];
+    if (!modA || !modB) return null;
+
+    const lcoeA = (modA.LCOE_EUR_MWh || 0) / 1000;
+    const lcoeB = (modB.LCOE_EUR_MWh || 0) / 1000;
+    const lcoeDiff = lcoeB - lcoeA;
+    const lcoePct = lcoeA > 0 ? ((lcoeDiff / lcoeA) * 100).toFixed(1) : 0;
+
+    const carbA = modA.Carbon_Intensity_Mean || 0;
+    const carbB = modB.Carbon_Intensity_Mean || 0;
+    const carbDiff = carbB - carbA;
+    const carbPct = carbA > 0 ? ((carbDiff / carbA) * 100).toFixed(1) : 0;
+
+    const suitA = modA.Suitability_Index || 0;
+    const suitB = modB.Suitability_Index || 0;
+    const suitDiff = (suitB - suitA).toFixed(1);
+
+    return {
+      lcoeDiff,
+      lcoePct,
+      carbDiff,
+      carbPct,
+      suitDiff,
+      modA,
+      modB
+    };
+  };
+
+  const deltas = getDeltas(runA, runB);
+
   const getRadarData = (runA, runB) => {
     if (!runA || !runB) return [];
     const modA = runA.results?.top_modules?.[0];
@@ -116,7 +152,7 @@ export default function HistoryCompare() {
 
     return [
       {
-        name: 'LCOE (€/kWh)',
+        name: `LCOE (${curSym}/kWh)`,
         RunA: parseFloat((modA.LCOE_EUR_MWh / 1000).toFixed(4)),
         RunB: parseFloat((modB.LCOE_EUR_MWh / 1000).toFixed(4))
       }
@@ -191,7 +227,7 @@ export default function HistoryCompare() {
                 <tr key={row.id} style={{ borderBottom: '1px solid rgba(255,255,255,0.05)', backgroundColor: selectedIds.includes(row.id) ? 'rgba(59, 130, 246, 0.2)' : 'transparent' }}>
                   <td style={{ padding: '8px' }}>
                     <input 
-                      type="checkbox" 
+                       type="checkbox" 
                       checked={selectedIds.includes(row.id)}
                       onChange={() => handleSelect(row.id)}
                     />
@@ -229,18 +265,61 @@ export default function HistoryCompare() {
             Side-by-Side Comparison
           </h2>
 
+          {/* DELTA HIGHLIGHTS BAR */}
+          {deltas && (
+            <div style={{
+              background: 'rgba(15, 23, 42, 0.65)',
+              border: '1px solid rgba(56, 189, 248, 0.25)',
+              borderRadius: '12px',
+              padding: '16px 20px',
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: '16px',
+              justifyContent: 'space-between',
+              alignItems: 'center'
+            }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--text-muted)' }}>LCOE Variance (Run B vs A)</span>
+                <span style={{ fontSize: '1.05rem', fontWeight: 'bold', color: deltas.lcoeDiff <= 0 ? '#34d399' : '#f87171' }}>
+                  {deltas.lcoeDiff <= 0 ? '▼ ' : '▲ '}{Math.abs(deltas.lcoePct)}% ({deltas.lcoeDiff <= 0 ? '-' : '+'}{curSym}{Math.abs(deltas.lcoeDiff).toFixed(4)}/kWh)
+                </span>
+              </div>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--text-muted)' }}>Carbon Delta (Run B vs A)</span>
+                <span style={{ fontSize: '1.05rem', fontWeight: 'bold', color: deltas.carbDiff <= 0 ? '#34d399' : '#f87171' }}>
+                  {deltas.carbDiff <= 0 ? '▼ ' : '▲ '}{Math.abs(deltas.carbPct)}% ({deltas.carbDiff <= 0 ? '-' : '+'}{Math.abs(deltas.carbDiff).toFixed(1)} gCO2/kWh)
+                </span>
+              </div>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--text-muted)' }}>Suitability Shift</span>
+                <span style={{ fontSize: '1.05rem', fontWeight: 'bold', color: Number(deltas.suitDiff) >= 0 ? '#38bdf8' : '#f87171' }}>
+                  {Number(deltas.suitDiff) >= 0 ? '+' : ''}{deltas.suitDiff} pts
+                </span>
+              </div>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--text-muted)' }}>Winning Portfolio Winner</span>
+                <span style={{ fontSize: '1.05rem', fontWeight: 'bold', color: '#facc15' }}>
+                  {deltas.suitDiff >= 0 ? 'Run B Winner' : 'Run A Winner'}
+                </span>
+              </div>
+            </div>
+          )}
+
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
             
             {/* Run A */}
             <div style={{ background: 'rgba(0,0,0,0.2)', padding: '16px', borderRadius: '8px', borderLeft: '4px solid #3b82f6' }}>
-              <h3 style={{ color: '#3b82f6', marginTop: 0 }}>Run A</h3>
+              <h3 style={{ color: '#3b82f6', marginTop: 0 }}>Run A: {runA.project_name || 'Project A'}</h3>
               <div style={{ fontSize: '12px', color: 'var(--text-muted)', marginBottom: '16px' }}>{formatDate(runA.timestamp)}</div>
               
               <div style={{ marginBottom: '16px' }}>
                 <strong style={{ color: 'var(--text-main)' }}>Scenario:</strong> <span style={{ color: 'var(--text-muted)' }}>{runA.scenario}</span><br/>
                 <strong style={{ color: 'var(--text-main)' }}>Project Size:</strong> <span style={{ color: 'var(--text-muted)' }}>{runA.project_size_mwp} MWp</span><br/>
                 <strong style={{ color: 'var(--text-main)' }}>Base Yield:</strong> <span style={{ color: 'var(--text-muted)' }}>{runA.inputs.base_irradiance} kWh/kWp</span><br/>
-                <strong style={{ color: 'var(--text-main)' }}>CBAM Tax:</strong> <span style={{ color: 'var(--text-muted)' }}>€{runA.inputs.cbam_tax_rate_eur_t}/t</span>
+                <strong style={{ color: 'var(--text-main)' }}>CBAM Tax:</strong> <span style={{ color: 'var(--text-muted)' }}>{curSym}{runA.inputs.cbam_tax_rate_eur_t}/t</span>
               </div>
 
               {runA.results?.top_modules?.length > 0 && (
@@ -252,7 +331,7 @@ export default function HistoryCompare() {
                   <div style={{ fontSize: '13px', color: 'var(--text-muted)', marginTop: '4px' }}>
                     Suitability Index: {runA.results.top_modules[0].Suitability_Index?.toFixed(1)}<br/>
                     Carbon: {runA.results.top_modules[0].Carbon_Intensity_Mean?.toFixed(1)} gCO2/kWh<br/>
-                    LCOE: €{(runA.results.top_modules[0].LCOE_EUR_MWh / 1000)?.toFixed(4)}/kWh
+                    LCOE: {curSym}{(runA.results.top_modules[0].LCOE_EUR_MWh / 1000)?.toFixed(4)}/kWh
                   </div>
                 </div>
               )}
@@ -260,14 +339,14 @@ export default function HistoryCompare() {
 
             {/* Run B */}
             <div style={{ background: 'rgba(0,0,0,0.2)', padding: '16px', borderRadius: '8px', borderLeft: '4px solid #8b5cf6' }}>
-              <h3 style={{ color: '#8b5cf6', marginTop: 0 }}>Run B</h3>
+              <h3 style={{ color: '#8b5cf6', marginTop: 0 }}>Run B: {runB.project_name || 'Project B'}</h3>
               <div style={{ fontSize: '12px', color: 'var(--text-muted)', marginBottom: '16px' }}>{formatDate(runB.timestamp)}</div>
               
               <div style={{ marginBottom: '16px' }}>
                 <strong style={{ color: 'var(--text-main)' }}>Scenario:</strong> <span style={{ color: 'var(--text-muted)' }}>{runB.scenario}</span><br/>
                 <strong style={{ color: 'var(--text-main)' }}>Project Size:</strong> <span style={{ color: 'var(--text-muted)' }}>{runB.project_size_mwp} MWp</span><br/>
                 <strong style={{ color: 'var(--text-main)' }}>Base Yield:</strong> <span style={{ color: 'var(--text-muted)' }}>{runB.inputs.base_irradiance} kWh/kWp</span><br/>
-                <strong style={{ color: 'var(--text-main)' }}>CBAM Tax:</strong> <span style={{ color: 'var(--text-muted)' }}>€{runB.inputs.cbam_tax_rate_eur_t}/t</span>
+                <strong style={{ color: 'var(--text-main)' }}>CBAM Tax:</strong> <span style={{ color: 'var(--text-muted)' }}>{curSym}{runB.inputs.cbam_tax_rate_eur_t}/t</span>
               </div>
 
               {runB.results?.top_modules?.length > 0 && (
@@ -279,7 +358,7 @@ export default function HistoryCompare() {
                   <div style={{ fontSize: '13px', color: 'var(--text-muted)', marginTop: '4px' }}>
                     Suitability Index: {runB.results.top_modules[0].Suitability_Index?.toFixed(1)}<br/>
                     Carbon: {runB.results.top_modules[0].Carbon_Intensity_Mean?.toFixed(1)} gCO2/kWh<br/>
-                    LCOE: €{(runB.results.top_modules[0].LCOE_EUR_MWh / 1000)?.toFixed(4)}/kWh
+                    LCOE: {curSym}{(runB.results.top_modules[0].LCOE_EUR_MWh / 1000)?.toFixed(4)}/kWh
                   </div>
                 </div>
               )}

@@ -9,8 +9,12 @@ export default function MultiBlockFleetView({
   setSelectedInverterId,
   targetDcAcRatio,
   setTargetDcAcRatio,
-  params
+  params,
+  currency = 'EUR'
 }) {
+  const CURRENCY_SYMBOLS = { EUR: '€', USD: '$', GBP: '£', AUD: 'A$' };
+  const curSym = CURRENCY_SYMBOLS[currency] || '€';
+
   const primaryModule = results[0] || selectedModule;
   const secondaryModule = results[1] || results[2] || primaryModule;
   const activeInverter = inverters.find(i => i.id === selectedInverterId) || inverters[0];
@@ -53,7 +57,7 @@ export default function MultiBlockFleetView({
               <div className="mod-stats-grid">
                 <div className="stat-box">
                   <span className="lbl">LCOE</span>
-                  <span className="val cyan">€ {Number(primaryModule.LCOE_EUR_MWh).toFixed(2)} /MWh</span>
+                  <span className="val cyan">{curSym} {Number(primaryModule.LCOE_EUR_MWh).toFixed(2)} /MWh</span>
                 </div>
                 <div className="stat-box">
                   <span className="lbl">Wattage</span>

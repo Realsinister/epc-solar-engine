@@ -9,22 +9,26 @@ export default function ExecutiveFinancialView({
   selectedModule,
   handleModuleSelect,
   analysisData,
-  params
+  params,
+  currency = 'EUR'
 }) {
   // Extract executive financials from either analysisData.executive or analysisData.financials
   const fin = analysisData?.executive || analysisData?.financials || {};
   const pitch = fin.executive_pitch || analysisData?.pitch || "";
 
-  // Format Large Euro Numbers
-  const formatEuro = (val) => {
-    if (val === undefined || val === null || isNaN(val)) return '€ --';
+  const CURRENCY_SYMBOLS = { EUR: '€', USD: '$', GBP: '£', AUD: 'A$' };
+  const curSym = CURRENCY_SYMBOLS[currency] || '€';
+
+  // Format Large Currency Numbers
+  const formatCurrency = (val) => {
+    if (val === undefined || val === null || isNaN(val)) return `${curSym} --`;
     const absVal = Math.abs(val);
     if (absVal >= 1e6) {
-      return `€ ${(val / 1e6).toFixed(2)}M`;
+      return `${curSym} ${(val / 1e6).toFixed(2)}M`;
     } else if (absVal >= 1e3) {
-      return `€ ${(val / 1e3).toFixed(1)}K`;
+      return `${curSym} ${(val / 1e3).toFixed(1)}K`;
     }
-    return `€ ${val.toFixed(0)}`;
+    return `${curSym} ${val.toFixed(0)}`;
   };
 
   // Format Payback Period
@@ -55,7 +59,7 @@ export default function ExecutiveFinancialView({
           </div>
           <div className="kpi-body">
             <div className="kpi-value-lg">
-              {formatEuro(fin.npv_eur ?? fin.NPV_EUR)}
+              {formatCurrency(fin.npv_eur ?? fin.NPV_EUR)}
             </div>
             <div className="kpi-sparkline-svg">
               <svg viewBox="0 0 100 24" className="spark-line">
@@ -91,7 +95,7 @@ export default function ExecutiveFinancialView({
           </div>
           <div className="kpi-body">
             <div className="kpi-value-lg">
-              {formatEuro(fin.total_lifetime_revenue_eur ?? fin.Lifetime_Revenue_EUR)}
+              {formatCurrency(fin.total_lifetime_revenue_eur ?? fin.Lifetime_Revenue_EUR)}
             </div>
             <div className="kpi-sparkline-svg">
               <svg viewBox="0 0 100 24" className="spark-line">
@@ -122,11 +126,11 @@ export default function ExecutiveFinancialView({
               <div className="risk-metric">
                 <ShieldAlert size={15} color="#f43f5e" />
                 <span>CBAM Import Tax Liability:</span>
-                <strong className="text-rose">{formatEuro(fin.total_cbam_tax_eur ?? fin.CBAM_Tax_Risk_EUR)}</strong>
+                <strong className="text-rose">{formatCurrency(fin.total_cbam_tax_eur ?? fin.CBAM_Tax_Risk_EUR)}</strong>
               </div>
               <div className="risk-metric">
                 <span className="text-muted">CBAM Rate / kWp:</span>
-                <strong>€ {((fin.total_cbam_tax_eur ?? 0) / ((params.project_size_mwp || 50) * 1000)).toFixed(2)} / kWp</strong>
+                <strong>{curSym} {((fin.total_cbam_tax_eur ?? 0) / ((params.project_size_mwp || 50) * 1000)).toFixed(2)} / kWp</strong>
               </div>
             </div>
           )}
@@ -185,7 +189,7 @@ export default function ExecutiveFinancialView({
                 <th>Module Model</th>
                 <th>Manufacturer</th>
                 <th>Power (W)</th>
-                <th>LCOE (€/MWh)</th>
+                <th>LCOE ({curSym}/MWh)</th>
                 <th>Carbon (kgCO2e/kWp)</th>
                 <th>TOPSIS Score</th>
                 <th>Action</th>
@@ -209,7 +213,7 @@ export default function ExecutiveFinancialView({
                     <td className="font-bold text-main">{mod.Display_Name || mod.name || mod.Short_Name}</td>
                     <td className="text-muted">{mfg}</td>
                     <td className="font-bold text-white">{typeof powerW === 'number' ? Math.round(powerW) : powerW} W</td>
-                    <td className="text-cyan font-bold">€ {Number(mod.LCOE_EUR_MWh).toFixed(2)}</td>
+                    <td className="text-cyan font-bold">{curSym} {Number(mod.LCOE_EUR_MWh).toFixed(2)}</td>
                     <td className="text-emerald">{Math.round(mod.Net_GWP_kgCO2e || 0)}</td>
                     <td>
                       <div className="score-pill">

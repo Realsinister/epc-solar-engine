@@ -125,6 +125,7 @@ class CalculationRequest(BaseModel):
     custom_dataset_id: Optional[str] = None
     user_block_size_mwp: Optional[float] = None
     custom_ratio_split: Optional[float] = None
+    project_name: Optional[str] = None
 
 
 @app.get("/")

@@ -93,7 +93,8 @@ function App() {
     project_size_mwp: 50.0,
     project_size_unit: "MWp",
     ppa_rate_eur_mwh: 45.0,
-    discount_rate_pct: 5.0
+    discount_rate_pct: 5.0,
+    project_name: ""
   });
 
   const handleSimulate = async () => {
@@ -121,7 +122,8 @@ function App() {
         ppa_rate_eur_mwh: parseFloat(params.ppa_rate_eur_mwh) || 45.0,
         discount_rate_pct: parseFloat(params.discount_rate_pct) || 5.0,
         inverter_id: selectedInverterId || "auto",
-        target_dc_ac_ratio: parseFloat(targetDcAcRatio) || 1.25
+        target_dc_ac_ratio: parseFloat(targetDcAcRatio) || 1.25,
+        project_name: params.project_name || ""
       };
 
       const res = await fetch('http://127.0.0.1:8000/api/calculate', {

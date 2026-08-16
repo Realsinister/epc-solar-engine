@@ -71,6 +71,22 @@ export default function SidebarParameters({
 
       <div className="drawer-scroll-body">
         
+        {/* PROJECT META */}
+        <div className="input-group" style={{ padding: '0 16px', marginTop: '16px', marginBottom: '8px' }}>
+          <label style={{ fontSize: '0.85rem', color: 'var(--text-main)', marginBottom: '6px', display: 'block' }}>Project Name / ID:</label>
+          <input 
+            type="text" 
+            value={params.project_name || ''} 
+            onChange={(e) => {
+              setParams(prev => ({ ...prev, project_name: e.target.value }));
+              setIsStale(true);
+            }}
+            className="text-input"
+            style={{ width: '100%', padding: '8px 12px', borderRadius: '6px', border: '1px solid var(--border-light)', background: 'rgba(0,0,0,0.2)', color: 'white' }}
+            placeholder="e.g. Client A - 50MW"
+          />
+        </div>
+
         {/* ACCORDION 1: CLIMATE & LOCATION */}
         <div className="accordion-item">
           <div className="accordion-header" onClick={() => toggleSection('physics')}>

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Clock, Activity, Trash2 } from 'lucide-react';
 import { 
-  BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell, 
+  BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell, Legend,
   Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis 
 } from 'recharts';
 
@@ -80,6 +80,49 @@ export default function HistoryCompare() {
     return new Date(iso).toLocaleString();
   };
 
+  const getRadarData = (runA, runB) => {
+    if (!runA || !runB) return [];
+    const modA = runA.results?.top_modules?.[0];
+    const modB = runB.results?.top_modules?.[0];
+    if (!modA || !modB) return [];
+
+    return [
+      {
+        subject: 'Eco Score',
+        A: (modA.Score_Eco || 0) * 100,
+        B: (modB.Score_Eco || 0) * 100,
+        fullMark: 100,
+      },
+      {
+        subject: 'Cost Score',
+        A: (modA.Score_Cost || 0) * 100,
+        B: (modB.Score_Cost || 0) * 100,
+        fullMark: 100,
+      },
+      {
+        subject: 'Tech Score',
+        A: (modA.Score_Tech || 0) * 100,
+        B: (modB.Score_Tech || 0) * 100,
+        fullMark: 100,
+      }
+    ];
+  };
+
+  const getBarData = (runA, runB) => {
+    if (!runA || !runB) return [];
+    const modA = runA.results?.top_modules?.[0];
+    const modB = runB.results?.top_modules?.[0];
+    if (!modA || !modB) return [];
+
+    return [
+      {
+        name: 'LCOE (€/kWh)',
+        RunA: parseFloat((modA.LCOE_EUR_MWh / 1000).toFixed(4)),
+        RunB: parseFloat((modB.LCOE_EUR_MWh / 1000).toFixed(4))
+      }
+    ];
+  };
+
   return (
     <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '20px' }}>
       <div className="glass-panel" style={{ maxHeight: '400px', overflowY: 'auto' }}>
@@ -137,7 +180,7 @@ export default function HistoryCompare() {
               <tr style={{ borderBottom: '1px solid var(--border-light)' }}>
                 <th style={{ padding: '8px' }}>Compare</th>
                 <th style={{ padding: '8px' }}>Date</th>
-                <th style={{ padding: '8px' }}>Scenario</th>
+                <th style={{ padding: '8px' }}>Project / Scenario</th>
                 <th style={{ padding: '8px' }}>Size (MWp)</th>
                 <th style={{ padding: '8px' }}>Winning Module</th>
                 <th style={{ padding: '8px' }}>Suitability</th>
@@ -154,7 +197,10 @@ export default function HistoryCompare() {
                     />
                   </td>
                   <td style={{ padding: '8px', fontSize: '12px' }}>{formatDate(row.timestamp)}</td>
-                  <td style={{ padding: '8px', fontSize: '13px' }}>{row.scenario}</td>
+                  <td style={{ padding: '8px', fontSize: '13px' }}>
+                    <div style={{ fontWeight: 'bold' }}>{row.project_name || 'Unnamed Project'}</div>
+                    <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>{row.scenario}</div>
+                  </td>
                   <td style={{ padding: '8px' }}>{row.project_size_mwp}</td>
                   <td style={{ padding: '8px' }}>
                     {row.winner_mfg} {row.winner_name}
@@ -237,6 +283,45 @@ export default function HistoryCompare() {
                   </div>
                 </div>
               )}
+            </div>
+
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px', marginTop: '24px' }}>
+            
+            {/* Radar Chart */}
+            <div style={{ background: 'rgba(0,0,0,0.2)', padding: '16px', borderRadius: '8px', border: '1px solid var(--border-light)' }}>
+              <h4 style={{ margin: '0 0 16px 0', color: 'var(--text-main)', textAlign: 'center' }}>Suitability Footprint</h4>
+              <div style={{ height: '300px', width: '100%' }}>
+                <ResponsiveContainer>
+                  <RadarChart cx="50%" cy="50%" outerRadius="70%" data={getRadarData(runA, runB)}>
+                    <PolarGrid stroke="rgba(255,255,255,0.1)" />
+                    <PolarAngleAxis dataKey="subject" tick={{ fill: 'var(--text-muted)', fontSize: 12 }} />
+                    <PolarRadiusAxis angle={30} domain={[0, 100]} tick={false} axisLine={false} />
+                    <Tooltip contentStyle={{ backgroundColor: '#1e293b', border: '1px solid #334155', borderRadius: '8px' }} />
+                    <Legend wrapperStyle={{ paddingTop: '20px' }} />
+                    <Radar name="Run A" dataKey="A" stroke="#3b82f6" fill="#3b82f6" fillOpacity={0.3} />
+                    <Radar name="Run B" dataKey="B" stroke="#8b5cf6" fill="#8b5cf6" fillOpacity={0.3} />
+                  </RadarChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
+
+            {/* LCOE Bar Chart */}
+            <div style={{ background: 'rgba(0,0,0,0.2)', padding: '16px', borderRadius: '8px', border: '1px solid var(--border-light)' }}>
+              <h4 style={{ margin: '0 0 16px 0', color: 'var(--text-main)', textAlign: 'center' }}>Financial Comparison</h4>
+              <div style={{ height: '300px', width: '100%' }}>
+                <ResponsiveContainer>
+                  <BarChart data={getBarData(runA, runB)} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+                    <XAxis dataKey="name" stroke="rgba(255,255,255,0.2)" tick={{ fill: 'var(--text-muted)' }} />
+                    <YAxis stroke="rgba(255,255,255,0.2)" tick={{ fill: 'var(--text-muted)' }} />
+                    <Tooltip cursor={{ fill: 'rgba(255,255,255,0.05)' }} contentStyle={{ backgroundColor: '#1e293b', border: '1px solid #334155', borderRadius: '8px' }} />
+                    <Legend wrapperStyle={{ paddingTop: '20px' }} />
+                    <Bar dataKey="RunA" fill="#3b82f6" name="Run A" radius={[4, 4, 0, 0]} />
+                    <Bar dataKey="RunB" fill="#8b5cf6" name="Run B" radius={[4, 4, 0, 0]} />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
             </div>
 
           </div>

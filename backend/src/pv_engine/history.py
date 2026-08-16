@@ -33,12 +33,17 @@ class HistoryDatabase:
                     winner_suitability REAL,
                     inputs_json TEXT NOT NULL,
                     results_json TEXT NOT NULL,
-                    dataset_name TEXT DEFAULT 'Baseline Parquet EPD'
+                    dataset_name TEXT DEFAULT 'Baseline Parquet EPD',
+                    project_name TEXT
                 )
             ''')
-            # Gracefully add column if table exists without dataset_name
+            # Gracefully add column if table exists without dataset_name or project_name
             try:
                 cursor.execute("ALTER TABLE sim_logs ADD COLUMN dataset_name TEXT DEFAULT 'Baseline Parquet EPD'")
+            except sqlite3.OperationalError:
+                pass # Column already exists
+            try:
+                cursor.execute("ALTER TABLE sim_logs ADD COLUMN project_name TEXT")
             except sqlite3.OperationalError:
                 pass # Column already exists
             conn.commit()
@@ -74,16 +79,18 @@ class HistoryDatabase:
             "top_modules": results_subset
         })
 
+        project_name = request_data.get("project_name", "")
+
         with sqlite3.connect(self.db_path) as conn:
             cursor = conn.cursor()
             cursor.execute('''
                 INSERT INTO sim_logs (
                     id, timestamp, scenario, project_size_mwp, location_or_yield,
-                    winner_mfg, winner_name, winner_suitability, inputs_json, results_json, dataset_name
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    winner_mfg, winner_name, winner_suitability, inputs_json, results_json, dataset_name, project_name
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             ''', (
                 sim_id, timestamp, scenario, project_size, loc_yield,
-                winner_mfg, winner_name, winner_suitability, inputs_json, results_json, dataset_name
+                winner_mfg, winner_name, winner_suitability, inputs_json, results_json, dataset_name, project_name
             ))
             conn.commit()
             
@@ -119,7 +126,8 @@ class HistoryDatabase:
             cursor.execute('''
                 SELECT id, timestamp, scenario, project_size_mwp, location_or_yield,
                        winner_mfg, winner_name, winner_suitability, inputs_json, results_json,
-                       COALESCE(dataset_name, 'Baseline Parquet EPD') as dataset_name
+                       COALESCE(dataset_name, 'Baseline Parquet EPD') as dataset_name,
+                       project_name
                 FROM sim_logs
                 ORDER BY timestamp DESC
                 LIMIT ?

@@ -152,9 +152,9 @@ function App() {
         setAnalysisData(data.initial_analysis);
       }
       
-      // Auto-select #1 TOPSIS module if available
+      // Auto-select #1 TOPSIS module if available without triggering duplicate async race
       if (moduleList.length > 0) {
-        handleModuleSelect(moduleList[0]);
+        setSelectedModule(moduleList[0]);
       }
     } catch (err) {
       console.error("Simulation failed", err);
@@ -169,13 +169,16 @@ function App() {
     setSelectedModule(module);
     setAnalyzing(true);
     try {
-      const actualSizeMwp = params.project_size_unit === 'kWp' ? params.project_size_mwp / 1000 : params.project_size_mwp;
+      const rawSize = parseFloat(params.project_size_mwp) || 50.0;
+      const actualSizeMwp = params.project_size_unit === 'kWp' ? rawSize / 1000 : rawSize;
       const payload = {
         ...params,
         project_size_mwp: actualSizeMwp,
-        ground_albedo: params.ground_albedo === "None" ? null : parseFloat(params.ground_albedo),
-        inverter_id: selectedInverterId,
-        target_dc_ac_ratio: targetDcAcRatio
+        ground_albedo: params.ground_albedo === "None" || !params.ground_albedo ? null : parseFloat(params.ground_albedo),
+        inverter_id: selectedInverterId || "auto",
+        target_dc_ac_ratio: parseFloat(targetDcAcRatio) || 1.25,
+        market_region: params.market_region || "EU",
+        tech_filter: params.tech_filter || "all"
       };
 
       const res = await fetch(`http://127.0.0.1:8000/api/analyze/${module.dataset_uuid}`, {
@@ -184,7 +187,9 @@ function App() {
         body: JSON.stringify(payload)
       });
       const data = await res.json();
-      setAnalysisData(data);
+      if (res.ok && data) {
+        setAnalysisData(data);
+      }
     } catch (err) {
       console.error("Analysis failed", err);
     } finally {

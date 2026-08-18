@@ -309,51 +309,27 @@ def calculate(request: CalculationRequest):
 @app.post("/api/analyze/{dataset_uuid}")
 def analyze_module(dataset_uuid: str, request: CalculationRequest):
     df = load_data_from_parquet(
-        project_size_mwp=None, # Unfiltered load to guarantee target module is found 
-        ground_albedo=None,
+        project_size_mwp=request.project_size_mwp, 
+        ground_albedo=request.ground_albedo,
         custom_dataset_id=request.custom_dataset_id
     )
     if df.empty:
         raise HTTPException(status_code=500, detail="Database not loaded")
         
-    module_row = df[df['dataset_uuid'] == dataset_uuid]
-    if module_row.empty:
-        module_row = df.head(1)
-        
     if request.project_size_mwp <= 0:
         raise HTTPException(status_code=400, detail="Project size must be greater than 0")
-        
-    df_calc = PVEngine.calculate_metrics(
-        module_row, 
-        base_irradiance=request.base_irradiance,
-        ambient_temp_c=request.ambient_temp_c,
-        lifetime=request.lifetime,
-        avg_price_wp=request.avg_price_wp,
-        bos_cost_wp=request.bos_cost_wp,
-        opex_annual=request.opex_annual,
-        cbam_tax_rate_eur_t=request.cbam_tax_rate_eur_t,
-        eol_recycling_rate_pct=request.eol_recycling_rate_pct,
-        system_topology=request.system_topology,
-        ground_albedo=request.ground_albedo,
-        project_size_mwp=request.project_size_mwp,
-        inverter_id=request.inverter_id,
-        target_dc_ac_ratio=request.target_dc_ac_ratio
-    )
-    
-    full_calc = load_data_from_parquet(
-        project_size_mwp=request.project_size_mwp, 
-        ground_albedo=request.ground_albedo,
-        custom_dataset_id=request.custom_dataset_id
-    )
+
+    effective_cbam_tax = request.cbam_tax_rate_eur_t if (request.market_region in ["EU", "eu", None]) else 0.0
+
     full_calc = PVEngine.calculate_metrics(
-        full_calc,
+        df,
         base_irradiance=request.base_irradiance,
         ambient_temp_c=request.ambient_temp_c,
         lifetime=request.lifetime,
         avg_price_wp=request.avg_price_wp,
         bos_cost_wp=request.bos_cost_wp,
         opex_annual=request.opex_annual,
-        cbam_tax_rate_eur_t=request.cbam_tax_rate_eur_t,
+        cbam_tax_rate_eur_t=effective_cbam_tax,
         eol_recycling_rate_pct=request.eol_recycling_rate_pct,
         system_topology=request.system_topology,
         ground_albedo=request.ground_albedo,
@@ -362,7 +338,12 @@ def analyze_module(dataset_uuid: str, request: CalculationRequest):
         target_dc_ac_ratio=request.target_dc_ac_ratio
     )
     
-    full_calc = PVEngine.filter_by_project_size(full_calc, request.project_size_mwp, ground_albedo=request.ground_albedo)
+    full_calc = PVEngine.filter_by_project_size(
+        full_calc, 
+        request.project_size_mwp, 
+        ground_albedo=request.ground_albedo,
+        tech_filter=request.tech_filter or "all"
+    )
     full_calc, _ = PVEngine.normalize_scores(full_calc, request.scenario)
     full_calc = PVEngine.calculate_topsis(full_calc, request.scenario)
     if not full_calc.empty and 'manufacturer' in full_calc.columns:
@@ -370,14 +351,15 @@ def analyze_module(dataset_uuid: str, request: CalculationRequest):
     
     matching_scores = full_calc[full_calc['dataset_uuid'] == dataset_uuid]
     if matching_scores.empty:
-        module_scores = df_calc.iloc[0] if not df_calc.empty else module_row.iloc[0]
+        # Fallback to rank #1 TOPSIS module in the calculated project fleet
+        module_scores = full_calc.iloc[0] if not full_calc.empty else df.iloc[0]
     else:
         module_scores = matching_scores.iloc[0]
     
     radar_data = [
-        {"subject": "Eco (Low Carbon)", "A": module_scores.get('Score_Eco', 0) * 100, "fullMark": 100},
-        {"subject": "Cost (Low LCOE)", "A": module_scores.get('Score_Cost', 0) * 100, "fullMark": 100},
-        {"subject": "Tech (High Efficiency)", "A": module_scores.get('Score_Tech', 0) * 100, "fullMark": 100}
+        {"subject": "Eco (Low Carbon)", "A": float(module_scores.get('Score_Eco', 0)) * 100, "fullMark": 100},
+        {"subject": "Cost (Low LCOE)", "A": float(module_scores.get('Score_Cost', 0)) * 100, "fullMark": 100},
+        {"subject": "Tech (High Efficiency)", "A": float(module_scores.get('Score_Tech', 0)) * 100, "fullMark": 100}
     ]
     
     # Run Sensitivity
@@ -388,7 +370,7 @@ def analyze_module(dataset_uuid: str, request: CalculationRequest):
         'avg_price_wp': request.avg_price_wp,
         'bos_cost_wp': request.bos_cost_wp,
         'opex_annual': request.opex_annual,
-        'cbam_tax_rate_eur_t': request.cbam_tax_rate_eur_t,
+        'cbam_tax_rate_eur_t': effective_cbam_tax,
         'eol_recycling_rate_pct': request.eol_recycling_rate_pct,
         'transport_distance_km': 20000.0,
         'system_topology': request.system_topology,
@@ -405,9 +387,8 @@ def analyze_module(dataset_uuid: str, request: CalculationRequest):
     # Scaled BOS and OPEX for project size
     scaled_bos_wp, scaled_opex_kwp = BlockOptimizer.get_scaled_bos_and_opex(request.project_size_mwp)
 
-    calc_row = df_calc.iloc[0]
     exec_financials = ExecutiveFinancialModel.calculate_project_financials(
-        module_row=calc_row,
+        module_row=module_scores,
         project_size_mwp=request.project_size_mwp,
         ppa_rate_eur_mwh=request.ppa_rate_eur_mwh,
         discount_rate_pct=request.discount_rate_pct,
@@ -466,7 +447,9 @@ def export_pdf(dataset_uuid: str, request: CalculationRequest):
     )
     if df.empty:
         raise HTTPException(status_code=500, detail="Database not loaded")
-        
+
+    effective_cbam_tax = request.cbam_tax_rate_eur_t if (request.market_region in ["EU", "eu", None]) else 0.0
+
     df_calc = PVEngine.calculate_metrics(
         df, 
         base_irradiance=request.base_irradiance,
@@ -475,7 +458,7 @@ def export_pdf(dataset_uuid: str, request: CalculationRequest):
         avg_price_wp=request.avg_price_wp,
         bos_cost_wp=request.bos_cost_wp,
         opex_annual=request.opex_annual,
-        cbam_tax_rate_eur_t=request.cbam_tax_rate_eur_t,
+        cbam_tax_rate_eur_t=effective_cbam_tax,
         eol_recycling_rate_pct=request.eol_recycling_rate_pct,
         system_topology=request.system_topology,
         ground_albedo=request.ground_albedo,
@@ -483,7 +466,12 @@ def export_pdf(dataset_uuid: str, request: CalculationRequest):
         inverter_id=request.inverter_id,
         target_dc_ac_ratio=request.target_dc_ac_ratio
     )
-    df_calc = PVEngine.filter_by_project_size(df_calc, request.project_size_mwp, ground_albedo=request.ground_albedo)
+    df_calc = PVEngine.filter_by_project_size(
+        df_calc, 
+        request.project_size_mwp, 
+        ground_albedo=request.ground_albedo,
+        tech_filter=request.tech_filter or "all"
+    )
     df_calc, _ = PVEngine.normalize_scores(df_calc, request.scenario)
     df_topsis = PVEngine.calculate_topsis(df_calc, request.scenario)
     if not df_topsis.empty and 'manufacturer' in df_topsis.columns:
@@ -497,11 +485,15 @@ def export_pdf(dataset_uuid: str, request: CalculationRequest):
     else:
         winner = winner_row.iloc[0].to_dict()
         
+    scaled_bos_wp, scaled_opex_kwp = BlockOptimizer.get_scaled_bos_and_opex(request.project_size_mwp)
+
     exec_financials = ExecutiveFinancialModel.calculate_project_financials(
         module_row=winner,
         project_size_mwp=request.project_size_mwp,
         ppa_rate_eur_mwh=request.ppa_rate_eur_mwh,
-        discount_rate_pct=request.discount_rate_pct
+        discount_rate_pct=request.discount_rate_pct,
+        override_bos_wp=scaled_bos_wp,
+        override_opex_kwp=scaled_opex_kwp
     )
     
     auto_paired = InverterEngine.auto_pair_inverter(request.project_size_mwp)

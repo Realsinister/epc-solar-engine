@@ -233,7 +233,7 @@ class PVEngine:
         
         # --- Economies of Scale (BOS & OPEX Optimization) ---
         if project_size_mwp < 1.0:
-            scale_multiplier = 1.20 # 20% premium for tiny/residential projects
+            scale_multiplier = 1.20 # 20% premium for small/residential projects
         elif project_size_mwp > 20.0:
             scale_multiplier = 0.90 # 10% discount for massive utility scale
         else:
@@ -242,7 +242,20 @@ class PVEngine:
         tracker_bos_mult = 1.10 if system_topology == "Single-Axis Tracker" else 1.0
         tracker_opex_mult = 1.20 if system_topology == "Single-Axis Tracker" else 1.0
         
-        scaled_bos = (bos_cost_wp + bos_perf['total_bos_capex_eur_per_wp']) * scale_multiplier * tracker_bos_mult
+        # --- Real-World Area-Dependent BOS Coupling Law ---
+        # In PV engineering, ~55% of total BOS is area-dependent (racking steel, piling, land acquisition, DC cabling, civil trenching).
+        # The remaining ~45% is power-dependent (central/string inverters, transformers, MV switchgear, grid interconnection).
+        # Lower efficiency modules require proportionately more land, steel, and string cabling per MWp.
+        # Reference baseline efficiency = 21.0% (standard utility module benchmark)
+        base_bos_total = (bos_cost_wp + bos_perf['total_bos_capex_eur_per_wp'])
+        area_bos_portion = base_bos_total * 0.55
+        power_bos_portion = base_bos_total * 0.45
+        
+        # Area scaling factor = (21.0% / Module_Efficiency) bounded to realistic engineering bounds [0.80, 1.40]
+        eff_clamped = df['Efficiency_Pct'].replace(0, 20.0).clip(lower=12.0, upper=26.0)
+        area_scaling_factor = (21.0 / eff_clamped).clip(lower=0.80, upper=1.40)
+        
+        df['Scaled_BOS_EUR_Wp'] = (power_bos_portion + (area_bos_portion * area_scaling_factor)) * scale_multiplier * tracker_bos_mult
         scaled_opex = opex_annual * scale_multiplier * tracker_opex_mult
 
         # 2. Economic: LCOE (€/MWh)
@@ -252,7 +265,7 @@ class PVEngine:
         # Tax = (Net_GWP_kgCO2e / 1000) * CBAM Rate per tonne 
         df['CBAM_Penalty_EUR_kWp'] = (df['Net_GWP_kgCO2e'] / 1000) * cbam_tax_rate_eur_t
         
-        capex = (df['Estimated_Price_Wp'] + scaled_bos) * 1000 + df['CBAM_Penalty_EUR_kWp'] # €/kWp
+        capex = (df['Estimated_Price_Wp'] + df['Scaled_BOS_EUR_Wp']) * 1000 + df['CBAM_Penalty_EUR_kWp'] # €/kWp
         opex = scaled_opex * lifetime # Total lifetime OPEX per kWp
         
         # ((CAPEX + OPEX) / production) * 1000 to get €/MWh
@@ -261,11 +274,16 @@ class PVEngine:
         return df
         
     @staticmethod
-    def filter_by_project_size(df: pd.DataFrame, project_size_mwp: float, ground_albedo: float = None) -> pd.DataFrame:
+    def filter_by_project_size(
+        df: pd.DataFrame, 
+        project_size_mwp: float, 
+        ground_albedo: float = None,
+        tech_filter: str = "all"
+    ) -> pd.DataFrame:
         """
         Hard filtering layer to eliminate modules that are physically incompatible
         with the scale of the project, prior to running the MCDA scenario optimization.
-        Also filters out monofacial modules if the user has explicitly selected a ground albedo target.
+        Also filters by technology family and bifaciality when selected.
         """
         if df.empty or 'module_power_Wp' not in df.columns:
             return df
@@ -274,11 +292,26 @@ class PVEngine:
         if 'dataset_type' in df.columns and (df['dataset_type'] == 'custom').any():
             return df
             
-        initial_count = len(df)
-        
-        # Bifaciality constraint
-        if ground_albedo is not None:
+        # Bifaciality constraint (if albedo is explicitly configured or bifacial filter is active)
+        if ground_albedo is not None or tech_filter == "bifacial":
             df = df[df['Is_Bifacial'].astype(str).str.lower() == 'true'].copy()
+            
+        # Technology Architecture Filters
+        if tech_filter == "topcon_hjt":
+            # Filter for N-type TOPCon, HJT, or High Efficiency Silicon (>= 21.8%)
+            def is_topcon_hjt(row):
+                text = (str(row.get('Description / Note', '')) + " " + str(row.get('name', ''))).lower()
+                return any(k in text for k in ['topcon', 'hjt', 'n-type', 'hi-mo', 'tiger neo', 'vertex']) or (row.get('Efficiency_Pct', 0) >= 21.8)
+            df = df[df.apply(is_topcon_hjt, axis=1)].copy()
+        elif tech_filter == "thin_film":
+            # Filter for CdTe / CIGS / Flexible Thin Film
+            def is_thin_film(row):
+                text = (str(row.get('Description / Note', '')) + " " + str(row.get('name', '')) + " " + str(row.get('manufacturer', ''))).lower()
+                return any(k in text for k in ['cdte', 'cigs', 'first solar', 'miasole', 'toledo', 'thin film', 'flexible'])
+            df = df[df.apply(is_thin_film, axis=1)].copy()
+        elif tech_filter == "low_carbon":
+            # Certified Low Carbon (< 450 kgCO2e/kWp EPD baseline)
+            df = df[df['GWP_total_A1A3_per_kWp_kgCO2e'] <= 450].copy()
         
         if project_size_mwp < 1.0:
             # SME / Commercial: Filter out massive utility-scale panels

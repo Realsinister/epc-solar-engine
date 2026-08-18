@@ -126,6 +126,8 @@ class CalculationRequest(BaseModel):
     user_block_size_mwp: Optional[float] = None
     custom_ratio_split: Optional[float] = None
     project_name: Optional[str] = None
+    market_region: Optional[str] = "EU"
+    tech_filter: Optional[str] = "all"
 
 
 @app.get("/")
@@ -172,6 +174,9 @@ def calculate(request: CalculationRequest):
     if request.project_size_mwp <= 0:
         raise HTTPException(status_code=400, detail="Project size must be greater than 0")
 
+    # CBAM tax applies in EU market region, while US/Global regions operate on pure market pricing
+    effective_cbam_tax = request.cbam_tax_rate_eur_t if (request.market_region in ["EU", "eu", None]) else 0.0
+
     df_calc = PVEngine.calculate_metrics(
         df, 
         base_irradiance=request.base_irradiance,
@@ -180,7 +185,7 @@ def calculate(request: CalculationRequest):
         avg_price_wp=request.avg_price_wp,
         bos_cost_wp=request.bos_cost_wp,
         opex_annual=request.opex_annual,
-        cbam_tax_rate_eur_t=request.cbam_tax_rate_eur_t,
+        cbam_tax_rate_eur_t=effective_cbam_tax,
         eol_recycling_rate_pct=request.eol_recycling_rate_pct,
         system_topology=request.system_topology,
         ground_albedo=request.ground_albedo,
@@ -189,7 +194,12 @@ def calculate(request: CalculationRequest):
         target_dc_ac_ratio=request.target_dc_ac_ratio
     )
     
-    df_calc = PVEngine.filter_by_project_size(df_calc, request.project_size_mwp, ground_albedo=request.ground_albedo)
+    df_calc = PVEngine.filter_by_project_size(
+        df_calc, 
+        request.project_size_mwp, 
+        ground_albedo=request.ground_albedo,
+        tech_filter=request.tech_filter or "all"
+    )
 
     df_calc, weights = PVEngine.normalize_scores(df_calc, request.scenario)
     df_calc = PVEngine.calculate_topsis(df_calc, request.scenario)

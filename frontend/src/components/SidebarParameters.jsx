@@ -112,6 +112,21 @@ export default function SidebarParameters({
                 </select>
               </div>
 
+              <div className="input-group">
+                <label>Technology Architecture:</label>
+                <select 
+                  value={params.tech_filter || "all"} 
+                  onChange={(e) => handleTextChange('tech_filter', e.target.value)}
+                  className="select-input"
+                >
+                  <option value="all">🌐 All Technologies (MCDA)</option>
+                  <option value="topcon_hjt">⚡ N-Type TOPCon & HJT</option>
+                  <option value="bifacial">🪞 Bifacial Glass-Glass Fleets</option>
+                  <option value="thin_film">🌿 Thin-Film (CdTe / CIGS)</option>
+                  <option value="low_carbon">🛡️ Low-Carbon Certified</option>
+                </select>
+              </div>
+
               <div className="row-inputs-2col">
                 <div className="input-group">
                   <label>Irradiance (kWh/m²):</label>
@@ -164,6 +179,18 @@ export default function SidebarParameters({
 
           {openSections.financials && (
             <div className="accordion-content">
+              <div className="input-group">
+                <label>Market Region & Policy:</label>
+                <select 
+                  value={params.market_region || "EU"} 
+                  onChange={(e) => handleTextChange('market_region', e.target.value)}
+                  className="select-input"
+                >
+                  <option value="EU">🇪🇺 European Union (CBAM €80/t)</option>
+                  <option value="US">🇺🇸 North America (US / IRA)</option>
+                  <option value="APAC">🌍 APAC / Middle East / Global</option>
+                </select>
+              </div>
               <div className="input-group">
                 <label>Project Capacity Scale:</label>
                 <div className="row-inputs">

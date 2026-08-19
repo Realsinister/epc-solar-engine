@@ -55,15 +55,33 @@ Unlike traditional engineering software (like PVsyst or Helioscope) that focuses
 
 ---
 
-### 5. ⏱️ SQLite Simulation History & Side-by-Side Comparison
-- **Automatic History Logging:** Every executed simulation scenario is saved locally to an embedded SQLite database (`sim_history.db`).
+### 5. ⏱️ SQLite Simulation History, Tagging & Delta Analytics
+- **Automatic History Logging:** Every executed simulation scenario is saved locally to an embedded SQLite database (`sim_history.db`) with custom project naming and metadata tags.
 - **Side-by-Side Scenario Comparison:** Select any 2 simulation runs to compare parameters, NPV gains, payback timelines, and Scope 3 carbon reduction side-by-side.
+- **Variance Delta Badges:** Real-time percentage badges showing exact LCOE shifts, carbon savings %, and TOPSIS score changes between procurement scenarios.
 
 ![Simulation History & Comparison](docs/screenshots/simulation_history.png)
 
 ---
 
-## 🏗️ Technical Architecture & Stack
+### 6. ⚙️ Real-World Area-Dependent BOS & Regional Trade Engine
+- **Area-Dependent BOS Coupling Law:** Couples civil ground grading, racking steel, piling, land lease, and DC cabling costs to module efficiency ($\eta$). High-efficiency TOPCon/HJT modules (22–24.5%) receive legitimate €0.03–€0.06/Wp civil cost savings per MWp.
+- **Regional Trade Policy Sieve:** Instant preset switching between European Union (CBAM €80/t enforcement), North America (US / IRA market pricing), and Global/APAC utility markets.
+- **Global Multi-Currency Switcher:** Full executive financial calculations supported across **EUR (€)**, **USD ($)**, **GBP (£)**, and **AUD (A$)**.
+- **Technology Architecture Filter:** Dedicated procurement filters for **N-Type TOPCon & HJT**, **Bifacial Glass-Glass Fleets**, **Thin-Film (CdTe/CIGS)**, and **Low-Carbon Certified** modules.
+
+---
+
+## 🗺️ Industrial Viability Roadmap
+
+To advance the EPC Solar Engine from an executive decision platform into an indispensable, day-to-day engineering tool for EPCs and IPPs, the following industrial capabilities are actively slated:
+
+| Priority | Industrial Feature | Strategic Value to EPCs & IPPs |
+| :--- | :--- | :--- |
+| **P1** | **Battery Storage (BESS) Co-Location** | Model AC/DC-coupled BESS (LFP vs Sodium-ion), round-trip efficiency, Levelized Cost of Storage (LCOS), and battery Scope 3 embodied carbon. |
+| **P2** | **8,760-Hr Vectorized Yield & TOU Tariffs** | Chronological hourly simulation supporting PVGIS/TMY3 weather files, clipping analysis, and Time-of-Use tariff revenue optimization. |
+| **P3** | **PVsyst & CAD Interoperability (`.PAN` / `.OND` Export)** | 1-Click generation of `.PAN` (module) and `.OND` (inverter) definition files for seamless drag-and-drop into PVsyst, PlantPredict, and AutoCAD. |
+| **P4** | **Bankability & Tier-1 BloombergNEF Certification** | Direct integration of BloombergNEF Tier-1 manufacturing rankings, financial solvency indices, and PVEL reliability scorecard badges. |
 
 ```
                                ┌─────────────────────────────────────────┐
